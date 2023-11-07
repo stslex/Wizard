@@ -1,7 +1,10 @@
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -23,34 +26,40 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun App() {
     AppTheme {
-        val defaultGreetState = "Hello World!"
-        val clickedGreetState = "Compose: ${Greeting().greet()}"
-        var isClicked by remember { mutableStateOf(false) }
-        val greetingText by remember {
-            derivedStateOf {
-                if (isClicked) {
-                    clickedGreetState
-                } else {
-                    defaultGreetState
-                }
-            }
-        }
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background)
         ) {
-            Button(
-                onClick = {
-                    isClicked = !isClicked
+            val defaultGreetState = "Hello World!"
+            val clickedGreetState = "Compose: ${Greeting().greet()}"
+            var isClicked by remember { mutableStateOf(false) }
+            val greetingText by remember {
+                derivedStateOf {
+                    if (isClicked) {
+                        clickedGreetState
+                    } else {
+                        defaultGreetState
+                    }
                 }
-            ) {
-                Text(greetingText)
             }
-            AnimatedVisibility(isClicked) {
-                Image(
-                    painterResource("compose-multiplatform.xml"),
-                    null
-                )
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Button(
+                    onClick = {
+                        isClicked = !isClicked
+                    }
+                ) {
+                    Text(greetingText)
+                }
+                AnimatedVisibility(isClicked) {
+                    Image(
+                        painterResource("compose-multiplatform.xml"),
+                        null
+                    )
+                }
             }
         }
     }
