@@ -1,4 +1,4 @@
-package core
+package com.stslex.core.core
 
 import co.touchlab.kermit.Logger as Log
 

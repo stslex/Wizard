@@ -21,5 +21,6 @@ dependencyResolutionManagement {
 include(":server")
 include(":shared")
 include(":composeApp")
-include(":core")
-include(":home")
+include(":core:core")
+include(":core:ui")
+include(":feature:home")

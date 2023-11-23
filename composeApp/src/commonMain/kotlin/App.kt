@@ -1,5 +1,5 @@
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.resources.ExperimentalResourceApi
+import com.stslex.core.ui.theme.AppTheme
 
 @Composable
 fun App() {

@@ -1,4 +1,4 @@
-package st.slex.csplashscreen.core.ui.mvi
+package com.stslex.core.ui.mvi
 
 interface Store {
 

@@ -41,7 +41,9 @@ kotlin {
             implementation(compose.desktop.currentOs)
         }
         commonMain.dependencies {
-            implementation(libs.kermit)
+            implementation(project(":core:core"))
+            implementation(project(":core:ui"))
+            implementation(project(":feature:home"))
 
             implementation(projects.shared)
             implementation(compose.runtime)

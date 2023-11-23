@@ -1,8 +1,13 @@
-package store
+package com.stslex.core.ui.mvi
 
-import core.AppDispatcher
-import core.Logger
-import core.coroutineExceptionHandler
+import com.stslex.core.core.AppDispatcher
+import com.stslex.core.core.Logger
+import com.stslex.core.core.coroutineExceptionHandler
+import com.stslex.core.ui.navigation.Router
+import com.stslex.core.ui.mvi.Store.Action
+import com.stslex.core.ui.mvi.Store.Event
+import com.stslex.core.ui.mvi.Store.Navigation
+import com.stslex.core.ui.mvi.Store.State
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -16,11 +21,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import st.slex.csplashscreen.core.ui.mvi.Router
-import st.slex.csplashscreen.core.ui.mvi.Store.Action
-import st.slex.csplashscreen.core.ui.mvi.Store.Event
-import st.slex.csplashscreen.core.ui.mvi.Store.Navigation
-import st.slex.csplashscreen.core.ui.mvi.Store.State
 
 abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val router: Router<N>,
