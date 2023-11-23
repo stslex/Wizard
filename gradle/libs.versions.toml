@@ -1,4 +1,5 @@
 [versions]
+kermit = "2.0.2"
 ktor = "2.3.6"
 logback = "1.4.11"
 compose = "1.5.4"
@@ -19,6 +20,7 @@ kotlin = "1.9.20"
 junit = "4.13.2"
 
 [libraries]
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

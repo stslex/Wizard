@@ -41,6 +41,8 @@ kotlin {
             implementation(compose.desktop.currentOs)
         }
         commonMain.dependencies {
+            implementation(libs.kermit)
+
             implementation(projects.shared)
             implementation(compose.runtime)
             implementation(compose.foundation)

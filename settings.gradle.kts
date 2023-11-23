@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 include(":server")
 include(":shared")
 include(":composeApp")
+include(":core")
+include(":home")
