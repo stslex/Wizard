@@ -41,6 +41,10 @@ kotlin {
             implementation(compose.desktop.currentOs)
         }
         commonMain.dependencies {
+            implementation(project(":core:core"))
+            implementation(project(":core:ui"))
+            implementation(project(":feature:home"))
+
             implementation(projects.shared)
             implementation(compose.runtime)
             implementation(compose.foundation)
