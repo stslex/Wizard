@@ -45,7 +45,6 @@ kotlin {
             implementation(project(":core:ui"))
             implementation(project(":feature:home"))
 
-            implementation(projects.shared)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)

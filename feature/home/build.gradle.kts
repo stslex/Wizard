@@ -29,13 +29,10 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
-
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(project(":core:ui"))
 
-            implementation(projects.shared)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -44,9 +41,6 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
         }
     }
 }
