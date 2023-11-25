@@ -29,6 +29,12 @@ kotlin {
     }
 
     sourceSets {
+        val desktopMain by getting
+
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
+
         commonMain.dependencies {
             implementation(project(":core:core"))
 
@@ -38,9 +44,16 @@ kotlin {
             api(compose.material3)
             @OptIn(ExperimentalComposeLibrary::class)
             api(compose.components.resources)
+            api(libs.bundles.voyager)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        androidMain.dependencies {
+            api(libs.compose.ui)
+            api(libs.compose.ui.tooling.preview)
+            api(libs.androidx.activity.compose)
+            api(libs.koin.android)
         }
     }
 }

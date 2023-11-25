@@ -31,14 +31,10 @@ kotlin {
     sourceSets {
         val desktopMain by getting
 
-        androidMain.dependencies {
-            implementation(libs.compose.ui)
-            implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.activity.compose)
-        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
+
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(project(":core:ui"))

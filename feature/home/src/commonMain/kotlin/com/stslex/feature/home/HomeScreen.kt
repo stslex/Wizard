@@ -20,18 +20,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.stslex.feature.home.domain.HomeInteractor
+import org.koin.compose.koinInject
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
+    val interactor = koinInject<HomeInteractor>()
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
         val defaultGreetState = "Hello World!"
-        val clickedGreetState = "Compose: Greeting"
+        val clickedGreetState = "Compose: ${interactor.greet}"
         var isClicked by remember { mutableStateOf(false) }
         val greetingText by remember {
             derivedStateOf {
