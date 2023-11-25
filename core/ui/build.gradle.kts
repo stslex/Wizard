@@ -32,11 +32,12 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:core"))
 
-            implementation(compose.runtime)
-            implementation(compose.foundation)
+            api(compose.runtime)
+            api(compose.foundation)
             implementation(compose.material)
+            api(compose.material3)
             @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
+            api(compose.components.resources)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

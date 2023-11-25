@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -20,9 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier
@@ -30,7 +28,7 @@ fun HomeScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colors.background)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         val defaultGreetState = "Hello World!"
         val clickedGreetState = "Compose: Greeting"
@@ -59,7 +57,7 @@ fun HomeScreen(
                 Icon(
                     imageVector = Icons.Default.Home,
                     contentDescription = null,
-                    tint = MaterialTheme.colors.primary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

@@ -1,5 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -32,12 +30,6 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(project(":core:ui"))
-
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
