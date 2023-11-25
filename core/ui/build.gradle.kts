@@ -54,6 +54,7 @@ kotlin {
             api(libs.compose.ui.tooling.preview)
             api(libs.androidx.activity.compose)
             api(libs.koin.android)
+            api(libs.koin.androidx.compose)
         }
     }
 }

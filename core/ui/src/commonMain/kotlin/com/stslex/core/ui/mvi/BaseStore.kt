@@ -3,11 +3,12 @@ package com.stslex.core.ui.mvi
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
 import com.stslex.core.core.coroutineExceptionHandler
-import com.stslex.core.ui.navigation.Router
+import com.stslex.core.ui.base.ViewModel
 import com.stslex.core.ui.mvi.Store.Action
 import com.stslex.core.ui.mvi.Store.Event
 import com.stslex.core.ui.mvi.Store.Navigation
 import com.stslex.core.ui.mvi.Store.State
+import com.stslex.core.ui.navigation.Router
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -26,14 +27,12 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val router: Router<N>,
     private val appDispatcher: AppDispatcher,
     initialState: S
-) {
+) : Store, ViewModel() {
 
     abstract fun sendAction(action: A)
 
     private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
     val state: StateFlow<S> = _state.asStateFlow()
-
-    private val scope: CoroutineScope = CoroutineScope(appDispatcher.default)
 
     private fun exceptionHandler(
         onError: suspend (cause: Throwable) -> Unit = {},

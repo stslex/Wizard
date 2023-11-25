@@ -1,20 +1,28 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.stslex.feature.home.HomeScreen
-import com.stslex.feature.home.di.homeModule
-import org.koin.core.context.startKoin
+import cafe.adriel.voyager.navigator.Navigator
+import com.stslex.feature.home.ui.HomeScreen
 
 @Composable
-fun InitialApp() {
+fun InitialApp(
+    modifier: Modifier = Modifier
+) {
     Scaffold(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) { paddingValues ->
-        HomeScreen()
+        Box(
+            modifier = Modifier.fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            Navigator(HomeScreen)
+        }
     }
 }
