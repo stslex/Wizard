@@ -7,7 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
-import com.stslex.feature.home.ui.HomeScreen
+import main_screen.MainScreen
 
 @Composable
 fun InitialApp(
@@ -22,7 +22,7 @@ fun InitialApp(
             modifier = Modifier.fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Navigator(HomeScreen)
+            Navigator(MainScreen)
         }
     }
 }

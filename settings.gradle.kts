@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":core:core")
 include(":core:ui")
-include(":feature:home")
+include(":feature:feed")

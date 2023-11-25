@@ -21,7 +21,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "home"
+            baseName = "feed"
             isStatic = true
         }
     }
@@ -38,7 +38,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.stslex.feature.home"
+    namespace = "com.stslex.feature.feed"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()

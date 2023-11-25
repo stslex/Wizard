@@ -56,6 +56,9 @@ kotlin {
             api(libs.koin.android)
             api(libs.koin.androidx.compose)
         }
+        dependencies {
+            debugApi(libs.compose.ui.tooling)
+        }
     }
 }
 

@@ -1,8 +1,8 @@
-package com.stslex.feature.home.ui.store
+package com.stslex.feature.feed.ui.store
 
 import com.stslex.core.ui.mvi.Store
 
-interface HomeScreenStoreComponent : Store {
+interface FeedScreenStoreComponent : Store {
 
     data class State(
         val text: String
@@ -20,8 +20,5 @@ interface HomeScreenStoreComponent : Store {
         object OnClick : Action
     }
 
-    interface Navigation : Store.Navigation {
-
-        data class SecondScreen(val text: String) : Navigation
-    }
+    interface Navigation : Store.Navigation
 }
