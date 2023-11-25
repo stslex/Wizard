@@ -31,21 +31,30 @@ kotlin {
     sourceSets {
         val desktopMain by getting
 
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
+
         commonMain.dependencies {
             implementation(project(":core:core"))
 
-            implementation(projects.shared)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
+            api(compose.runtime)
+            api(compose.foundation)
             implementation(compose.material)
+            api(compose.material3)
             @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
+            api(compose.components.resources)
+            api(libs.bundles.voyager)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
+        androidMain.dependencies {
+            api(libs.compose.ui)
+            api(libs.compose.ui.tooling.preview)
+            api(libs.androidx.activity.compose)
+            api(libs.koin.android)
+            api(libs.koin.androidx.compose)
         }
     }
 }

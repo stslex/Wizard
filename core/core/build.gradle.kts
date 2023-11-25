@@ -14,7 +14,7 @@ kotlin {
     }
 
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -27,19 +27,15 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
-
         commonMain.dependencies {
             implementation(libs.kermit)
-            implementation(projects.shared)
             implementation(compose.runtime)
             implementation(compose.foundation)
+            api(libs.koin.core)
+            api(libs.koin.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
         }
     }
 }
