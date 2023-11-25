@@ -9,6 +9,9 @@ class FeedScreenRouterImpl(
 
     override fun invoke(event: FeedScreenStoreComponent.Navigation) {
         when (event) {
+            is FeedScreenStoreComponent.Navigation.Film -> {
+// TODO                navigator.navigateToFilmDetails(event.filmId)
+            }
         }
     }
 }
