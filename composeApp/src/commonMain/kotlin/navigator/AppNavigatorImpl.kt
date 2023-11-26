@@ -1,8 +1,9 @@
+package navigator
+
 import cafe.adriel.voyager.navigator.Navigator
 import com.stslex.core.ui.navigation.AppNavigator
 import com.stslex.core.ui.navigation.AppScreen
-import com.stslex.feature.home.ui.HomeScreen
-import com.stslex.feature.home.ui.SecondScreen
+import main_screen.MainScreen
 
 class AppNavigatorImpl(
     private val navigator: Lazy<Navigator>
@@ -12,8 +13,7 @@ class AppNavigatorImpl(
         screen: AppScreen
     ) {
         when (screen) {
-            AppScreen.Home -> navigator.value.push(HomeScreen)
-            is AppScreen.SecondScreen -> navigator.value.push(SecondScreen(screen.text))
+            AppScreen.Main -> navigator.value.push(MainScreen)
         }
     }
 }

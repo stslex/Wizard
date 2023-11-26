@@ -1,6 +1,6 @@
 package di
 
-import AppNavigatorImpl
+import navigator.AppNavigatorImpl
 import com.stslex.core.ui.navigation.AppNavigator
 import org.koin.dsl.module
 

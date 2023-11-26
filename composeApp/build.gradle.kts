@@ -38,7 +38,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(project(":core:ui"))
-            implementation(project(":feature:home"))
+            implementation(project(":feature:feed"))
         }
     }
 }

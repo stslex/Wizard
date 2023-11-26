@@ -15,7 +15,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
@@ -43,7 +45,8 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         }
     }
 
-    val event: MutableSharedFlow<E> = MutableSharedFlow()
+    private val _event: MutableSharedFlow<E> = MutableSharedFlow()
+    val event: SharedFlow<E> = _event.asSharedFlow()
 
     fun updateState(update: (S) -> S) {
         _state.update(update)
@@ -51,7 +54,7 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
 
     fun sendEvent(event: E) {
         scope.launch(appDispatcher.default) {
-            this@BaseStore.event.emit(event)
+            this@BaseStore._event.emit(event)
         }
     }
 

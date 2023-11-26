@@ -33,6 +33,7 @@ kotlin {
             implementation(compose.foundation)
             api(libs.koin.core)
             api(libs.koin.compose)
+            api(libs.kotlinx.collections.immutable)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
