@@ -21,8 +21,9 @@ junit = "4.13.2"
 koin = "3.4.3"
 koin-compose = "1.0.4"
 voyagerVersion = "1.0.0-rc10"
-
+ktor = "2.3.2"
 immutableCollection = "0.3.5"
+kamel = "0.9.0"
 
 [libraries]
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
@@ -57,6 +58,16 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "immutableCollection" }
 
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
+kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version = "1.7.9" }
+
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
@@ -66,3 +77,11 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 
 [bundles]
 voyager = ["voyager-navigator", "voyager-koin", "voyager-tab-navigator"]
+ktor = [
+    "ktor-client-core",
+    "ktor-client-content-negotiation",
+    "ktor-serialization-kotlinx-json",
+    "ktor-client-cio",
+    "ktor-client-logging",
+    "slf4j-simple"
+]
