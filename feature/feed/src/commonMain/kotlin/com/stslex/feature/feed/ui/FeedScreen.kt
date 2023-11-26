@@ -40,6 +40,9 @@ fun FeedScreenSetup() {
             }
         }
     }
+    LaunchedEffect(Unit) {
+        store.sendAction(Action.LoadFilms)
+    }
     FeedScreen(
         state = state,
         sendAction = store::sendAction
@@ -56,7 +59,12 @@ internal fun FeedScreen(
         modifier = modifier.fillMaxSize()
     ) {
         when (val screenState = state.screen) {
-            is ScreenState.Content -> FeedScreenContent(state.films, screenState)
+            is ScreenState.Content -> FeedScreenContent(
+                loadMore = remember { { sendAction(Action.LoadFilms) } },
+                films = state.films,
+                screenState = screenState,
+            )
+
             is ScreenState.Error -> FeedScreenError(screenState.message)
             ScreenState.Loading -> FeedScreenLoading()
         }

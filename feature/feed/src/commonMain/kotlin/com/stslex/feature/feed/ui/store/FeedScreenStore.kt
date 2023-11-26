@@ -12,6 +12,7 @@ import com.stslex.feature.feed.ui.store.FeedScreenStoreComponent.Event
 import com.stslex.feature.feed.ui.store.FeedScreenStoreComponent.Navigation
 import com.stslex.feature.feed.ui.store.FeedScreenStoreComponent.State
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.Job
 
 class FeedScreenStore(
     private val interactor: FeedInteractor,
@@ -22,6 +23,9 @@ class FeedScreenStore(
     initialState = State.INITIAL,
     appDispatcher = appDispatcher
 ) {
+
+    private var loadingJob: Job? = null
+
     override fun sendAction(action: Action) {
         when (action) {
             is Action.LoadFilms -> actionLoadFilms()
@@ -29,6 +33,10 @@ class FeedScreenStore(
     }
 
     private fun actionLoadFilms() {
+        if (loadingJob?.isActive == true) {
+            Logger.debug("Loading job is active")
+            return
+        }
         val hasNextPage = state.value.hasNextPage
         if (hasNextPage.not()) {
             Logger.debug("No more pages")
@@ -47,7 +55,7 @@ class FeedScreenStore(
         }
 
         val currentPage = state.value.currentPage
-        launch(
+        loadingJob = launch(
             action = {
                 interactor.getFeed(
                     page = currentPage.inc(),
@@ -83,6 +91,6 @@ class FeedScreenStore(
 
     companion object {
 
-        private const val PAGE_SIZE = 5
+        private const val PAGE_SIZE = 30
     }
 }
