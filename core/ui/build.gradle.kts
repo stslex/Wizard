@@ -45,6 +45,10 @@ kotlin {
             @OptIn(ExperimentalComposeLibrary::class)
             api(compose.components.resources)
             api(libs.bundles.voyager)
+            api(libs.kamel)
+            implementation(libs.bundles.ktor)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.slf4j.simple)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -55,6 +59,10 @@ kotlin {
             api(libs.androidx.activity.compose)
             api(libs.koin.android)
             api(libs.koin.androidx.compose)
+        }
+        iosMain.dependencies {
+            // TODO research TLS PROBLEM
+            implementation("io.ktor:ktor-client-darwin:2.3.2")
         }
         dependencies {
             debugApi(libs.compose.ui.tooling)
