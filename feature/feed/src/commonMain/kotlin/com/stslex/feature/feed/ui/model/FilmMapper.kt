@@ -10,4 +10,6 @@ fun FilmDomainModel.toUi() = FilmModel(
     title = title,
     description = description,
     imageUrl = imageUrl,
+    rate = rate,
+    genres = genres.toImmutableList()
 )
