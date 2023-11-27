@@ -45,13 +45,7 @@ internal fun FeedScreenContent(
             }
     }
     BoxWithConstraints {
-        val itemHeight = remember(maxWidth, maxHeight) {
-            if (maxHeight > maxWidth) {
-                maxWidth / 3 * 4
-            } else {
-                maxHeight / 3 * 4
-            }
-        }
+        val itemHeight = remember(maxHeight) { maxHeight / 3 }
         LazyColumn(
             modifier = modifier
                 .fillMaxSize(),

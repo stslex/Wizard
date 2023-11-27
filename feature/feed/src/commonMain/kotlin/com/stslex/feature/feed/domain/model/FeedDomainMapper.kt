@@ -13,4 +13,6 @@ fun FilmDataModel.toDomain() = FilmDomainModel(
     title = title,
     description = description,
     imageUrl = imageUrl,
+    rate = rate,
+    genres = genres,
 )

@@ -5,4 +5,6 @@ data class FilmDomainModel(
     val title: String,
     val description: String,
     val imageUrl: String,
+    val rate: String,
+    val genres: List<String>,
 )
