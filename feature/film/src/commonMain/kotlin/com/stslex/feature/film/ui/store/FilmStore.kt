@@ -23,7 +23,12 @@ class FilmStore(
     override fun sendAction(action: Action) {
         when (action) {
             is Action.Init -> actionInit(action)
+            is Action.BackButtonClick -> actionBackButtonClick()
         }
+    }
+
+    private fun actionBackButtonClick() {
+        navigate(Navigation.Back)
     }
 
     private fun actionInit(action: Action.Init) {

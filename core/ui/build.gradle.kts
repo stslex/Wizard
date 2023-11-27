@@ -41,7 +41,7 @@ kotlin {
 
             api(compose.runtime)
             api(compose.foundation)
-            implementation(compose.material)
+            api(compose.material)
             api(compose.material3)
             @OptIn(ExperimentalComposeLibrary::class)
             api(compose.components.resources)
