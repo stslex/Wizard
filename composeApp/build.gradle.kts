@@ -39,6 +39,7 @@ kotlin {
             implementation(project(":core:core"))
             implementation(project(":core:ui"))
             implementation(project(":feature:feed"))
+            implementation(project(":feature:film"))
         }
     }
 }

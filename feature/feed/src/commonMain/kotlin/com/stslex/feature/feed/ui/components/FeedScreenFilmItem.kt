@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,12 +32,13 @@ import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.feed.ui.model.FilmModel
 import kotlinx.collections.immutable.ImmutableList
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun FeedScreenFilmItem(
     modifier: Modifier = Modifier,
     itemHeight: Dp,
-    film: FilmModel
+    film: FilmModel,
+    onFilmClick: (String) -> Unit,
+    onGenreClick: (String) -> Unit,
 ) {
     val posterWidth = remember(itemHeight) {
         (itemHeight - AppDimension.Padding.medium * 2) / 4 * 3
@@ -51,7 +50,7 @@ internal fun FeedScreenFilmItem(
             .height(itemHeight)
             .padding(AppDimension.Padding.medium)
             .clickable {
-
+                onFilmClick(film.id)
             }
     ) {
         Box {
@@ -81,7 +80,7 @@ internal fun FeedScreenFilmItem(
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
-            FilmItemGenres(genres = film.genres) { genre -> }
+            FilmItemGenres(genres = film.genres, onItemClick = onGenreClick)
             Spacer(modifier = Modifier.height(AppDimension.Padding.big))
             Text(
                 modifier = Modifier.fillMaxSize(),

@@ -63,6 +63,8 @@ internal fun FeedScreen(
                 loadMore = remember { { sendAction(Action.LoadFilms) } },
                 films = state.films,
                 screenState = screenState,
+                onFilmClick = remember { { sendAction(Action.FilmClick(it)) } },
+                onGenreClick = remember { { sendAction(Action.GenreClick(it)) } },
             )
 
             is ScreenState.Error -> FeedScreenError(screenState.message)

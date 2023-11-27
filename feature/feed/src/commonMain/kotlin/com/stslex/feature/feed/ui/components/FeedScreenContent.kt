@@ -25,6 +25,8 @@ internal fun FeedScreenContent(
     loadMore: () -> Unit,
     films: ImmutableList<FilmModel>,
     screenState: ScreenState.Content,
+    onFilmClick: (String) -> Unit,
+    onGenreClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberLazyListState()
@@ -59,7 +61,9 @@ internal fun FeedScreenContent(
                 if (film != null) {
                     FeedScreenFilmItem(
                         film = film,
-                        itemHeight = itemHeight
+                        itemHeight = itemHeight,
+                        onFilmClick = onFilmClick,
+                        onGenreClick = onGenreClick
                     )
                 }
             }
