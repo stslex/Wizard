@@ -22,11 +22,13 @@ interface FilmStoreComponent : Store {
 
         @Stable
         data class Init(val id: String) : Action
+
+        data object BackButtonClick : Action
     }
 
     sealed interface Event : Store.Event
 
-    sealed interface Navigation : Store.Navigation{
+    sealed interface Navigation : Store.Navigation {
 
         data object Back : Navigation
     }

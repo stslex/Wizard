@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.base.getScreenStore
+import com.stslex.core.ui.mvi.getScreenStore
 import com.stslex.feature.feed.ui.components.FeedScreenContent
 import com.stslex.feature.feed.ui.components.FeedScreenError
 import com.stslex.feature.feed.ui.components.FeedScreenLoading
