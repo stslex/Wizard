@@ -27,7 +27,6 @@ class MockFilmClientImpl : FilmClient {
     override fun getFilm(
         id: String
     ): Flow<FilmResponse> = flow {
-        delay(1000)
         emit(getFilmById(id.toInt()))
     }
 

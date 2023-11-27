@@ -25,7 +25,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.core.ui.base.image.NetworkImage
 import com.stslex.core.ui.base.onClickDelay
@@ -44,7 +43,9 @@ data class FilmScreen(
     @Composable
     override fun Content() {
         val store = getScreenStore<FilmStore>()
-        store.sendAction(Action.Init(id))
+        LaunchedEffect(Unit) {
+            store.sendAction(Action.Init(id))
+        }
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
             store.event.collect { event ->
@@ -108,13 +109,14 @@ internal fun FilmSuccess(
     BoxWithConstraints(
         modifier = modifier.fillMaxSize(),
     ) {
+        val defaultHeight = maxHeight / 2
         Column(
             modifier = Modifier.fillMaxSize(),
         ) {
             NetworkImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp),
+                    .height(defaultHeight),
                 url = film.poster,
                 contentDescription = film.title,
                 contentScale = ContentScale.FillWidth,
