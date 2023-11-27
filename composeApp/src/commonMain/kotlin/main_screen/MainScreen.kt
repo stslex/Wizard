@@ -1,27 +1,24 @@
 package main_screen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
-import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import main_screen.bottom_nav_bar.BottomNavigationBar
+import main_screen.bottom_nav_bar.FeedTab
 
 object MainScreen : Screen {
 
     @Composable
     override fun Content() {
-        TabNavigator(FeedTab) {
+        TabNavigator(
+            tab = FeedTab,
+        ) { tabNavigator ->
             Scaffold(
                 content = { paddingValues ->
                     Box(
@@ -33,32 +30,9 @@ object MainScreen : Screen {
                     }
                 },
                 bottomBar = {
-                    NavigationBar {
-                        TabNavigationItem(FeedTab)
-                        TabNavigationItem(ProfileTab)
-                    }
+                    BottomNavigationBar(tabNavigator)
                 }
             )
         }
     }
 }
-
-@Composable
-private fun RowScope.TabNavigationItem(tab: Tab) {
-    val tabNavigator = LocalTabNavigator.current
-    NavigationBarItem(
-        selected = tabNavigator.current == tab,
-        onClick = {
-            tabNavigator.current = tab
-        },
-        label = { Text(tab.options.title) },
-        alwaysShowLabel = false,
-        icon = {
-            Icon(
-                painter = checkNotNull(tab.options.icon),
-                contentDescription = tab.options.title
-            )
-        }
-    )
-}
-

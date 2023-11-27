@@ -30,16 +30,11 @@ class FeedScreenStore(
         when (action) {
             is Action.LoadFilms -> actionLoadFilms()
             is Action.FilmClick -> actionFilmClick(action)
-            is Action.GenreClick -> actionGenreClick(action)
         }
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {
         navigate(Navigation.Film(action.filmId))
-    }
-
-    private fun actionGenreClick(action: Action.GenreClick) {
-        navigate(Navigation.SearchGenre(action.genreId))
     }
 
     private fun actionLoadFilms() {

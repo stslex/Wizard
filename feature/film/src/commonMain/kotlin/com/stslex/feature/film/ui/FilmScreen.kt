@@ -1,44 +1,112 @@
 package com.stslex.feature.film.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.base.rememberStore
+import com.stslex.core.ui.base.getScreenStore
+import com.stslex.core.ui.base.image.NetworkImage
+import com.stslex.core.ui.theme.AppDimension
+import com.stslex.feature.film.ui.model.Film
 import com.stslex.feature.film.ui.store.FilmScreenState
 import com.stslex.feature.film.ui.store.FilmStore
-import com.stslex.feature.film.ui.store.FilmStoreComponent
+import com.stslex.feature.film.ui.store.FilmStoreComponent.Action
+import com.stslex.feature.film.ui.store.FilmStoreComponent.State
 
-data class FilmScreen(private val id: String) : Screen {
+data class FilmScreen(
+    private val id: String
+) : Screen {
 
     @Composable
     override fun Content() {
-        val store = rememberStore<FilmStore>()
-        store.sendAction(FilmStoreComponent.Action.Init(id))
-
+        val store = getScreenStore<FilmStore>()
+        store.sendAction(Action.Init(id))
         val state by remember { store.state }.collectAsState()
 
-        when (val screenState = state.screenState) {
-            FilmScreenState.Loading -> {
-                Box(
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column {
-                        Text(text = "Loading...")
-                        CircularProgressIndicator()
-                    }
-                }
-            }
+        FilmContent(
+            state = state,
+            onAction = store::sendAction
+        )
+    }
+}
 
-            is FilmScreenState.Success -> {
-                Text(text = screenState.data.title)
-            }
+@Composable
+internal fun FilmContent(
+    modifier: Modifier = Modifier,
+    state: State,
+    onAction: (Action) -> Unit
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+    ) {
+        when (val screenState = state.screenState) {
+            FilmScreenState.Loading -> FilmLoading()
+            is FilmScreenState.Content -> FilmSuccess(
+                film = screenState.data,
+                onAction = onAction
+            )
+        }
+    }
+}
+
+@Composable
+internal fun FilmSuccess(
+    film: Film,
+    onAction: (Action) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    BoxWithConstraints {
+        Column(
+            modifier = modifier.fillMaxSize(),
+        ) {
+            NetworkImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp),
+                url = film.poster,
+                contentDescription = film.title,
+                contentScale = ContentScale.FillWidth,
+            )
+            Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
+            Text(
+                text = film.title,
+                style = MaterialTheme.typography.displayMedium,
+            )
+            Spacer(modifier = Modifier.height(AppDimension.Padding.large))
+            Text(
+                text = film.description,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+    }
+}
+
+@Composable
+internal fun FilmLoading(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column {
+            Text(text = "Loading...")
+            CircularProgressIndicator()
         }
     }
 }

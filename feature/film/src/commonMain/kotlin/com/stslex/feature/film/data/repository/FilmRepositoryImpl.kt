@@ -1,13 +1,20 @@
 package com.stslex.feature.film.data.repository
 
+import com.stslex.core.network.clients.film.client.FilmClient
 import com.stslex.feature.film.data.model.FilmData
-import kotlinx.coroutines.delay
+import com.stslex.feature.film.data.model.toData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
-class FilmRepositoryImpl : FilmRepository {
-    override fun getFilm(id: String): Flow<FilmData> = flow {
-        delay(3000)
-        TODO("Not yet implemented")
-    }
+class FilmRepositoryImpl(
+    private val client: FilmClient
+) : FilmRepository {
+
+    override fun getFilm(
+        id: String
+    ): Flow<FilmData> = client
+        .getFilm(id = id)
+        .map { response ->
+            response.toData()
+        }
 }

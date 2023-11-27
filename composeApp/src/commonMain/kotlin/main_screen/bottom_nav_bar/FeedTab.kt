@@ -1,25 +1,26 @@
-package main_screen
+package main_screen.bottom_nav_bar
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.stslex.feature.feed.ui.FeedScreen
 
-object ProfileTab : Tab {
+object FeedTab : Tab {
 
     override val options: TabOptions
         @Composable
         get() {
-            val title = "profile"
-            val icon = rememberVectorPainter(Icons.Default.AccountBox)
+            val title = "feed"
+            val icon = rememberVectorPainter(Icons.Default.List)
 
             return remember {
                 TabOptions(
-                    index = 1u,
+                    index = 0u,
                     title = title,
                     icon = icon
                 )
@@ -28,6 +29,6 @@ object ProfileTab : Tab {
 
     @Composable
     override fun Content() {
-        Text("Profile")
+        Navigator(FeedScreen)
     }
 }

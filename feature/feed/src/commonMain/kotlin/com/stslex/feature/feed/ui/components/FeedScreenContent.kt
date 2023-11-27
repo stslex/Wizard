@@ -26,7 +26,6 @@ internal fun FeedScreenContent(
     films: ImmutableList<FilmModel>,
     screenState: ScreenState.Content,
     onFilmClick: (String) -> Unit,
-    onGenreClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberLazyListState()
@@ -55,7 +54,10 @@ internal fun FeedScreenContent(
         ) {
             items(
                 count = films.size,
-                key = films.key
+                key = films.key,
+                contentType = {
+                    "film"
+                }
             ) { index ->
                 val film = films.getOrNull(index)
                 if (film != null) {
@@ -63,13 +65,16 @@ internal fun FeedScreenContent(
                         film = film,
                         itemHeight = itemHeight,
                         onFilmClick = onFilmClick,
-                        onGenreClick = onGenreClick
                     )
                 }
             }
 
             if (screenState is ScreenState.Content.AppendLoading) {
-                item {
+                item(
+                    contentType = {
+                        "loading"
+                    }
+                ) {
                     Box(
                         modifier = Modifier.fillMaxWidth(),
                         contentAlignment = androidx.compose.ui.Alignment.Center

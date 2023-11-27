@@ -8,7 +8,6 @@ fun FilmData.toDomain() = FilmDomain(
     description = description,
     poster = poster,
     rating = rating,
-    reviews = reviews,
     duration = duration,
     genres = genres,
     actors = actors,

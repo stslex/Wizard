@@ -1,5 +1,6 @@
 import androidx.compose.runtime.Composable
 import com.stslex.core.core.coreModule
+import com.stslex.core.network.di.networkModule
 import com.stslex.core.ui.theme.AppTheme
 import com.stslex.feature.feed.di.feedModule
 import com.stslex.feature.film.di.filmModule
@@ -31,6 +32,7 @@ private fun setupModules(): KoinAppDeclaration = {
         listOf(
             appModule,
             coreModule,
+            networkModule,
             feedModule,
             filmModule
         )

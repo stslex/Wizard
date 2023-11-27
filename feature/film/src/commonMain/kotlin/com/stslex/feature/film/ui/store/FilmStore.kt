@@ -32,7 +32,7 @@ class FilmStore(
             .launch { film ->
                 updateState { currentState ->
                     currentState.copy(
-                        screenState = FilmScreenState.Success(film.toUi())
+                        screenState = FilmScreenState.Content(film.toUi())
                     )
                 }
             }
