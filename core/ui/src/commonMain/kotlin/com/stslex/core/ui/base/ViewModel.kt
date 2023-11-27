@@ -27,7 +27,7 @@ expect inline fun <reified T : ViewModel> getViewModel(): T
 @Composable
 inline fun <reified VM : ViewModel> rememberStore(): VM {
     val navigator = LocalNavigator.currentOrThrow
-    val module = module { single { navigator } }
+    val module = module { factory { navigator } }
     getKoin().loadModules(
         modules = listOf(module),
         allowOverride = true,

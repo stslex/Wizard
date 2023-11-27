@@ -46,10 +46,11 @@ object MainScreen : Screen {
 @Composable
 private fun RowScope.TabNavigationItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
-
     NavigationBarItem(
         selected = tabNavigator.current == tab,
-        onClick = { tabNavigator.current = tab },
+        onClick = {
+            tabNavigator.current = tab
+        },
         label = { Text(tab.options.title) },
         alwaysShowLabel = false,
         icon = {

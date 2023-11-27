@@ -37,11 +37,19 @@ interface FeedScreenStoreComponent : Store {
     interface Action : Store.Action {
 
         data object LoadFilms : Action
+
+        @Stable
+        data class FilmClick(val filmId: String) : Action
+
+        @Stable
+        data class GenreClick(val genreId: String) : Action
     }
 
     @Stable
     interface Navigation : Store.Navigation {
 
-        data class Film(val filmId: Int) : Navigation
+        data class Film(val filmId: String) : Navigation
+
+        data class SearchGenre(val query: String) : Navigation
     }
 }
