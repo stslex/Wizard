@@ -37,6 +37,7 @@ kotlin {
 
         commonMain.dependencies {
             implementation(project(":core:core"))
+            implementation(project(":core:network"))
 
             api(compose.runtime)
             api(compose.foundation)
@@ -46,9 +47,6 @@ kotlin {
             api(compose.components.resources)
             api(libs.bundles.voyager)
             api(libs.kamel)
-            implementation(libs.bundles.ktor)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.slf4j.simple)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

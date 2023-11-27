@@ -1,4 +1,4 @@
-package com.stslex.core.ui.base.image
+package com.stslex.core.network.utils
 
 import io.kamel.core.config.KamelConfig
 import io.kamel.core.config.httpFetcher
@@ -14,7 +14,7 @@ object AppKamelConfig {
             takeFrom(KamelConfig.Default)
             httpFetcher {
                 install(Logging) {
-                    logger = KamelLogger
+                    logger = KtorLogger
                     level = LogLevel.ALL
                 }
             }

@@ -7,7 +7,7 @@ import com.stslex.feature.film.ui.model.Film
 sealed interface FilmScreenState {
 
     @Stable
-    data class Success(val data: Film) : FilmScreenState
+    data class Content(val data: Film) : FilmScreenState
 
     data object Loading : FilmScreenState
 }

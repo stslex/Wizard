@@ -27,29 +27,24 @@ interface FeedScreenStoreComponent : Store {
         }
     }
 
-    interface Event : Store.Event {
+    sealed interface Event : Store.Event {
 
         @Stable
         data class ErrorSnackBar(val message: String) : Event
     }
 
     @Stable
-    interface Action : Store.Action {
+    sealed interface Action : Store.Action {
 
         data object LoadFilms : Action
 
         @Stable
         data class FilmClick(val filmId: String) : Action
-
-        @Stable
-        data class GenreClick(val genreId: String) : Action
     }
 
     @Stable
-    interface Navigation : Store.Navigation {
+    sealed interface Navigation : Store.Navigation {
 
         data class Film(val filmId: String) : Navigation
-
-        data class SearchGenre(val query: String) : Navigation
     }
 }

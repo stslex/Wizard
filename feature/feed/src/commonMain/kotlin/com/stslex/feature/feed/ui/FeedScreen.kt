@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.base.rememberStore
+import com.stslex.core.ui.base.getScreenStore
 import com.stslex.feature.feed.ui.components.FeedScreenContent
 import com.stslex.feature.feed.ui.components.FeedScreenError
 import com.stslex.feature.feed.ui.components.FeedScreenLoading
@@ -23,30 +23,25 @@ object FeedScreen : Screen {
 
     @Composable
     override fun Content() {
-        FeedScreenSetup()
-    }
-}
-
-@Composable
-fun FeedScreenSetup() {
-    val store = rememberStore<FeedScreenStore>()
-    val state by remember { store.state }.collectAsState()
-    LaunchedEffect(Unit) {
-        store.event.collect { event ->
-            when (event) {
-                is FeedScreenStoreComponent.Event.ErrorSnackBar -> {
-                    // TODO show error snackbar
+        val store = getScreenStore<FeedScreenStore>()
+        val state by remember { store.state }.collectAsState()
+        LaunchedEffect(Unit) {
+            store.event.collect { event ->
+                when (event) {
+                    is FeedScreenStoreComponent.Event.ErrorSnackBar -> {
+                        // TODO show error snackbar
+                    }
                 }
             }
         }
+        LaunchedEffect(Unit) {
+            store.sendAction(Action.LoadFilms)
+        }
+        FeedScreen(
+            state = state,
+            sendAction = store::sendAction
+        )
     }
-    LaunchedEffect(Unit) {
-        store.sendAction(Action.LoadFilms)
-    }
-    FeedScreen(
-        state = state,
-        sendAction = store::sendAction
-    )
 }
 
 @Composable
@@ -64,7 +59,6 @@ internal fun FeedScreen(
                 films = state.films,
                 screenState = screenState,
                 onFilmClick = remember { { sendAction(Action.FilmClick(it)) } },
-                onGenreClick = remember { { sendAction(Action.GenreClick(it)) } },
             )
 
             is ScreenState.Error -> FeedScreenError(screenState.message)

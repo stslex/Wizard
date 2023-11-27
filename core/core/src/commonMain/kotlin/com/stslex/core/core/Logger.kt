@@ -4,7 +4,7 @@ import co.touchlab.kermit.Logger as Log
 
 object Logger {
 
-    private const val DEFAULT_TAG = "WIZARD"
+    const val DEFAULT_TAG = "WIZARD"
 
     fun exception(
         throwable: Throwable,

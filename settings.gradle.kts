@@ -20,6 +20,7 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":core:core")
+include(":core:network")
 include(":core:ui")
 include(":feature:feed")
 include(":feature:film")

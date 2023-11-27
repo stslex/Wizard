@@ -1,9 +1,10 @@
 package com.stslex.core.ui.mvi
 
+import cafe.adriel.voyager.core.model.StateScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
 import com.stslex.core.core.coroutineExceptionHandler
-import com.stslex.core.ui.base.ViewModel
 import com.stslex.core.ui.mvi.Store.Action
 import com.stslex.core.ui.mvi.Store.Event
 import com.stslex.core.ui.mvi.Store.Navigation
@@ -14,11 +15,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,18 +27,17 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val router: Router<N>,
     private val appDispatcher: AppDispatcher,
     initialState: S
-) : Store, ViewModel() {
+) : Store, StateScreenModel<S>(initialState) {
 
     abstract fun sendAction(action: A)
-
-    private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
-    val state: StateFlow<S> = _state.asStateFlow()
 
     private fun exceptionHandler(
         onError: suspend (cause: Throwable) -> Unit = {},
     ) = CoroutineExceptionHandler { coroutineContext, throwable ->
         Logger.exception(throwable)
-        CoroutineScope(coroutineContext).launch(coroutineExceptionHandler) {
+        CoroutineScope(
+            context = coroutineContext + appDispatcher.default
+        ).launch(coroutineExceptionHandler) {
             onError(throwable)
         }
     }
@@ -49,11 +46,11 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     val event: SharedFlow<E> = _event.asSharedFlow()
 
     fun updateState(update: (S) -> S) {
-        _state.update(update)
+        mutableState.update(update)
     }
 
     fun sendEvent(event: E) {
-        scope.launch(appDispatcher.default) {
+        screenModelScope.launch(appDispatcher.default) {
             this@BaseStore._event.emit(event)
         }
     }
@@ -65,8 +62,8 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     fun launch(
         onError: suspend (Throwable) -> Unit = {},
         block: suspend CoroutineScope.() -> Unit,
-    ): Job = scope.launch(
-        context = exceptionHandler(onError),
+    ): Job = screenModelScope.launch(
+        context = exceptionHandler(onError) + appDispatcher.default,
         block = block
     )
 
@@ -74,8 +71,8 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         action: suspend CoroutineScope.() -> T,
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: (T) -> Unit,
-    ): Job = scope.launch(
-        context = exceptionHandler(onError),
+    ): Job = screenModelScope.launch(
+        context = exceptionHandler(onError) + appDispatcher.default,
         block = {
             onSuccess(action())
         }
@@ -86,6 +83,6 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         each: suspend (T) -> Unit
     ): Job = this
         .onEach(each)
-        .flowOn(exceptionHandler(onError))
-        .launchIn(scope)
+        .flowOn(exceptionHandler(onError) + appDispatcher.default)
+        .launchIn(screenModelScope)
 }
