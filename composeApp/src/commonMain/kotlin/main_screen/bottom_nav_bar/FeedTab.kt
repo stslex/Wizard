@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import cafe.adriel.voyager.transitions.SlideTransition
 import com.stslex.feature.feed.ui.FeedScreen
 
 object FeedTab : Tab {
@@ -29,6 +30,8 @@ object FeedTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(FeedScreen)
+        Navigator(FeedScreen){
+            SlideTransition(it)
+        }
     }
 }

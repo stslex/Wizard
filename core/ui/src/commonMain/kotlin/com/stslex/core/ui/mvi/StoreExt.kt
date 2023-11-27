@@ -1,6 +1,7 @@
 package com.stslex.core.ui.mvi
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
@@ -12,6 +13,9 @@ import org.koin.compose.getKoin
 @Composable
 inline fun <reified S : ScreenModel> Screen.getScreenStore(): S {
     val navigator = LocalNavigator.currentOrThrow
-    getKoin().get<AppNavigator>().setNavigator(navigator)
+    val koin = getKoin()
+    remember(navigator) {
+        koin.get<AppNavigator>().setNavigator(navigator)
+    }
     return getScreenModel<S>()
 }

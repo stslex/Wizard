@@ -17,9 +17,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -78,11 +75,13 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         }
     )
 
-    fun <T> Flow<T>.launch(
+    fun <T> Flow<T>.launchFlow(
         onError: suspend (cause: Throwable) -> Unit = {},
         each: suspend (T) -> Unit
-    ): Job = this
-        .onEach(each)
-        .flowOn(exceptionHandler(onError) + appDispatcher.default)
-        .launchIn(screenModelScope)
+    ): Job = screenModelScope.launch(
+        context = exceptionHandler(onError) + appDispatcher.default,
+        block = {
+            collect(each)
+        }
+    )
 }

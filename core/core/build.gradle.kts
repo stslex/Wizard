@@ -34,6 +34,10 @@ kotlin {
             api(libs.koin.core)
             api(libs.koin.compose)
             api(libs.kotlinx.collections.immutable)
+            api(libs.coroutines.core)
+        }
+        androidMain.dependencies {
+            api(libs.coroutines.android)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
