@@ -4,8 +4,6 @@ import com.stslex.core.core.Logger
 import com.stslex.core.network.clients.film.model.FilmFeedResponse
 import com.stslex.core.network.clients.film.model.FilmResponse
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class MockFilmClientImpl : FilmClient {
 
@@ -24,11 +22,7 @@ class MockFilmClientImpl : FilmClient {
         )
     }
 
-    override fun getFilm(
-        id: String
-    ): Flow<FilmResponse> = flow {
-        emit(getFilmById(id.toInt()))
-    }
+    override suspend fun getFilm(id: String): FilmResponse = getFilmById(id.toInt())
 
     private fun getFilmById(id: Int) = filmsList[id % filmsList.size].copy(
         id = id.toString()

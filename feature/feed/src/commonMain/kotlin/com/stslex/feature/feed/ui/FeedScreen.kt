@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getScreenStore
+import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.feature.feed.ui.components.FeedScreenContent
 import com.stslex.feature.feed.ui.components.FeedScreenError
 import com.stslex.feature.feed.ui.components.FeedScreenLoading
@@ -23,7 +23,7 @@ object FeedScreen : Screen {
 
     @Composable
     override fun Content() {
-        val store = getScreenStore<FeedScreenStore>()
+        val store = getScreenModel<FeedScreenStore>()
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
             store.event.collect { event ->

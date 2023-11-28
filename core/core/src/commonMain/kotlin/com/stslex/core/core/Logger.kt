@@ -4,7 +4,7 @@ import co.touchlab.kermit.Logger as Log
 
 object Logger {
 
-    const val DEFAULT_TAG = "WIZARD"
+    private const val DEFAULT_TAG = "WIZARD"
 
     fun exception(
         throwable: Throwable,
@@ -12,9 +12,8 @@ object Logger {
         message: String? = null
     ) {
         // TODO check build config if (BuildConfig.DEBUG.not()) return
-        val currentTag = "$DEFAULT_TAG:${tag.orEmpty()}"
         Log.e(
-            tag = currentTag,
+            tag = tag ?: DEFAULT_TAG,
             throwable = throwable,
             messageString = message ?: throwable.message.orEmpty(),
         )
@@ -25,9 +24,8 @@ object Logger {
         tag: String? = null,
     ) {
         // TODO check build config if (BuildConfig.DEBUG.not()) return
-        val currentTag = "$DEFAULT_TAG:${tag.orEmpty()}"
         Log.d(
-            tag = currentTag,
+            tag = tag ?: DEFAULT_TAG,
             messageString = message
         )
     }

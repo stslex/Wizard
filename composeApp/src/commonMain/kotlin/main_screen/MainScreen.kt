@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
+import com.stslex.core.ui.mvi.setupNavigator
 import main_screen.bottom_nav_bar.BottomNavigationBar
 import main_screen.bottom_nav_bar.FeedTab
 
@@ -16,6 +17,8 @@ object MainScreen : Screen {
 
     @Composable
     override fun Content() {
+        setupNavigator()
+
         TabNavigator(
             tab = FeedTab,
         ) { tabNavigator ->
