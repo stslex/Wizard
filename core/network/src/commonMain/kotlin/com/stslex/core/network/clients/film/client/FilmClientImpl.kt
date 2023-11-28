@@ -6,8 +6,6 @@ import com.stslex.core.network.clients.film.model.FilmResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class FilmClientImpl(
     private val client: NetworkClient
@@ -22,14 +20,9 @@ class FilmClientImpl(
         }.body()
     }
 
-    override fun getFilm(
-        id: String
-    ): Flow<FilmResponse> = flow {
-        val film: FilmResponse = client.request {
-            get("feed") {
-                parameter("id", id)
-            }.body()
-        }
-        emit(film)
+    override suspend fun getFilm(id: String): FilmResponse = client.request {
+        get("feed") {
+            parameter("id", id)
+        }.body()
     }
 }

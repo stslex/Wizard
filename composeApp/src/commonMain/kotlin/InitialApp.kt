@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.transitions.SlideTransition
 import main_screen.MainScreen
 
 @Composable
@@ -22,7 +23,9 @@ fun InitialApp(
             modifier = Modifier.fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Navigator(MainScreen)
+            Navigator(MainScreen) {
+                SlideTransition(it)
+            }
         }
     }
 }
