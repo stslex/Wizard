@@ -7,11 +7,13 @@ interface FilmStoreComponent : Store {
 
     @Stable
     data class State(
+        val filmId: String,
         val screenState: FilmScreenState
     ) : Store.State {
 
         companion object {
             val INITIAL = State(
+                filmId = "",
                 screenState = FilmScreenState.Loading
             )
         }
@@ -24,6 +26,8 @@ interface FilmStoreComponent : Store {
         data class Init(val id: String) : Action
 
         data object BackButtonClick : Action
+
+        data object LikeButtonClick : Action
     }
 
     sealed interface Event : Store.Event

@@ -21,5 +21,10 @@ val filmModule = module {
         FilmRouterImpl(navigator = get())
     }
     factory<FilmInteractor> { FilmInteractorImpl(repository = get()) }
-    factory<FilmRepository> { FilmRepositoryImpl(client = get()) }
+    factory<FilmRepository> {
+        FilmRepositoryImpl(
+            favouriteDatasource = get(),
+            client = get()
+        )
+    }
 }
