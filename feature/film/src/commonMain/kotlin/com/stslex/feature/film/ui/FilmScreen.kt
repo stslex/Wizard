@@ -64,7 +64,12 @@ internal fun FilmContent(
 
             is FilmScreenState.Content -> FilmContentScreen(
                 film = screenState.data,
-                onAction = onAction
+                onLikeClick = {
+                    onAction(Action.LikeButtonClick)
+                },
+                onBackClick = {
+                    onAction(Action.BackButtonClick)
+                }
             )
         }
     }

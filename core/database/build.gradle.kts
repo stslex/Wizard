@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
+    kotlin("plugin.serialization") version "1.9.20"
 }
 
 kotlin {
@@ -21,7 +22,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "film"
+            baseName = "database"
             isStatic = true
         }
     }
@@ -29,9 +30,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":core:core"))
-            implementation(project(":core:ui"))
-            implementation(project(":core:network"))
-            implementation(project(":core:database"))
+            implementation(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -40,12 +39,9 @@ kotlin {
 }
 
 android {
-    namespace = "com.stslex.feature.film"
+    namespace = "com.stslex.core.database"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 }

@@ -58,11 +58,16 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
 
     fun launch(
         onError: suspend (Throwable) -> Unit = {},
+        onSuccess: suspend () -> Unit = {},
         block: suspend CoroutineScope.() -> Unit,
-    ): Job = screenModelScope.launch(
-        context = exceptionHandler(onError) + appDispatcher.default,
-        block = block
-    )
+    ): Job = screenModelScope.launch(appDispatcher.default) {
+        runCatching { block() }
+            .onSuccess { onSuccess() }
+            .onFailure {
+                Logger.exception(it)
+                onError(it)
+            }
+    }
 
     fun <T> launch(
         action: suspend CoroutineScope.() -> T,

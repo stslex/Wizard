@@ -20,3 +20,21 @@ fun FilmDomain.toUi() = Film(
     trailer = trailer,
     isFavorite = isFavorite
 )
+
+fun Film.toDomain(): FilmDomain = FilmDomain(
+    id = id,
+    title = title,
+    description = description,
+    poster = poster,
+    rating = rating,
+    duration = duration,
+    genres = genres.toImmutableList(),
+    actors = actors.toImmutableList(),
+    director = director,
+    country = country,
+    year = year,
+    age = age,
+    type = type,
+    trailer = trailer,
+    isFavorite = isFavorite
+)

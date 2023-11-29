@@ -24,6 +24,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.rememberSwipeableState
@@ -52,18 +53,19 @@ import androidx.compose.ui.unit.dp
 import com.stslex.core.ui.base.SwipeScrollConnection
 import com.stslex.core.ui.base.SwipeState
 import com.stslex.core.ui.base.image.NetworkImage
+import com.stslex.core.ui.base.onClick
 import com.stslex.core.ui.base.onClickDelay
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.core.ui.theme.toDp
 import com.stslex.core.ui.theme.toPx
 import com.stslex.feature.film.ui.model.Film
-import com.stslex.feature.film.ui.store.FilmStoreComponent.Action
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun FilmContentScreen(
     film: Film,
-    onAction: (Action) -> Unit,
+    onBackClick: () -> Unit,
+    onLikeClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyListState = rememberLazyListState()
@@ -121,7 +123,10 @@ internal fun FilmContentScreen(
                     targetState = derivedStateOf { progress > 0.5f }.value,
                 ) { isVisible ->
                     if (isVisible) {
-                        FilmActions()
+                        FilmActions(
+                            isLiked = film.isFavorite,
+                            onLikeClick = onLikeClick
+                        )
                     }
                 }
             }
@@ -156,9 +161,7 @@ internal fun FilmContentScreen(
                         )
                     ),
                 title = film.title,
-                onBackClick = {
-                    onAction(Action.BackButtonClick)
-                },
+                onBackClick = onBackClick,
                 textSize = MaterialTheme.typography.displayMedium
                     .fontSize * ((1 - progress).coerceAtLeast(0.5f))
             )
@@ -268,7 +271,9 @@ internal fun FilmBody(
 
 @Composable
 internal fun FilmActions(
-    modifier: Modifier = Modifier
+    onLikeClick: () -> Unit,
+    isLiked: Boolean,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -276,12 +281,19 @@ internal fun FilmActions(
         IconButton(
             modifier = Modifier
                 .padding(AppDimension.Padding.smallest),
-            onClick = {}
+            onClick = onClick(onClick = onLikeClick)
         ) {
-            Icon(
-                imageVector = Icons.Default.Favorite,
-                contentDescription = "Back",
-            )
+            if (isLiked) {
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "Like",
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Default.FavoriteBorder,
+                    contentDescription = "Like",
+                )
+            }
         }
         IconButton(
             modifier = Modifier

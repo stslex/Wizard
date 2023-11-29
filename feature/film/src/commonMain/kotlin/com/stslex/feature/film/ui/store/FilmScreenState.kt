@@ -10,4 +10,7 @@ sealed interface FilmScreenState {
     data class Content(val data: Film) : FilmScreenState
 
     data object Loading : FilmScreenState
+
+    val result: Film?
+        get() = (this as? Content)?.data
 }
