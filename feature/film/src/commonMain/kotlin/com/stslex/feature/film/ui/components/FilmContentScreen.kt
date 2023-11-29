@@ -131,7 +131,7 @@ internal fun FilmContentScreen(
                     .offset(
                         y = swipeableState.offset.value
                             .coerceAtLeast(toolbarHeight.toFloat())
-                            .toDp - AppDimension.Padding.large * progress
+                            .toDp - AppDimension.Padding.large * 2 * progress
                     )
                     .clip(
                         RoundedCornerShape(

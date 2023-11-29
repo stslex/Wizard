@@ -1,14 +1,14 @@
 [versions]
-kermit = "2.0.2"
-logback = "1.4.11"
-compose = "1.5.4"
-compose-plugin = "1.5.10"
-compose-compiler = "1.5.3"
-agp = "8.1.2"
 android-minSdk = "24"
 android-compileSdk = "34"
 android-targetSdk = "34"
-androidx-activityCompose = "1.8.0"
+
+logback = "1.4.11"
+compose = "1.5.4"
+compose-plugin = "1.5.11"
+compose-compiler = "1.5.4"
+agp = "8.1.4"
+androidx-activityCompose = "1.8.1"
 androidx-core-ktx = "1.12.0"
 androidx-appcompat = "1.6.1"
 androidx-material = "1.10.0"
@@ -20,14 +20,15 @@ junit = "4.13.2"
 
 koin = "3.4.3"
 koin-compose = "1.0.4"
-voyagerVersion = "1.0.0-rc10"
-ktor = "2.3.2"
+ktor = "2.3.6"
 immutableCollection = "0.3.5"
-kamel = "0.9.0"
 coroutines = "1.7.3"
 
+voyagerVersion = "1.0.0-rc10"
+kermit = "2.0.2"
+kamel = "0.9.0"
+
 [libraries]
-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -55,6 +56,10 @@ voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyagerVersion" }
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyagerVersion" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerVersion" }
+
+kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+
 #todo check if this is needed
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
@@ -67,7 +72,6 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.6.0" }
-kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version = "1.7.9" }
 
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
