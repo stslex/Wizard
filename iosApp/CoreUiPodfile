@@ -1,0 +1,5 @@
+target 'test' do
+  use_frameworks!
+  platform :ios, '16.0'
+  pod 'ui', :path => '../core/ui'
+end

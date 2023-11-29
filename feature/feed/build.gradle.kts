@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
@@ -15,14 +16,17 @@ kotlin {
 
     jvm("desktop")
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "feed"
-            isStatic = true
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    cocoapods {
+        summary = "Some description for the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0"
+        ios.deploymentTarget = "16.0"
+        podfile = project.file(project.rootProject.projectDir.path + "/iosApp/FeatureFeedPodfile")
+        framework {
+            baseName = "featureFeed"
         }
     }
 
