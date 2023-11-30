@@ -3,7 +3,7 @@ import com.stslex.core.core.coreModule
 import com.stslex.core.database.di.databaseModule
 import com.stslex.core.network.di.networkModule
 import com.stslex.core.ui.theme.AppTheme
-import com.stslex.feature.feed.di.feedModule
+import com.stslex.feature.film_feed.di.feedModule
 import com.stslex.feature.film.di.filmModule
 import com.stslex.feature.profile.di.profileModule
 import di.appModule

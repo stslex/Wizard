@@ -7,4 +7,6 @@ sealed interface AppScreen {
     data class Film(val id: String) : AppScreen
 
     data object Back : AppScreen
+
+    data object MatchFeed : AppScreen
 }

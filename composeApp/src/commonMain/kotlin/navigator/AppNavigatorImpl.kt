@@ -24,6 +24,7 @@ class AppNavigatorImpl : AppNavigator {
             AppScreen.Back -> navigator.pop()
             AppScreen.Main -> navigator.push(MainScreen)
             is AppScreen.Film -> navigator.push(FilmScreen(screen.id))
+            AppScreen.MatchFeed -> TODO()
         }
     }
 }
