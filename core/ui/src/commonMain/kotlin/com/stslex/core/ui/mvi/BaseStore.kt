@@ -42,37 +42,24 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
     val event: SharedFlow<E> = _event.asSharedFlow()
 
-    fun updateState(update: (S) -> S) {
+    protected fun updateState(update: (S) -> S) {
         mutableState.update(update)
     }
 
-    fun sendEvent(event: E) {
+    protected fun sendEvent(event: E) {
         screenModelScope.launch(appDispatcher.default) {
             this@BaseStore._event.emit(event)
         }
     }
 
-    fun navigate(event: N) {
+    protected fun navigate(event: N) {
         router(event)
     }
 
-    fun launch(
-        onError: suspend (Throwable) -> Unit = {},
-        onSuccess: suspend () -> Unit = {},
-        block: suspend CoroutineScope.() -> Unit,
-    ): Job = screenModelScope.launch(appDispatcher.default) {
-        runCatching { block() }
-            .onSuccess { onSuccess() }
-            .onFailure {
-                Logger.exception(it)
-                onError(it)
-            }
-    }
-
-    fun <T> launch(
-        action: suspend CoroutineScope.() -> T,
+    protected fun <T> launch(
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: (T) -> Unit,
+        action: suspend CoroutineScope.() -> T,
     ): Job = screenModelScope.launch(
         context = exceptionHandler(onError) + appDispatcher.default,
         block = {
@@ -80,7 +67,7 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         }
     )
 
-    fun <T> Flow<T>.launchFlow(
+    protected fun <T> Flow<T>.launchFlow(
         onError: suspend (cause: Throwable) -> Unit = {},
         each: suspend (T) -> Unit
     ): Job = screenModelScope.launch(
