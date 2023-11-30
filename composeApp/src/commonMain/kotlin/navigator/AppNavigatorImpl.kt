@@ -4,6 +4,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.stslex.core.ui.navigation.AppNavigator
 import com.stslex.core.ui.navigation.AppScreen
 import com.stslex.feature.film.ui.FilmScreen
+import com.stslex.feature.match_feed.ui.MatchFeedScreen
 import main_screen.MainScreen
 
 // TODO NAVIGATION beetwen screens after tab crush application
@@ -24,7 +25,7 @@ class AppNavigatorImpl : AppNavigator {
             AppScreen.Back -> navigator.pop()
             AppScreen.Main -> navigator.push(MainScreen)
             is AppScreen.Film -> navigator.push(FilmScreen(screen.id))
-            AppScreen.MatchFeed -> TODO()
+            AppScreen.MatchFeed -> navigator.push(MatchFeedScreen)
         }
     }
 }
