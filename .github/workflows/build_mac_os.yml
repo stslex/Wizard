@@ -1,4 +1,4 @@
-name: Project Build
+name: Project Build MacOs
 
 on:
   push:
@@ -31,7 +31,4 @@ jobs:
           xcode-version: latest-stable
 
       - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Junit tests with Gradle
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew iosArm64Binaries

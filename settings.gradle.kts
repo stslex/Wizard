@@ -19,10 +19,11 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+
 include(":core:core")
 include(":core:network")
 include(":core:ui")
+include(":core:database")
 include(":feature:feed")
 include(":feature:film")
 include(":feature:profile")
-include(":core:database")
