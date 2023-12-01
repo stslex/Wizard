@@ -60,6 +60,16 @@ private fun MatchFeedScreen(
                 films = state.films,
                 screenState = screenState,
                 onFilmClick = remember { { sendAction(Action.FilmClick(it)) } },
+                onItemSwiped = remember {
+                    { direction, id ->
+                        sendAction(
+                            Action.FilmSwiped(
+                                direction = direction,
+                                uuid = id
+                            )
+                        )
+                    }
+                },
             )
 
             is ScreenState.Error -> MatchFeedScreenError(screenState.message)

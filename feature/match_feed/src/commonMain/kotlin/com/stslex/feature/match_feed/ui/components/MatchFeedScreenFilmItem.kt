@@ -1,5 +1,6 @@
 package com.stslex.feature.match_feed.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
@@ -9,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
@@ -22,9 +23,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -37,6 +40,10 @@ import com.stslex.core.ui.base.onClickDelay
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.match_feed.ui.model.FilmUi
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 import kotlin.math.abs
 
 enum class SwipeDirection {
@@ -45,14 +52,15 @@ enum class SwipeDirection {
     NONE
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
 internal fun MatchFeedScreenFilmItem(
     modifier: Modifier = Modifier,
     screenWidth: Dp,
     film: FilmUi,
-    listState: LazyListState,
+    pagerState: PagerState,
     onFilmClick: (String) -> Unit,
+    onItemSwiped: (SwipeDirection, String) -> Unit,
 ) {
     val swipeableState = rememberSwipeableState(SwipeDirection.NONE)
 
@@ -68,35 +76,55 @@ internal fun MatchFeedScreenFilmItem(
         }
     }
 
+    LaunchedEffect(swipeableState, film.uuid) {
+        snapshotFlow {
+            swipeableState.progress.to.takeIf {
+                swipeableState.isAnimationRunning.not() &&
+                        swipeableState.progress.fraction == 1f
+            }
+        }
+            .filter {
+                it != SwipeDirection.NONE
+            }
+            .filterNotNull()
+            .distinctUntilChanged()
+            .collect { value ->
+                delay(300)
+                onItemSwiped(value, film.uuid)
+            }
+    }
 
     Box(
         modifier = modifier
-            .graphicsLayer {
-                rotationZ = 15f * progress
-                translationX = swipeableState.offset.value
-                alpha = 1f - abs(progress * 0.5f)
-            }
-            .width(posterWidth)
-            .height(posterHeight)
-            .swipeable(
-                state = swipeableState,
-                anchors = mapOf(
-                    -screenWidth.value to SwipeDirection.LEFT,
-                    screenWidth.value to SwipeDirection.RIGHT,
-                    0f to SwipeDirection.NONE,
-                ),
-                orientation = Orientation.Horizontal,
-            )
-            .animateItemTop(
-                listState = listState,
-                key = film.uuid,
-            )
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center,
     ) {
-        MatchFeedScreenFilmItemContent(
-            modifier = Modifier.fillMaxSize(),
-            film = film,
-            onFilmClick = onFilmClick,
-        )
+        Box(
+            modifier = modifier
+                .graphicsLayer {
+                    rotationZ = 15f * progress
+                    translationX = swipeableState.offset.value
+                    alpha = 1f - abs(progress * 0.5f)
+                }
+                .width(posterWidth)
+                .height(posterHeight)
+                .swipeable(
+                    state = swipeableState,
+                    anchors = mapOf(
+                        -screenWidth.value to SwipeDirection.LEFT,
+                        screenWidth.value to SwipeDirection.RIGHT,
+                        0f to SwipeDirection.NONE,
+                    ),
+                    orientation = Orientation.Horizontal,
+                )
+                .animateItemTop(pagerState)
+        ) {
+            MatchFeedScreenFilmItemContent(
+                modifier = Modifier.fillMaxSize(),
+                film = film,
+                onFilmClick = onFilmClick,
+            )
+        }
     }
 }
 

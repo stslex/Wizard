@@ -1,19 +1,14 @@
 package com.stslex.feature.match_feed.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,23 +18,27 @@ import com.stslex.feature.match_feed.ui.store.ScreenState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun MatchFeedScreenContent(
     loadMore: () -> Unit,
     films: ImmutableList<FilmUi>,
     screenState: ScreenState.Content,
     onFilmClick: (String) -> Unit,
+    onItemSwiped: (SwipeDirection, String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val listState = rememberLazyListState()
-    LaunchedEffect(listState, films.size) {
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) { films.size }
+
+    LaunchedEffect(pagerState, films.size) {
         snapshotFlow {
-            listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
+            pagerState.currentPage
         }
-            .filterNotNull()
             .distinctUntilChanged()
             .collectLatest { index ->
                 if (
@@ -52,57 +51,35 @@ internal fun MatchFeedScreenContent(
             }
     }
 
+    val coroutineScope = rememberCoroutineScope()
+
     BoxWithConstraints {
         val screenWidth = remember(maxWidth) { maxWidth }
-        LazyColumn(
+
+        VerticalPager(
+            state = pagerState,
             modifier = modifier
                 .fillMaxSize(),
-            state = listState,
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            flingBehavior = rememberSnapFlingBehavior(listState)
-        ) {
-            items(
-                count = films.size,
-                key = films.key,
-                contentType = {
-                    "film"
-                }
-            ) { index ->
-                val film = films.getOrNull(index)
-                if (film != null) {
-                    MatchFeedScreenFilmItem(
-                        film = film,
-                        screenWidth = screenWidth,
-                        onFilmClick = onFilmClick,
-                        listState = listState,
-                    )
-                }
+            key = { page ->
+                films.getOrNull(page)?.uuid ?: page
             }
-
-            if (screenState is ScreenState.Content.AppendLoading) {
-                item(
-                    contentType = {
-                        "loading"
+        ) { page ->
+            val film = films.getOrNull(page)
+            if (film != null) {
+                MatchFeedScreenFilmItem(
+                    film = film,
+                    screenWidth = screenWidth,
+                    onFilmClick = onFilmClick,
+                    pagerState = pagerState,
+                    onItemSwiped = { direction, id ->
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(page + 1)
+                            onItemSwiped(direction, id)
+                        }
                     }
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
+                )
             }
         }
     }
 }
-
-private val ImmutableList<FilmUi>.key: ((Int) -> Any)?
-    get() = if (isEmpty()) {
-        null
-    } else {
-        { index ->
-            get(index).uuid
-        }
-    }

@@ -2,6 +2,7 @@ package com.stslex.feature.match_feed.ui.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.core.ui.mvi.Store
+import com.stslex.feature.match_feed.ui.components.SwipeDirection
 import com.stslex.feature.match_feed.ui.model.FilmUi
 import com.stslex.feature.match_feed.ui.model.MatchUi
 import kotlinx.collections.immutable.ImmutableList
@@ -45,7 +46,14 @@ interface MatchFeedStoreComponent : Store {
 
         data object LoadFilms : Action
 
+        @Stable
         data class FilmClick(
+            val uuid: String
+        ) : Action
+
+        @Stable
+        data class FilmSwiped(
+            val direction: SwipeDirection,
             val uuid: String
         ) : Action
     }
