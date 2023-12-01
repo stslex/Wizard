@@ -11,7 +11,7 @@ import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.stslex.core.ui.mvi.setupNavigator
 import main_screen.bottom_nav_bar.BottomNavigationBar
-import main_screen.bottom_nav_bar.FeedTab
+import main_screen.bottom_nav_bar.BottomNavigationTabs
 
 object MainScreen : Screen {
 
@@ -20,7 +20,7 @@ object MainScreen : Screen {
         setupNavigator()
 
         TabNavigator(
-            tab = FeedTab,
+            tab = BottomNavigationTabs.MATCH_FEED.tab,
         ) { tabNavigator ->
             Scaffold(
                 content = { paddingValues ->

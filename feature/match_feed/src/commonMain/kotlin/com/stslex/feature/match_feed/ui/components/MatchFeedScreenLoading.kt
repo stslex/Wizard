@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-internal fun FeedScreenLoading(
+internal fun MatchFeedScreenLoading(
     modifier: Modifier = Modifier
 ) {
     // TODO add loading screen
