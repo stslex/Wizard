@@ -17,4 +17,10 @@ object AppDimension {
         val medium = 10.dp
         val large = 15.dp
     }
+
+    object Elevation {
+        val smallest = 2.dp
+        val small = 4.dp
+        val medium = 8.dp
+    }
 }

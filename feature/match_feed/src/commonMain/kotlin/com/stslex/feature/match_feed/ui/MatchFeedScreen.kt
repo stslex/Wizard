@@ -10,9 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
-import com.stslex.feature.match_feed.ui.components.FeedScreenContent
-import com.stslex.feature.match_feed.ui.components.FeedScreenError
-import com.stslex.feature.match_feed.ui.components.FeedScreenLoading
+import com.stslex.feature.match_feed.ui.components.MatchFeedScreenContent
+import com.stslex.feature.match_feed.ui.components.MatchFeedScreenError
+import com.stslex.feature.match_feed.ui.components.MatchFeedScreenLoading
 import com.stslex.feature.match_feed.ui.store.MatchFeedStore
 import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Action
 import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Event.ErrorSnackBar
@@ -55,15 +55,25 @@ private fun MatchFeedScreen(
         modifier = modifier.fillMaxSize()
     ) {
         when (val screenState = state.screen) {
-            is ScreenState.Content -> FeedScreenContent(
+            is ScreenState.Content -> MatchFeedScreenContent(
                 loadMore = remember { { sendAction(Action.LoadFilms) } },
                 films = state.films,
                 screenState = screenState,
                 onFilmClick = remember { { sendAction(Action.FilmClick(it)) } },
+                onItemSwiped = remember {
+                    { direction, id ->
+                        sendAction(
+                            Action.FilmSwiped(
+                                direction = direction,
+                                uuid = id
+                            )
+                        )
+                    }
+                },
             )
 
-            is ScreenState.Error -> FeedScreenError(screenState.message)
-            ScreenState.Loading -> FeedScreenLoading()
+            is ScreenState.Error -> MatchFeedScreenError(screenState.message)
+            ScreenState.Loading -> MatchFeedScreenLoading()
         }
     }
 }

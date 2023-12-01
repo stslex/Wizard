@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-internal fun FeedScreenError(
+internal fun MatchFeedScreenError(
     message: String,
     modifier: Modifier = Modifier
 ) {

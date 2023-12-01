@@ -29,7 +29,12 @@ class MatchFeedStore(
             Action.Init -> actionInit()
             Action.LoadFilms -> actionLoadFilms()
             is Action.FilmClick -> actionFilmClick(action)
+            is Action.FilmSwiped -> actionFilmSwiped(action)
         }
+    }
+
+    private fun actionFilmSwiped(action: Action.FilmSwiped) {
+        // TODO send action to backend
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {
