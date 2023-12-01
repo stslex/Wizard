@@ -59,8 +59,7 @@ kotlin {
             api(libs.compose.ui)
             api(libs.compose.ui.tooling.preview)
             api(libs.androidx.activity.compose)
-            api(libs.koin.android)
-            api(libs.koin.androidx.compose)
+            api(libs.coil.compose)
         }
         iosMain.dependencies {
             // TODO research TLS PROBLEM
@@ -78,4 +77,18 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$projectDir/build/compose/metrics",
+    )
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$projectDir/build/compose/reports",
+    )
 }

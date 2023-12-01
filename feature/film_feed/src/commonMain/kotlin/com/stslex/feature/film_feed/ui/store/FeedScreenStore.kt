@@ -1,5 +1,6 @@
 package com.stslex.feature.film_feed.ui.store
 
+import androidx.compose.runtime.Stable
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
 import com.stslex.core.ui.mvi.BaseStore
@@ -14,6 +15,7 @@ import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.State
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 
+@Stable
 class FeedScreenStore(
     private val interactor: FeedInteractor,
     appDispatcher: AppDispatcher,
@@ -96,6 +98,6 @@ class FeedScreenStore(
 
     companion object {
 
-        private const val PAGE_SIZE = 5
+        private const val PAGE_SIZE = 15
     }
 }
