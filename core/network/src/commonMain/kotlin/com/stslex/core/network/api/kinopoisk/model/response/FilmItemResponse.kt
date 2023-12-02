@@ -1,10 +1,10 @@
-package com.stslex.core.network.model
+package com.stslex.core.network.api.kinopoisk.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FilmItem(
+data class FilmItemResponse(
     @SerialName("kinopoiskId")
     val kinopoiskId: Int,
     @SerialName("imdbId")

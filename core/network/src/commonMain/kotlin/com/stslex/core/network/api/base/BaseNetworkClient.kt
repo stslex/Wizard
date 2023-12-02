@@ -1,10 +1,10 @@
-package com.stslex.core.network.client.base
+package com.stslex.core.network.api.base
 
 import com.stslex.core.core.AppDispatcher
-import com.stslex.core.network.client.model.DefaultRequest
-import com.stslex.core.network.client.base.NetworkClientBuilder.setupDefaultRequest
-import com.stslex.core.network.client.base.NetworkClientBuilder.setupLogging
-import com.stslex.core.network.client.base.NetworkClientBuilder.setupNegotiation
+import com.stslex.core.network.api.model.DefaultRequest
+import com.stslex.core.network.api.base.NetworkClientBuilder.setupDefaultRequest
+import com.stslex.core.network.api.base.NetworkClientBuilder.setupLogging
+import com.stslex.core.network.api.base.NetworkClientBuilder.setupNegotiation
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.cache.HttpCache

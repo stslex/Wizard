@@ -1,4 +1,4 @@
-package com.stslex.core.network.model
+package com.stslex.core.network.api.kinopoisk.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

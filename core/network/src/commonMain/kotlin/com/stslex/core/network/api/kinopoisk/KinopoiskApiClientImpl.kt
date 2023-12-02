@@ -1,13 +1,13 @@
-package com.stslex.core.network.client.kinopoisk
+package com.stslex.core.network.api.kinopoisk
 
 import Wizard.core.network.BuildConfig
 import com.stslex.core.core.AppDispatcher
-import com.stslex.core.network.client.base.BaseNetworkClient
-import com.stslex.core.network.client.model.DefaultRequest
+import com.stslex.core.network.api.base.BaseNetworkClient
+import com.stslex.core.network.api.model.DefaultRequest
 
-class KinopoiskClientImpl(
+class KinopoiskApiClientImpl(
     appDispatcher: AppDispatcher
-) : KinopoiskClient, BaseNetworkClient(
+) : KinopoiskApiClient, BaseNetworkClient(
     appDispatcher = appDispatcher,
     defaultRequest = DEFAULT_REQUEST
 ) {

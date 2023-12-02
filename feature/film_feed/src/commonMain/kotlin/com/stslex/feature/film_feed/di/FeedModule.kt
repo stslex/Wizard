@@ -9,7 +9,7 @@ import com.stslex.feature.film_feed.navigation.FeedScreenRouterImpl
 import com.stslex.feature.film_feed.ui.store.FeedScreenStore
 import org.koin.dsl.module
 
-val feedModule = module {
+val featureFeedModule = module {
     factory {
         FeedScreenStore(
             interactor = get(),

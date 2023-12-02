@@ -1,4 +1,4 @@
-package com.stslex.core.network.model
+package com.stslex.core.network.api.kinopoisk.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TrailerResponse(
     @SerialName("total")
-    val total: Int,
+    val total: Int?,
     @SerialName("items")
-    val items: List<TrailerItemResponse>
+    val items: List<TrailerItemResponse>?
 )
 

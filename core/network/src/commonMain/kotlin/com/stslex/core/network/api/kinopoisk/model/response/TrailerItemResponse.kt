@@ -1,4 +1,4 @@
-package com.stslex.core.network.model
+package com.stslex.core.network.api.kinopoisk.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TrailerItemResponse(
     @SerialName("url")
-    val url: String,
+    val url: String?,
     @SerialName("name")
-    val name: String,
+    val name: String?,
     @SerialName("site")
-    val site: String
+    val site: String?
 )

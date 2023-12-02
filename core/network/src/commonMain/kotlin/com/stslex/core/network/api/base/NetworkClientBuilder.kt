@@ -1,6 +1,6 @@
-package com.stslex.core.network.client.base
+package com.stslex.core.network.api.base
 
-import com.stslex.core.network.client.model.DefaultRequest
+import com.stslex.core.network.api.model.DefaultRequest
 import com.stslex.core.network.utils.KtorLogger
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.cio.CIOEngineConfig

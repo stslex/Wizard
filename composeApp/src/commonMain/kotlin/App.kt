@@ -1,12 +1,12 @@
 import androidx.compose.runtime.Composable
 import com.stslex.core.core.coreModule
-import com.stslex.core.database.di.databaseModule
-import com.stslex.core.network.di.networkModule
+import com.stslex.core.database.di.coreDatabaseModule
+import com.stslex.core.network.di.coreNetworkModule
 import com.stslex.core.ui.theme.AppTheme
-import com.stslex.feature.film.di.filmModule
-import com.stslex.feature.film_feed.di.feedModule
-import com.stslex.feature.match_feed.di.matchFeedModule
-import com.stslex.feature.profile.di.profileModule
+import com.stslex.feature.film.di.featureFilmModule
+import com.stslex.feature.film_feed.di.featureFeedModule
+import com.stslex.feature.match_feed.di.featureMatchFeedModule
+import com.stslex.feature.profile.di.featureProfileModule
 import di.appModule
 import org.koin.compose.KoinApplication
 import org.koin.dsl.KoinAppDeclaration
@@ -35,12 +35,12 @@ private fun setupModules(): KoinAppDeclaration = {
         listOf(
             appModule,
             coreModule,
-            networkModule,
-            databaseModule,
-            feedModule,
-            filmModule,
-            profileModule,
-            matchFeedModule
+            coreNetworkModule,
+            coreDatabaseModule,
+            featureFeedModule,
+            featureFilmModule,
+            featureProfileModule,
+            featureMatchFeedModule
         )
     )
 }

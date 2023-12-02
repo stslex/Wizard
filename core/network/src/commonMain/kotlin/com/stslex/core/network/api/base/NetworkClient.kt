@@ -1,4 +1,4 @@
-package com.stslex.core.network.client.base
+package com.stslex.core.network.api.base
 
 import io.ktor.client.HttpClient
 

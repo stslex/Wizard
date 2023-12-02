@@ -9,7 +9,7 @@ import com.stslex.feature.match_feed.navigation.MatchFeedRouterImpl
 import com.stslex.feature.match_feed.ui.store.MatchFeedStore
 import org.koin.dsl.module
 
-val matchFeedModule = module {
+val featureMatchFeedModule = module {
     factory<MatchFeedRepository> { MatchFeedMockRepositoryImpl(client = get()) }
     factory<MatchFeedInteractor> { MatchFeedInteractorImpl(repository = get()) }
     factory<MatchFeedRouter> { MatchFeedRouterImpl(navigator = get()) }

@@ -1,4 +1,4 @@
-package com.stslex.core.network.model
+package com.stslex.core.network.api.kinopoisk.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class FilmListResponse(
     @SerialName("total")
-    val total: Int,
+    val total: Int?,
     @SerialName("totalPages")
-    val totalPages: Int,
+    val totalPages: Int?,
     @SerialName("items")
-    val items: List<FilmItem>
+    val items: List<FilmItemResponse>?
 )

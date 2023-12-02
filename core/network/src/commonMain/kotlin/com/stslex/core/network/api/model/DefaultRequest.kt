@@ -1,4 +1,4 @@
-package com.stslex.core.network.client.model
+package com.stslex.core.network.api.model
 
 data class DefaultRequest(
     val hostUrl: String,

@@ -9,7 +9,7 @@ import com.stslex.feature.profile.navigation.ProfileRouterImpl
 import com.stslex.feature.profile.ui.store.ProfileStore
 import org.koin.dsl.module
 
-val profileModule = module {
+val featureProfileModule = module {
     factory {
         ProfileStore(
             interactor = get(),

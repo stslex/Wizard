@@ -9,7 +9,7 @@ import com.stslex.feature.film.navigation.FilmRouterImpl
 import com.stslex.feature.film.ui.store.FilmStore
 import org.koin.dsl.module
 
-val filmModule = module {
+val featureFilmModule = module {
     factory {
         FilmStore(
             interactor = get(),
