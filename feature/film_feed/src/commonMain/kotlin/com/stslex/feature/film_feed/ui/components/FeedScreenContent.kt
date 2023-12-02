@@ -12,13 +12,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import com.stslex.core.core.Logger
 import com.stslex.feature.film_feed.ui.model.FilmModel
 import com.stslex.feature.film_feed.ui.model.ScreenState
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun FeedScreenContent(
@@ -30,20 +30,22 @@ internal fun FeedScreenContent(
 ) {
     val listState = rememberLazyListState()
     LaunchedEffect(listState, films.size) {
-        snapshotFlow {
-            listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
-        }
-            .filterNotNull()
-            .distinctUntilChanged()
-            .collectLatest { index ->
-                if (
-                    screenState != ScreenState.Content.AppendLoading
-                    && index >= films.size - 5
-                ) {
-                    Logger.debug("index: $index, films.size: ${films.size}")
-                    loadMore()
-                }
+        launch(Dispatchers.Default) {
+            snapshotFlow {
+                listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
             }
+                .filterNotNull()
+                .distinctUntilChanged()
+                .collect { index ->
+                    if (
+                        screenState != ScreenState.Content.AppendLoading
+                        && index >= films.size - 10
+                    ) {
+                        loadMore()
+                    }
+                }
+        }
+
     }
     BoxWithConstraints {
         val itemHeight = remember(maxHeight) { maxHeight / 3 }

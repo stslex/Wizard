@@ -20,7 +20,7 @@ object MainScreen : Screen {
         setupNavigator()
 
         TabNavigator(
-            tab = BottomNavigationTabs.MATCH_FEED.tab,
+            tab = BottomNavigationTabs.FILM_FEED.tab,
         ) { tabNavigator ->
             Scaffold(
                 content = { paddingValues ->

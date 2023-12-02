@@ -19,12 +19,13 @@ fun AppTheme(
     } else {
         lightColorScheme()
     }
-    CompositionLocalProvider(
-        LocalKamelConfig provides AppKamelConfig.KamelLoggingConfig
-    ) {
-        MaterialTheme(
-            colorScheme = colors,
-            content = content
-        )
-    }
+    MaterialTheme(
+        colorScheme = colors,
+        content = content
+    )
+//    CompositionLocalProvider(
+//        LocalKamelConfig provides AppKamelConfig.KamelLoggingConfig
+//    ) {
+//
+//    }
 }

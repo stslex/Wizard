@@ -5,9 +5,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 
 @Composable
-expect fun NativeNetworkImage(
+actual fun NativeNetworkImage(
     url: String,
     contentDescription: String?,
     contentScale: ContentScale,
-    modifier: Modifier = Modifier,
-)
+    modifier: Modifier
+) {
+    // TODO implement native loader
+    KamelNetworkImage(
+        url = url,
+        contentDescription = contentDescription,
+        contentScale = contentScale,
+        modifier = modifier
+    )
+}
