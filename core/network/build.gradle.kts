@@ -1,9 +1,13 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.github.gmazzo.gradle.plugins.BuildConfigExtension
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinCocoapods)
     kotlin("plugin.serialization") version "1.9.20"
+    id("com.github.gmazzo.buildconfig").version("4.2.0")
 }
 
 kotlin {
@@ -43,6 +47,9 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+        buildConfig {
+            setLocalProperty(project.rootProject)
+        }
     }
 }
 
@@ -52,4 +59,12 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+}
+
+
+fun BuildConfigExtension.setLocalProperty(dir: Project) {
+    val key = gradleLocalProperties(dir.projectDir)["KINOPOISK_API_KEY"]
+        ?.toString()
+        ?: throw IllegalStateException("KINOPOISK_API_KEY should be initialised")
+    buildConfigField("String", "KINOPOISK_API_KEY", key)
 }

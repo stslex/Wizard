@@ -1,6 +1,6 @@
 package com.stslex.core.network.clients.film.client
 
-import com.stslex.core.network.client.NetworkClient
+import com.stslex.core.network.client.base.NetworkClient
 import com.stslex.core.network.clients.film.model.FilmFeedResponse
 import com.stslex.core.network.clients.film.model.FilmResponse
 import io.ktor.client.call.body

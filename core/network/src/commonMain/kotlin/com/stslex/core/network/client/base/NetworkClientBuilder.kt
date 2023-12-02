@@ -1,5 +1,6 @@
-package com.stslex.core.network.client
+package com.stslex.core.network.client.base
 
+import com.stslex.core.network.client.model.DefaultRequest
 import com.stslex.core.network.utils.KtorLogger
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.cio.CIOEngineConfig
@@ -15,8 +16,6 @@ import kotlinx.serialization.json.Json
 
 internal object NetworkClientBuilder {
 
-    private const val HOST_URL = "smth_host_url"
-
     @OptIn(ExperimentalSerializationApi::class)
     fun HttpClientConfig<CIOEngineConfig>.setupNegotiation() {
         install(ContentNegotiation) {
@@ -31,14 +30,18 @@ internal object NetworkClientBuilder {
         }
     }
 
-    fun HttpClientConfig<CIOEngineConfig>.setupDefaultRequest() {
+    fun HttpClientConfig<CIOEngineConfig>.setupDefaultRequest(
+        defaultRequest: DefaultRequest
+    ) {
         defaultRequest {
             url {
-                host = HOST_URL
+                host = defaultRequest.hostUrl
                 protocol = URLProtocol.HTTPS
             }
             headers {
-                // TODO add auth headers
+                defaultRequest.headers.forEach { (key, value) ->
+                    append(key, value)
+                }
             }
         }
     }

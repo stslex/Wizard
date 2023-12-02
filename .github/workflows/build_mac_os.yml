@@ -30,5 +30,10 @@ jobs:
         with:
           xcode-version: latest-stable
 
+      - name: set up LOCAL_PROPERTIES
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo "$LOCAL_PROPERTIES" > ./local.properties
+
       - name: Build with Gradle
         run: ./gradlew iosArm64Binaries
