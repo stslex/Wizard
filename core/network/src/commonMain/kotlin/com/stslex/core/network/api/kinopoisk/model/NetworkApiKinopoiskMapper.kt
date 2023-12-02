@@ -32,7 +32,7 @@ fun FilmItemResponse.toNetwork(): FilmItemNetwork = FilmItemNetwork(
     year = year,
     posterUrl = posterUrl.orEmpty(),
     posterUrlPreview = posterUrlPreview.orEmpty(),
-    type = FilmTypeNetwork.valueOf(type.orEmpty())
+    type = FilmTypeNetwork.getType(type.orEmpty())
 )
 
 fun TrailerResponse.toNetwork(): TrailerNetwork = TrailerNetwork(
@@ -78,7 +78,7 @@ fun MovieResponse.toNetwork(): MovieNetwork = MovieNetwork(
     shortDescription = shortDescription.orEmpty(),
     editorAnnotation = editorAnnotation.orEmpty(),
     isTicketsAvailable = isTicketsAvailable ?: false,
-    productionStatus = FilmProductionStatusNetwork.fromValue(productionStatus.orEmpty()),
+    productionStatus = FilmProductionStatusNetwork.getType(productionStatus.orEmpty()),
     type = type,
     ratingMpaa = ratingMpaa,
     ratingAgeLimits = ratingAgeLimits,
