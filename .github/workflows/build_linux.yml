@@ -27,6 +27,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: set up LOCAL_PROPERTIES
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo "$LOCAL_PROPERTIES" > ./local.properties
+
       - name: Build with Gradle
         run: ./gradlew assembleAndroidTest
 
@@ -48,6 +53,11 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: set up LOCAL_PROPERTIES
+        env:
+          LOCAL_PROPERTIES: ${{ secrets.LOCAL_PROPERTIES }}
+        run: echo "$LOCAL_PROPERTIES" > ./local.properties
 
       - name: Build with Gradle
         run: ./gradlew desktopMainClasses desktopSourcesJar desktopTestClasses
