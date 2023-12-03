@@ -1,6 +1,6 @@
 package com.stslex.core.network.api.kinopoisk.model.network
 
-data class TrailerNetwork(
+data class TrailerKinopoisk(
     val total: Int,
-    val items: List<TrailerItemNetwork>
+    val items: List<TrailerItemKinopoisk>
 )

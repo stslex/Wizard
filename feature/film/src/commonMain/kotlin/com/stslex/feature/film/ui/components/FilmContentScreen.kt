@@ -388,7 +388,7 @@ internal fun FilmInfo(
                 style = MaterialTheme.typography.bodyMedium,
             )
             Text(
-                text = film.country,
+                text = film.countries.joinToString(", "),
                 style = MaterialTheme.typography.bodyMedium,
             )
         }

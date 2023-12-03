@@ -1,17 +1,16 @@
 package com.stslex.feature.film_feed.data.model
 
-import com.stslex.core.network.clients.film.model.FilmFeedResponse
-import com.stslex.core.network.clients.film.model.FilmResponse
+import com.stslex.core.network.clients.film.model.FilmItemNetwork
+import com.stslex.core.network.clients.film.model.FilmListNetwork
 
-fun FilmFeedResponse.toData() = FeedDataModel(
+fun FilmListNetwork.toData() = FeedDataModel(
     films = results.map { it.toData() },
     hasNextPage = hasNext,
 )
 
-fun FilmResponse.toData() = FilmDataModel(
+fun FilmItemNetwork.toData() = FilmDataModel(
     id = id,
     title = title,
-    description = description,
     imageUrl = poster,
     rate = rating,
     genres = genres,

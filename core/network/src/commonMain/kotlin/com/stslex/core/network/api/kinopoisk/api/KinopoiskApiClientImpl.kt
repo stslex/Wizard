@@ -1,9 +1,9 @@
-package com.stslex.core.network.api.kinopoisk
+package com.stslex.core.network.api.kinopoisk.api
 
 import Wizard.core.network.BuildConfig
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.network.api.base.BaseNetworkClient
-import com.stslex.core.network.api.model.DefaultRequest
+import com.stslex.core.network.api.base.model.DefaultRequest
 
 class KinopoiskApiClientImpl(
     appDispatcher: AppDispatcher
@@ -13,7 +13,8 @@ class KinopoiskApiClientImpl(
 ) {
 
     companion object {
-        private const val KINOPOISK_HOST_URL = "https://kinopoiskapiunofficial.tech/api/v2.2/"
+        // TODO parse error
+        private const val KINOPOISK_HOST_URL = "kinopoiskapiunofficial.tech/api/v2.2"
         private const val API_KEY = BuildConfig.KINOPOISK_API_KEY
         private const val API_HEADER = "X-API-KEY"
         private const val CONTENT_TYPE = "Content-Type"

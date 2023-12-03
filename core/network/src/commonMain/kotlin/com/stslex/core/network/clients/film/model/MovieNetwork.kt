@@ -1,6 +1,6 @@
-package com.stslex.feature.film.data.model
+package com.stslex.core.network.clients.film.model
 
-data class FilmData(
+data class MovieNetwork(
     val id: String,
     val title: String,
     val description: String,
@@ -8,12 +8,8 @@ data class FilmData(
     val rating: String,
     val duration: String,
     val genres: List<String>,
-    val actors: List<String>,
-    val director: String,
     val countries: List<String>,
     val year: String,
     val age: String,
     val type: String,
-    val trailer: String,
-    val isFavorite: Boolean
 )
