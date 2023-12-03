@@ -23,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import com.stslex.core.ui.base.image.NetworkImage
 import com.stslex.core.ui.base.onClickDelay
@@ -82,13 +81,6 @@ internal fun FeedScreenFilmItem(
                 )
                 Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
                 FilmItemGenres(genres = film.genres)
-                Spacer(modifier = Modifier.height(AppDimension.Padding.big))
-                Text(
-                    modifier = Modifier.fillMaxSize(),
-                    text = film.description,
-                    style = MaterialTheme.typography.bodySmall,
-                    overflow = TextOverflow.Ellipsis
-                )
             }
         }
     }

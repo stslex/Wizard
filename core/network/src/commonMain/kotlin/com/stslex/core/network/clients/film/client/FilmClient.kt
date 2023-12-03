@@ -1,14 +1,16 @@
 package com.stslex.core.network.clients.film.client
 
-import com.stslex.core.network.clients.film.model.FilmFeedResponse
-import com.stslex.core.network.clients.film.model.FilmResponse
-import kotlinx.coroutines.flow.Flow
+import com.stslex.core.network.clients.film.model.FilmListNetwork
+import com.stslex.core.network.clients.film.model.FilmTrailerNetwork
+import com.stslex.core.network.clients.film.model.MovieNetwork
 
 interface FilmClient {
 
-    suspend fun getFeedFilms(page: Int, pageSize: Int): FilmFeedResponse
+    suspend fun getFeedFilms(page: Int, pageSize: Int): FilmListNetwork
 
-    fun getFilm(id: String): Flow<FilmResponse>
+    suspend fun getFilm(id: String): MovieNetwork
+
+    suspend fun getFilmTrailers(id: String): List<FilmTrailerNetwork>
 
     suspend fun likeFilm(id: String)
 

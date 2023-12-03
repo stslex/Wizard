@@ -9,7 +9,7 @@ enum class FilmProductionStatusNetwork(val value: String) {
     POST_PRODUCTION("POST_PRODUCTION");
 
     companion object {
-        fun fromValue(value: String) = FilmProductionStatusNetwork
+        fun getType(value: String) = FilmProductionStatusNetwork
             .entries
             .firstOrNull { it.value == value }
             ?: UNKNOWN

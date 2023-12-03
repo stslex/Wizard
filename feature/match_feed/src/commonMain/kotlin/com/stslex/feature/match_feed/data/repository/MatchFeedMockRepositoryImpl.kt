@@ -46,7 +46,7 @@ class MatchFeedMockRepositoryImpl(
                 FilmData(
                     uuid = it.id,
                     title = it.title,
-                    description = it.description,
+                    description = "", // TODO refactor this
                     poster = it.poster,
                     genres = it.genres,
                     rate = it.rating,

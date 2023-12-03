@@ -1,35 +1,32 @@
 package com.stslex.core.network.clients.film.client
 
 import com.stslex.core.network.api.base.NetworkClient
-import com.stslex.core.network.clients.film.model.FilmFeedResponse
-import com.stslex.core.network.clients.film.model.FilmResponse
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.stslex.core.network.api.kinopoisk.source.KinopoiskNetworkClient
+import com.stslex.core.network.clients.film.model.FilmListNetwork
+import com.stslex.core.network.clients.film.model.FilmTrailerNetwork
+import com.stslex.core.network.clients.film.model.MovieNetwork
+import com.stslex.core.network.clients.film.model.toNetwork
 
 class FilmClientImpl(
-    private val client: NetworkClient
+    private val client: NetworkClient,
+    private val kinopoiskClient: KinopoiskNetworkClient
 ) : FilmClient {
 
     override suspend fun getFeedFilms(
         page: Int, pageSize: Int
-    ): FilmFeedResponse = client.request {
-        get("feed") {
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+    ): FilmListNetwork = kinopoiskClient
+        .getFilms(page)
+        .toNetwork()
 
-    override fun getFilm(id: String): Flow<FilmResponse> = flow {
-        val result: FilmResponse = client.request {
-            get("feed") {
-                parameter("id", id)
-            }.body()
-        }
-        emit(result)
-    }
+    override suspend fun getFilm(id: String): MovieNetwork = kinopoiskClient
+        .getFilm(id)
+        .toNetwork()
+
+    override suspend fun getFilmTrailers(
+        id: String
+    ): List<FilmTrailerNetwork> = kinopoiskClient
+        .getFilmTrailers(id)
+        .toNetwork()
 
     override suspend fun likeFilm(id: String) {
         TODO("Not yet implemented")

@@ -1,25 +1,26 @@
 package com.stslex.core.network.api.kinopoisk.model
 
-import com.stslex.core.network.api.kinopoisk.model.network.FilmItemNetwork
-import com.stslex.core.network.api.kinopoisk.model.network.FilmListNetwork
+import com.stslex.core.network.api.kinopoisk.model.network.FilmItemKinopoisk
+import com.stslex.core.network.api.kinopoisk.model.network.FilmListKinopoisk
 import com.stslex.core.network.api.kinopoisk.model.network.FilmProductionStatusNetwork
 import com.stslex.core.network.api.kinopoisk.model.network.FilmTypeNetwork
-import com.stslex.core.network.api.kinopoisk.model.network.MovieNetwork
-import com.stslex.core.network.api.kinopoisk.model.network.TrailerItemNetwork
-import com.stslex.core.network.api.kinopoisk.model.network.TrailerNetwork
+import com.stslex.core.network.api.kinopoisk.model.network.MovieKinopoisk
+import com.stslex.core.network.api.kinopoisk.model.network.TrailerItemKinopoisk
+import com.stslex.core.network.api.kinopoisk.model.network.TrailerKinopoisk
 import com.stslex.core.network.api.kinopoisk.model.response.FilmItemResponse
 import com.stslex.core.network.api.kinopoisk.model.response.FilmListResponse
 import com.stslex.core.network.api.kinopoisk.model.response.MovieResponse
 import com.stslex.core.network.api.kinopoisk.model.response.TrailerItemResponse
 import com.stslex.core.network.api.kinopoisk.model.response.TrailerResponse
+import com.stslex.core.network.clients.film.model.TrailerSiteType
 
-fun FilmListResponse.toNetwork(): FilmListNetwork = FilmListNetwork(
+fun FilmListResponse.toNetwork(): FilmListKinopoisk = FilmListKinopoisk(
     total = total ?: 0,
     totalPages = totalPages ?: 0,
     items = items?.map { it.toNetwork() }.orEmpty()
 )
 
-fun FilmItemResponse.toNetwork(): FilmItemNetwork = FilmItemNetwork(
+fun FilmItemResponse.toNetwork(): FilmItemKinopoisk = FilmItemKinopoisk(
     kinopoiskId = kinopoiskId,
     imdbId = imdbId.orEmpty(),
     nameRu = nameRu.orEmpty(),
@@ -32,21 +33,21 @@ fun FilmItemResponse.toNetwork(): FilmItemNetwork = FilmItemNetwork(
     year = year,
     posterUrl = posterUrl.orEmpty(),
     posterUrlPreview = posterUrlPreview.orEmpty(),
-    type = FilmTypeNetwork.valueOf(type.orEmpty())
+    type = FilmTypeNetwork.getType(type.orEmpty())
 )
 
-fun TrailerResponse.toNetwork(): TrailerNetwork = TrailerNetwork(
+fun TrailerResponse.toNetwork(): TrailerKinopoisk = TrailerKinopoisk(
     total = total ?: 0,
     items = items?.map { it.toNetwork() }.orEmpty()
 )
 
-fun TrailerItemResponse.toNetwork(): TrailerItemNetwork = TrailerItemNetwork(
+fun TrailerItemResponse.toNetwork(): TrailerItemKinopoisk = TrailerItemKinopoisk(
     url = url.orEmpty(),
     name = name.orEmpty(),
-    site = site.orEmpty(),
+    site = TrailerSiteType.getByValue(site.orEmpty()),
 )
 
-fun MovieResponse.toNetwork(): MovieNetwork = MovieNetwork(
+fun MovieResponse.toNetwork(): MovieKinopoisk = MovieKinopoisk(
     kinopoiskId = kinopoiskId,
     kinopoiskHDId = kinopoiskHDId.orEmpty(),
     imdbId = imdbId.orEmpty(),
@@ -78,7 +79,7 @@ fun MovieResponse.toNetwork(): MovieNetwork = MovieNetwork(
     shortDescription = shortDescription.orEmpty(),
     editorAnnotation = editorAnnotation.orEmpty(),
     isTicketsAvailable = isTicketsAvailable ?: false,
-    productionStatus = FilmProductionStatusNetwork.fromValue(productionStatus.orEmpty()),
+    productionStatus = FilmProductionStatusNetwork.getType(productionStatus.orEmpty()),
     type = type,
     ratingMpaa = ratingMpaa,
     ratingAgeLimits = ratingAgeLimits,

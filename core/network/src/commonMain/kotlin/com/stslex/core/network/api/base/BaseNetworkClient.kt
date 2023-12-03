@@ -1,7 +1,7 @@
 package com.stslex.core.network.api.base
 
 import com.stslex.core.core.AppDispatcher
-import com.stslex.core.network.api.model.DefaultRequest
+import com.stslex.core.network.api.base.model.DefaultRequest
 import com.stslex.core.network.api.base.NetworkClientBuilder.setupDefaultRequest
 import com.stslex.core.network.api.base.NetworkClientBuilder.setupLogging
 import com.stslex.core.network.api.base.NetworkClientBuilder.setupNegotiation

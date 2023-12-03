@@ -1,6 +1,6 @@
 package com.stslex.core.network.api.kinopoisk.model.network
 
-data class FilmItemNetwork(
+data class FilmItemKinopoisk(
     val kinopoiskId: Int,
     val imdbId: String,
     val nameRu: String,

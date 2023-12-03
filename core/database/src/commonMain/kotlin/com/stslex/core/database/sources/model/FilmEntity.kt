@@ -10,7 +10,7 @@ data class FilmEntity(
     val genres: List<String>,
     val actors: List<String>,
     val director: String,
-    val country: String,
+    val countries: List<String>,
     val year: String,
     val age: String,
     val type: String,

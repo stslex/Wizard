@@ -9,7 +9,7 @@ enum class FilmTypeNetwork(val value: String) {
     UNKNOWN("TV_SERIES");
 
     companion object {
-        fun fromValue(value: String): FilmTypeNetwork =
+        fun getType(value: String): FilmTypeNetwork =
             FilmTypeNetwork.entries
                 .firstOrNull { it.value == value }
                 ?: UNKNOWN

@@ -14,7 +14,7 @@ data class Film(
     val genres: ImmutableList<String>,
     val actors: ImmutableList<String>,
     val director: String,
-    val country: String,
+    val countries: ImmutableList<String>,
     val year: String,
     val age: String,
     val type: String,

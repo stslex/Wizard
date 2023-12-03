@@ -11,7 +11,6 @@ fun FeedDataModel.toDomain() = FeedDomainModel(
 fun FilmDataModel.toDomain() = FilmDomainModel(
     id = id,
     title = title,
-    description = description,
     imageUrl = imageUrl,
     rate = rate,
     genres = genres,

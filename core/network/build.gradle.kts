@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinCocoapods)
-    kotlin("plugin.serialization") version "1.9.20"
-    id("com.github.gmazzo.buildconfig").version("4.2.0")
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.buildConfig)
 }
 
 kotlin {
