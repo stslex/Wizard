@@ -50,6 +50,7 @@ kotlin {
             implementation(project(":feature:film"))
             implementation(project(":feature:profile"))
             implementation(project(":feature:match_feed"))
+            implementation(project(":feature:auth"))
         }
     }
 }
