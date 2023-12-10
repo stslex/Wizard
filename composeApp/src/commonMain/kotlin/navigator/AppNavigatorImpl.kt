@@ -3,7 +3,7 @@ package navigator
 import cafe.adriel.voyager.navigator.Navigator
 import com.stslex.core.ui.navigation.AppNavigator
 import com.stslex.core.ui.navigation.AppScreen
-import com.stslex.feature.auth.AuthScreen
+import com.stslex.feature.auth.ui.AuthScreen
 import com.stslex.feature.film.ui.FilmScreen
 import com.stslex.feature.match_feed.ui.MatchFeedScreen
 import main_screen.MainScreen

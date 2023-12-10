@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.stslex.core.database.store.UserStore
-import com.stslex.feature.auth.AuthScreen
+import com.stslex.feature.auth.ui.AuthScreen
 import main_screen.MainScreen
 import org.koin.compose.getKoin
 
