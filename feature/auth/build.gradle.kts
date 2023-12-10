@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinCocoapods)
-    kotlin("plugin.serialization") version "1.9.20"
 }
 
 kotlin {
@@ -25,17 +24,18 @@ kotlin {
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "16.0"
-        podfile = project.file(project.rootProject.projectDir.path + "/iosApp/CoreDatabasePodfile")
+        podfile = project.file(project.rootProject.projectDir.path + "/iosApp/FeatureAuthPodfile")
         framework {
-            baseName = "coreDatabase"
+            baseName = "featureAuth"
         }
     }
 
     sourceSets {
         commonMain.dependencies {
             implementation(project(":core:core"))
-            implementation(libs.kotlinx.serialization.json)
-            implementation("com.russhwolf:multiplatform-settings:1.1.1")
+            implementation(project(":core:ui"))
+            implementation(project(":core:network"))
+            implementation(project(":core:database"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -44,9 +44,23 @@ kotlin {
 }
 
 android {
-    namespace = "com.stslex.core.database"
+    namespace = "com.stslex.feature.auth"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$projectDir/build/compose/metrics",
+    )
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-P",
+        "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$projectDir/build/compose/reports",
+    )
 }

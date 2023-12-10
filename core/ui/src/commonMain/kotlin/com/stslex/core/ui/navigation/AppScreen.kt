@@ -9,4 +9,6 @@ sealed interface AppScreen {
     data object Back : AppScreen
 
     data object MatchFeed : AppScreen
+
+    data object Auth : AppScreen
 }
