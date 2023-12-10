@@ -35,6 +35,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(libs.kotlinx.serialization.json)
+            implementation("com.russhwolf:multiplatform-settings:1.1.1")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

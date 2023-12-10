@@ -42,6 +42,7 @@ kotlin {
         }
         androidMain.dependencies {
             api(libs.coroutines.android)
+            api(libs.koin.android)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
