@@ -22,7 +22,7 @@ import com.stslex.feature.film.ui.store.FilmStoreComponent.Action
 import com.stslex.feature.film.ui.store.FilmStoreComponent.State
 
 data class FilmScreen(
-    private val id: String
+    val id: String
 ) : Screen {
 
     @Composable

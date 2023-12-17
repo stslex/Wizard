@@ -6,7 +6,7 @@ class UserStoreImpl(
     private val userSettings: UserSettings
 ) : UserStore {
 
-    override var userToken: String
+    override var accessToken: String
         get() = userSettings.getString(KEY_TOKEN, EMPTY_VALUE)
         set(value) {
             userSettings[KEY_TOKEN] = value
@@ -29,9 +29,6 @@ class UserStoreImpl(
         set(value) {
             userSettings[KEY_UUID] = value
         }
-
-    override val isAuth: Boolean
-        get() = userToken.isBlank().not()
 
     override fun clear() {
         userSettings.clear()

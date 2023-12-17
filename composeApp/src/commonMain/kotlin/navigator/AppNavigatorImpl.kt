@@ -18,6 +18,15 @@ class AppNavigatorImpl : AppNavigator {
         _navigator = navigator
     }
 
+    override val currentScreen: AppScreen?
+        get() = when (val item = _navigator?.lastItemOrNull) {
+            AuthScreen -> AppScreen.Auth
+            MainScreen -> AppScreen.Main
+            MatchFeedScreen -> AppScreen.MatchFeed
+            is FilmScreen -> AppScreen.Film(item.id)
+            else -> null
+        }
+
     override fun navigate(
         screen: AppScreen
     ) {

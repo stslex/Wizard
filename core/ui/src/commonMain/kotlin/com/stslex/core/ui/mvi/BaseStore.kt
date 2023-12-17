@@ -30,11 +30,9 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
 
     private fun exceptionHandler(
         onError: suspend (cause: Throwable) -> Unit = {},
-    ) = CoroutineExceptionHandler { coroutineContext, throwable ->
+    ) = CoroutineExceptionHandler { _, throwable ->
         Logger.exception(throwable)
-        CoroutineScope(
-            context = coroutineContext + appDispatcher.default
-        ).launch(coroutineExceptionHandler) {
+        screenModelScope.launch(appDispatcher.default + coroutineExceptionHandler) {
             onError(throwable)
         }
     }
