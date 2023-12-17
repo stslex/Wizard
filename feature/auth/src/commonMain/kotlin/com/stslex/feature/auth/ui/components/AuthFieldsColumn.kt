@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.auth.ui.model.screen.AuthScreenState
+import com.stslex.feature.auth.ui.model.screen.text_field.LoginTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.UsernameTextFieldState
 
 @Composable
@@ -35,7 +36,19 @@ internal fun AuthFieldsColumn(
         ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AuthUsernameTextField(state.usernameState)
+        AuthLoginTextField(state.loginState)
+        AnimatedVisibility(
+            visible = state.isRegisterState,
+            enter = fadeIn(tween(300)) + expandVertically(tween(600)),
+            exit = fadeOut(tween(300)) + shrinkVertically(tween(600))
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.height(AppDimension.Padding.small))
+                AuthUsernameTextField(state.usernameState)
+            }
+        }
         Spacer(Modifier.height(AppDimension.Padding.medium))
         AuthPasswordTextField(state.passwordEnterState)
         AnimatedVisibility(
@@ -72,6 +85,35 @@ private fun AuthUsernameTextField(
         singleLine = true,
         label = {
             Text(text = "username")
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email,
+            imeAction = ImeAction.Next
+        ),
+        supportingText = {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    modifier = Modifier.align(Alignment.CenterEnd),
+                    text = state.supportingEndText
+                )
+            }
+        },
+    )
+}
+
+@Composable
+private fun AuthLoginTextField(
+    state: LoginTextFieldState,
+    modifier: Modifier = Modifier
+) {
+    OutlinedTextField(
+        modifier = modifier
+            .fillMaxWidth(),
+        value = state.text,
+        onValueChange = state::onTextChange,
+        singleLine = true,
+        label = {
+            Text(text = "login")
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email,

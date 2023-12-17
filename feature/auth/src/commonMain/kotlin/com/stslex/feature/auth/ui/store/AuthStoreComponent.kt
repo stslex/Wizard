@@ -6,6 +6,7 @@ interface AuthStoreComponent : Store {
 
     data class State(
         val screenLoadingState: ScreenLoadingState,
+        val login: String,
         val username: String,
         val password: String,
         val passwordSubmit: String,
@@ -14,6 +15,7 @@ interface AuthStoreComponent : Store {
         companion object {
             val INITIAL = State(
                 screenLoadingState = ScreenLoadingState.Content,
+                login = "",
                 username = "",
                 password = "",
                 passwordSubmit = "",
@@ -36,6 +38,10 @@ interface AuthStoreComponent : Store {
         sealed class InputAction(
             open val value: String
         ) : Action {
+
+            data class LoginInput(
+                override val value: String
+            ) : InputAction(value)
 
             data class UsernameInput(
                 override val value: String

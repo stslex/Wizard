@@ -25,9 +25,18 @@ class AuthStore(
         when (action) {
             is Action.InputAction.PasswordInput -> processPasswordInput(action)
             is Action.InputAction.PasswordSubmitInput -> processPasswordSubmitInput(action)
+            is Action.InputAction.LoginInput -> processLoginInput(action)
             is Action.InputAction.UsernameInput -> processUsernameInput(action)
             is Action.OnAuthFieldChange -> processAuthFieldChange(action)
             is Action.OnSubmitClicked -> processSubmitClicked(action)
+        }
+    }
+
+    private fun processLoginInput(action: Action.InputAction.LoginInput) {
+        updateState { currentValue ->
+            currentValue.copy(
+                login = action.value
+            )
         }
     }
 
@@ -90,6 +99,7 @@ class AuthStore(
             }) {
             interactor
                 .register(
+                    login = state.login,
                     username = state.username,
                     password = state.password
                 )
@@ -115,7 +125,7 @@ class AuthStore(
             }) {
             interactor
                 .auth(
-                    username = state.username,
+                    login = state.login,
                     password = state.password
                 )
         }

@@ -15,9 +15,11 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
+import com.stslex.feature.auth.ui.model.screen.text_field.LoginTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.PasswordInputTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.PasswordSubmitTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.UsernameTextFieldState
+import com.stslex.feature.auth.ui.model.screen.text_field.rememberLoginTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.rememberPasswordInputTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.rememberPasswordSubmitTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.rememberUsernameTextFieldState
@@ -30,6 +32,7 @@ import com.stslex.feature.auth.ui.store.AuthStoreComponent.State
 @Stable
 data class AuthScreenState @OptIn(ExperimentalMaterialApi::class) constructor(
     val screenLoadingState: ScreenLoadingState = ScreenLoadingState.Content,
+    val loginState: LoginTextFieldState,
     val usernameState: UsernameTextFieldState,
     val passwordEnterState: PasswordInputTextFieldState,
     val passwordSubmitState: PasswordSubmitTextFieldState,
@@ -42,10 +45,12 @@ data class AuthScreenState @OptIn(ExperimentalMaterialApi::class) constructor(
 
     val isFieldsValid: Boolean
         get() {
-            val isCorrectLength = usernameState.text.length >= 4 &&
-                    passwordEnterState.text.length >= 4
+            val isCorrectLength = loginState.text.length >= 6 &&
+                    passwordEnterState.text.length >= 8
             val isEqualsPasswords = passwordEnterState.text == passwordSubmitState.text
-            val isRegisterPassword = authFieldsState == AuthFieldsState.AUTH || isEqualsPasswords
+            val isUsernameValid = usernameState.text.length >= 6
+            val isRegisterPassword = authFieldsState == AuthFieldsState.AUTH
+                    || (isEqualsPasswords && isUsernameValid)
             return isCorrectLength && isRegisterPassword
         }
 
@@ -69,6 +74,11 @@ fun rememberAuthScreenState(
 
     val usernameTextFieldState = rememberUsernameTextFieldState(
         text = screenState.username,
+        processAction = processAction
+    )
+
+    val loginTextFieldState = rememberLoginTextFieldState(
+        text = screenState.login,
         processAction = processAction
     )
 
@@ -100,6 +110,7 @@ fun rememberAuthScreenState(
     return remember(screenState) {
         AuthScreenState(
             screenLoadingState = screenState.screenLoadingState,
+            loginState = loginTextFieldState,
             passwordEnterState = passwordEnterState,
             passwordSubmitState = passwordSubmitState,
             authFieldsState = screenState.authFieldsState,

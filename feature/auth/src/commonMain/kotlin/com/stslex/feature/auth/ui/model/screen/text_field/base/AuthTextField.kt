@@ -19,6 +19,6 @@ abstract class AuthTextField {
     }
 
     companion object {
-        private const val MAX_SYMBOL_COUNT = 10
+        private const val MAX_SYMBOL_COUNT = 16
     }
 }
