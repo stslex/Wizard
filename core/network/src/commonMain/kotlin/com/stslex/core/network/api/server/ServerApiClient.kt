@@ -1,5 +1,6 @@
 package com.stslex.core.network.api.server
 
+import Wizard.core.network.BuildConfig
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.network.api.base.NetworkClient
 import com.stslex.core.network.api.base.NetworkClientBuilder.setupLogging
@@ -22,7 +23,6 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
-import io.ktor.http.encodedPath
 import kotlinx.coroutines.withContext
 
 interface ServerApiClient : NetworkClient
@@ -52,14 +52,17 @@ class ServerApiClientImpl(
             handleResponseExceptionWithRequest(errorParser)
         }
         defaultRequest {
-            url(API_HOST) {
-                host = API_HOST
-                encodedPath = "api/v1"
-                protocol = URLProtocol.HTTP
-                contentType(ContentType.Application.Json)
-            }
+            url(
+                scheme = URLProtocol.HTTP.name,
+                host = BuildConfig.SERVER_HOST,
+                port = BuildConfig.SERVER_PORT.toInt(),
+                path = BuildConfig.SERVER_API_VERSION,
+                block = {
+                    contentType(ContentType.Application.Json)
+                }
+            )
             headers {
-                append(API_KEY_NAME, "API_KEY") // TODO
+                append(API_KEY_NAME, "API_KEY") // TODO move to buildConfig
             }
         }
     }
@@ -88,7 +91,6 @@ class ServerApiClientImpl(
     }
 
     companion object {
-        private const val API_KEY_NAME = "API_KEY"
-        private const val API_HOST = "api_host"
+        private const val API_KEY_NAME = "x-api-key"
     }
 }

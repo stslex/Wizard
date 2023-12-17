@@ -1,4 +1,4 @@
-package com.stslex.core.network.clients.auth.response
+package com.stslex.core.network.clients.auth.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

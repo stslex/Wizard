@@ -95,6 +95,7 @@ class AuthStore(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
+                navigate(Navigation.HomeFeature)
                 // TODO sendEvent(Event.ShowSnackbar.SuccessRegister)
             }) {
             interactor
@@ -121,6 +122,7 @@ class AuthStore(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
+                navigate(Navigation.HomeFeature)
                 // TODO sendEvent(Event.ShowSnackbar.SuccessRegister)
             }) {
             interactor
