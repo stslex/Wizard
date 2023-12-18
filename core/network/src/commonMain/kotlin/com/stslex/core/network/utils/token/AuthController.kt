@@ -8,6 +8,6 @@ interface AuthController {
     val accessToken: String
     val refreshToken: String
 
-    fun update(token: TokenModel)
+    suspend fun update(token: TokenModel)
+    suspend fun logOut()
 }
-

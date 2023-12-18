@@ -17,12 +17,16 @@ import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.HttpRequest
+import io.ktor.client.request.bearerAuth
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 interface ServerApiClient : NetworkClient
@@ -32,22 +36,12 @@ class ServerApiClientImpl(
     private val appDispatcher: AppDispatcher
 ) : ServerApiClient {
 
-    private val client = HttpClient(CIO) {
-        setupNegotiation()
+    private var refreshJob: Job? = null
 
+    val client = HttpClient(CIO) {
+        setupNegotiation()
         setupLogging()
         expectSuccess = true
-
-        install(Auth) {
-            bearer {
-                loadTokens {
-                    BearerTokens(
-                        accessToken = tokenProvider.accessToken,
-                        refreshToken = tokenProvider.refreshToken
-                    )
-                }
-            }
-        }
         HttpResponseValidator {
             handleResponseExceptionWithRequest(errorParser)
         }
@@ -62,35 +56,64 @@ class ServerApiClientImpl(
                 }
             )
             headers {
-                append(API_KEY_NAME, "API_KEY") // TODO move to buildConfig
+                append(API_KEY_NAME, BuildConfig.SERVER_API_KEY)
             }
         }
     }
 
+    private val authClient: HttpClient
+        get() = client.config {
+            install(Auth) {
+                bearer {
+                    loadTokens {
+                        BearerTokens(
+                            accessToken = tokenProvider.accessToken,
+                            refreshToken = tokenProvider.refreshToken
+                        )
+                    }
+                }
+            }
+        }
+
     override suspend fun <T> request(
         request: suspend HttpClient.() -> T
     ): T = withContext(appDispatcher.io) {
-        request(client)
+        try {
+            request(authClient)
+        } catch (error: ErrorRepeat) {
+            request(authClient)
+//            request(request) // TODO
+        }
     }
 
     private val errorParser: suspend (Throwable, HttpRequest) -> Unit
-        get() = { exception, _ ->
+        get() = { exception, request ->
             val clientException = exception as? ResponseException ?: throw exception
             if (HttpStatusCode.Unauthorized.value == clientException.response.status.value) {
-                refreshToken()
+                request.refreshToken()
             } else {
                 throw clientException
             }
         }
 
-    private suspend fun refreshToken() {
-        val tokenResponse = client
-            .get("passport/refresh")
-            .body<TokenResponseModel>()
-        tokenProvider.update(tokenResponse.toModel())
+    private suspend fun HttpRequest.refreshToken() {
+        if (refreshJob?.isActive == true) return
+        refreshJob = coroutineScope {
+            launch {
+                val tokenResponse = client
+                    .get("passport/refresh") {
+                        bearerAuth(tokenProvider.refreshToken)
+                    }
+                    .body<TokenResponseModel>()
+                tokenProvider.update(tokenResponse.toModel())
+                throw ErrorRepeat
+            }
+        }
     }
 
     companion object {
-        private const val API_KEY_NAME = "x-api-key"
+        private const val API_KEY_NAME = "X-Api-Key"
     }
 }
+
+data object ErrorRepeat : Throwable()

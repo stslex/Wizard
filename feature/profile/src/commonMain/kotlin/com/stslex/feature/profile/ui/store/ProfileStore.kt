@@ -23,15 +23,46 @@ class ProfileStore(
     override fun sendAction(action: Action) {
         when (action) {
             is Action.LoadProfile -> actionLoadProfile(action)
+            is Action.Logout -> actionLogout()
+        }
+    }
+
+    private fun actionLogout() {
+        val currentScreen = state.value.screen
+        if (currentScreen !is ProfileScreenState.Content) return
+        updateState {
+            it.copy(screen = ProfileScreenState.Shimmer)
+        }
+        launch(
+            onSuccess = {
+                updateState { state ->
+                    state.copy(
+                        screen = ProfileScreenState.Content.NotLoading(currentScreen.data)
+                    )
+                }
+            },
+            onError = { error ->
+                sendEvent(Event.ErrorSnackBar(error.message ?: "error logout"))
+            }
+        ) {
+            interactor.logOut()
         }
     }
 
     private fun actionLoadProfile(action: Action.LoadProfile) {
         interactor.getProfile(action.uuid)
-            .launchFlow { profile ->
+            .launchFlow(
+                onError = {
+                    updateState { currentState ->
+                        currentState.copy(
+                            screen = ProfileScreenState.Error(it)
+                        )
+                    }
+                }
+            ) { profile ->
                 updateState { currentState ->
                     currentState.copy(
-                        screen = ProfileScreenState.Content(profile.toUi())
+                        screen = ProfileScreenState.Content.NotLoading(profile.toUi())
                     )
                 }
             }

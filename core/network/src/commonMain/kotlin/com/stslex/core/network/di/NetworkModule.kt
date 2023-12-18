@@ -10,8 +10,8 @@ import com.stslex.core.network.clients.auth.client.AuthClient
 import com.stslex.core.network.clients.auth.client.AuthClientImpl
 import com.stslex.core.network.clients.film.client.FilmClient
 import com.stslex.core.network.clients.film.client.MockFilmClientImpl
-import com.stslex.core.network.clients.profile.client.MockProfileClientImpl
 import com.stslex.core.network.clients.profile.client.ProfileClient
+import com.stslex.core.network.clients.profile.client.ProfileClientImpl
 import com.stslex.core.network.utils.token.AuthController
 import com.stslex.core.network.utils.token.AuthControllerImpl
 import org.koin.dsl.module
@@ -43,7 +43,9 @@ val coreNetworkModule = module {
 //            kinopoiskClient = get()
 //        )
     }
-    single<ProfileClient> { MockProfileClientImpl() }
+    single<ProfileClient> {
+        ProfileClientImpl(client = get())
+    }
 
     /*Utils*/
     single<AuthController> {

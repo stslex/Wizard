@@ -18,6 +18,16 @@ val featureProfileModule = module {
         )
     }
     factory<ProfileRouter> { ProfileRouterImpl(navigator = get()) }
-    factory<ProfileRepository> { ProfileRepositoryImpl(client = get()) }
-    factory<ProfileInteractor> { ProfileInteractorImpl(repository = get()) }
+    factory<ProfileRepository> {
+        ProfileRepositoryImpl(
+            client = get(),
+            dataStore = get(),
+        )
+    }
+    factory<ProfileInteractor> {
+        ProfileInteractorImpl(
+            repository = get(),
+            authController = get(),
+        )
+    }
 }
