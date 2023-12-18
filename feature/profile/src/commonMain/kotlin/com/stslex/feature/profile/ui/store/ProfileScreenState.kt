@@ -7,10 +7,21 @@ import com.stslex.feature.profile.ui.model.ProfileModel
 sealed interface ProfileScreenState {
 
     @Stable
-    data class Content(val model: ProfileModel) : ProfileScreenState
+    sealed class Content(
+        val data: ProfileModel
+    ) : ProfileScreenState {
+
+        data class NotLoading(
+            val profile: ProfileModel
+        ) : Content(profile)
+
+        data class Loading(
+            val profile: ProfileModel
+        ) : Content(profile)
+    }
 
     @Stable
-    data object Loading : ProfileScreenState
+    data object Shimmer : ProfileScreenState
 
     @Stable
     data class Error(val error: Throwable) : ProfileScreenState
