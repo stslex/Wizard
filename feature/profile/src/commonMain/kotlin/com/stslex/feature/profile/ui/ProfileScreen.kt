@@ -82,44 +82,32 @@ internal fun ProfileScreenError(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            when (error) {
+                is ErrorRefresh -> {
+                    Text(text = "Auth error")
+                    Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
+                    Button(onClick = logOut) {
+                        Text(text = "logout")
+                    }
+                    Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
+                    Button(onClick = repeatLastAction) {
+                        Text(text = "Retry")
+                    }
+                }
 
-        when (error) {
-            is ErrorRefresh -> {
-                ProfileScreenErrorContent(
-                    errorMessage = "Auth error",
-                    buttonTest = "LogOut",
-                    onAction = logOut,
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                else -> {
+                    Text(text = "Error: ${error?.message}")
+                    Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
+                    Button(onClick = repeatLastAction) {
+                        Text(text = "Retry")
+                    }
+                }
             }
-
-            else -> {
-                ProfileScreenErrorContent(
-                    errorMessage = "Error: ${error?.message}",
-                    buttonTest = "Retry",
-                    onAction = repeatLastAction,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-            }
-        }
-    }
-}
-
-@Composable
-internal fun ProfileScreenErrorContent(
-    errorMessage: String,
-    buttonTest: String,
-    onAction: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Text(text = errorMessage)
-        Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
-        Button(onClick = onAction) {
-            Text(text = buttonTest)
         }
     }
 }

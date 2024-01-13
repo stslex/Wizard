@@ -43,7 +43,7 @@ class ServerApiClientImpl(
         setupLogging()
         expectSuccess = true
         HttpResponseValidator {
-//            handleResponseExceptionWithRequest(errorParser)
+            handleResponseExceptionWithRequest(errorParser)
         }
         defaultRequest {
             url(
@@ -78,14 +78,11 @@ class ServerApiClientImpl(
     override suspend fun <T> request(
         request: suspend HttpClient.() -> T
     ): T = withContext(appDispatcher.io) {
-        request(authClient)
-
-//        try {
-//            request(authClient)
-//        } catch (error: ErrorRepeat) {
-//            request(authClient)
-////            request(request) // TODO
-//        }
+        try {
+            request(authClient)
+        } catch (error: ErrorRepeatEnd) {
+            request(authClient)
+        }
     }
 
     private val errorParser: suspend (Throwable, HttpRequest) -> Unit
@@ -103,21 +100,47 @@ class ServerApiClientImpl(
         refreshJob = coroutineScope {
             launch {
                 val tokenResponse = client
+                    .config {
+                        HttpResponseValidator {
+                            handleResponseExceptionWithRequest(refreshTokenValidator)
+                        }
+                    }
                     .get("passport/refresh") {
                         bearerAuth(tokenProvider.refreshToken)
                     }
                     .body<TokenResponseModel>()
                 tokenProvider.update(tokenResponse.toModel())
-                throw ErrorRepeat
+                throw ErrorRepeatEnd
             }
         }
     }
+
+    private val refreshTokenValidator: suspend (Throwable, HttpRequest) -> Unit
+        get() = { exception, _ ->
+            val clientException = exception as? ResponseException ?: throw exception
+            if (HttpStatusCode.Unauthorized.value == clientException.response.status.value) {
+                throw ErrorRefresh
+            } else {
+                throw clientException
+            }
+        }
 
     companion object {
         private const val API_KEY_NAME = "X-Api-Key"
     }
 }
 
-data object ErrorRepeat : Throwable()
+/**
+ * Error repeat request.
+ * Show that the request was repeated after a refresh token
+ * @see ServerApiClientImpl.request
+ */
+private data object ErrorRepeatEnd : Throwable()
 
+/**
+ * Error refresh token response
+ * @see ServerApiClientImpl.refreshToken
+ * @see ServerApiClientImpl.errorParser
+ * @see ServerApiClientImpl.request
+ */
 data object ErrorRefresh : Throwable()
