@@ -17,4 +17,8 @@ class MockProfileClientImpl : ProfileClient {
             favouriteCount = 873
         )
     }
+
+    override suspend fun getProfile(): ProfileResponse {
+        TODO("Not yet implemented")
+    }
 }

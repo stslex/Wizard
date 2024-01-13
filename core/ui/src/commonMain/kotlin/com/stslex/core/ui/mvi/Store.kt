@@ -8,5 +8,7 @@ interface Store {
 
     interface Navigation
 
-    interface Action
+    interface Action {
+        interface RepeatLastAction : Action
+    }
 }

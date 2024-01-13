@@ -76,9 +76,13 @@ fun BuildConfigExtension.setLocalProperty(dir: Project) {
     val serverPort = gradleLocalProperties(dir.projectDir)["SERVER_PORT"]
         ?.toString()
         ?: throw IllegalStateException("SERVER_PORT should be initialised")
+    val serverApiKey = gradleLocalProperties(dir.projectDir)["SERVER_API_KEY"]
+        ?.toString()
+        ?: throw IllegalStateException("SERVER_API_KEY should be initialised")
 
     buildConfigField("String", "KINOPOISK_API_KEY", key)
     buildConfigField("String", "SERVER_HOST", serverHost)
     buildConfigField("String", "SERVER_API_VERSION", serverApiVersion)
     buildConfigField("String", "SERVER_PORT", serverPort)
+    buildConfigField("String", "SERVER_API_KEY", serverApiKey)
 }

@@ -28,7 +28,7 @@ class FeedScreenStore(
 
     private var loadingJob: Job? = null
 
-    override fun sendAction(action: Action) {
+    override fun process(action: Action) {
         when (action) {
             is Action.LoadFilms -> actionLoadFilms()
             is Action.FilmClick -> actionFilmClick(action)

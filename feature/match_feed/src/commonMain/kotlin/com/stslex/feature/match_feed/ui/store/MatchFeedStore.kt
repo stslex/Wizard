@@ -24,7 +24,7 @@ class MatchFeedStore(
 ) {
     private var loadingJob: Job? = null
 
-    override fun sendAction(action: Action) {
+    override fun process(action: Action) {
         when (action) {
             Action.Init -> actionInit()
             Action.LoadFilms -> actionLoadFilms()

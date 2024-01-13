@@ -23,7 +23,7 @@ class FilmStore(
 ) {
     private var likeJob: Job? = null
 
-    override fun sendAction(action: Action) {
+    override fun process(action: Action) {
         when (action) {
             is Action.Init -> actionInit(action)
             is Action.BackButtonClick -> actionBackButtonClick()

@@ -21,7 +21,7 @@ class AuthStore(
     router = router
 ) {
 
-    override fun sendAction(action: Action) {
+    override fun process(action: Action) {
         when (action) {
             is Action.InputAction.PasswordInput -> processPasswordInput(action)
             is Action.InputAction.PasswordSubmitInput -> processPasswordSubmitInput(action)

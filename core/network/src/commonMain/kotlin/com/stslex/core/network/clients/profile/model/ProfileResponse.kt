@@ -10,13 +10,13 @@ data class ProfileResponse(
     @SerialName("username")
     val username: String,
     @SerialName("avatar_url")
-    val avatarUrl: String,
+    val avatarUrl: String = "",
     @SerialName("bio")
-    val bio: String,
+    val bio: String = "",
     @SerialName("followers")
-    val followers: Int,
+    val followers: Int = 0,
     @SerialName("following")
-    val following: Int,
+    val following: Int = 0,
     @SerialName("favourite_count")
-    val favouriteCount: Int
+    val favouriteCount: Int = 0,
 )

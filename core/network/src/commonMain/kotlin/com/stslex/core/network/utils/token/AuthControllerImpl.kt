@@ -9,6 +9,10 @@ class AuthControllerImpl(
     private val userStore: UserStore
 ) : AuthController {
 
+    init {
+        userStore.accessToken = "123"
+    }
+
     override val isAuth: Boolean
         get() = userStore.accessToken.isNotEmpty()
 
@@ -21,11 +25,16 @@ class AuthControllerImpl(
     override val refreshToken: String
         get() = userStore.refreshToken
 
-    override fun update(token: TokenModel) {
+    override suspend fun update(token: TokenModel) {
         userStore.accessToken = token.accessToken
         userStore.refreshToken = token.refreshToken
         userStore.username = token.username
         userStore.uuid = token.uuid
-        _isAuthFlow.value = token.accessToken.isNotEmpty()
+        _isAuthFlow.emit(token.accessToken.isNotEmpty())
+    }
+
+    override suspend fun logOut() {
+        userStore.clear()
+        _isAuthFlow.emit(false)
     }
 }

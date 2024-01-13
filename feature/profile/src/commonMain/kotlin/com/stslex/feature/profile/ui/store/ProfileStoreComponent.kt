@@ -12,7 +12,7 @@ interface ProfileStoreComponent : Store {
 
         companion object {
 
-            val INITIAL = State(screen = ProfileScreenState.Loading)
+            val INITIAL = State(screen = ProfileScreenState.Shimmer)
         }
     }
 
@@ -23,10 +23,18 @@ interface ProfileStoreComponent : Store {
         data class LoadProfile(
             val uuid: String
         ) : Action
+
+        data object Logout : Action
+
+        data object RepeatLastAction : Action, Store.Action.RepeatLastAction
     }
 
     @Stable
-    sealed interface Event : Store.Event
+    sealed interface Event : Store.Event {
+
+        @Stable
+        data class ErrorSnackBar(val message: String) : Event
+    }
 
     sealed interface Navigation : Store.Navigation
 }
