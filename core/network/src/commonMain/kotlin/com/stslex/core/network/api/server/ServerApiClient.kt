@@ -43,7 +43,7 @@ class ServerApiClientImpl(
         setupLogging()
         expectSuccess = true
         HttpResponseValidator {
-            handleResponseExceptionWithRequest(errorParser)
+//            handleResponseExceptionWithRequest(errorParser)
         }
         defaultRequest {
             url(
@@ -78,25 +78,27 @@ class ServerApiClientImpl(
     override suspend fun <T> request(
         request: suspend HttpClient.() -> T
     ): T = withContext(appDispatcher.io) {
-        try {
-            request(authClient)
-        } catch (error: ErrorRepeat) {
-            request(authClient)
-//            request(request) // TODO
-        }
+        request(authClient)
+
+//        try {
+//            request(authClient)
+//        } catch (error: ErrorRepeat) {
+//            request(authClient)
+////            request(request) // TODO
+//        }
     }
 
     private val errorParser: suspend (Throwable, HttpRequest) -> Unit
-        get() = { exception, request ->
+        get() = { exception, _ ->
             val clientException = exception as? ResponseException ?: throw exception
             if (HttpStatusCode.Unauthorized.value == clientException.response.status.value) {
-                request.refreshToken()
+                refreshToken()
             } else {
                 throw clientException
             }
         }
 
-    private suspend fun HttpRequest.refreshToken() {
+    private suspend fun refreshToken() {
         if (refreshJob?.isActive == true) return
         refreshJob = coroutineScope {
             launch {
@@ -117,3 +119,5 @@ class ServerApiClientImpl(
 }
 
 data object ErrorRepeat : Throwable()
+
+data object ErrorRefresh : Throwable()

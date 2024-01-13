@@ -26,7 +26,18 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     initialState: S
 ) : Store, StateScreenModel<S>(initialState) {
 
-    abstract fun sendAction(action: A)
+    private var _lastAction: A? = null
+    val lastAction: A?
+        get() = _lastAction
+
+    fun sendAction(action: A) {
+        if (lastAction != action && action !is Action.RepeatLastAction) {
+            _lastAction = action
+        }
+        process(action)
+    }
+
+    abstract fun process(action: A)
 
     private fun exceptionHandler(
         onError: suspend (cause: Throwable) -> Unit = {},

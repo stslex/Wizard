@@ -19,12 +19,17 @@ class ProfileStore(
     appDispatcher = appDispatcher,
     initialState = State.INITIAL,
 ) {
-
-    override fun sendAction(action: Action) {
+    override fun process(action: Action) {
         when (action) {
             is Action.LoadProfile -> actionLoadProfile(action)
             is Action.Logout -> actionLogout()
+            is Action.RepeatLastAction -> actionRepeatLastAction()
         }
+    }
+
+    private fun actionRepeatLastAction() {
+        val lastAction = lastAction ?: return
+        process(lastAction)
     }
 
     private fun actionLogout() {

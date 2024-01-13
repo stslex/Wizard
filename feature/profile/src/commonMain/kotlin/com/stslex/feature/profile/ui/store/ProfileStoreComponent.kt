@@ -25,6 +25,8 @@ interface ProfileStoreComponent : Store {
         ) : Action
 
         data object Logout : Action
+
+        data object RepeatLastAction : Action, Store.Action.RepeatLastAction
     }
 
     @Stable

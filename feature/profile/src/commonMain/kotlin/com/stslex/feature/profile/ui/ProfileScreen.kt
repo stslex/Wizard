@@ -3,7 +3,10 @@ package com.stslex.feature.profile.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -16,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
+import com.stslex.core.network.api.server.ErrorRefresh
+import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStore
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
@@ -45,7 +50,12 @@ private fun ProfileScreenContent(state: State, onAction: (Action) -> Unit) {
             onAction = onAction
         )
 
-        is ProfileScreenState.Error -> ProfileScreenError(screen.error)
+        is ProfileScreenState.Error -> ProfileScreenError(
+            error = screen.error,
+            logOut = { onAction(Action.Logout) },
+            repeatLastAction = { onAction(Action.RepeatLastAction) }
+        )
+
         ProfileScreenState.Shimmer -> ProfileScreenShinner()
     }
 }
@@ -63,14 +73,54 @@ internal fun ProfileScreenShinner(modifier: Modifier = Modifier) {
 
 @Composable
 internal fun ProfileScreenError(
-    error: Throwable? = null,
+    error: Throwable?,
+    logOut: () -> Unit,
+    repeatLastAction: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Error: ${error?.message}")
+
+        when (error) {
+            is ErrorRefresh -> {
+                ProfileScreenErrorContent(
+                    errorMessage = "Auth error",
+                    buttonTest = "LogOut",
+                    onAction = logOut,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+
+            else -> {
+                ProfileScreenErrorContent(
+                    errorMessage = "Error: ${error?.message}",
+                    buttonTest = "Retry",
+                    onAction = repeatLastAction,
+                    modifier = Modifier.align(Alignment.Center),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+internal fun ProfileScreenErrorContent(
+    errorMessage: String,
+    buttonTest: String,
+    onAction: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(text = errorMessage)
+        Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
+        Button(onClick = onAction) {
+            Text(text = buttonTest)
+        }
     }
 }
 
