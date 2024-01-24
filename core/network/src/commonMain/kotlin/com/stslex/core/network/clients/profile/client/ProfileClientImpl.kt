@@ -1,6 +1,6 @@
 package com.stslex.core.network.clients.profile.client
 
-import com.stslex.core.network.api.server.ServerApiClient
+import com.stslex.core.network.api.server.client.ServerApiClient
 import com.stslex.core.network.clients.profile.model.ProfileResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get

@@ -4,8 +4,12 @@ import com.stslex.core.network.api.kinopoisk.api.KinopoiskApiClient
 import com.stslex.core.network.api.kinopoisk.api.KinopoiskApiClientImpl
 import com.stslex.core.network.api.kinopoisk.source.KinopoiskNetworkClient
 import com.stslex.core.network.api.kinopoisk.source.KinopoiskNetworkClientImpl
-import com.stslex.core.network.api.server.ServerApiClient
-import com.stslex.core.network.api.server.ServerApiClientImpl
+import com.stslex.core.network.api.server.client.ServerApiClient
+import com.stslex.core.network.api.server.client.ServerApiClientImpl
+import com.stslex.core.network.api.server.error_handler.ErrorHandler
+import com.stslex.core.network.api.server.error_handler.ErrorHandlerImpl
+import com.stslex.core.network.api.server.http_client.ServerHttpClient
+import com.stslex.core.network.api.server.http_client.ServerHttpClientImpl
 import com.stslex.core.network.clients.auth.client.AuthClient
 import com.stslex.core.network.clients.auth.client.AuthClientImpl
 import com.stslex.core.network.clients.film.client.FilmClient
@@ -17,6 +21,21 @@ import com.stslex.core.network.utils.token.AuthControllerImpl
 import org.koin.dsl.module
 
 val coreNetworkModule = module {
+    /*Clients*/
+    single<ErrorHandler> {
+        ErrorHandlerImpl(
+            client = lazy { get<ServerHttpClient>() },
+            tokenProvider = get()
+        )
+    }
+
+    single<ServerHttpClient> {
+        ServerHttpClientImpl(
+            errorHandler = get(),
+            tokenProvider = get()
+        )
+    }
+
     /*Kinopoisk Api*/
     single<KinopoiskApiClient> { KinopoiskApiClientImpl(appDispatcher = get()) }
     single<KinopoiskNetworkClient> { KinopoiskNetworkClientImpl(apiClient = get()) }
@@ -25,7 +44,7 @@ val coreNetworkModule = module {
     single<ServerApiClient> {
         ServerApiClientImpl(
             appDispatcher = get(),
-            tokenProvider = get()
+            client = get()
         )
     }
 

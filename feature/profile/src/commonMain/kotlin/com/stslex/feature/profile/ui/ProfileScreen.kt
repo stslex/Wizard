@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
-import com.stslex.core.network.api.server.ErrorRefresh
+import com.stslex.core.network.api.server.model.ErrorRefresh
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStore
