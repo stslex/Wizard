@@ -1,6 +1,6 @@
 package com.stslex.core.network.clients.auth.client
 
-import com.stslex.core.network.api.server.ServerApiClient
+import com.stslex.core.network.api.server.client.ServerApiClient
 import com.stslex.core.network.clients.auth.request.LoginRequest
 import com.stslex.core.network.clients.auth.request.RegisterRequest
 import com.stslex.core.network.clients.auth.response.LoginOkResponse

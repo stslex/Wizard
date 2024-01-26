@@ -1,4 +1,4 @@
-package com.stslex.core.network.api.server
+package com.stslex.core.network.api.server.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

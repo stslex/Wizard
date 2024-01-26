@@ -1,6 +1,6 @@
 package com.stslex.core.network.utils.token
 
-import com.stslex.core.network.api.server.TokenResponseModel
+import com.stslex.core.network.api.server.model.TokenResponseModel
 import com.stslex.core.network.clients.auth.response.LoginOkResponse
 
 data class TokenModel(
