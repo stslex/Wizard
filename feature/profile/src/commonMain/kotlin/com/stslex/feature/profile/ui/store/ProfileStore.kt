@@ -34,24 +34,28 @@ class ProfileStore(
 
     private fun actionLogout() {
         val currentScreen = state.value.screen
-        if (currentScreen !is ProfileScreenState.Content) return
+
+        if (
+            currentScreen is ProfileScreenState.Content.Loading ||
+            currentScreen is ProfileScreenState.Shimmer
+        ) {
+            return
+        }
+
         updateState {
             it.copy(screen = ProfileScreenState.Shimmer)
         }
         launch(
+            action = {
+                interactor.logOut()
+            },
             onSuccess = {
-                updateState { state ->
-                    state.copy(
-                        screen = ProfileScreenState.Content.NotLoading(currentScreen.data)
-                    )
-                }
+                navigate(Navigation.LogIn)
             },
             onError = { error ->
                 sendEvent(Event.ErrorSnackBar(error.message ?: "error logout"))
             }
-        ) {
-            interactor.logOut()
-        }
+        )
     }
 
     private fun actionLoadProfile(action: Action.LoadProfile) {

@@ -36,5 +36,8 @@ interface ProfileStoreComponent : Store {
         data class ErrorSnackBar(val message: String) : Event
     }
 
-    sealed interface Navigation : Store.Navigation
+    sealed interface Navigation : Store.Navigation {
+
+        data object LogIn : Navigation
+    }
 }
