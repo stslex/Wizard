@@ -51,6 +51,7 @@ kotlin {
             implementation(project(":feature:profile"))
             implementation(project(":feature:match_feed"))
             implementation(project(":feature:auth"))
+            implementation(project(":feature:follower"))
         }
     }
 }
