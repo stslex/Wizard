@@ -9,12 +9,11 @@ class AuthControllerImpl(
     private val userStore: UserStore
 ) : AuthController {
 
-    init {
-        userStore.accessToken = "123"
-    }
-
     override val isAuth: Boolean
-        get() = userStore.accessToken.isNotEmpty()
+        get() = userStore.accessToken.isNotBlank() &&
+                userStore.refreshToken.isNotBlank() &&
+                userStore.username.isNotBlank() &&
+                userStore.uuid.isNotBlank()
 
     private val _isAuthFlow: MutableStateFlow<Boolean> = MutableStateFlow(isAuth)
     override val isAuthFlow: StateFlow<Boolean> = _isAuthFlow.asStateFlow()

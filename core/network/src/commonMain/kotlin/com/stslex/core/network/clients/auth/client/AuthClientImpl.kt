@@ -36,7 +36,7 @@ class AuthClientImpl(
         username: String,
         password: String
     ): LoginOkResponse = networkClient.request {
-        post("$AUTH_URL/register") {
+        post("$AUTH_URL/registration") {
             setBody(
                 RegisterRequest(
                     login = login,

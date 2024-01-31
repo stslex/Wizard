@@ -11,4 +11,16 @@ sealed interface AppScreen {
     data object MatchFeed : AppScreen
 
     data object Auth : AppScreen
+
+    data class Favourite(
+        val uuid: String
+    ) : AppScreen
+
+    data class Following(
+        val uuid: String
+    ) : AppScreen
+
+    data class Followers(
+        val uuid: String
+    ) : AppScreen
 }

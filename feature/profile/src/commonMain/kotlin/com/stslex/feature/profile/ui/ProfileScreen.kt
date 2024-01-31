@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -21,21 +20,25 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.core.network.api.server.model.ErrorRefresh
 import com.stslex.core.ui.theme.AppDimension
+import com.stslex.feature.profile.navigation.ProfileScreenArguments
+import com.stslex.feature.profile.ui.components.ProfileScreenContent
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStore
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
 
-object ProfileScreen : Screen {
+data class ProfileScreen(
+    val args: ProfileScreenArguments
+) : Screen {
 
     @Composable
     override fun Content() {
         val store = getScreenModel<ProfileStore>()
         LaunchedEffect(Unit) {
-            store.sendAction(Action.LoadProfile("uuid"))
+            store.sendAction(Action.Init(args = args))
         }
         val state by remember { store.state }.collectAsState()
-        ProfileScreenContent(
+        ProfileScreen(
             state = state,
             onAction = store::sendAction
         )
@@ -43,7 +46,7 @@ object ProfileScreen : Screen {
 }
 
 @Composable
-private fun ProfileScreenContent(state: State, onAction: (Action) -> Unit) {
+private fun ProfileScreen(state: State, onAction: (Action) -> Unit) {
     when (val screen = state.screen) {
         is ProfileScreenState.Content -> ProfileScreenContent(
             state = screen,
@@ -108,39 +111,6 @@ internal fun ProfileScreenError(
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-internal fun ProfileScreenContent(
-    state: ProfileScreenState.Content,
-    onAction: (Action) -> Unit = {},
-    modifier: Modifier = Modifier,
-) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.align(Alignment.Center),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            TextButton(
-                modifier = modifier,
-                onClick = {
-                    onAction(Action.Logout)
-                }
-            ) {
-                Text(text = "Logout")
-            }
-            Text(
-                modifier = modifier,
-                text = state.data.username
-            )
-        }
-
-        if (state is ProfileScreenState.Content.Loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
         }
     }
 }

@@ -36,6 +36,9 @@ class AppNavigatorImpl : AppNavigator {
             AppScreen.Main -> navigator.replaceAll(MainScreen)
             is AppScreen.Film -> navigator.push(FilmScreen(screen.id))
             AppScreen.MatchFeed -> navigator.push(MatchFeedScreen)
+            is AppScreen.Favourite -> TODO()
+            is AppScreen.Followers -> TODO()
+            is AppScreen.Following -> TODO()
         }
     }
 }
