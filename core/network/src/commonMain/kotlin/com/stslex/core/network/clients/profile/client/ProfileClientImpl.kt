@@ -1,7 +1,7 @@
 package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.network.api.server.client.ServerApiClient
-import com.stslex.core.network.clients.profile.model.ProfileResponse
+import com.stslex.core.network.clients.profile.model.UserResponse
 import com.stslex.core.network.clients.profile.model.UserFavouriteResponse
 import com.stslex.core.network.clients.profile.model.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.UserSearchResponse
@@ -15,13 +15,13 @@ class ProfileClientImpl(
 
     override suspend fun getProfile(
         uuid: String
-    ): ProfileResponse = client.request {
+    ): UserResponse = client.request {
         get(HOST) {
             parameter("uuid", uuid)
         }.body()
     }
 
-    override suspend fun getProfile(): ProfileResponse = client.request {
+    override suspend fun getProfile(): UserResponse = client.request {
         get(HOST).body()
     }
 

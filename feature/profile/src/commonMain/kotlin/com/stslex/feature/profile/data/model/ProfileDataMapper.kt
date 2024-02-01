@@ -1,13 +1,16 @@
 package com.stslex.feature.profile.data.model
 
-import com.stslex.core.network.clients.profile.model.ProfileResponse
+import com.stslex.core.network.clients.profile.model.UserResponse
 
-fun ProfileResponse.toData() = ProfileDataModel(
+fun UserResponse.toData() = ProfileDataModel(
     uuid = uuid,
     username = username,
     avatarUrl = avatarUrl,
     bio = bio,
-    followers = followers,
-    following = following,
-    favouriteCount = favouriteCount,
+    followers = followersCount,
+    following = followingCount,
+    favouriteCount = favouritesCount,
+    isFollowing = isFollowing,
+    isFollowed = isFollowed,
+    isCurrentUser = isCurrentUser
 )

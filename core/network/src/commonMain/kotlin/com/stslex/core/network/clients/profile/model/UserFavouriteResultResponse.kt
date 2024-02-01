@@ -9,4 +9,6 @@ data class UserFavouriteResultResponse(
     val uuid: String,
     @SerialName("title")
     val title: String,
+    @SerialName("is_favourite")
+    val isFavourite: Boolean,
 )

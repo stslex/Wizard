@@ -10,4 +10,7 @@ fun ProfileDomainModel.toUi() = ProfileModel(
     followers = followers,
     following = following,
     favouriteCount = favouriteCount,
+    isFollowing = isFollowing,
+    isFollowed = isFollowed,
+    isCurrentUser = isCurrentUser
 )

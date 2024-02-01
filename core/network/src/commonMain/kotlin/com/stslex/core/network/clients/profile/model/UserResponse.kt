@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserSearchResultResponse(
+data class UserResponse(
     @SerialName("uuid")
     val uuid: String,
     @SerialName("username")
@@ -19,4 +19,10 @@ data class UserSearchResultResponse(
     val followingCount: Int,
     @SerialName("favourites_count")
     val favouritesCount: Int,
+    @SerialName("is_following")
+    val isFollowing: Boolean,
+    @SerialName("is_followed")
+    val isFollowed: Boolean,
+    @SerialName("is_current_user")
+    val isCurrentUser: Boolean,
 )

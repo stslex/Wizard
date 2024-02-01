@@ -9,4 +9,5 @@ fun FollowerDataModel.toUI(): FollowerModel = FollowerModel(
     uuid = uuid,
     username = username,
     avatarUrl = avatarUrl,
+    isFollowing = isFollowing
 )

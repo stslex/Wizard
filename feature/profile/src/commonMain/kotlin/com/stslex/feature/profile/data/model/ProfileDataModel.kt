@@ -8,4 +8,7 @@ data class ProfileDataModel(
     val followers: Int,
     val following: Int,
     val favouriteCount: Int,
+    val isFollowing: Boolean,
+    val isFollowed: Boolean,
+    val isCurrentUser: Boolean,
 )

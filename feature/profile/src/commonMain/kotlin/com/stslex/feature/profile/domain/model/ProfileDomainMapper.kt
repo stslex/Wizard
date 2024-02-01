@@ -10,4 +10,7 @@ fun ProfileDataModel.toDomain() = ProfileDomainModel(
     followers = followers,
     following = following,
     favouriteCount = favouriteCount,
+    isFollowing = isFollowing,
+    isFollowed = isFollowed,
+    isCurrentUser = isCurrentUser
 )

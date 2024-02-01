@@ -1,30 +1,32 @@
 package com.stslex.core.network.clients.profile.client
 
-import com.stslex.core.network.clients.profile.model.ProfileResponse
 import com.stslex.core.network.clients.profile.model.UserFavouriteResponse
 import com.stslex.core.network.clients.profile.model.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.UserFollowerResultResponse
+import com.stslex.core.network.clients.profile.model.UserResponse
 import com.stslex.core.network.clients.profile.model.UserSearchResponse
-import com.stslex.core.network.clients.profile.model.UserSearchResultResponse
 import kotlinx.coroutines.delay
 
 class MockProfileClientImpl : ProfileClient {
 
-    override suspend fun getProfile(uuid: String): ProfileResponse {
+    override suspend fun getProfile(uuid: String): UserResponse {
         delay(2000)
-        return ProfileResponse(
+        return UserResponse(
             uuid = "uuid",
             username = "John Doe",
             avatarUrl = "https://avatars.githubusercontent.com/u/139426?s=460&u=8f6b6e2e4e9e4b0e9b5b5e4e9b5b5e4e9b5b5e4e&v=4",
             bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eu ultricies tincidunt, nisl nisl aliquam nisl,",
-            followers = 100,
-            following = 93,
-            favouriteCount = 873
+            followersCount = 100,
+            followingCount = 93,
+            favouritesCount = 873,
+            isFollowing = false,
+            isFollowed = false,
+            isCurrentUser = true,
         )
     }
 
-    override suspend fun getProfile(): ProfileResponse = getProfile("uuid")
+    override suspend fun getProfile(): UserResponse = getProfile("uuid")
 
     override suspend fun searchUser(
         query: String,
@@ -34,14 +36,17 @@ class MockProfileClientImpl : ProfileClient {
         delay(2000)
         return UserSearchResponse(
             result = listOf(
-                UserSearchResultResponse(
+                UserResponse(
                     uuid = "uuid",
                     username = "John Doe",
                     avatarUrl = "https://avatars.githubusercontent.com/u/139426?s=460&u=8f6b6e2e4e9e4b0e9b5b5e4e9b5b5e4e9b5b5e4e&v=4",
                     bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eu ultricies tincidunt, nisl nisl aliquam nisl,",
                     followersCount = 100,
                     followingCount = 93,
-                    favouritesCount = 873
+                    favouritesCount = 873,
+                    isFollowing = true,
+                    isFollowed = true,
+                    isCurrentUser = true,
                 ),
             )
         )
@@ -58,6 +63,7 @@ class MockProfileClientImpl : ProfileClient {
                 UserFavouriteResultResponse(
                     uuid = "uuid",
                     title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eu ultricies tincidunt, nisl nisl aliquam nisl,",
+                    isFavourite = false,
                 ),
             )
         )
@@ -75,6 +81,7 @@ class MockProfileClientImpl : ProfileClient {
                     uuid = "uuid",
                     username = "John Doe",
                     avatarUrl = "https://avatars.githubusercontent.com/u/139426?s=460&u=8f6b6e2e4e9e4b0e9b5b5e4e9b5b5e4e9b5b5e4e&v=4",
+                    isFollowing = false,
                 ),
             )
         )
@@ -92,6 +99,7 @@ class MockProfileClientImpl : ProfileClient {
                     uuid = "uuid",
                     username = "John Doe",
                     avatarUrl = "https://avatars.githubusercontent.com/u/139426?s=460&u=8f6b6e2e4e9e4b0e9b5b5e4e9b5b5e4e9b5b5e4e&v=4",
+                    isFollowing = false
                 ),
             )
         )
