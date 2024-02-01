@@ -9,5 +9,6 @@ fun UserFollowerResponse.toData(): List<FollowerDataModel> = this
             uuid = response.uuid,
             username = response.username,
             avatarUrl = response.avatarUrl,
+            isFollowing = response.isFollowing
         )
     }

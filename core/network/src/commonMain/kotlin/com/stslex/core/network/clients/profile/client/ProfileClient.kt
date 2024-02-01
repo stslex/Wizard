@@ -1,15 +1,15 @@
 package com.stslex.core.network.clients.profile.client
 
-import com.stslex.core.network.clients.profile.model.ProfileResponse
+import com.stslex.core.network.clients.profile.model.UserResponse
 import com.stslex.core.network.clients.profile.model.UserFavouriteResponse
 import com.stslex.core.network.clients.profile.model.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.UserSearchResponse
 
 interface ProfileClient {
 
-    suspend fun getProfile(uuid: String): ProfileResponse
+    suspend fun getProfile(uuid: String): UserResponse
 
-    suspend fun getProfile(): ProfileResponse
+    suspend fun getProfile(): UserResponse
 
     suspend fun searchUser(
         query: String,

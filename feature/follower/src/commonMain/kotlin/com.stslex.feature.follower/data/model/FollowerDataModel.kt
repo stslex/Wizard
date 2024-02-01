@@ -4,4 +4,5 @@ data class FollowerDataModel(
     val uuid: String,
     val username: String,
     val avatarUrl: String,
+    val isFollowing: Boolean
 )

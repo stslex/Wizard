@@ -11,4 +11,6 @@ data class UserFollowerResultResponse(
     val username: String,
     @SerialName("avatar_url")
     val avatarUrl: String,
+    @SerialName("is_following")
+    val isFollowing: Boolean
 )
