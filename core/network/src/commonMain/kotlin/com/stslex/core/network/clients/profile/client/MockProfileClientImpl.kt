@@ -63,6 +63,7 @@ class MockProfileClientImpl : ProfileClient {
                 UserFavouriteResultResponse(
                     uuid = "uuid",
                     title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eu ultricies tincidunt, nisl nisl aliquam nisl,",
+                    isFavourite = false,
                 ),
             )
         )
