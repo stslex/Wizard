@@ -13,7 +13,7 @@ val featureFollowerModule = module {
 
     factory<FollowerRepository> {
         FollowerRepositoryImpl(
-            api = get()
+            client = get()
         )
     }
 

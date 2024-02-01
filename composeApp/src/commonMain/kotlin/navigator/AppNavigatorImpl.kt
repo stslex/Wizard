@@ -6,7 +6,7 @@ import com.stslex.core.ui.navigation.AppScreen
 import com.stslex.feature.auth.ui.AuthScreen
 import com.stslex.feature.film.ui.FilmScreen
 import com.stslex.feature.follower.ui.FollowerScreen
-import com.stslex.feature.follower.ui.FollowerScreenArgs
+import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.match_feed.ui.MatchFeedScreen
 import main_screen.MainScreen
 
