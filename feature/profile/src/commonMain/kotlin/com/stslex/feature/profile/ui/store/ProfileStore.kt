@@ -1,6 +1,7 @@
 package com.stslex.feature.profile.ui.store
 
 import com.stslex.core.core.AppDispatcher
+import com.stslex.core.database.store.UserStore
 import com.stslex.core.ui.mvi.BaseStore
 import com.stslex.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.feature.profile.navigation.ProfileRouter
@@ -12,6 +13,7 @@ import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
 
 class ProfileStore(
     private val interactor: ProfileInteractor,
+    private val userStore: UserStore,
     router: ProfileRouter,
     appDispatcher: AppDispatcher,
 ) : BaseStore<State, Event, Action, Navigation>(
@@ -19,43 +21,29 @@ class ProfileStore(
     appDispatcher = appDispatcher,
     initialState = State.INITIAL,
 ) {
+
     override fun process(action: Action) {
         when (action) {
-            is Action.LoadProfile -> actionLoadProfile(action)
+            is Action.Init -> actionInit(action)
             is Action.Logout -> actionLogout()
             is Action.RepeatLastAction -> actionRepeatLastAction()
+            is Action.FavouriteClick -> actionFavouriteClick()
+            is Action.FollowingClick -> actionFollowingClick()
+            is Action.FollowersClick -> actionFollowersClick()
         }
     }
 
-    private fun actionRepeatLastAction() {
-        val lastAction = lastAction ?: return
-        process(lastAction)
-    }
+    private fun actionInit(action: Action.Init) {
+        val uuid = action.args.uuid ?: userStore.uuid
 
-    private fun actionLogout() {
-        val currentScreen = state.value.screen
-        if (currentScreen !is ProfileScreenState.Content) return
-        updateState {
-            it.copy(screen = ProfileScreenState.Shimmer)
+        updateState { currentState ->
+            currentState.copy(
+                isSelf = action.args.isSelf,
+                uuid = uuid,
+            )
         }
-        launch(
-            onSuccess = {
-                updateState { state ->
-                    state.copy(
-                        screen = ProfileScreenState.Content.NotLoading(currentScreen.data)
-                    )
-                }
-            },
-            onError = { error ->
-                sendEvent(Event.ErrorSnackBar(error.message ?: "error logout"))
-            }
-        ) {
-            interactor.logOut()
-        }
-    }
 
-    private fun actionLoadProfile(action: Action.LoadProfile) {
-        interactor.getProfile(action.uuid)
+        interactor.getProfile(uuid)
             .launchFlow(
                 onError = {
                     updateState { currentState ->
@@ -71,5 +59,51 @@ class ProfileStore(
                     )
                 }
             }
+    }
+
+    private fun actionFavouriteClick() {
+        navigate(Navigation.Favourite(state.value.uuid))
+    }
+
+    private fun actionFollowingClick() {
+        navigate(Navigation.Following(state.value.uuid))
+    }
+
+    private fun actionFollowersClick() {
+        navigate(Navigation.Followers(state.value.uuid))
+    }
+
+    private fun actionRepeatLastAction() {
+        val lastAction = lastAction ?: return
+        process(lastAction)
+    }
+
+    private fun actionLogout() {
+        val currentScreen = state.value.screen
+
+        if (
+            currentScreen is ProfileScreenState.Content.Loading ||
+            currentScreen is ProfileScreenState.Shimmer
+        ) {
+            return
+        }
+
+        updateState { currentState ->
+            currentState.copy(
+                screen = ProfileScreenState.Shimmer
+            )
+        }
+
+        launch(
+            action = {
+                interactor.logOut()
+            },
+            onSuccess = {
+                navigate(Navigation.LogIn)
+            },
+            onError = { error ->
+                sendEvent(Event.ErrorSnackBar(error.message ?: "error logout"))
+            }
+        )
     }
 }

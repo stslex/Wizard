@@ -5,6 +5,8 @@ import com.stslex.core.ui.navigation.AppNavigator
 import com.stslex.core.ui.navigation.AppScreen
 import com.stslex.feature.auth.ui.AuthScreen
 import com.stslex.feature.film.ui.FilmScreen
+import com.stslex.feature.follower.ui.FollowerScreen
+import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.match_feed.ui.MatchFeedScreen
 import main_screen.MainScreen
 
@@ -36,6 +38,22 @@ class AppNavigatorImpl : AppNavigator {
             AppScreen.Main -> navigator.replaceAll(MainScreen)
             is AppScreen.Film -> navigator.push(FilmScreen(screen.id))
             AppScreen.MatchFeed -> navigator.push(MatchFeedScreen)
+            is AppScreen.Favourite -> TODO()
+            is AppScreen.Followers -> navigator.push(
+                FollowerScreen(
+                    args = FollowerScreenArgs.Follower(
+                        uuid = screen.uuid
+                    )
+                )
+            )
+
+            is AppScreen.Following -> navigator.push(
+                FollowerScreen(
+                    args = FollowerScreenArgs.Following(
+                        uuid = screen.uuid
+                    )
+                )
+            )
         }
     }
 }

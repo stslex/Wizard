@@ -7,6 +7,7 @@ import com.stslex.core.ui.theme.AppTheme
 import com.stslex.feature.auth.di.featureAuthModule
 import com.stslex.feature.film.di.featureFilmModule
 import com.stslex.feature.film_feed.di.featureFeedModule
+import com.stslex.feature.follower.di.featureFollowerModule
 import com.stslex.feature.match_feed.di.featureMatchFeedModule
 import com.stslex.feature.profile.di.featureProfileModule
 import di.appModule
@@ -42,6 +43,7 @@ private fun KoinApplication.setupCommonModules() {
             featureProfileModule,
             featureMatchFeedModule,
             featureAuthModule,
+            featureFollowerModule
         )
     )
 }

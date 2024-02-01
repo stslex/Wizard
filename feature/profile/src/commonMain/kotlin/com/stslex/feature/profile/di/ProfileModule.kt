@@ -13,6 +13,7 @@ val featureProfileModule = module {
     factory {
         ProfileStore(
             interactor = get(),
+            userStore = get(),
             appDispatcher = get(),
             router = get(),
         )
