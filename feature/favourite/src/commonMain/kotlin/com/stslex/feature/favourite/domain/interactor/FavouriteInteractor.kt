@@ -10,4 +10,7 @@ interface FavouriteInteractor {
         page: Int,
         pageSize: Int
     ): Flow<List<FavouriteDomainModel>>
+
+    suspend fun setFavourite(model: FavouriteDomainModel)
 }
+

@@ -24,7 +24,8 @@ val featureFilmModule = module {
     factory<FilmRepository> {
         FilmRepositoryImpl(
             favouriteDatasource = get(),
-            client = get()
+            client = get(),
+            profileClient = get()
         )
     }
 }

@@ -2,6 +2,7 @@ package com.stslex.feature.favourite.domain.interactor
 
 import com.stslex.feature.favourite.data.repository.FavouriteRepository
 import com.stslex.feature.favourite.domain.model.FavouriteDomainModel
+import com.stslex.feature.favourite.domain.model.toData
 import com.stslex.feature.favourite.domain.model.toDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -23,4 +24,12 @@ class FavouriteInteractorImpl(
         .map { favourites ->
             favourites.map { favourite -> favourite.toDomain() }
         }
+
+    override suspend fun setFavourite(model: FavouriteDomainModel) {
+        if (model.isFavourite) {
+            repository.addFavourite(model.toData())
+        } else {
+            repository.removeFavourite(model.uuid)
+        }
+    }
 }

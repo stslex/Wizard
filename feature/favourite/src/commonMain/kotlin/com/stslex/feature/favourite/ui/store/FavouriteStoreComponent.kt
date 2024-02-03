@@ -39,6 +39,12 @@ interface FavouriteStoreComponent : Store {
 
         @Stable
         data object LoadMore : Action
+
+        @Stable
+        data class LikeClick(val uuid: String) : Action
+
+        @Stable
+        data class ItemClick(val uuid: String) : Action
     }
 
     @Stable
@@ -48,5 +54,8 @@ interface FavouriteStoreComponent : Store {
         data class ErrorSnackBar(val message: String) : Event
     }
 
-    sealed interface Navigation : Store.Navigation
+    sealed interface Navigation : Store.Navigation {
+
+        data class OpenFilm(val uuid: String) : Navigation
+    }
 }

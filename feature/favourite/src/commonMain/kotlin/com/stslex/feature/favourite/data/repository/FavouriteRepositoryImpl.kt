@@ -24,4 +24,15 @@ class FavouriteRepositoryImpl(
             .result.map { result -> result.toData() }
         emit(result)
     }
+
+    override suspend fun addFavourite(model: FavouriteDataModel) {
+        client.addFavourite(
+            uuid = model.uuid,
+            title = model.title
+        )
+    }
+
+    override suspend fun removeFavourite(uuid: String) {
+        client.removeFavourite(uuid)
+    }
 }

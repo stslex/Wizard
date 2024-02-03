@@ -4,6 +4,7 @@ import com.stslex.core.core.AppDispatcher
 import com.stslex.core.ui.mvi.BaseStore
 import com.stslex.feature.favourite.domain.interactor.FavouriteInteractor
 import com.stslex.feature.favourite.navigation.FavouriteRouter
+import com.stslex.feature.favourite.ui.model.toDomain
 import com.stslex.feature.favourite.ui.model.toUI
 import com.stslex.feature.favourite.ui.store.FavouriteStoreComponent.Action
 import com.stslex.feature.favourite.ui.store.FavouriteStoreComponent.Event
@@ -24,12 +25,46 @@ class FavouriteStore(
 ) {
 
     private var loadingJob: Job? = null
+    private var likeJob: Job? = null
 
     override fun process(action: Action) {
         when (action) {
             is Action.Init -> actionInit(action)
-            Action.LoadMore -> actionLoadMore()
+            is Action.LoadMore -> actionLoadMore()
+            is Action.ItemClick -> actionItemClick(action)
+            is Action.LikeClick -> actionLikeClick(action)
         }
+    }
+
+    private fun actionItemClick(action: Action.ItemClick) {
+        navigate(Navigation.OpenFilm(action.uuid))
+    }
+
+    private fun actionLikeClick(action: Action.LikeClick) {
+        if (likeJob?.isActive == true) return
+        val item = state.value.data.firstOrNull { it.uuid == action.uuid } ?: return
+        val isFavourite = item.isFavourite.not()
+        updateState { state ->
+            state.copy(
+                data = state.data.map { favourite ->
+                    if (favourite.uuid == item.uuid) {
+                        favourite.copy(isFavourite = isFavourite)
+                    } else {
+                        favourite
+                    }
+                }.toImmutableList()
+            )
+        }
+        likeJob = launch(
+            onSuccess = { /* do nothing */ },
+            onError = { error ->
+                sendEvent(Event.ErrorSnackBar(error.message.orEmpty()))
+            },
+            action = {
+                interactor.setFavourite(
+                    model = item.toDomain().copy(isFavourite = isFavourite)
+                )
+            })
     }
 
     private fun actionInit(action: Action.Init) {
@@ -73,16 +108,17 @@ class FavouriteStore(
             pageSize = PAGE_SIZE
         ).launchFlow(
             each = { data ->
-                val screen = if (data.isEmpty()) {
+                val uiData = data.map { favourite -> favourite.toUI() }
+                val screenItems = currentState.data.plus(uiData).toImmutableList()
+                val screen = if (screenItems.isEmpty()) {
                     FavouriteScreenState.Empty
                 } else {
                     FavouriteScreenState.Content.NotLoading
                 }
-                val uiData = data.map { favourite -> favourite.toUI() }
                 updateState { state ->
                     state.copy(
                         page = page,
-                        data = currentState.data.plus(uiData).toImmutableList(),
+                        data = screenItems,
                         screen = screen
                     )
                 }

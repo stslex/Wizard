@@ -2,6 +2,7 @@ package com.stslex.feature.film.data.repository
 
 import com.stslex.core.database.sources.source.FavouriteFilmDataSource
 import com.stslex.core.network.clients.film.client.FilmClient
+import com.stslex.core.network.clients.profile.client.ProfileClient
 import com.stslex.feature.film.data.model.FilmData
 import com.stslex.feature.film.data.model.getTrailer
 import com.stslex.feature.film.data.model.toData
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.flow
 
 class FilmRepositoryImpl(
     private val client: FilmClient,
+    private val profileClient: ProfileClient,
     private val favouriteDatasource: FavouriteFilmDataSource
 ) : FilmRepository {
 
@@ -36,11 +38,16 @@ class FilmRepositoryImpl(
 
     override suspend fun likeFilm(filmData: FilmData) {
         favouriteDatasource.likeFilm(filmData.toEntity())
-        client.likeFilm(filmData.id)
+//        client.likeFilm(filmData.id)
+        profileClient.addFavourite(
+            uuid = filmData.id,
+            title = filmData.title
+        )
     }
 
     override suspend fun dislikeFilm(id: String) {
         favouriteDatasource.dislikeFilm(id)
-        client.dislikeFilm(id)
+//        client.dislikeFilm(id)
+        profileClient.removeFavourite(id)
     }
 }

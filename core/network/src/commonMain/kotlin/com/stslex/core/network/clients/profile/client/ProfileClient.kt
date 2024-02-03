@@ -1,9 +1,9 @@
 package com.stslex.core.network.clients.profile.client
 
-import com.stslex.core.network.clients.profile.model.UserResponse
-import com.stslex.core.network.clients.profile.model.UserFavouriteResponse
-import com.stslex.core.network.clients.profile.model.UserFollowerResponse
-import com.stslex.core.network.clients.profile.model.UserSearchResponse
+import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
+import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
+import com.stslex.core.network.clients.profile.model.response.UserResponse
+import com.stslex.core.network.clients.profile.model.response.UserSearchResponse
 
 interface ProfileClient {
 
@@ -34,4 +34,11 @@ interface ProfileClient {
         page: Int,
         pageSize: Int
     ): UserFollowerResponse
+
+    suspend fun addFavourite(
+        uuid: String,
+        title: String,
+    )
+
+    suspend fun removeFavourite(uuid: String)
 }

@@ -10,4 +10,8 @@ interface FavouriteRepository {
         page: Int,
         pageSize: Int
     ): Flow<List<FavouriteDataModel>>
+
+    suspend fun addFavourite(model: FavouriteDataModel)
+
+    suspend fun removeFavourite(uuid: String)
 }
