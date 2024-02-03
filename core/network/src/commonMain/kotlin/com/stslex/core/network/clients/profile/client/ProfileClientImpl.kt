@@ -43,11 +43,13 @@ class ProfileClientImpl(
 
     override suspend fun getFavourites(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFavouriteResponse = client.request {
         get("$HOST/favourites") {
             parameter("uuid", uuid)
+            parameter("query", query)
             parameter("page", page)
             parameter("page_size", pageSize)
         }.body()

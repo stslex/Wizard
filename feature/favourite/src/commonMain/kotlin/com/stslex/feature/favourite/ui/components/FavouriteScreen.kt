@@ -18,11 +18,15 @@ internal fun FavouriteScreen(
         is FavouriteScreenState.Content -> FavouriteScreenContent(
             state = state.screen,
             items = state.data,
+            query = state.query,
             onItemClick = { uuid ->
                 onAction(Action.ItemClick(uuid))
             },
             onLikeClick = { uuid ->
                 onAction(Action.LikeClick(uuid))
+            },
+            onSearch = { query ->
+                onAction(Action.InputSearch(query))
             }
         )
 

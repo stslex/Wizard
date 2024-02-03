@@ -50,7 +50,7 @@ class MockFilmClientImpl : FilmClient {
 }
 
 private val lokiMovieFilm = MovieNetwork(
-    id = randomUuid(),
+    id = "b2cb4f71-1bf1-43fa-b047-4378f77d1286",
     title = "Локи",
     description = "Сразу же после кражи Тессеракта в фильме «Мстители: Финал» (2019), альтернативная версия Локи попадает в «Управление временны́ми изменениями» (УВИ), бюрократическую организацию, которая существует вне пространства и времени. Богу обмана предстоит ответить за свои преступления против времени и перед ним встаёт выбор: подвергнуться стиранию из реальности или помочь УВИ в борьбе с большей угрозой.",
     poster = "https://pico.kartinka.shop/poster/item/big/72418.jpg",
@@ -66,7 +66,7 @@ private val lokiMovieFilm = MovieNetwork(
 private val lokiFilm = lokiMovieFilm.toFilmItemNetwork()
 
 private val infiniteWarMovie = MovieNetwork(
-    id = randomUuid(),
+    id = "33fa9d73-a722-4efd-b95c-0dd6af25e6af",
     title = "Мстители: Война бесконечности",
     description = "Пока Мстители и их союзники продолжают защищать мир от различных опасностей, с которыми не смог бы справиться один супергерой, новая угроза возникает из космоса: Танос. Межгалактический тиран преследует цель собрать все шесть Камней Бесконечности - артефакты невероятной силы, с помощью которых можно менять реальность по своему желанию. Всё, с чем Мстители сталкивались ранее, вело к этому моменту - судьба Земли никогда ещё не была столь неопределённой.",
     poster = "https://pico.kartinka.shop/poster/item/big/34114.jpg",
@@ -84,7 +84,7 @@ private val infiniteWarMovie = MovieNetwork(
 private val infiniteWar = infiniteWarMovie.toFilmItemNetwork()
 
 private val rhinoFilmMovie = MovieNetwork(
-    id = randomUuid(),
+    id = "261fc394-e9cd-484e-bcd1-33152b7a0ba9",
     title = "Вольт",
     description = "Вольт — собака-полицейский, звезда телесериала, в котором он сражается с преступниками и спасает мир. Но когда камеры отключаются, Вольт не понимает, что происходит, и думает, что всё, что его окружает, настоящее. Когда его хозяйка Пенни похищают, Вольт отправляется в реальное путешествие, чтобы спасти её. На помощь ему приходят два необычных спутника — кот Мистер и хомяк Ролли.",
     poster = "https://pico.kartinka.shop/poster/item/big/2570.jpg",

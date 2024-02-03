@@ -19,6 +19,7 @@ interface ProfileClient {
 
     suspend fun getFavourites(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFavouriteResponse

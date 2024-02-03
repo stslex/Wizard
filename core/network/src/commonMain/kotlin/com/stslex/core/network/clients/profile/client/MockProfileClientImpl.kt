@@ -55,6 +55,7 @@ class MockProfileClientImpl : ProfileClient {
 
     override suspend fun getFavourites(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFavouriteResponse {

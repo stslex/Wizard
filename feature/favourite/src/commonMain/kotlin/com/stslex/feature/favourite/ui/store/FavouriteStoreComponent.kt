@@ -12,6 +12,7 @@ interface FavouriteStoreComponent : Store {
     data class State(
         val uuid: String,
         val page: Int,
+        val query: String,
         val data: ImmutableList<FavouriteModel>,
         val screen: FavouriteScreenState
     ) : Store.State {
@@ -23,6 +24,7 @@ interface FavouriteStoreComponent : Store {
             val INITIAL = State(
                 uuid = "",
                 page = DEFAULT_PAGE,
+                query = "",
                 data = emptyList<FavouriteModel>().toImmutableList(),
                 screen = FavouriteScreenState.Shimmer
             )
@@ -45,6 +47,9 @@ interface FavouriteStoreComponent : Store {
 
         @Stable
         data class ItemClick(val uuid: String) : Action
+
+        @Stable
+        data class InputSearch(val query: String) : Action
     }
 
     @Stable

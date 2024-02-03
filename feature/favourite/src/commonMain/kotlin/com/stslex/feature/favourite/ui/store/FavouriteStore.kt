@@ -13,6 +13,8 @@ import com.stslex.feature.favourite.ui.store.FavouriteStoreComponent.State
 import com.stslex.feature.favourite.ui.store.FavouriteStoreComponent.State.Companion.DEFAULT_PAGE
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 
 class FavouriteStore(
     private val interactor: FavouriteInteractor,
@@ -23,8 +25,6 @@ class FavouriteStore(
     appDispatcher = appDispatcher,
     initialState = State.INITIAL
 ) {
-
-    private var loadingJob: Job? = null
     private var likeJob: Job? = null
 
     override fun process(action: Action) {
@@ -33,6 +33,13 @@ class FavouriteStore(
             is Action.LoadMore -> actionLoadMore()
             is Action.ItemClick -> actionItemClick(action)
             is Action.LikeClick -> actionLikeClick(action)
+            is Action.InputSearch -> actionInputSearch(action)
+        }
+    }
+
+    private fun actionInputSearch(action: Action.InputSearch) {
+        updateState { state ->
+            state.copy(query = action.query)
         }
     }
 
@@ -73,7 +80,33 @@ class FavouriteStore(
                 uuid = action.uuid,
             )
         }
-        loadNextItems()
+
+        state.map { it.query }
+            .distinctUntilChanged()
+            .launchFlow { query ->
+                updateState { state ->
+                    state.copy(
+                        page = DEFAULT_PAGE,
+                        query = query,
+                    )
+                }
+                loadNextItems()
+            }
+
+        interactor.favourites
+            .launchFlow { data ->
+                val screen = if (data.isEmpty()) {
+                    FavouriteScreenState.Empty
+                } else {
+                    FavouriteScreenState.Content.NotLoading
+                }
+                updateState { state ->
+                    state.copy(
+                        data = data.map { it.toUI() }.toImmutableList(),
+                        screen = screen
+                    )
+                }
+            }
     }
 
     private fun actionLoadMore() {
@@ -81,10 +114,7 @@ class FavouriteStore(
     }
 
     private fun loadNextItems() {
-        if (loadingJob?.isActive == true) return
-
         val currentState = state.value
-
         val loadingScreen = if (
             currentState.screen is FavouriteScreenState.Content &&
             currentState.data.isNotEmpty()
@@ -102,24 +132,11 @@ class FavouriteStore(
             currentState.page.inc()
         }
 
-        loadingJob = interactor.getFavourites(
-            uuid = state.value.uuid,
-            page = page,
-            pageSize = PAGE_SIZE
-        ).launchFlow(
-            each = { data ->
-                val uiData = data.map { favourite -> favourite.toUI() }
-                val screenItems = currentState.data.plus(uiData).toImmutableList()
-                val screen = if (screenItems.isEmpty()) {
-                    FavouriteScreenState.Empty
-                } else {
-                    FavouriteScreenState.Content.NotLoading
-                }
+        launch(
+            onSuccess = {
                 updateState { state ->
                     state.copy(
-                        page = page,
-                        data = screenItems,
-                        screen = screen
+                        page = page
                     )
                 }
             },
@@ -134,7 +151,14 @@ class FavouriteStore(
                     sendEvent(Event.ErrorSnackBar(error.message.orEmpty()))
                 }
             }
-        )
+        ) {
+            interactor.getFavourites(
+                uuid = state.value.uuid,
+                query = state.value.query,
+                page = page,
+                pageSize = PAGE_SIZE,
+            )
+        }
     }
 
     companion object {
