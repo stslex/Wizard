@@ -14,7 +14,8 @@ interface FavouriteStoreComponent : Store {
         val page: Int,
         val query: String,
         val data: ImmutableList<FavouriteModel>,
-        val screen: FavouriteScreenState
+        val screen: FavouriteScreenState,
+        val isLoading: Boolean
     ) : Store.State {
 
         companion object {
@@ -26,7 +27,8 @@ interface FavouriteStoreComponent : Store {
                 page = DEFAULT_PAGE,
                 query = "",
                 data = emptyList<FavouriteModel>().toImmutableList(),
-                screen = FavouriteScreenState.Shimmer
+                screen = FavouriteScreenState.Shimmer,
+                isLoading = true
             )
         }
     }

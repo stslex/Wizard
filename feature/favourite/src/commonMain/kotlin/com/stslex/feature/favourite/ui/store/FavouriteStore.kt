@@ -96,14 +96,15 @@ class FavouriteStore(
         interactor.favourites
             .launchFlow { data ->
                 val screen = if (data.isEmpty()) {
-                    FavouriteScreenState.Empty
+                    FavouriteScreenState.Content.Empty
                 } else {
-                    FavouriteScreenState.Content.NotLoading
+                    FavouriteScreenState.Content.Data
                 }
                 updateState { state ->
                     state.copy(
                         data = data.map { it.toUI() }.toImmutableList(),
-                        screen = screen
+                        screen = screen,
+                        isLoading = false
                     )
                 }
             }
@@ -119,12 +120,17 @@ class FavouriteStore(
             currentState.screen is FavouriteScreenState.Content &&
             currentState.data.isNotEmpty()
         ) {
-            FavouriteScreenState.Content.Loading
+            currentState.screen
         } else {
             FavouriteScreenState.Shimmer
         }
 
-        updateState { state -> state.copy(screen = loadingScreen) }
+        updateState { state ->
+            state.copy(
+                screen = loadingScreen,
+                isLoading = true
+            )
+        }
 
         val page = if (currentState.page == DEFAULT_PAGE) {
             FIRST_PAGE
@@ -144,10 +150,12 @@ class FavouriteStore(
                 if (currentState.data.isEmpty()) {
                     updateState { state ->
                         state.copy(
-                            screen = FavouriteScreenState.Error(error)
+                            screen = FavouriteScreenState.Error(error),
+                            isLoading = false
                         )
                     }
                 } else {
+                    updateState { it.copy(isLoading = false) }
                     sendEvent(Event.ErrorSnackBar(error.message.orEmpty()))
                 }
             }

@@ -2,7 +2,6 @@ package com.stslex.feature.favourite.ui.components
 
 import androidx.compose.runtime.Composable
 import com.stslex.feature.favourite.ui.components.content.FavouriteScreenContent
-import com.stslex.feature.favourite.ui.components.empty.FavouriteScreenEmpty
 import com.stslex.feature.favourite.ui.components.error.FavouriteScreenError
 import com.stslex.feature.favourite.ui.components.shimmer.FavouriteScreenShimmer
 import com.stslex.feature.favourite.ui.store.FavouriteScreenState
@@ -19,6 +18,7 @@ internal fun FavouriteScreen(
             state = state.screen,
             items = state.data,
             query = state.query,
+            isLoading = state.isLoading,
             onItemClick = { uuid ->
                 onAction(Action.ItemClick(uuid))
             },
@@ -32,6 +32,5 @@ internal fun FavouriteScreen(
 
         is FavouriteScreenState.Error -> FavouriteScreenError(state = state.screen)
         FavouriteScreenState.Shimmer -> FavouriteScreenShimmer()
-        FavouriteScreenState.Empty -> FavouriteScreenEmpty()
     }
 }

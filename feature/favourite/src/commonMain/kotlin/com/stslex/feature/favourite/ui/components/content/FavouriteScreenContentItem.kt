@@ -33,15 +33,17 @@ internal fun FavouriteScreenContentItem(
         onClick = { onItemClick(item.uuid) }
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(AppDimension.Padding.medium),
         ) {
             Text(
                 modifier = Modifier
                     .weight(1f)
                     .padding(AppDimension.Padding.medium),
                 text = item.title,
-                style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Center
+                style = MaterialTheme.typography.titleMedium,
+                textAlign = TextAlign.Start
             )
             Icon(
                 modifier = Modifier
