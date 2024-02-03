@@ -1,6 +1,5 @@
 package com.stslex.feature.favourite.ui.components.content
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,6 +9,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +36,7 @@ internal fun FavouriteScreenContentItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(AppDimension.Padding.medium),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
         ) {
             Text(
                 modifier = Modifier
@@ -45,19 +46,20 @@ internal fun FavouriteScreenContentItem(
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Start
             )
-            Icon(
+            IconButton(
                 modifier = Modifier
-                    .padding(AppDimension.Padding.medium)
-                    .clickable {
-                        onLikeClick(item.uuid)
+                    .padding(AppDimension.Padding.small),
+                onClick = { onLikeClick(item.uuid) }
+            ) {
+                Icon(
+                    imageVector = if (item.isFavourite) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
                     },
-                imageVector = if (item.isFavourite) {
-                    Icons.Default.Favorite
-                } else {
-                    Icons.Default.FavoriteBorder
-                },
-                contentDescription = "Like button",
-            )
+                    contentDescription = "Like button",
+                )
+            }
         }
     }
 }

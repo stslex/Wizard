@@ -20,16 +20,28 @@ class FilmRepositoryImpl(
 
     override fun getFilm(id: String): Flow<FilmData> = flow {
         coroutineScope {
-            val isFavourite = async {
+            /*TODO: Implement caching for favourite films in the local database
+            *  with extra remote saving*/
+            val isFavouriteLocal = async {
                 favouriteDatasource.getFilm(id) != null
             }
+
+            val isFavouriteRemote = async {
+                try {
+                    profileClient.isFavourite(favouriteUuid = id).result
+                } catch (e: Throwable) {
+                    false
+                }
+            }
+
             val trailerUrl = async {
                 client.getFilmTrailers(id = id).getTrailer()
             }
 
+
             val film = client.getFilm(id = id)
             val result = film.toData(
-                isFavourite = isFavourite.await(),
+                isFavourite = isFavouriteRemote.await(),
                 trailer = trailerUrl.await()
             )
             emit(result)

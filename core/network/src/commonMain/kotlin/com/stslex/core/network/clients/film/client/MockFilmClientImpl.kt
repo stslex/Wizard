@@ -8,6 +8,7 @@ import com.stslex.core.network.clients.film.model.FilmTrailerNetwork
 import com.stslex.core.network.clients.film.model.MovieNetwork
 import kotlinx.coroutines.delay
 import kotlin.coroutines.coroutineContext
+import kotlin.random.Random
 
 class MockFilmClientImpl : FilmClient {
 
@@ -46,7 +47,7 @@ class MockFilmClientImpl : FilmClient {
     )
 
     private fun getMovieById(id: String) = movieList.firstOrNull { it.id == id }
-        ?: throw IllegalArgumentException("Movie with id $id not found")
+        ?: movieList[Random(0).nextInt(filmsList.size)]
 }
 
 private val lokiMovieFilm = MovieNetwork(

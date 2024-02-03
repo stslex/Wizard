@@ -1,6 +1,7 @@
 package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.core.Logger
+import com.stslex.core.network.clients.profile.model.response.BooleanResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
@@ -109,6 +110,10 @@ class MockProfileClientImpl : ProfileClient {
 
     override suspend fun addFavourite(uuid: String, title: String) {
         Logger.debug("Favourite added")
+    }
+
+    override suspend fun isFavourite(favouriteUuid: String): BooleanResponse {
+        return BooleanResponse(true)
     }
 
     override suspend fun removeFavourite(uuid: String) {

@@ -2,6 +2,7 @@ package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.network.api.server.client.ServerApiClient
 import com.stslex.core.network.clients.profile.model.request.AddLikeRequest
+import com.stslex.core.network.clients.profile.model.response.BooleanResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
@@ -98,6 +99,14 @@ class ProfileClientImpl(
                 parameter("favourite_uuid", uuid)
             }
         }
+    }
+
+    override suspend fun isFavourite(
+        favouriteUuid: String
+    ): BooleanResponse = client.request {
+        get("$HOST/is_favourite") {
+            parameter("uuid", favouriteUuid)
+        }.body()
     }
 
     companion object {

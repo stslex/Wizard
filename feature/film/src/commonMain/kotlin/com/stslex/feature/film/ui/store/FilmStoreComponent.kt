@@ -30,7 +30,10 @@ interface FilmStoreComponent : Store {
         data object LikeButtonClick : Action
     }
 
-    sealed interface Event : Store.Event
+    sealed interface Event : Store.Event {
+
+        data class ErrorSnackbar(val throwable: Throwable) : Event
+    }
 
     sealed interface Navigation : Store.Navigation {
 

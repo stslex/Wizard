@@ -1,5 +1,6 @@
 package com.stslex.core.network.clients.profile.client
 
+import com.stslex.core.network.clients.profile.model.response.BooleanResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
@@ -40,6 +41,8 @@ interface ProfileClient {
         uuid: String,
         title: String,
     )
+
+    suspend fun isFavourite(favouriteUuid: String): BooleanResponse
 
     suspend fun removeFavourite(uuid: String)
 }
