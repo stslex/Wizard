@@ -1,13 +1,18 @@
 package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.network.api.server.client.ServerApiClient
-import com.stslex.core.network.clients.profile.model.UserResponse
-import com.stslex.core.network.clients.profile.model.UserFavouriteResponse
-import com.stslex.core.network.clients.profile.model.UserFollowerResponse
-import com.stslex.core.network.clients.profile.model.UserSearchResponse
+import com.stslex.core.network.clients.profile.model.request.AddLikeRequest
+import com.stslex.core.network.clients.profile.model.response.BooleanResponse
+import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
+import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
+import com.stslex.core.network.clients.profile.model.response.UserResponse
+import com.stslex.core.network.clients.profile.model.response.UserSearchResponse
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 
 class ProfileClientImpl(
     private val client: ServerApiClient
@@ -39,11 +44,13 @@ class ProfileClientImpl(
 
     override suspend fun getFavourites(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFavouriteResponse = client.request {
         get("$HOST/favourites") {
             parameter("uuid", uuid)
+            parameter("query", query)
             parameter("page", page)
             parameter("page_size", pageSize)
         }.body()
@@ -73,7 +80,37 @@ class ProfileClientImpl(
         }.body()
     }
 
+    override suspend fun addFavourite(uuid: String, title: String) {
+        client.request {
+            post("$HOST/favourite") {
+                setBody(
+                    AddLikeRequest(
+                        filmUuid = uuid,
+                        title = title
+                    )
+                )
+            }
+        }
+    }
+
+    override suspend fun removeFavourite(uuid: String) {
+        client.request {
+            delete("$HOST/favourite") {
+                parameter("favourite_uuid", uuid)
+            }
+        }
+    }
+
+    override suspend fun isFavourite(
+        favouriteUuid: String
+    ): BooleanResponse = client.request {
+        get("$HOST/is_favourite") {
+            parameter("uuid", favouriteUuid)
+        }.body()
+    }
+
     companion object {
         private const val HOST = "user"
     }
 }
+

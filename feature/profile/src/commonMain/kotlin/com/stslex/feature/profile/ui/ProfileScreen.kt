@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -47,19 +48,25 @@ data class ProfileScreen(
 
 @Composable
 private fun ProfileScreen(state: State, onAction: (Action) -> Unit) {
-    when (val screen = state.screen) {
-        is ProfileScreenState.Content -> ProfileScreenContent(
-            state = screen,
-            onAction = onAction
-        )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .systemBarsPadding(),
+    ) {
+        when (val screen = state.screen) {
+            is ProfileScreenState.Content -> ProfileScreenContent(
+                state = screen,
+                onAction = onAction
+            )
 
-        is ProfileScreenState.Error -> ProfileScreenError(
-            error = screen.error,
-            logOut = { onAction(Action.Logout) },
-            repeatLastAction = { onAction(Action.RepeatLastAction) }
-        )
+            is ProfileScreenState.Error -> ProfileScreenError(
+                error = screen.error,
+                logOut = { onAction(Action.Logout) },
+                repeatLastAction = { onAction(Action.RepeatLastAction) }
+            )
 
-        ProfileScreenState.Shimmer -> ProfileScreenShinner()
+            ProfileScreenState.Shimmer -> ProfileScreenShinner()
+        }
     }
 }
 

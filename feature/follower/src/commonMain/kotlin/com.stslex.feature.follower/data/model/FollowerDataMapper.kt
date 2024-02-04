@@ -1,6 +1,6 @@
 package com.stslex.feature.follower.data.model
 
-import com.stslex.core.network.clients.profile.model.UserFollowerResponse
+import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 
 fun UserFollowerResponse.toData(): List<FollowerDataModel> = this
     .result

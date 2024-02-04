@@ -7,3 +7,9 @@ fun FavouriteDomainModel.toUI() = FavouriteModel(
     title = title,
     isFavourite = isFavourite
 )
+
+fun FavouriteModel.toDomain() = FavouriteDomainModel(
+    uuid = uuid,
+    title = title,
+    isFavourite = isFavourite
+)

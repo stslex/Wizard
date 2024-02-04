@@ -1,6 +1,6 @@
 package com.stslex.feature.profile.data.model
 
-import com.stslex.core.network.clients.profile.model.UserResponse
+import com.stslex.core.network.clients.profile.model.response.UserResponse
 
 fun UserResponse.toData() = ProfileDataModel(
     uuid = uuid,

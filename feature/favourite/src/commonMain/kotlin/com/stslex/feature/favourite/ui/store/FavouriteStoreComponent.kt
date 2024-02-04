@@ -12,8 +12,10 @@ interface FavouriteStoreComponent : Store {
     data class State(
         val uuid: String,
         val page: Int,
+        val query: String,
         val data: ImmutableList<FavouriteModel>,
-        val screen: FavouriteScreenState
+        val screen: FavouriteScreenState,
+        val isLoading: Boolean
     ) : Store.State {
 
         companion object {
@@ -23,8 +25,10 @@ interface FavouriteStoreComponent : Store {
             val INITIAL = State(
                 uuid = "",
                 page = DEFAULT_PAGE,
+                query = "",
                 data = emptyList<FavouriteModel>().toImmutableList(),
-                screen = FavouriteScreenState.Shimmer
+                screen = FavouriteScreenState.Shimmer,
+                isLoading = true
             )
         }
     }
@@ -39,6 +43,15 @@ interface FavouriteStoreComponent : Store {
 
         @Stable
         data object LoadMore : Action
+
+        @Stable
+        data class LikeClick(val uuid: String) : Action
+
+        @Stable
+        data class ItemClick(val uuid: String) : Action
+
+        @Stable
+        data class InputSearch(val query: String) : Action
     }
 
     @Stable
@@ -48,5 +61,8 @@ interface FavouriteStoreComponent : Store {
         data class ErrorSnackBar(val message: String) : Event
     }
 
-    sealed interface Navigation : Store.Navigation
+    sealed interface Navigation : Store.Navigation {
+
+        data class OpenFilm(val uuid: String) : Navigation
+    }
 }

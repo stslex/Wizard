@@ -3,14 +3,14 @@ package com.stslex.feature.profile.ui.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.stslex.core.ui.theme.AppDimension
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProfileFavouritesCard(
     count: Int,
@@ -22,7 +22,10 @@ internal fun ProfileFavouritesCard(
             .padding(AppDimension.Padding.medium),
         onClick = onClick
     ) {
-        Column {
+        Column(
+            modifier = Modifier.padding(AppDimension.Padding.medium),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        ) {
             Text(
                 text = "favourite"
             )
@@ -34,7 +37,7 @@ internal fun ProfileFavouritesCard(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProfileFollowingCard(
     count: Int,
@@ -46,7 +49,10 @@ internal fun ProfileFollowingCard(
             .padding(AppDimension.Padding.medium),
         onClick = onClick
     ) {
-        Column {
+        Column(
+            modifier = Modifier.padding(AppDimension.Padding.medium),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        ) {
             Text(
                 text = "following"
             )
@@ -58,7 +64,7 @@ internal fun ProfileFollowingCard(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProfileFollowersCard(
     count: Int,
@@ -70,7 +76,10 @@ internal fun ProfileFollowersCard(
             .padding(AppDimension.Padding.medium),
         onClick = onClick
     ) {
-        Column {
+        Column(
+            modifier = Modifier.padding(AppDimension.Padding.medium),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        ) {
             Text(
                 text = "followers"
             )

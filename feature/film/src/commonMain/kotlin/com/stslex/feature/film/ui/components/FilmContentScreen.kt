@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -159,7 +160,8 @@ internal fun FilmContentScreen(
                         MaterialTheme.colorScheme.background.copy(
                             alpha = (1 - progress).coerceAtLeast(0.5f)
                         )
-                    ),
+                    )
+                    .statusBarsPadding(),
                 title = film.title,
                 onBackClick = onBackClick,
                 textSize = MaterialTheme.typography.displayMedium
@@ -277,23 +279,28 @@ internal fun FilmActions(
 ) {
     Column(
         modifier = modifier
+            .clip(
+                RoundedCornerShape(
+                    topStart = AppDimension.Radius.large,
+                    bottomStart = AppDimension.Radius.large
+                )
+            )
+            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
     ) {
+
         IconButton(
             modifier = Modifier
                 .padding(AppDimension.Padding.smallest),
             onClick = onClick(onClick = onLikeClick)
         ) {
-            if (isLiked) {
-                Icon(
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "Like",
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Like",
-                )
-            }
+            Icon(
+                imageVector = if (isLiked) {
+                    Icons.Default.Favorite
+                } else {
+                    Icons.Default.FavoriteBorder
+                },
+                contentDescription = "Like",
+            )
         }
         IconButton(
             modifier = Modifier

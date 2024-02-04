@@ -34,10 +34,19 @@ class FilmStore(
     private fun actionLikeButtonClick() {
         if (likeJob?.isActive == true) return
         val film = state.value.screenState.result ?: return
-
+        updateState { state ->
+            state.copy(
+                screenState = FilmScreenState.Content(film.copy(isFavorite = !film.isFavorite))
+            )
+        }
         likeJob = launch(
             onError = {
-                // TODO show toast error
+                updateState { state ->
+                    state.copy(
+                        screenState = FilmScreenState.Content(film.copy(isFavorite = !film.isFavorite))
+                    )
+                }
+                sendEvent(Event.ErrorSnackbar(it))
             },
             onSuccess = {
                 // TODO show toast success

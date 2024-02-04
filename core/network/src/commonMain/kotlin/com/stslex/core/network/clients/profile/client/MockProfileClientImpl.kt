@@ -1,11 +1,13 @@
 package com.stslex.core.network.clients.profile.client
 
-import com.stslex.core.network.clients.profile.model.UserFavouriteResponse
-import com.stslex.core.network.clients.profile.model.UserFavouriteResultResponse
-import com.stslex.core.network.clients.profile.model.UserFollowerResponse
-import com.stslex.core.network.clients.profile.model.UserFollowerResultResponse
-import com.stslex.core.network.clients.profile.model.UserResponse
-import com.stslex.core.network.clients.profile.model.UserSearchResponse
+import com.stslex.core.core.Logger
+import com.stslex.core.network.clients.profile.model.response.BooleanResponse
+import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
+import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
+import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
+import com.stslex.core.network.clients.profile.model.response.UserFollowerResultResponse
+import com.stslex.core.network.clients.profile.model.response.UserResponse
+import com.stslex.core.network.clients.profile.model.response.UserSearchResponse
 import kotlinx.coroutines.delay
 
 class MockProfileClientImpl : ProfileClient {
@@ -54,6 +56,7 @@ class MockProfileClientImpl : ProfileClient {
 
     override suspend fun getFavourites(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFavouriteResponse {
@@ -103,5 +106,17 @@ class MockProfileClientImpl : ProfileClient {
                 ),
             )
         )
+    }
+
+    override suspend fun addFavourite(uuid: String, title: String) {
+        Logger.debug("Favourite added")
+    }
+
+    override suspend fun isFavourite(favouriteUuid: String): BooleanResponse {
+        return BooleanResponse(true)
+    }
+
+    override suspend fun removeFavourite(uuid: String) {
+        Logger.debug("Favourite removed")
     }
 }
