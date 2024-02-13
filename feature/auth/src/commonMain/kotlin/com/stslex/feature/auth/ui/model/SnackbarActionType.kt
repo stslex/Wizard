@@ -1,4 +1,4 @@
-package com.stslex.aproselection.feature.auth.ui.model
+package com.stslex.feature.auth.ui.model
 
 enum class SnackbarActionType(val action: String) {
     ERROR("error"),

@@ -3,6 +3,7 @@ package com.stslex.feature.profile.ui.store
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.database.store.UserStore
 import com.stslex.core.ui.mvi.BaseStore
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.feature.profile.navigation.ProfileRouter
 import com.stslex.feature.profile.ui.model.toUi
@@ -45,10 +46,10 @@ class ProfileStore(
 
         interactor.getProfile(uuid)
             .launchFlow(
-                onError = {
+                onError = { error ->
                     updateState { currentState ->
                         currentState.copy(
-                            screen = ProfileScreenState.Error(it)
+                            screen = ProfileScreenState.Error(error)
                         )
                     }
                 }
@@ -102,7 +103,7 @@ class ProfileStore(
                 navigate(Navigation.LogIn)
             },
             onError = { error ->
-                sendEvent(Event.ErrorSnackBar(error.message ?: "error logout"))
+                sendEvent(Event.ShowSnackbar(Snackbar.Error(error.message ?: "error logout")))
             }
         )
     }

@@ -2,6 +2,7 @@ package com.stslex.feature.profile.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,12 +22,14 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.core.network.api.server.model.ErrorRefresh
+import com.stslex.core.ui.components.AppSnackbarHost
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.profile.navigation.ProfileScreenArguments
 import com.stslex.feature.profile.ui.components.ProfileScreenContent
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStore
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Event
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
 
 data class ProfileScreen(
@@ -39,17 +43,37 @@ data class ProfileScreen(
             store.sendAction(Action.Init(args = args))
         }
         val state by remember { store.state }.collectAsState()
+
+        val snackbarHostState = remember { SnackbarHostState() }
+        LaunchedEffect(Unit) {
+            store.event.collect { event ->
+                when (event) {
+                    is Event.ShowSnackbar -> snackbarHostState.showSnackbar(
+                        message = event.snackbar.message,
+                        actionLabel = event.snackbar.action,
+                        duration = event.snackbar.duration,
+                        withDismissAction = event.snackbar.withDismissAction,
+                    )
+                }
+            }
+        }
         ProfileScreen(
             state = state,
-            onAction = store::sendAction
+            onAction = store::sendAction,
+            snackbarHostState = snackbarHostState
         )
     }
 }
 
 @Composable
-private fun ProfileScreen(state: State, onAction: (Action) -> Unit) {
-    Box(
-        modifier = Modifier
+private fun ProfileScreen(
+    state: State,
+    onAction: (Action) -> Unit,
+    snackbarHostState: SnackbarHostState,
+    modifier: Modifier = Modifier,
+) {
+    BoxWithConstraints(
+        modifier = modifier
             .fillMaxSize()
             .systemBarsPadding(),
     ) {
@@ -67,6 +91,7 @@ private fun ProfileScreen(state: State, onAction: (Action) -> Unit) {
 
             ProfileScreenState.Shimmer -> ProfileScreenShinner()
         }
+        AppSnackbarHost(snackbarHostState)
     }
 }
 

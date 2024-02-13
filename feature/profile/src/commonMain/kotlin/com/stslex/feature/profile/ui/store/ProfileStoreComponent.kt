@@ -2,6 +2,7 @@ package com.stslex.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.core.ui.mvi.Store
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.profile.navigation.ProfileScreenArguments
 
 interface ProfileStoreComponent : Store {
@@ -46,7 +47,7 @@ interface ProfileStoreComponent : Store {
     sealed interface Event : Store.Event {
 
         @Stable
-        data class ErrorSnackBar(val message: String) : Event
+        data class ShowSnackbar(val snackbar: Snackbar) : Event
     }
 
     sealed interface Navigation : Store.Navigation {
