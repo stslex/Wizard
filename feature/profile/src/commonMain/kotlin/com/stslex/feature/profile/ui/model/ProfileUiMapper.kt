@@ -2,10 +2,12 @@ package com.stslex.feature.profile.ui.model
 
 import com.stslex.feature.profile.domain.model.ProfileDomainModel
 
-fun ProfileDomainModel.toUi() = ProfileModel(
+fun ProfileDomainModel.toUi(
+    avatarModel: ProfileAvatarModel
+) = ProfileModel(
     uuid = uuid,
     username = username,
-    avatarUrl = avatarUrl,
+    avatar = avatarModel,
     bio = bio,
     followers = followers,
     following = following,

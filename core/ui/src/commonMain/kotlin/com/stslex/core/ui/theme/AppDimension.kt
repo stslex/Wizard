@@ -23,4 +23,10 @@ object AppDimension {
         val small = 4.dp
         val medium = 8.dp
     }
+
+    object Icon{
+        val small = 16.dp
+        val medium = 24.dp
+        val large = 32.dp
+    }
 }
