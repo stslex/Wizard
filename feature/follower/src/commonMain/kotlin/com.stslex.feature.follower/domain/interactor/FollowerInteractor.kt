@@ -1,20 +1,24 @@
 package com.stslex.feature.follower.domain.interactor
 
 import com.stslex.feature.follower.ui.model.FollowerModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 interface FollowerInteractor {
 
-    fun getFollowers(
-        uuid: String,
-        page: Int,
-        pageSize: Int
-    ): Flow<List<FollowerModel>>
+    val followItems: StateFlow<List<FollowerModel>>
 
-    fun getFollowing(
+    suspend fun getFollowers(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
-    ): Flow<List<FollowerModel>>
+    )
+
+    suspend fun getFollowing(
+        uuid: String,
+        query: String,
+        page: Int,
+        pageSize: Int
+    )
 }
 

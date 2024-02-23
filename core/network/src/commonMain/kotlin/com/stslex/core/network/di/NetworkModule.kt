@@ -16,6 +16,8 @@ import com.stslex.core.network.clients.film.client.FilmClient
 import com.stslex.core.network.clients.film.client.MockFilmClientImpl
 import com.stslex.core.network.clients.profile.client.ProfileClient
 import com.stslex.core.network.clients.profile.client.ProfileClientImpl
+import com.stslex.core.network.utils.PagingWorker
+import com.stslex.core.network.utils.PagingWorkerImpl
 import com.stslex.core.network.utils.token.AuthController
 import com.stslex.core.network.utils.token.AuthControllerImpl
 import org.koin.dsl.module
@@ -71,5 +73,9 @@ val coreNetworkModule = module {
         AuthControllerImpl(
             userStore = get(),
         )
+    }
+
+    factory<PagingWorker> {
+        PagingWorkerImpl()
     }
 }

@@ -19,7 +19,8 @@ val featureFollowerModule = module {
 
     factory<FollowerInteractor> {
         FollowerInteractorImpl(
-            repository = get()
+            repository = get(),
+            pagingWorker = get()
         )
     }
 
