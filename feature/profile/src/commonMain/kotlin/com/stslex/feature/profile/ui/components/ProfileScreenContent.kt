@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.core.ui.base.image.NetworkImage
 import com.stslex.core.ui.theme.AppDimension
+import com.stslex.feature.profile.ui.model.ProfileAvatarModel
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent
 
@@ -28,12 +29,24 @@ internal fun ProfileScreenContent(
             modifier = Modifier.align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
         ) {
-            NetworkImage(
-                url = state.data.avatarUrl,
-                modifier = Modifier
-                    .padding(AppDimension.Padding.big)
-                    .align(Alignment.CenterHorizontally)
-            )
+            when (val avatar = state.data.avatar) {
+                is ProfileAvatarModel.Empty -> {
+                    Text(
+                        text = avatar.symbol,
+                        color = avatar.color
+                    )
+                }
+
+                is ProfileAvatarModel.Content -> {
+                    NetworkImage(
+                        url = avatar.url,
+                        modifier = Modifier
+                            .padding(AppDimension.Padding.big)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
+
 
             TextButton(
                 onClick = {
