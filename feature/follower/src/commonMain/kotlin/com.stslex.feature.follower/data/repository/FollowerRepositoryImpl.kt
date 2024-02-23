@@ -3,36 +3,36 @@ package com.stslex.feature.follower.data.repository
 import com.stslex.core.network.clients.profile.client.ProfileClient
 import com.stslex.feature.follower.data.model.FollowerDataModel
 import com.stslex.feature.follower.data.model.toData
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class FollowerRepositoryImpl(
     private val client: ProfileClient
 ) : FollowerRepository {
 
-    override fun getFollowers(
+    override suspend fun getFollowers(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
-    ): Flow<List<FollowerDataModel>> = flow {
-        val result = client.getFollowers(
+    ): List<FollowerDataModel> = client
+        .getFollowers(
             uuid = uuid,
+            query = query,
             page = page,
             pageSize = pageSize
-        ).toData()
-        emit(result)
-    }
+        )
+        .toData()
 
-    override fun getFollowing(
+    override suspend fun getFollowing(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
-    ): Flow<List<FollowerDataModel>> = flow {
-        val result = client.getFollowing(
+    ): List<FollowerDataModel> = client
+        .getFollowing(
             uuid = uuid,
+            query = query,
             page = page,
             pageSize = pageSize
-        ).toData()
-        emit(result)
-    }
+        )
+        .toData()
 }

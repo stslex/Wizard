@@ -12,7 +12,12 @@ import org.koin.dsl.module
 val featureFavouriteModule = module {
 
     factory<FavouriteRepository> { FavouriteRepositoryImpl(client = get()) }
-    factory<FavouriteInteractor> { FavouriteInteractorImpl(repository = get()) }
+    factory<FavouriteInteractor> {
+        FavouriteInteractorImpl(
+            repository = get(),
+            pagingWorker = get()
+        )
+    }
     factory<FavouriteRouter> { FavouriteRouterImpl(navigator = get()) }
     factory {
         FavouriteStore(

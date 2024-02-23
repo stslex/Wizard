@@ -1,20 +1,21 @@
 package com.stslex.feature.follower.data.repository
 
 import com.stslex.feature.follower.data.model.FollowerDataModel
-import kotlinx.coroutines.flow.Flow
 
 interface FollowerRepository {
 
-    fun getFollowers(
+    suspend fun getFollowers(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
-    ): Flow<List<FollowerDataModel>>
+    ): List<FollowerDataModel>
 
-    fun getFollowing(
+    suspend fun getFollowing(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
-    ): Flow<List<FollowerDataModel>>
+    ): List<FollowerDataModel>
 }
 

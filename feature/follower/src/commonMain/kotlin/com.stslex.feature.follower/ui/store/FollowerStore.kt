@@ -12,6 +12,8 @@ import com.stslex.feature.follower.ui.store.FollowerStoreComponent.State
 import com.stslex.feature.follower.ui.store.FollowerStoreComponent.State.Companion.DEFAULT_PAGE
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 
 class FollowerStore(
     private val interactor: FollowerInteractor,
@@ -44,7 +46,33 @@ class FollowerStore(
                 screen = FollowerScreenState.Shimmer
             )
         }
-        loadNextItems()
+
+        state.map { it.query }
+            .distinctUntilChanged()
+            .launchFlow { query ->
+                updateState { state ->
+                    state.copy(
+                        page = DEFAULT_PAGE,
+                        query = query,
+                    )
+                }
+                loadNextItems()
+            }
+
+        interactor.followItems
+            .launchFlow { data ->
+                val screen = if (data.isEmpty()) {
+                    FollowerScreenState.Empty
+                } else {
+                    FollowerScreenState.Content.NotLoading
+                }
+                updateState { state ->
+                    state.copy(
+                        data = data.toImmutableList(),
+                        screen = screen,
+                    )
+                }
+            }
     }
 
     private fun loadNextItems() {
@@ -69,30 +97,28 @@ class FollowerStore(
             currentState.page.inc()
         }
 
-        loadingJob = when (val type = currentState.type) {
-            is FollowerScreenArgs.Follower -> interactor.getFollowers(
-                uuid = type.uuid,
-                page = page,
-                pageSize = PAGE_SIZE
-            )
+        launch(
+            action = {
+                when (val type = currentState.type) {
+                    is FollowerScreenArgs.Follower -> interactor.getFollowers(
+                        uuid = type.uuid,
+                        query = "", // todo add query
+                        page = page,
+                        pageSize = PAGE_SIZE
+                    )
 
-            is FollowerScreenArgs.Following -> interactor.getFollowing(
-                uuid = type.uuid,
-                page = page,
-                pageSize = PAGE_SIZE
-            )
-        }.launchFlow(
-            each = { data ->
-                val screen = if (data.isEmpty()) {
-                    FollowerScreenState.Empty
-                } else {
-                    FollowerScreenState.Content.NotLoading
+                    is FollowerScreenArgs.Following -> interactor.getFollowing(
+                        uuid = type.uuid,
+                        query = "", // todo add query
+                        page = page,
+                        pageSize = PAGE_SIZE
+                    )
                 }
+            },
+            onSuccess = {
                 updateState { state ->
                     state.copy(
-                        page = page,
-                        data = currentState.data.plus(data).toImmutableList(),
-                        screen = screen
+                        page = page
                     )
                 }
             },
@@ -104,6 +130,7 @@ class FollowerStore(
                         )
                     }
                 } else {
+                    updateState { it.copy(screen = FollowerScreenState.Content.NotLoading) }
                     sendEvent(Event.ErrorSnackBar(error.message.orEmpty()))
                 }
             }

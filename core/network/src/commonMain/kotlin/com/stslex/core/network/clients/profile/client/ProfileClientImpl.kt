@@ -58,11 +58,13 @@ class ProfileClientImpl(
 
     override suspend fun getFollowers(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFollowerResponse = client.request {
         get("$HOST/followers") {
             parameter("uuid", uuid)
+            parameter("query", query)
             parameter("page", page)
             parameter("page_size", pageSize)
         }.body()
@@ -70,11 +72,13 @@ class ProfileClientImpl(
 
     override suspend fun getFollowing(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFollowerResponse = client.request {
         get("$HOST/following") {
             parameter("uuid", uuid)
+            parameter("query", query)
             parameter("page", page)
             parameter("page_size", pageSize)
         }.body()

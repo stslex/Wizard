@@ -1,10 +1,13 @@
 package com.stslex.feature.profile.ui.store
 
+import androidx.compose.ui.graphics.Color
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.database.store.UserStore
 import com.stslex.core.ui.mvi.BaseStore
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.feature.profile.navigation.ProfileRouter
+import com.stslex.feature.profile.ui.model.ProfileAvatarModel
 import com.stslex.feature.profile.ui.model.toUi
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
 import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Event
@@ -45,17 +48,28 @@ class ProfileStore(
 
         interactor.getProfile(uuid)
             .launchFlow(
-                onError = {
+                onError = { error ->
                     updateState { currentState ->
                         currentState.copy(
-                            screen = ProfileScreenState.Error(it)
+                            screen = ProfileScreenState.Error(error)
                         )
                     }
                 }
             ) { profile ->
+                val avatar = if (profile.avatarUrl.isBlank()) {
+                    ProfileAvatarModel.Empty(
+                        color = Color.Gray, // TODO replace with random color
+                        symbol = profile.username.firstOrNull()?.lowercase().orEmpty()
+                    )
+                } else {
+                    ProfileAvatarModel.Content(profile.avatarUrl)
+                }
+                val profileUi = profile.toUi(
+                    avatarModel = avatar
+                )
                 updateState { currentState ->
                     currentState.copy(
-                        screen = ProfileScreenState.Content.NotLoading(profile.toUi())
+                        screen = ProfileScreenState.Content.NotLoading(profileUi)
                     )
                 }
             }
@@ -102,7 +116,7 @@ class ProfileStore(
                 navigate(Navigation.LogIn)
             },
             onError = { error ->
-                sendEvent(Event.ErrorSnackBar(error.message ?: "error logout"))
+                sendEvent(Event.ShowSnackbar(Snackbar.Error(error.message ?: "error logout")))
             }
         )
     }

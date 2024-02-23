@@ -1,6 +1,7 @@
 package com.stslex.feature.auth.ui.store
 
 import com.stslex.core.ui.mvi.Store
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
 
 interface AuthStoreComponent : Store {
 
@@ -24,7 +25,12 @@ interface AuthStoreComponent : Store {
         }
     }
 
-    sealed interface Event : Store.Event
+    sealed interface Event : Store.Event {
+
+        data class ShowSnackbar(
+            val snackbar: Snackbar
+        ) : Event
+    }
 
     sealed interface Action : Store.Action {
         data class OnSubmitClicked(

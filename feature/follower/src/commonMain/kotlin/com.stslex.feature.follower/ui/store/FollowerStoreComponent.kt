@@ -15,7 +15,8 @@ interface FollowerStoreComponent : Store {
         val page: Int,
         val type: FollowerScreenArgs,
         val data: ImmutableList<FollowerModel>,
-        val screen: FollowerScreenState
+        val screen: FollowerScreenState,
+        val query: String
     ) : Store.State {
 
         companion object {
@@ -27,7 +28,8 @@ interface FollowerStoreComponent : Store {
                 page = DEFAULT_PAGE,
                 type = FollowerScreenArgs.Follower(""),
                 data = emptyList<FollowerModel>().toImmutableList(),
-                screen = FollowerScreenState.Shimmer
+                screen = FollowerScreenState.Shimmer,
+                query = ""
             )
         }
     }

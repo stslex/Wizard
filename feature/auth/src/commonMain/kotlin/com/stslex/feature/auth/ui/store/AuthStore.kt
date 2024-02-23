@@ -2,6 +2,7 @@ package com.stslex.feature.auth.ui.store
 
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.ui.mvi.BaseStore
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.auth.domain.AuthInteractor
 import com.stslex.feature.auth.navigation.AuthRouter
 import com.stslex.feature.auth.ui.store.AuthStoreComponent.Action
@@ -10,6 +11,7 @@ import com.stslex.feature.auth.ui.store.AuthStoreComponent.Event
 import com.stslex.feature.auth.ui.store.AuthStoreComponent.Navigation
 import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
 import com.stslex.feature.auth.ui.store.AuthStoreComponent.State
+import kotlinx.coroutines.delay
 
 class AuthStore(
     private val interactor: AuthInteractor,
@@ -84,11 +86,32 @@ class AuthStore(
         setLoadingState(ScreenLoadingState.Loading)
 
         launch(
-            onError = {
+            action = {
+                interactor.register(
+                    login = state.login,
+                    username = state.username,
+                    password = state.password
+                )
+            },
+            onError = { error ->
+                sendEvent(
+                    Event.ShowSnackbar(
+                        snackbar = Snackbar.Error(
+                            message = error.message ?: "Unknown error"
+                        )
+                    )
+                )
                 setLoadingState(ScreenLoadingState.Content)
-                // TODO sendEvent(Event.ShowSnackbar.ERROR)
             },
             onSuccess = {
+                sendEvent(
+                    Event.ShowSnackbar(
+                        snackbar = Snackbar.Success(
+                            message = "Success register"
+                        )
+                    )
+                )
+                delay(1000L)
                 updateState { currentState ->
                     currentState.copy(
                         screenLoadingState = ScreenLoadingState.Content,
@@ -96,26 +119,38 @@ class AuthStore(
                     )
                 }
                 navigate(Navigation.HomeFeature)
-                // TODO sendEvent(Event.ShowSnackbar.SuccessRegister)
-            }) {
-            interactor
-                .register(
-                    login = state.login,
-                    username = state.username,
-                    password = state.password
-                )
-        }
+            })
     }
 
     private fun auth() {
         val state = state.value
         setLoadingState(ScreenLoadingState.Loading)
         launch(
-            onError = {
+            action = {
+                interactor.auth(
+                    login = state.login,
+                    password = state.password
+                )
+            },
+            onError = { error ->
+                sendEvent(
+                    Event.ShowSnackbar(
+                        snackbar = Snackbar.Error(
+                            message = error.message ?: "Unknown error"
+                        )
+                    )
+                )
                 setLoadingState(ScreenLoadingState.Content)
-                // TODO sendEvent(Event.ShowSnackbar.ERROR)
             },
             onSuccess = {
+                sendEvent(
+                    Event.ShowSnackbar(
+                        snackbar = Snackbar.Success(
+                            message = "Success auth"
+                        )
+                    )
+                )
+                delay(1000L)
                 updateState { currentState ->
                     currentState.copy(
                         screenLoadingState = ScreenLoadingState.Content,
@@ -123,14 +158,7 @@ class AuthStore(
                     )
                 }
                 navigate(Navigation.HomeFeature)
-                // TODO sendEvent(Event.ShowSnackbar.SuccessRegister)
-            }) {
-            interactor
-                .auth(
-                    login = state.login,
-                    password = state.password
-                )
-        }
+            })
     }
 
     private fun setLoadingState(screenLoadingState: ScreenLoadingState) {

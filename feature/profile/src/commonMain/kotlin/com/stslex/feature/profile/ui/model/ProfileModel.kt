@@ -6,7 +6,7 @@ import androidx.compose.runtime.Stable
 data class ProfileModel(
     val uuid: String,
     val username: String,
-    val avatarUrl: String,
+    val avatar: ProfileAvatarModel,
     val bio: String,
     val followers: Int,
     val following: Int,

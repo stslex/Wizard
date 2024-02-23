@@ -74,6 +74,7 @@ class MockProfileClientImpl : ProfileClient {
 
     override suspend fun getFollowers(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFollowerResponse {
@@ -92,6 +93,7 @@ class MockProfileClientImpl : ProfileClient {
 
     override suspend fun getFollowing(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int
     ): UserFollowerResponse {

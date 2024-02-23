@@ -6,11 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.swipeable
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,15 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
-import com.stslex.feature.auth.ui.components.AuthTitle
+import com.stslex.core.ui.components.AppSnackbarHost
 import com.stslex.core.ui.mvi.setupNavigator
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.core.ui.theme.toPx
 import com.stslex.feature.auth.ui.components.AuthFieldsColumn
+import com.stslex.feature.auth.ui.components.AuthTitle
 import com.stslex.feature.auth.ui.model.screen.AuthScreenState
 import com.stslex.feature.auth.ui.model.screen.rememberAuthScreenState
 import com.stslex.feature.auth.ui.store.AuthStore
 import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
+import com.stslex.feature.auth.ui.store.AuthStoreComponent.Event
 import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
 
 object AuthScreen : Screen {
@@ -44,7 +46,14 @@ object AuthScreen : Screen {
 
         LaunchedEffect(Unit) {
             store.event.collect { event ->
-                // TODO handle events
+                when (event) {
+                    is Event.ShowSnackbar -> snackbarHostState.showSnackbar(
+                        message = event.snackbar.message,
+                        actionLabel = event.snackbar.action,
+                        duration = event.snackbar.duration,
+                        withDismissAction = event.snackbar.withDismissAction,
+                    )
+                }
             }
         }
 
@@ -59,45 +68,46 @@ object AuthScreen : Screen {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun AuthScreen(state: AuthScreenState) {
+private fun AuthScreen(
+    state: AuthScreenState
+) {
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        val screenWidth = maxWidth.toPx
+
+        val screenWidth = maxWidth
+        val screenWidthPx = screenWidth.toPx
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .systemBarsPadding()
                 .background(MaterialTheme.colorScheme.background)
                 .swipeable(
                     state = state.swipeableState,
                     orientation = Orientation.Horizontal,
                     anchors = mapOf(
-                        screenWidth to AuthFieldsState.AUTH,
+                        screenWidthPx to AuthFieldsState.AUTH,
                         0f to AuthFieldsState.REGISTER
                     )
                 ),
             contentAlignment = Alignment.Center,
         ) {
             AuthScreenContent(state)
-            SnackbarHost(
-                modifier = Modifier.align(Alignment.BottomCenter),
-                hostState = state.snackbarHostState
-            ) { snackbarData ->
-                // TODO
-//            when (SnackbarActionType.getByAction(snackbarData.visuals.actionLabel)) {
-//                SnackbarActionType.ERROR -> ErrorSnackbar(snackbarData)
-//                SnackbarActionType.SUCCESS -> SuccessSnackbar(snackbarData)
-//                SnackbarActionType.NONE -> return@SnackbarHost
-//            }
-            }
+            AppSnackbarHost(
+                snackbarHostState = state.snackbarHostState,
+                width = screenWidth
+            )
         }
+
         if (state.screenLoadingState == ScreenLoadingState.Loading) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f)),
+                    .background(MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f))
+                    .systemBarsPadding(),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()

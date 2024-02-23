@@ -102,8 +102,8 @@ fun rememberAuthScreenState(
         )
     )
 
-    LaunchedEffect(key1 = swipeableState.currentValue) {
-        processAction(Action.OnAuthFieldChange(swipeableState.currentValue))
+    LaunchedEffect(key1 = swipeableState.targetValue) {
+        processAction(Action.OnAuthFieldChange(swipeableState.targetValue))
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
     }
 
