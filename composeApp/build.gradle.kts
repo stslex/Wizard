@@ -99,9 +99,6 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
-    dexOptions {
-        javaMaxHeapSize = "4g"
-    }
 }
 
 compose.desktop {
