@@ -51,9 +51,6 @@ kotlin {
             api(compose.components.resources)
             api(libs.bundles.voyager)
             api(libs.kamel)
-
-//            implementation(compose.uiTooling)
-//            implementation(compose.preview)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
