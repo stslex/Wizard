@@ -9,8 +9,9 @@ fun UserResponse.toData() = ProfileDataModel(
     bio = bio,
     followers = followersCount,
     following = followingCount,
+    matches = matchesCount,
     favouriteCount = favouritesCount,
     isFollowing = isFollowing,
     isFollowed = isFollowed,
-    isCurrentUser = isCurrentUser
+    isCurrentUser = isCurrentUser,
 )

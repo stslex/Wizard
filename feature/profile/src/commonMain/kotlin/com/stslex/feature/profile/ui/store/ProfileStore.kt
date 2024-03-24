@@ -89,6 +89,13 @@ class ProfileStore(
 
     private fun actionRepeatLastAction() {
         val lastAction = lastAction ?: return
+        updateState { currentState ->
+            val screen = when (val screen = currentState.screen) {
+                is ProfileScreenState.Content -> ProfileScreenState.Content.Loading(screen.data)
+                is ProfileScreenState.Error, is ProfileScreenState.Shimmer -> ProfileScreenState.Shimmer
+            }
+            currentState.copy(screen = screen)
+        }
         process(lastAction)
     }
 

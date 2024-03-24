@@ -4,7 +4,7 @@ android-compileSdk = "34"
 android-targetSdk = "34"
 
 logback = "1.4.11"
-androidCompose = "1.6.2"
+androidCompose = "1.6.4"
 compose-plugin = "1.6.0"
 compose-compiler = "1.5.4"
 agp = "8.2.2"
@@ -31,7 +31,7 @@ coil = "2.5.0"
 
 buildConfig = "4.2.0"
 lifecycleRuntimeKtx = "2.7.0"
-androixComposeBom = "2024.02.01"
+androixComposeBom = "2024.03.00"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
