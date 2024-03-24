@@ -2,17 +2,55 @@ package com.stslex.feature.profile.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.core.ui.theme.AppDimension
 
+@Composable
+fun ProfileInfo(
+    username: String,
+    favouriteCount: Int,
+    followingCount: Int,
+    followersCount: Int,
+    onFavouriteClick: () -> Unit,
+    onFollowingClick: () -> Unit,
+    onFollowersClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        Text(text = username)
+
+        Spacer(modifier = Modifier.padding(AppDimension.Padding.big))
+        ProfileFavouritesCard(
+            count = favouriteCount,
+            onClick = onFavouriteClick
+        )
+
+        Spacer(modifier = Modifier.padding(AppDimension.Padding.small))
+        ProfileFollowingCard(
+            count = followingCount,
+            onClick = onFollowingClick
+        )
+
+        Spacer(modifier = Modifier.padding(AppDimension.Padding.small))
+        ProfileFollowersCard(
+            count = followersCount,
+            onClick = onFollowersClick
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProfileFavouritesCard(
+private fun ProfileFavouritesCard(
     count: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -24,7 +62,7 @@ internal fun ProfileFavouritesCard(
     ) {
         Column(
             modifier = Modifier.padding(AppDimension.Padding.medium),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "favourite"
@@ -39,7 +77,7 @@ internal fun ProfileFavouritesCard(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProfileFollowingCard(
+private fun ProfileFollowingCard(
     count: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -51,7 +89,7 @@ internal fun ProfileFollowingCard(
     ) {
         Column(
             modifier = Modifier.padding(AppDimension.Padding.medium),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "following"
@@ -66,7 +104,7 @@ internal fun ProfileFollowingCard(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProfileFollowersCard(
+private fun ProfileFollowersCard(
     count: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -78,7 +116,7 @@ internal fun ProfileFollowersCard(
     ) {
         Column(
             modifier = Modifier.padding(AppDimension.Padding.medium),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = "followers"

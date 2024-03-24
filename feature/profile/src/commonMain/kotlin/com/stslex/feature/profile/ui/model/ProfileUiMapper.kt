@@ -11,6 +11,7 @@ fun ProfileDomainModel.toUi(
     bio = bio,
     followers = followers,
     following = following,
+    matches = matches,
     favouriteCount = favouriteCount,
     isFollowing = isFollowing,
     isFollowed = isFollowed,

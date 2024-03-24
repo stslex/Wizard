@@ -2,12 +2,15 @@ package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.network.api.server.client.ServerApiClient
 import com.stslex.core.network.clients.profile.model.request.AddLikeRequest
+import com.stslex.core.network.clients.profile.model.request.PagingRequest
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
-import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
+import com.stslex.core.network.clients.profile.model.response.PagingResponse
+import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
 import com.stslex.core.network.clients.profile.model.response.UserSearchResponse
 import io.ktor.client.call.body
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -31,62 +34,40 @@ class ProfileClientImpl(
     }
 
     override suspend fun searchUser(
-        query: String,
-        page: Int,
-        pageSize: Int
+        request: PagingRequest
     ): UserSearchResponse = client.request {
         get("$HOST/search") {
-            parameter("query", query)
-            parameter("page", page)
-            parameter("page_size", pageSize)
+            requestPaging(request)
         }.body()
     }
 
     override suspend fun getFavourites(
-        uuid: String,
-        query: String,
-        page: Int,
-        pageSize: Int
-    ): UserFavouriteResponse = client.request {
-        get("$HOST/favourites") {
-            parameter("uuid", uuid)
-            parameter("query", query)
-            parameter("page", page)
-            parameter("page_size", pageSize)
+        request: PagingRequest
+    ): PagingResponse<UserFavouriteResultResponse> = client.request {
+        get("$HOST/$HOST_FAVOURITE") {
+            requestPaging(request)
         }.body()
     }
 
     override suspend fun getFollowers(
-        uuid: String,
-        query: String,
-        page: Int,
-        pageSize: Int
+        request: PagingRequest
     ): UserFollowerResponse = client.request {
-        get("$HOST/followers") {
-            parameter("uuid", uuid)
-            parameter("query", query)
-            parameter("page", page)
-            parameter("page_size", pageSize)
+        get("$HOST/$HOST_FOLLOW") {
+            requestPaging(request)
         }.body()
     }
 
     override suspend fun getFollowing(
-        uuid: String,
-        query: String,
-        page: Int,
-        pageSize: Int
+        request: PagingRequest
     ): UserFollowerResponse = client.request {
-        get("$HOST/following") {
-            parameter("uuid", uuid)
-            parameter("query", query)
-            parameter("page", page)
-            parameter("page_size", pageSize)
+        get("$HOST/$HOST_FOLLOW") {
+            requestPaging(request)
         }.body()
     }
 
     override suspend fun addFavourite(uuid: String, title: String) {
         client.request {
-            post("$HOST/favourite") {
+            post("$HOST/$HOST_FAVOURITE") {
                 setBody(
                     AddLikeRequest(
                         filmUuid = uuid,
@@ -99,7 +80,7 @@ class ProfileClientImpl(
 
     override suspend fun removeFavourite(uuid: String) {
         client.request {
-            delete("$HOST/favourite") {
+            delete("$HOST/$HOST_FAVOURITE") {
                 parameter("favourite_uuid", uuid)
             }
         }
@@ -109,12 +90,29 @@ class ProfileClientImpl(
         favouriteUuid: String
     ): BooleanResponse = client.request {
         get("$HOST/is_favourite") {
-            parameter("uuid", favouriteUuid)
+            parameter(PARAMETER_UUID, favouriteUuid)
         }.body()
+    }
+
+    private fun HttpRequestBuilder.requestPaging(request: PagingRequest) {
+        if (request.uuid != null) {
+            parameter(PARAMETER_UUID, request.uuid)
+        }
+        parameter(PARAMETER_QUERY, request.query)
+        parameter(PARAMETER_PAGE, request.page)
+        parameter(PARAMETER_PAGE_SIZE, request.pageSize)
     }
 
     companion object {
         private const val HOST = "user"
+
+        private const val HOST_FAVOURITE = "favourite"
+        private const val HOST_FOLLOW = "follow"
+
+        private const val PARAMETER_QUERY = "query"
+        private const val PARAMETER_PAGE = "page"
+        private const val PARAMETER_PAGE_SIZE = "page_size"
+        private const val PARAMETER_UUID = "uuid"
     }
 }
 

@@ -19,6 +19,8 @@ data class UserResponse(
     val followingCount: Int,
     @SerialName("favourites_count")
     val favouritesCount: Int,
+    @SerialName("matches_count")
+    val matchesCount: Int,
     @SerialName("is_following")
     val isFollowing: Boolean,
     @SerialName("is_followed")

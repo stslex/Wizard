@@ -1,8 +1,9 @@
 package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.core.Logger
+import com.stslex.core.network.clients.profile.model.request.PagingRequest
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
-import com.stslex.core.network.clients.profile.model.response.UserFavouriteResponse
+import com.stslex.core.network.clients.profile.model.response.PagingResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResultResponse
@@ -22,6 +23,7 @@ class MockProfileClientImpl : ProfileClient {
             followersCount = 100,
             followingCount = 93,
             favouritesCount = 873,
+            matchesCount = 10,
             isFollowing = false,
             isFollowed = false,
             isCurrentUser = true,
@@ -31,9 +33,7 @@ class MockProfileClientImpl : ProfileClient {
     override suspend fun getProfile(): UserResponse = getProfile("uuid")
 
     override suspend fun searchUser(
-        query: String,
-        page: Int,
-        pageSize: Int
+        request: PagingRequest
     ): UserSearchResponse {
         delay(2000)
         return UserSearchResponse(
@@ -49,19 +49,21 @@ class MockProfileClientImpl : ProfileClient {
                     isFollowing = true,
                     isFollowed = true,
                     isCurrentUser = true,
+                    matchesCount = 10,
                 ),
             )
         )
     }
 
     override suspend fun getFavourites(
-        uuid: String,
-        query: String,
-        page: Int,
-        pageSize: Int
-    ): UserFavouriteResponse {
+        request: PagingRequest
+    ): PagingResponse<UserFavouriteResultResponse> {
         delay(2000)
-        return UserFavouriteResponse(
+        return PagingResponse<UserFavouriteResultResponse>(
+            page = request.page,
+            pageSize = request.pageSize,
+            total = 1,
+            hasMore = true,
             result = listOf(
                 UserFavouriteResultResponse(
                     uuid = "uuid",
@@ -73,10 +75,7 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun getFollowers(
-        uuid: String,
-        query: String,
-        page: Int,
-        pageSize: Int
+        request: PagingRequest
     ): UserFollowerResponse {
         delay(2000)
         return UserFollowerResponse(
@@ -92,10 +91,7 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun getFollowing(
-        uuid: String,
-        query: String,
-        page: Int,
-        pageSize: Int
+        request: PagingRequest
     ): UserFollowerResponse {
         delay(2000)
         return UserFollowerResponse(
