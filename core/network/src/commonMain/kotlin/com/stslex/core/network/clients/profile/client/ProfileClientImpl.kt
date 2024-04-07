@@ -52,7 +52,7 @@ class ProfileClientImpl(
     override suspend fun getFollowers(
         request: PagingRequest
     ): UserFollowerResponse = client.request {
-        get("$HOST/$HOST_FOLLOW") {
+        get("$HOST/$HOST_FOLLOW/followers") {
             requestPaging(request)
         }.body()
     }
@@ -60,7 +60,7 @@ class ProfileClientImpl(
     override suspend fun getFollowing(
         request: PagingRequest
     ): UserFollowerResponse = client.request {
-        get("$HOST/$HOST_FOLLOW") {
+        get("$HOST/$HOST_FOLLOW/following") {
             requestPaging(request)
         }.body()
     }
