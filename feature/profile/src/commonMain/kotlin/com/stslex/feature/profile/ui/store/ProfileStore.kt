@@ -33,6 +33,8 @@ class ProfileStore(
             is Action.FavouriteClick -> actionFavouriteClick()
             is Action.FollowingClick -> actionFollowingClick()
             is Action.FollowersClick -> actionFollowersClick()
+            is Action.SettingsClick -> actionSettingsClick()
+            is Action.BackButtonClick -> actionBackClick()
         }
     }
 
@@ -126,5 +128,13 @@ class ProfileStore(
                 sendEvent(Event.ShowSnackbar(Snackbar.Error(error.message ?: "error logout")))
             }
         )
+    }
+
+    private fun actionSettingsClick() {
+        navigate(Navigation.Settings)
+    }
+
+    private fun actionBackClick() {
+        navigate(Navigation.Back)
     }
 }

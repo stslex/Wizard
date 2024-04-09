@@ -11,6 +11,7 @@ import com.stslex.feature.film_feed.di.featureFeedModule
 import com.stslex.feature.follower.di.featureFollowerModule
 import com.stslex.feature.match_feed.di.featureMatchFeedModule
 import com.stslex.feature.profile.di.featureProfileModule
+import com.stslex.feature.settings.di.featureSettingsModule
 import di.appModule
 import org.koin.compose.KoinApplication
 import org.koin.core.KoinApplication
@@ -45,7 +46,8 @@ private fun KoinApplication.setupCommonModules() {
             featureMatchFeedModule,
             featureAuthModule,
             featureFollowerModule,
-            featureFavouriteModule
+            featureFavouriteModule,
+            featureSettingsModule
         )
     )
 }

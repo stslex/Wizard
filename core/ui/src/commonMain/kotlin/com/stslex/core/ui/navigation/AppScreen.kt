@@ -12,6 +12,8 @@ sealed interface AppScreen {
 
     data object Auth : AppScreen
 
+    data object Settings : AppScreen
+
     data class Favourite(
         val uuid: String
     ) : AppScreen

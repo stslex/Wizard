@@ -41,6 +41,10 @@ interface ProfileStoreComponent : Store {
         data object FollowingClick : Action
 
         data object FollowersClick : Action
+
+        data object SettingsClick : Action
+
+        data object BackButtonClick : Action
     }
 
     @Stable
@@ -65,5 +69,9 @@ interface ProfileStoreComponent : Store {
         data class Followers(
             val uuid: String
         ) : Navigation
+
+        data object Back : Navigation
+
+        data object Settings : Navigation
     }
 }
