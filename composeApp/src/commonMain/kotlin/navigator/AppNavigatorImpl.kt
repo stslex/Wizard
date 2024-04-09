@@ -9,6 +9,7 @@ import com.stslex.feature.film.ui.FilmScreen
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.follower.ui.FollowerScreen
 import com.stslex.feature.match_feed.ui.MatchFeedScreen
+import com.stslex.feature.settings.ui.SettingsScreen
 import main_screen.MainScreen
 
 class AppNavigatorImpl : AppNavigator {
@@ -40,21 +41,17 @@ class AppNavigatorImpl : AppNavigator {
             is AppScreen.Film -> navigator.push(FilmScreen(screen.id))
             AppScreen.MatchFeed -> navigator.push(MatchFeedScreen)
             is AppScreen.Favourite -> navigator.push(FavouriteScreen(uuid = screen.uuid))
-            is AppScreen.Followers -> navigator.push(
-                FollowerScreen(
-                    args = FollowerScreenArgs.Follower(
-                        uuid = screen.uuid
-                    )
-                )
-            )
-
-            is AppScreen.Following -> navigator.push(
-                FollowerScreen(
-                    args = FollowerScreenArgs.Following(
-                        uuid = screen.uuid
-                    )
-                )
-            )
+            is AppScreen.Followers -> navToFollowers(screen.uuid)
+            is AppScreen.Following -> navToFollowing(screen.uuid)
+            AppScreen.Settings -> navigator.push(SettingsScreen)
         }
+    }
+
+    private fun navToFollowing(uuid: String) {
+        navigator.push(FollowerScreen(args = FollowerScreenArgs.Following(uuid = uuid)))
+    }
+
+    private fun navToFollowers(uuid: String) {
+        navigator.push(FollowerScreen(args = FollowerScreenArgs.Follower(uuid = uuid)))
     }
 }

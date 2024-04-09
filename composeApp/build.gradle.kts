@@ -53,6 +53,7 @@ kotlin {
             implementation(project(":feature:auth"))
             implementation(project(":feature:follower"))
             implementation(project(":feature:favourite"))
+            implementation(project(":feature:settings"))
         }
     }
 }
@@ -99,6 +100,9 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+dependencies {
+    implementation(project(":feature:settings"))
 }
 
 compose.desktop {

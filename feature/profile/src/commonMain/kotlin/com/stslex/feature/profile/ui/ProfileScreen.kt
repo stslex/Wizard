@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHostState
@@ -73,9 +72,7 @@ private fun ProfileScreen(
     modifier: Modifier = Modifier,
 ) {
     BoxWithConstraints(
-        modifier = modifier
-            .fillMaxSize()
-            .systemBarsPadding(),
+        modifier = modifier.fillMaxSize(),
     ) {
         when (val screen = state.screen) {
             is ProfileScreenState.Content -> ProfileScreenContent(
@@ -89,14 +86,14 @@ private fun ProfileScreen(
                 repeatLastAction = { onAction(Action.RepeatLastAction) }
             )
 
-            ProfileScreenState.Shimmer -> ProfileScreenShinner()
+            ProfileScreenState.Shimmer -> ProfileScreenShimmer()
         }
         AppSnackbarHost(snackbarHostState)
     }
 }
 
 @Composable
-internal fun ProfileScreenShinner(modifier: Modifier = Modifier) {
+internal fun ProfileScreenShimmer(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
