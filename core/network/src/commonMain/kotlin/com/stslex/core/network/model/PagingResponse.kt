@@ -1,4 +1,4 @@
-package com.stslex.core.network.clients.profile.model.response
+package com.stslex.core.network.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
