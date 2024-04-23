@@ -12,7 +12,6 @@ import com.stslex.core.network.clients.profile.model.response.UserFavouriteResul
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
 import com.stslex.core.network.clients.profile.model.response.UserSearchResponse
-import com.stslex.core.network.model.PagingResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.delete

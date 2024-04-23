@@ -12,7 +12,7 @@ data class MatchDetailResponse(
     @SerialName("description")
     val description: String,
     @SerialName("status")
-    val status: MatchStatus = MatchStatus.PENDING,
+    val status: MatchStatusResponse = MatchStatusResponse.PENDING,
     @SerialName("participants")
     val participants: List<MatchUserResponse>,
     @SerialName("is_creator")

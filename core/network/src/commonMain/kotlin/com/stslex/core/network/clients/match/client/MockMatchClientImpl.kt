@@ -1,12 +1,12 @@
 package com.stslex.core.network.clients.match.client
 
+import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.network.clients.match.model.request.MatchCreateRequest
 import com.stslex.core.network.clients.match.model.response.MatchDetailResponse
 import com.stslex.core.network.clients.match.model.response.MatchResponse
-import com.stslex.core.network.clients.match.model.response.MatchStatus
+import com.stslex.core.network.clients.match.model.response.MatchStatusResponse
 import com.stslex.core.network.clients.match.model.response.MatchUserResponse
 import com.stslex.core.network.model.PagingRequest
-import com.stslex.core.network.model.PagingResponse
 import com.stslex.core.network.utils.currentTimeMs
 import kotlinx.coroutines.delay
 
@@ -68,7 +68,7 @@ class MockMatchClientImpl : MatchClient {
             uuid = "uuid$index",
             title = "title$index",
             description = "description$index",
-            status = if (index % 2 == 0) MatchStatus.PENDING else MatchStatus.ACTIVE,
+            status = if (index % 2 == 0) MatchStatusResponse.PENDING else MatchStatusResponse.ACTIVE,
             participants = createMatchUsers(index),
             isCreator = index % 2 == 0,
             createdAt = created,

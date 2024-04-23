@@ -3,7 +3,6 @@ package com.stslex.core.network.clients.profile.client
 import com.stslex.core.core.Logger
 import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
-import com.stslex.core.network.model.PagingResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResultResponse
