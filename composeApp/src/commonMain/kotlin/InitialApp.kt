@@ -45,7 +45,7 @@ fun InitialApp(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-    ) { paddingValues ->
+    ) { _ ->
         Box(
             modifier = Modifier.fillMaxSize()
         ) {

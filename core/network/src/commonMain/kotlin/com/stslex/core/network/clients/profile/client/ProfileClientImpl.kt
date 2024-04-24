@@ -1,5 +1,6 @@
 package com.stslex.core.network.clients.profile.client
 
+import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE
 import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE_SIZE
 import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_QUERY

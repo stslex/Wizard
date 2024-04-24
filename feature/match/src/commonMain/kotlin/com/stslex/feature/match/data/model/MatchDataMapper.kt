@@ -5,7 +5,7 @@ import com.stslex.core.network.clients.match.model.response.MatchResponse
 import com.stslex.core.network.clients.match.model.response.MatchStatusResponse
 import com.stslex.core.network.clients.match.model.response.MatchUserResponse
 
-private suspend fun MatchResponse.toData() = MatchDataModel(
+internal suspend fun MatchResponse.toData() = MatchDataModel(
     uuid = uuid,
     title = title,
     description = description,

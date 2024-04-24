@@ -1,7 +1,10 @@
 package com.stslex.feature.match.data.repository
 
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.core.core.paging.pagingMap
 import com.stslex.core.network.clients.match.client.MatchClient
 import com.stslex.core.network.model.PagingRequest
+import com.stslex.feature.match.data.model.MatchDataModel
 import com.stslex.feature.match.data.model.toData
 
 class MatchRepositoryImpl(
@@ -13,7 +16,7 @@ class MatchRepositoryImpl(
         query: String,
         page: Int,
         pageSize: Int
-    ): MatchDataPagingResult = client
+    ): PagingResponse<MatchDataModel> = client
         .getMatches(
             request = PagingRequest(
                 uuid = uuid,
@@ -22,5 +25,5 @@ class MatchRepositoryImpl(
                 query = query
             )
         )
-        .toData()
+        .pagingMap { it.toData() }
 }

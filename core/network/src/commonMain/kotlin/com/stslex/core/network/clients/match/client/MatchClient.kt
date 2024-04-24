@@ -1,5 +1,6 @@
 package com.stslex.core.network.clients.match.client
 
+import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.network.clients.match.model.request.MatchCreateRequest
 import com.stslex.core.network.clients.match.model.response.MatchDetailResponse
 import com.stslex.core.network.clients.match.model.response.MatchResponse
