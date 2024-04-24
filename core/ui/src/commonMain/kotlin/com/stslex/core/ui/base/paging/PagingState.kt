@@ -35,13 +35,11 @@ data class PagingState<out T : PagingItem>(
 }
 
 suspend fun <T : PagingCoreItem, R : PagingItem> PagingResponse<T>.pagingMap(
-    transform: suspend T.() -> R,
+    transform: suspend (T) -> R,
 ): PagingState<R> = PagingState(
-    page = page,
+    page = page.inc(),
     pageSize = pageSize,
     total = total,
-    hasMore = hasMore,
-    result = result.asyncMap {
-        it.transform()
-    }.toImmutableList(),
+    hasMore = hasMore && result.isNotEmpty(),
+    result = result.asyncMap { transform(it) }.toImmutableList(),
 )

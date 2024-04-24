@@ -1,9 +1,14 @@
-package com.stslex.feature.match.navigation
+package com.stslex.core.ui.navigation.args
 
+import androidx.compose.runtime.Stable
+
+@Stable
 interface MatchScreenArgs {
 
+    @Stable
     data object Self : MatchScreenArgs
 
+    @Stable
     data class Other(
         private val id: String
     ) : MatchScreenArgs

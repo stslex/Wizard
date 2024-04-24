@@ -10,4 +10,6 @@ interface MatchInteractor {
         page: Int,
         pageSize: Int,
     ): PagingResponse<MatchDomainModel>
+
+    suspend fun logout()
 }

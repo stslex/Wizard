@@ -1,5 +1,7 @@
 package com.stslex.core.ui.navigation
 
+import com.stslex.core.ui.navigation.args.MatchScreenArgs
+
 sealed interface AppScreen {
 
     data object Main : AppScreen
@@ -24,5 +26,13 @@ sealed interface AppScreen {
 
     data class Followers(
         val uuid: String
+    ) : AppScreen
+
+    data class MatchDetails(
+        val matchUuid: String
+    ) : AppScreen
+
+    data class Match(
+        val args: MatchScreenArgs
     ) : AppScreen
 }

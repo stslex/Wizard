@@ -8,9 +8,10 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import com.stslex.feature.match_feed.ui.MatchFeedScreen
+import com.stslex.core.ui.navigation.args.MatchScreenArgs
+import com.stslex.feature.match.ui.MatchScreen
 
-object MatchFeedTab : Tab {
+object MatchTab : Tab {
 
     override val options: TabOptions
         @Composable
@@ -29,6 +30,6 @@ object MatchFeedTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(MatchFeedScreen)
+        Navigator(MatchScreen(MatchScreenArgs.Self))
     }
 }

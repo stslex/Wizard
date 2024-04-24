@@ -8,6 +8,7 @@ import com.stslex.feature.favourite.FavouriteScreen
 import com.stslex.feature.film.ui.FilmScreen
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.follower.ui.FollowerScreen
+import com.stslex.feature.match.ui.MatchScreen
 import com.stslex.feature.match_feed.ui.MatchFeedScreen
 import com.stslex.feature.settings.ui.SettingsScreen
 import main_screen.MainScreen
@@ -35,15 +36,17 @@ class AppNavigatorImpl : AppNavigator {
         screen: AppScreen
     ) {
         when (screen) {
-            AppScreen.Back -> navigator.pop()
-            AppScreen.Auth -> navigator.replaceAll(AuthScreen)
-            AppScreen.Main -> navigator.replaceAll(MainScreen)
+            is AppScreen.Back -> navigator.pop()
+            is AppScreen.Auth -> navigator.replaceAll(AuthScreen)
+            is AppScreen.Main -> navigator.replaceAll(MainScreen)
             is AppScreen.Film -> navigator.push(FilmScreen(screen.id))
-            AppScreen.MatchFeed -> navigator.push(MatchFeedScreen)
+            is AppScreen.MatchFeed -> navigator.push(MatchFeedScreen)
             is AppScreen.Favourite -> navigator.push(FavouriteScreen(uuid = screen.uuid))
             is AppScreen.Followers -> navToFollowers(screen.uuid)
             is AppScreen.Following -> navToFollowing(screen.uuid)
-            AppScreen.Settings -> navigator.push(SettingsScreen)
+            is AppScreen.Settings -> navigator.push(SettingsScreen)
+            is AppScreen.MatchDetails -> TODO()
+            is AppScreen.Match -> navigator.push(MatchScreen(args = screen.args))
         }
     }
 

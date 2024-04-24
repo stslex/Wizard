@@ -12,7 +12,7 @@ import kotlinx.coroutines.delay
 
 class MockMatchClientImpl : MatchClient {
 
-    private val matches = MutableList(20) {
+    private val matches = MutableList(800) {
         createMatch(it)
     }
 
@@ -22,7 +22,7 @@ class MockMatchClientImpl : MatchClient {
         val page = request.page
         val pageSize = request.pageSize
         val startIndex = page * pageSize
-        val endIndex = startIndex + pageSize
+        val endIndex = (startIndex + pageSize).coerceAtMost(matches.size.dec())
         val data = matches.subList(startIndex, endIndex)
         delay(1000)
         return PagingResponse(
