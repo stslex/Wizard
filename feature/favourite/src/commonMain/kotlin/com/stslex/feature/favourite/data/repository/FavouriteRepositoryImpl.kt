@@ -1,7 +1,7 @@
 package com.stslex.feature.favourite.data.repository
 
 import com.stslex.core.network.clients.profile.client.ProfileClient
-import com.stslex.core.network.clients.profile.model.request.PagingRequest
+import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.feature.favourite.data.model.FavouriteDataModel
 import com.stslex.feature.favourite.data.model.toData
 
@@ -16,7 +16,7 @@ class FavouriteRepositoryImpl(
         pageSize: Int
     ): List<FavouriteDataModel> = client
         .getFavourites(
-            PagingRequest(
+            PagingProfileRequest(
                 uuid = uuid,
                 query = query,
                 page = page,

@@ -1,9 +1,9 @@
 package com.stslex.core.network.clients.profile.client
 
 import com.stslex.core.core.Logger
-import com.stslex.core.network.clients.profile.model.request.PagingRequest
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
-import com.stslex.core.network.clients.profile.model.response.PagingResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResultResponse
@@ -33,7 +33,7 @@ class MockProfileClientImpl : ProfileClient {
     override suspend fun getProfile(): UserResponse = getProfile("uuid")
 
     override suspend fun searchUser(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): UserSearchResponse {
         delay(2000)
         return UserSearchResponse(
@@ -56,10 +56,10 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun getFavourites(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): PagingResponse<UserFavouriteResultResponse> {
         delay(2000)
-        return PagingResponse<UserFavouriteResultResponse>(
+        return PagingResponse(
             page = request.page,
             pageSize = request.pageSize,
             total = 1,
@@ -75,7 +75,7 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun getFollowers(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): UserFollowerResponse {
         delay(2000)
         return UserFollowerResponse(
@@ -91,7 +91,7 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun getFollowing(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): UserFollowerResponse {
         delay(2000)
         return UserFollowerResponse(

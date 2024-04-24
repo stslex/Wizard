@@ -6,6 +6,6 @@ enum class BottomNavigationTabs(
     val tab: Tab
 ) {
     FILM_FEED(FeedTab),
-    MATCH_FEED(MatchFeedTab),
+    MATCH_FEED(MatchTab),
     PROFILE(ProfileTab),
 }

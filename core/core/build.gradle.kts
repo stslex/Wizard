@@ -1,10 +1,9 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -41,6 +40,7 @@ kotlin {
             api(libs.koin.compose)
             api(libs.kotlinx.collections.immutable)
             api(libs.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
         }
         androidMain.dependencies {
             api(libs.coroutines.android)

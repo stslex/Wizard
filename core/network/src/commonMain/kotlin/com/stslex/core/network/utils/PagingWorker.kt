@@ -1,9 +1,11 @@
 package com.stslex.core.network.utils
 
-fun interface PagingWorker {
+interface PagingWorker {
 
     suspend operator fun invoke(
         request: suspend () -> Unit
     )
+
+    suspend fun cancel()
 }
 

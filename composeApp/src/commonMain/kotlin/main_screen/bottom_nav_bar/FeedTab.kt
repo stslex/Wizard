@@ -1,7 +1,7 @@
 package main_screen.bottom_nav_bar
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -17,7 +17,7 @@ object FeedTab : Tab {
         @Composable
         get() {
             val title = "feed"
-            val icon = rememberVectorPainter(Icons.Default.List)
+            val icon = rememberVectorPainter(Icons.AutoMirrored.Filled.List)
 
             return remember {
                 TabOptions(
@@ -30,7 +30,7 @@ object FeedTab : Tab {
 
     @Composable
     override fun Content() {
-        Navigator(FeedScreen){
+        Navigator(FeedScreen) {
             SlideTransition(it)
         }
     }

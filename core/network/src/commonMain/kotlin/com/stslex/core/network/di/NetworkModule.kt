@@ -14,6 +14,8 @@ import com.stslex.core.network.clients.auth.client.AuthClient
 import com.stslex.core.network.clients.auth.client.AuthClientImpl
 import com.stslex.core.network.clients.film.client.FilmClient
 import com.stslex.core.network.clients.film.client.MockFilmClientImpl
+import com.stslex.core.network.clients.match.client.MatchClient
+import com.stslex.core.network.clients.match.client.MockMatchClientImpl
 import com.stslex.core.network.clients.profile.client.ProfileClient
 import com.stslex.core.network.clients.profile.client.ProfileClientImpl
 import com.stslex.core.network.utils.PagingWorker
@@ -58,6 +60,7 @@ val coreNetworkModule = module {
         )
     }
     single<FilmClient> {
+        // todo remove mock
         MockFilmClientImpl()
 //        FilmClientImpl(
 //            client = get(),
@@ -66,6 +69,10 @@ val coreNetworkModule = module {
     }
     single<ProfileClient> {
         ProfileClientImpl(client = get())
+    }
+    single<MatchClient> {
+        // todo remove mock
+        MockMatchClientImpl()
     }
 
     /*Utils*/

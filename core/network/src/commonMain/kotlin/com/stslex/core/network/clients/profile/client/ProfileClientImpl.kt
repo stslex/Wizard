@@ -1,10 +1,14 @@
 package com.stslex.core.network.clients.profile.client
 
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE
+import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE_SIZE
+import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_QUERY
+import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_UUID
 import com.stslex.core.network.api.server.client.ServerApiClient
 import com.stslex.core.network.clients.profile.model.request.AddLikeRequest
-import com.stslex.core.network.clients.profile.model.request.PagingRequest
+import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
-import com.stslex.core.network.clients.profile.model.response.PagingResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
@@ -34,7 +38,7 @@ class ProfileClientImpl(
     }
 
     override suspend fun searchUser(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): UserSearchResponse = client.request {
         get("$HOST/search") {
             requestPaging(request)
@@ -42,7 +46,7 @@ class ProfileClientImpl(
     }
 
     override suspend fun getFavourites(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): PagingResponse<UserFavouriteResultResponse> = client.request {
         get("$HOST/$HOST_FAVOURITE") {
             requestPaging(request)
@@ -50,7 +54,7 @@ class ProfileClientImpl(
     }
 
     override suspend fun getFollowers(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): UserFollowerResponse = client.request {
         get("$HOST/$HOST_FOLLOW/followers") {
             requestPaging(request)
@@ -58,7 +62,7 @@ class ProfileClientImpl(
     }
 
     override suspend fun getFollowing(
-        request: PagingRequest
+        request: PagingProfileRequest
     ): UserFollowerResponse = client.request {
         get("$HOST/$HOST_FOLLOW/following") {
             requestPaging(request)
@@ -94,7 +98,7 @@ class ProfileClientImpl(
         }.body()
     }
 
-    private fun HttpRequestBuilder.requestPaging(request: PagingRequest) {
+    private fun HttpRequestBuilder.requestPaging(request: PagingProfileRequest) {
         if (request.uuid != null) {
             parameter(PARAMETER_UUID, request.uuid)
         }
@@ -108,11 +112,6 @@ class ProfileClientImpl(
 
         private const val HOST_FAVOURITE = "favourite"
         private const val HOST_FOLLOW = "follow"
-
-        private const val PARAMETER_QUERY = "query"
-        private const val PARAMETER_PAGE = "page"
-        private const val PARAMETER_PAGE_SIZE = "page_size"
-        private const val PARAMETER_UUID = "uuid"
     }
 }
 

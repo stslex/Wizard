@@ -54,6 +54,7 @@ kotlin {
             implementation(project(":feature:follower"))
             implementation(project(":feature:favourite"))
             implementation(project(":feature:settings"))
+            implementation(project(":feature:match"))
         }
     }
 }

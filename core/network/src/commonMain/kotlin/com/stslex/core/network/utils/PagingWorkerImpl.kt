@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.coroutineContext
 
 class PagingWorkerImpl : PagingWorker {
+
     private var job: Job? = null
     private var nextPageJob: Job? = null
     private var lastRequestTime = 0L
@@ -21,6 +22,11 @@ class PagingWorkerImpl : PagingWorker {
             )
         }
         startRequest(request = request)
+    }
+
+    override suspend fun cancel() {
+        job?.cancel()
+        nextPageJob?.cancel()
     }
 
     private suspend fun startRequest(

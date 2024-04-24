@@ -1,8 +1,8 @@
 package com.stslex.core.network.clients.profile.client
 
-import com.stslex.core.network.clients.profile.model.request.PagingRequest
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
-import com.stslex.core.network.clients.profile.model.response.PagingResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
@@ -14,13 +14,13 @@ interface ProfileClient {
 
     suspend fun getProfile(): UserResponse
 
-    suspend fun searchUser(request: PagingRequest): UserSearchResponse
+    suspend fun searchUser(request: PagingProfileRequest): UserSearchResponse
 
-    suspend fun getFavourites(request: PagingRequest): PagingResponse<UserFavouriteResultResponse>
+    suspend fun getFavourites(request: PagingProfileRequest): PagingResponse<UserFavouriteResultResponse>
 
-    suspend fun getFollowers(request: PagingRequest): UserFollowerResponse
+    suspend fun getFollowers(request: PagingProfileRequest): UserFollowerResponse
 
-    suspend fun getFollowing(request: PagingRequest): UserFollowerResponse
+    suspend fun getFollowing(request: PagingProfileRequest): UserFollowerResponse
 
     suspend fun addFavourite(
         uuid: String,
