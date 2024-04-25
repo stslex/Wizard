@@ -4,7 +4,6 @@ import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.paging.PagingCoreData.Companion.DEFAULT_PAGE
 import com.stslex.core.database.store.UserStore
 import com.stslex.core.ui.base.mapToAppError
-import com.stslex.core.ui.base.paging.PagingState
 import com.stslex.core.ui.base.paging.pagingMap
 import com.stslex.core.ui.mvi.BaseStore
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
@@ -44,16 +43,18 @@ class MatchStore(
     }
 
     private fun actionInit(action: Action.Init) {
-        val uuid = action.args.uuid ?: userStore.uuid
         updateState { currentState ->
             currentState.copy(
                 isSelf = action.args.isSelf,
-                uuid = uuid,
-                screen = MatchScreenState.Shimmer,
-                pagingState = PagingState.default()
+                uuid = action.args.uuid ?: userStore.uuid,
+                pagingState = currentState.pagingState.copy(
+                    hasMore = true
+                )
             )
         }
-        loadItems(isForceLoad = true)
+        if (state.value.pagingState.result.isEmpty()) {
+            loadItems(isForceLoad = true)
+        }
     }
 
     private fun actionLoadMore() {
