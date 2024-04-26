@@ -1,9 +1,11 @@
 package com.stslex.feature.match.ui.model
 
 import com.stslex.core.core.asyncMap
+import com.stslex.core.ui.pager.PagerLoadState
 import com.stslex.feature.match.domain.model.MatchDomainModel
 import com.stslex.feature.match.domain.model.MatchDomainStatus
 import com.stslex.feature.match.domain.model.MatchUserDomainModel
+import com.stslex.feature.match.ui.store.MatchScreenState
 import kotlinx.collections.immutable.toImmutableList
 
 internal suspend fun MatchDomainModel.toUi() = MatchUiModel(
@@ -35,3 +37,13 @@ private fun MatchUserDomainModel.toUi() = MatchUserUiModel(
     isCreator = isCreator,
     isAccepted = isAccepted
 )
+
+fun PagerLoadState.toUi() = when (this) {
+    PagerLoadState.Data -> MatchScreenState.Content.Data
+    PagerLoadState.Empty -> MatchScreenState.Empty
+    PagerLoadState.Initial -> MatchScreenState.Shimmer
+    PagerLoadState.Loading -> MatchScreenState.Content.Append
+    PagerLoadState.Refresh -> MatchScreenState.Content.Refresh
+    PagerLoadState.Retry -> MatchScreenState.Shimmer
+    is PagerLoadState.Error -> MatchScreenState.Error(error)
+}

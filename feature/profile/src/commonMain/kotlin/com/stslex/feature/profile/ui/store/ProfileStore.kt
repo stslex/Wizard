@@ -49,7 +49,7 @@ class ProfileStore(
         }
 
         interactor.getProfile(uuid)
-            .launchFlow(
+            .launch(
                 onError = { error ->
                     updateState { currentState ->
                         currentState.copy(

@@ -49,7 +49,7 @@ class FollowerStore(
 
         state.map { it.query }
             .distinctUntilChanged()
-            .launchFlow { query ->
+            .launch { query ->
                 updateState { state ->
                     state.copy(
                         page = DEFAULT_PAGE,
@@ -60,7 +60,7 @@ class FollowerStore(
             }
 
         interactor.followItems
-            .launchFlow { data ->
+            .launch { data ->
                 val screen = if (data.isEmpty()) {
                     FollowerScreenState.Empty
                 } else {

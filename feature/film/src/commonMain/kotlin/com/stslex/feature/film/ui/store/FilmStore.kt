@@ -73,7 +73,7 @@ class FilmStore(
         }
         interactor
             .getFilm(action.id)
-            .launchFlow { film ->
+            .launch { film ->
                 updateState { currentState ->
                     currentState.copy(
                         screenState = FilmScreenState.Content(film.toUi())
