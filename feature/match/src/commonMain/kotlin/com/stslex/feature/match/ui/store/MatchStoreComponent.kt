@@ -7,6 +7,7 @@ import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.core.ui.navigation.args.MatchScreenArgs
 import com.stslex.feature.match.ui.model.MatchUiModel
 
+// todo make more representative logic with store components implementation https://github.com/stslex/Wizard/issues/34
 interface MatchStoreComponent : Store {
 
     @Stable

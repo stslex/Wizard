@@ -16,9 +16,9 @@ import com.stslex.feature.match.ui.store.MatchStoreComponent.Event
 import com.stslex.feature.match.ui.store.MatchStoreComponent.Navigation
 import com.stslex.feature.match.ui.store.MatchStoreComponent.State
 
-// todo refactor pager state for UI
-// todo add base store pager binding
-// todo add query support for pager
+// todo refactor pager state for UI https://github.com/stslex/Wizard/issues/35
+// todo add base store pager binding https://github.com/stslex/Wizard/issues/36
+// todo add query support for pager https://github.com/stslex/Wizard/issues/37
 
 class MatchStore(
     appDispatcher: AppDispatcher,

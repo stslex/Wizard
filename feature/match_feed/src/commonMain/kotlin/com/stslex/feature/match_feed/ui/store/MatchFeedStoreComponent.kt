@@ -8,7 +8,6 @@ import com.stslex.feature.match_feed.ui.model.MatchUi
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
-// todo make more representative logic with store components implementation
 interface MatchFeedStoreComponent : Store {
 
     @Stable
