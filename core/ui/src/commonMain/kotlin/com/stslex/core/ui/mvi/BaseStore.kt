@@ -4,6 +4,8 @@ import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
+import com.stslex.core.core.coroutine.AppCoroutineScope
+import com.stslex.core.core.coroutine.AppCoroutineScopeImpl
 import com.stslex.core.core.coroutineExceptionHandler
 import com.stslex.core.ui.mvi.Store.Action
 import com.stslex.core.ui.mvi.Store.Event
@@ -28,6 +30,11 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private var _lastAction: A? = null
     protected val lastAction: A?
         get() = _lastAction
+
+    protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(
+        scope = screenModelScope,
+        appDispatcher = appDispatcher
+    )
 
     /**
      * Sends an action to the store. Checks if the action is not the same as the last action.
@@ -104,11 +111,10 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: suspend CoroutineScope.(T) -> Unit = {},
         action: suspend CoroutineScope.() -> T,
-    ): Job = screenModelScope.launch(
-        context = exceptionHandler(onError) + appDispatcher.default,
-        block = {
-            onSuccess(action())
-        }
+    ): Job = scope.launch(
+        onError = onError,
+        onSuccess = onSuccess,
+        action = action
     )
 
     /**
@@ -120,13 +126,12 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
      * @see Job
      * @see AppDispatcher
      * */
-    protected fun <T> Flow<T>.launchFlow(
+    protected fun <T> Flow<T>.launch(
         onError: suspend (cause: Throwable) -> Unit = {},
         each: suspend (T) -> Unit
-    ): Job = screenModelScope.launch(
-        context = exceptionHandler(onError) + appDispatcher.default,
-        block = {
-            collect(each)
-        }
+    ): Job = scope.launch(
+        flow = this,
+        onError = onError,
+        each = each,
     )
 }

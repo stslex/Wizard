@@ -3,6 +3,7 @@ package com.stslex.feature.match.ui.model
 import androidx.compose.runtime.Stable
 import com.stslex.core.ui.base.paging.PagingItem
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @Stable
 data class MatchUiModel(
@@ -15,4 +16,20 @@ data class MatchUiModel(
     val expiresAtDays: Int,
     val expiresAtHours: Int,
     val expiresAtMinutes: Int,
-) : PagingItem
+) : PagingItem {
+
+    companion object {
+
+        val EMPTY = MatchUiModel(
+            uuid = "",
+            title = "",
+            description = "",
+            status = MatchUiStatusModel.PENDING,
+            participants = persistentListOf(),
+            isCreator = false,
+            expiresAtDays = 0,
+            expiresAtHours = 0,
+            expiresAtMinutes = 0,
+        )
+    }
+}

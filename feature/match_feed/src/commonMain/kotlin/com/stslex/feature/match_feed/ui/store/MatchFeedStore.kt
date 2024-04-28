@@ -44,7 +44,7 @@ class MatchFeedStore(
     private fun actionInit() {
         interactor
             .getLatestMatch()
-            .launchFlow { match ->
+            .launch { match ->
                 updateState { currentState ->
                     currentState.copy(
                         screen = ScreenState.Content.Success,

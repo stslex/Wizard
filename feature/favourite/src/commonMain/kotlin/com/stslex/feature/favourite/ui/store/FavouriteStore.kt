@@ -83,7 +83,7 @@ class FavouriteStore(
 
         state.map { it.query }
             .distinctUntilChanged()
-            .launchFlow { query ->
+            .launch { query ->
                 updateState { state ->
                     state.copy(
                         page = DEFAULT_PAGE,
@@ -94,7 +94,7 @@ class FavouriteStore(
             }
 
         interactor.favourites
-            .launchFlow { data ->
+            .launch { data ->
                 val screen = if (data.isEmpty()) {
                     FavouriteScreenState.Content.Empty
                 } else {

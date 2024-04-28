@@ -29,42 +29,47 @@ import com.stslex.core.ui.theme.toPx
 import kotlin.math.roundToInt
 
 fun Modifier.shimmerLoadingAnimation(
+    isShimmerVisible: Boolean = true,
     widthOfShadowBrush: Int = 500,
     angleOfAxisY: Float = 270f,
     durationMillis: Int = 1000,
-): Modifier = composed {
-    val shimmerColors = with(MaterialTheme.colorScheme.surfaceVariant) {
-        listOf(
-            copy(alpha = 0.3f),
-            copy(alpha = 0.5f),
-            copy(alpha = 0.7f),
-            copy(alpha = 0.5f),
-            copy(alpha = 0.3f),
+): Modifier = if (isShimmerVisible) {
+    composed {
+        val shimmerColors = with(MaterialTheme.colorScheme.surfaceVariant) {
+            listOf(
+                copy(alpha = 0.3f),
+                copy(alpha = 0.5f),
+                copy(alpha = 0.7f),
+                copy(alpha = 0.5f),
+                copy(alpha = 0.3f),
+            )
+        }
+
+        val transition = rememberInfiniteTransition(label = "shimmer loading animation transition")
+
+        val translateAnimation = transition.animateFloat(
+            initialValue = 0f,
+            targetValue = (durationMillis + widthOfShadowBrush).toFloat(),
+            animationSpec = infiniteRepeatable(
+                animation = tween(
+                    durationMillis = durationMillis,
+                    easing = LinearEasing,
+                ),
+                repeatMode = RepeatMode.Restart,
+            ),
+            label = "Shimmer loading animation",
+        )
+
+        background(
+            brush = Brush.linearGradient(
+                colors = shimmerColors,
+                start = Offset(x = translateAnimation.value - widthOfShadowBrush, y = 0.0f),
+                end = Offset(x = translateAnimation.value, y = angleOfAxisY),
+            ),
         )
     }
-
-    val transition = rememberInfiniteTransition(label = "shimmer loading animation transition")
-
-    val translateAnimation = transition.animateFloat(
-        initialValue = 0f,
-        targetValue = (durationMillis + widthOfShadowBrush).toFloat(),
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = durationMillis,
-                easing = LinearEasing,
-            ),
-            repeatMode = RepeatMode.Restart,
-        ),
-        label = "Shimmer loading animation",
-    )
-
-    background(
-        brush = Brush.linearGradient(
-            colors = shimmerColors,
-            start = Offset(x = translateAnimation.value - widthOfShadowBrush, y = 0.0f),
-            end = Offset(x = translateAnimation.value, y = angleOfAxisY),
-        ),
-    )
+} else {
+    this
 }
 
 @Composable

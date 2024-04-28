@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.core.ui.base.DotsPrintAnimation
 import com.stslex.core.ui.base.paging.PagingState
+import com.stslex.core.ui.base.shimmerLoadingAnimation
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.match.ui.model.MatchUiModel
 import com.stslex.feature.match.ui.store.MatchScreenState
@@ -54,9 +55,6 @@ internal fun MatchScreenContent(
             }
     }
 
-    Column {
-
-    }
     Box(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -64,9 +62,6 @@ internal fun MatchScreenContent(
             modifier = Modifier.fillMaxSize(),
             state = lazyListState,
         ) {
-            item {
-                Text("total count: ${state.total}, result size: ${state.result.size}")
-            }
             items(
                 count = state.result.size,
                 key = { index ->
@@ -85,6 +80,9 @@ internal fun MatchScreenContent(
             if (screen is MatchScreenState.Content.Append) {
                 item {
                     DotsPrintAnimation(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(AppDimension.Padding.medium),
                         dotsCount = 3,
                     )
                 }
@@ -99,27 +97,33 @@ internal fun MatchScreenContent(
 }
 
 @Composable
-private fun MatchItem(
+internal fun MatchItem(
     item: MatchUiModel,
     onItemClicked: (matchUuid: String) -> Unit,
     modifier: Modifier = Modifier,
+    isShimmer: Boolean = false,
 ) {
     ElevatedCard(
-        modifier = modifier.fillMaxWidth().padding(AppDimension.Padding.medium),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(AppDimension.Padding.medium)
+            .shimmerLoadingAnimation(isShimmer),
         onClick = { onItemClicked(item.uuid) },
     ) {
         Column {
             Text(
                 text = item.title,
                 modifier = Modifier
-                    .padding(AppDimension.Padding.medium),
+                    .padding(AppDimension.Padding.medium)
+                    .shimmerLoadingAnimation(isShimmer),
                 style = MaterialTheme.typography.titleLarge,
             )
             Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
             Text(
                 text = item.title,
                 modifier = Modifier
-                    .padding(AppDimension.Padding.medium),
+                    .padding(AppDimension.Padding.medium)
+                    .shimmerLoadingAnimation(isShimmer),
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
