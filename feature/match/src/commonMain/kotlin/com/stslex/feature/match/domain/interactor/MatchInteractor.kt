@@ -7,6 +7,7 @@ interface MatchInteractor {
 
     suspend fun getMatches(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int,
     ): PagingResponse<MatchDomainModel>

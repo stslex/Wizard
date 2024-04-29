@@ -1,5 +1,6 @@
 package com.stslex.feature.favourite.data.repository
 
+import com.stslex.core.core.paging.PagingResponse
 import com.stslex.feature.favourite.data.model.FavouriteDataModel
 
 interface FavouriteRepository {
@@ -9,7 +10,7 @@ interface FavouriteRepository {
         query: String,
         page: Int,
         pageSize: Int
-    ): List<FavouriteDataModel>
+    ): PagingResponse<FavouriteDataModel>
 
     suspend fun addFavourite(model: FavouriteDataModel)
 

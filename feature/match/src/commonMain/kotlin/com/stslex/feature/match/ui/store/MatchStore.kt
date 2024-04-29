@@ -18,6 +18,7 @@ interface MatchStore : Store<State, Event, Action> {
         val screen: MatchScreenState,
         val uuid: String,
         val isSelf: Boolean,
+        val query: String,
         val pagingState: PagingState<MatchUiModel>
     ) : Store.State {
 
@@ -27,7 +28,8 @@ interface MatchStore : Store<State, Event, Action> {
                 screen = MatchScreenState.Shimmer,
                 pagingState = PagingState.default(),
                 uuid = "",
-                isSelf = false
+                isSelf = false,
+                query = ""
             )
         }
     }
@@ -60,6 +62,10 @@ interface MatchStore : Store<State, Event, Action> {
         data object Logout : Action
 
         data object RepeatLastAction : Action, Store.Action.RepeatLastAction
+
+        data class OnQueryChanged(
+            val query: String
+        ) : Action
     }
 
     @Stable

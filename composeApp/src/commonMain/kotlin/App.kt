@@ -3,6 +3,7 @@ import com.stslex.core.core.coreModule
 import com.stslex.core.database.di.coreDatabaseModule
 import com.stslex.core.database.di.userSettingsModule
 import com.stslex.core.network.di.coreNetworkModule
+import com.stslex.core.ui.di.coreUiModule
 import com.stslex.core.ui.theme.AppTheme
 import com.stslex.feature.auth.di.featureAuthModule
 import com.stslex.feature.favourite.di.featureFavouriteModule
@@ -38,6 +39,7 @@ private fun KoinApplication.setupCommonModules() {
         listOf(
             appModule,
             coreModule,
+            coreUiModule,
             coreNetworkModule,
             userSettingsModule,
             coreDatabaseModule,

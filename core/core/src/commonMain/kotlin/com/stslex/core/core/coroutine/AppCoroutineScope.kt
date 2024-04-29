@@ -2,6 +2,7 @@ package com.stslex.core.core.coroutine
 
 import com.stslex.core.core.AppDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 
@@ -17,6 +18,7 @@ interface AppCoroutineScope {
      * @see AppDispatcher
      * */
     fun <T> launch(
+        start: CoroutineStart = CoroutineStart.DEFAULT,
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: suspend CoroutineScope.(T) -> Unit = {},
         action: suspend CoroutineScope.() -> T,

@@ -23,7 +23,8 @@ val featureMatchModule = module {
             interactor = get(),
             router = get(),
             appDispatcher = get(),
-            userStore = get()
+            userStore = get(),
+            pagerFactory = get()
         )
     }
 }

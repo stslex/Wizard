@@ -1,6 +1,5 @@
-package com.stslex.core.ui.pager
+package com.stslex.core.ui.pager.pager
 
-import com.stslex.core.core.coroutine.AppCoroutineScope
 import com.stslex.core.core.paging.PagingCoreData
 import com.stslex.core.core.paging.PagingCoreData.Companion.DEFAULT_PAGE
 import com.stslex.core.core.paging.PagingCoreItem
@@ -9,6 +8,10 @@ import com.stslex.core.ui.base.mapToAppError
 import com.stslex.core.ui.base.paging.PagingItem
 import com.stslex.core.ui.base.paging.PagingState
 import com.stslex.core.ui.base.paging.pagingMap
+import com.stslex.core.ui.pager.states.PagerLoadEvents
+import com.stslex.core.ui.pager.states.PagerLoadState
+import com.stslex.core.ui.pager.utils.PagingMapper
+import com.stslex.core.ui.pager.utils.PagingWorker
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,8 +21,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class StorePagerImpl<out T : PagingItem, in R : PagingCoreItem>(
+    private val pagingWorker: PagingWorker,
     private val request: suspend (page: Int, pageSize: Int) -> PagingResponse<R>,
-    private val scope: AppCoroutineScope,
     private val mapper: PagingMapper<R, T>,
     pageSize: Int = PagingCoreData.DEFAULT_PAGE_SIZE,
 ) : StorePager<T> {
@@ -57,14 +60,14 @@ class StorePagerImpl<out T : PagingItem, in R : PagingCoreItem>(
         requestItems(isForceLoad = false)
     }
 
-    override fun refresh() {
+    override fun refresh(isForceLoad: Boolean) {
         _loadState.value = PagerLoadState.Refresh
         _state.update { currentState ->
             currentState.copy(
-                page = DEFAULT_PAGE
+                page = DEFAULT_PAGE,
             )
         }
-        requestItems(isForceLoad = true)
+        requestItems(isForceLoad = isForceLoad)
     }
 
     override fun retry() {
@@ -85,7 +88,7 @@ class StorePagerImpl<out T : PagingItem, in R : PagingCoreItem>(
             return
         }
         loadJob?.cancel()
-        loadJob = scope.launch(
+        loadJob = pagingWorker.launch(
             action = {
                 val page = state.value.page
                 val pageSize = state.value.pageSize

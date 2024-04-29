@@ -1,5 +1,7 @@
 package com.stslex.feature.favourite.data.repository
 
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.core.core.paging.pagingMap
 import com.stslex.core.network.clients.profile.client.ProfileClient
 import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.feature.favourite.data.model.FavouriteDataModel
@@ -14,7 +16,7 @@ class FavouriteRepositoryImpl(
         query: String,
         page: Int,
         pageSize: Int
-    ): List<FavouriteDataModel> = client
+    ): PagingResponse<FavouriteDataModel> = client
         .getFavourites(
             PagingProfileRequest(
                 uuid = uuid,
@@ -23,8 +25,7 @@ class FavouriteRepositoryImpl(
                 pageSize = pageSize
             )
         )
-        .result
-        .map { result ->
+        .pagingMap { result ->
             result.toData()
         }
 

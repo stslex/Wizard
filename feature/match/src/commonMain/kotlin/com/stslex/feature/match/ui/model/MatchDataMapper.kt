@@ -1,7 +1,7 @@
 package com.stslex.feature.match.ui.model
 
 import com.stslex.core.core.asyncMap
-import com.stslex.core.ui.pager.PagerLoadState
+import com.stslex.core.ui.pager.states.PagerLoadState
 import com.stslex.feature.match.domain.model.MatchDomainModel
 import com.stslex.feature.match.domain.model.MatchDomainStatus
 import com.stslex.feature.match.domain.model.MatchUserDomainModel
