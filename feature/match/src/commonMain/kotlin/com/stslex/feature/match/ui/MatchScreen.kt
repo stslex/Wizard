@@ -19,9 +19,10 @@ import com.stslex.feature.match.ui.components.MatchScreenError
 import com.stslex.feature.match.ui.components.MatchScreenShimmer
 import com.stslex.feature.match.ui.store.MatchScreenState
 import com.stslex.feature.match.ui.store.MatchStore
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Event
-import com.stslex.feature.match.ui.store.MatchStoreComponent.State
+import com.stslex.feature.match.ui.store.MatchStore.Action
+import com.stslex.feature.match.ui.store.MatchStore.Event
+import com.stslex.feature.match.ui.store.MatchStore.State
+import com.stslex.feature.match.ui.store.MatchStoreImpl
 
 data class MatchScreen(
     private val args: MatchScreenArgs
@@ -29,7 +30,7 @@ data class MatchScreen(
 
     @Composable
     override fun Content() {
-        val store = getScreenModel<MatchStore>()
+        val store: MatchStore = getScreenModel<MatchStoreImpl>()
         LaunchedEffect(Unit) {
             store.sendAction(Action.Init(args = args))
         }

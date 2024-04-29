@@ -26,7 +26,7 @@ import com.stslex.core.ui.base.shimmerLoadingAnimation
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.match.ui.model.MatchUiModel
 import com.stslex.feature.match.ui.store.MatchScreenState
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
+import com.stslex.feature.match.ui.store.MatchStore.Action
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

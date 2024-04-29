@@ -25,11 +25,17 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val router: Router<N>,
     private val appDispatcher: AppDispatcher,
     initialState: S
-) : Store, StateScreenModel<S>(initialState) {
+) : Store<S, E, A>, StateScreenModel<S>(initialState) {
 
     private var _lastAction: A? = null
     protected val lastAction: A?
         get() = _lastAction
+
+    /**
+     * Flow of events that are sent to the screen.
+     * */
+    private val _event: MutableSharedFlow<E> = MutableSharedFlow()
+    override val event: SharedFlow<E> = _event.asSharedFlow()
 
     protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(
         scope = screenModelScope,
@@ -42,16 +48,14 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
      * The action is then processed.
      * @param action - action to be sent
      */
-    fun sendAction(action: A) {
+    override fun sendAction(action: A) {
         if (lastAction != action && action !is Action.RepeatLastAction) {
             _lastAction = action
         }
         process(action)
     }
 
-    /**
-     * Process the action. This method should be overridden in the child class.
-     */
+    /** Process the action. This method should be overridden in the child class.*/
     protected abstract fun process(action: A)
 
     private fun exceptionHandler(
@@ -62,13 +66,6 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
             onError(throwable)
         }
     }
-
-    private val _event: MutableSharedFlow<E> = MutableSharedFlow()
-
-    /**
-     * Flow of events that are sent to the screen.
-     * */
-    val event: SharedFlow<E> = _event.asSharedFlow()
 
     /**
      * Updates the state of the screen.
