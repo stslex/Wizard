@@ -18,9 +18,9 @@ interface ProfileClient {
 
     suspend fun getFavourites(request: PagingProfileRequest): PagingResponse<UserFavouriteResultResponse>
 
-    suspend fun getFollowers(request: PagingProfileRequest): UserFollowerResponse
+    suspend fun getFollowers(request: PagingProfileRequest): PagingResponse<UserFollowerResponse>
 
-    suspend fun getFollowing(request: PagingProfileRequest): UserFollowerResponse
+    suspend fun getFollowing(request: PagingProfileRequest): PagingResponse<UserFollowerResponse>
 
     suspend fun addFavourite(
         uuid: String,

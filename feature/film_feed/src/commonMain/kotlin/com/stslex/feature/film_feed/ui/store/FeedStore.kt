@@ -4,10 +4,13 @@ import androidx.compose.runtime.Stable
 import com.stslex.core.ui.mvi.Store
 import com.stslex.feature.film_feed.ui.model.FilmModel
 import com.stslex.feature.film_feed.ui.model.ScreenState
+import com.stslex.feature.film_feed.ui.store.FeedStore.Action
+import com.stslex.feature.film_feed.ui.store.FeedStore.Event
+import com.stslex.feature.film_feed.ui.store.FeedStore.State
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
-interface FeedScreenStoreComponent : Store {
+interface FeedStore : Store<State, Event, Action> {
 
     @Stable
     data class State(
@@ -19,7 +22,7 @@ interface FeedScreenStoreComponent : Store {
 
         companion object {
             val INITIAL = State(
-                films = emptyList<FilmModel>().toImmutableList(),
+                films = persistentListOf(),
                 screen = ScreenState.Loading,
                 currentPage = 0,
                 hasNextPage = true

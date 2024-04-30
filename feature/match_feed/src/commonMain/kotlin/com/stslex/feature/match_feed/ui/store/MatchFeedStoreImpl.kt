@@ -1,45 +1,70 @@
-package com.stslex.feature.film_feed.ui.store
+package com.stslex.feature.match_feed.ui.store
 
-import androidx.compose.runtime.Stable
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
 import com.stslex.core.ui.mvi.BaseStore
-import com.stslex.feature.film_feed.domain.interactor.FeedInteractor
-import com.stslex.feature.film_feed.navigation.FeedScreenRouter
-import com.stslex.feature.film_feed.ui.model.ScreenState
-import com.stslex.feature.film_feed.ui.model.toUI
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.Action
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.Event
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.Navigation
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.State
+import com.stslex.feature.match_feed.domain.MatchFeedInteractor
+import com.stslex.feature.match_feed.navigation.MatchFeedRouter
+import com.stslex.feature.match_feed.ui.model.toUI
+import com.stslex.feature.match_feed.ui.store.MatchFeedStore.Action
+import com.stslex.feature.match_feed.ui.store.MatchFeedStore.Event
+import com.stslex.feature.match_feed.ui.store.MatchFeedStore.Navigation
+import com.stslex.feature.match_feed.ui.store.MatchFeedStore.State
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 
-@Stable
-class FeedScreenStore(
-    private val interactor: FeedInteractor,
+class MatchFeedStoreImpl(
+    private val interactor: MatchFeedInteractor,
     appDispatcher: AppDispatcher,
-    router: FeedScreenRouter
-) : FeedScreenStoreComponent, BaseStore<State, Event, Action, Navigation>(
-    router = router,
+    router: MatchFeedRouter
+) : MatchFeedStore, BaseStore<State, Event, Action, Navigation>(
     initialState = State.INITIAL,
-    appDispatcher = appDispatcher
+    appDispatcher = appDispatcher,
+    router = router
 ) {
-
     private var loadingJob: Job? = null
 
     override fun process(action: Action) {
         when (action) {
-            is Action.LoadFilms -> actionLoadFilms()
+            Action.Init -> actionInit()
+            Action.LoadFilms -> actionLoadFilms()
             is Action.FilmClick -> actionFilmClick(action)
+            is Action.FilmSwiped -> actionFilmSwiped(action)
         }
     }
 
+    private fun actionFilmSwiped(action: Action.FilmSwiped) {
+        // todo send action to backend
+    }
+
     private fun actionFilmClick(action: Action.FilmClick) {
-        navigate(Navigation.Film(action.filmId))
+        navigate(Navigation.Film(action.uuid))
+    }
+
+    private fun actionInit() {
+        interactor
+            .getLatestMatch()
+            .launch { match ->
+                updateState { currentState ->
+                    currentState.copy(
+                        screen = ScreenState.Content.Success,
+                        match = match.toUI()
+                    )
+                }
+                loadFilms(match.uuid)
+            }
     }
 
     private fun actionLoadFilms() {
+        val matchUuid = state.value.match?.uuid
+        if (matchUuid == null) {
+            Logger.debug("Match uuid is null")
+            return
+        }
+        loadFilms(matchUuid)
+    }
+
+    private fun loadFilms(uuid: String) {
         if (loadingJob?.isActive == true) {
             Logger.debug("Loading job is active")
             return
@@ -64,7 +89,8 @@ class FeedScreenStore(
         val currentPage = state.value.currentPage
         loadingJob = launch(
             action = {
-                interactor.getFeed(
+                interactor.getMatchFilms(
+                    matchUuid = uuid,
                     page = currentPage.inc(),
                     pageSize = PAGE_SIZE
                 )
@@ -96,8 +122,9 @@ class FeedScreenStore(
         )
     }
 
+
     companion object {
 
-        private const val PAGE_SIZE = 15
+        private const val PAGE_SIZE = 5
     }
 }

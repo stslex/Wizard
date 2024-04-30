@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.SwipeableState
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +25,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.stslex.core.ui.theme.AppDimension
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
+import com.stslex.feature.auth.ui.store.AuthStore.AuthFieldsState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -81,7 +81,7 @@ internal fun AuthTitle(
                     textAlign = TextAlign.Center,
                     maxLines = 1
                 )
-                Divider(
+                HorizontalDivider(
                     modifier = Modifier
                         .padding(top = AppDimension.Padding.small)
                         .width(100.dp * scaleDividerValue)

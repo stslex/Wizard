@@ -9,26 +9,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import com.stslex.core.ui.mvi.getStoreTest
 import com.stslex.feature.film_feed.ui.components.FeedScreenContent
 import com.stslex.feature.film_feed.ui.components.FeedScreenError
 import com.stslex.feature.film_feed.ui.components.FeedScreenLoading
 import com.stslex.feature.film_feed.ui.model.ScreenState
-import com.stslex.feature.film_feed.ui.store.FeedScreenStore
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.Action
-import com.stslex.feature.film_feed.ui.store.FeedScreenStoreComponent.State
+import com.stslex.feature.film_feed.ui.store.FeedStore
+import com.stslex.feature.film_feed.ui.store.FeedStore.Action
+import com.stslex.feature.film_feed.ui.store.FeedStore.Event
+import com.stslex.feature.film_feed.ui.store.FeedStore.State
 
 object FeedScreen : Screen {
 
     @Composable
     override fun Content() {
-        val store = getScreenModel<FeedScreenStore>()
+        val store = getStoreTest<FeedStore>()
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
             store.event.collect { event ->
                 when (event) {
-                    is FeedScreenStoreComponent.Event.ErrorSnackBar -> {
+                    is Event.ErrorSnackBar -> {
                         // TODO show error snackbar
                     }
                 }

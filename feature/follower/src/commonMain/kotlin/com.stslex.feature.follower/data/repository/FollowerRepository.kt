@@ -1,5 +1,6 @@
 package com.stslex.feature.follower.data.repository
 
+import com.stslex.core.core.paging.PagingResponse
 import com.stslex.feature.follower.data.model.FollowerDataModel
 
 interface FollowerRepository {
@@ -9,13 +10,13 @@ interface FollowerRepository {
         query: String,
         page: Int,
         pageSize: Int
-    ): List<FollowerDataModel>
+    ): PagingResponse<FollowerDataModel>
 
     suspend fun getFollowing(
         uuid: String,
         query: String,
         page: Int,
         pageSize: Int
-    ): List<FollowerDataModel>
+    ): PagingResponse<FollowerDataModel>
 }
 

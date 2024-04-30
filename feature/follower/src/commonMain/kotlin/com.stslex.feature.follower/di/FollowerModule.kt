@@ -7,30 +7,19 @@ import com.stslex.feature.follower.domain.interactor.FollowerInteractorImpl
 import com.stslex.feature.follower.navigation.FollowerRouter
 import com.stslex.feature.follower.navigation.FollowerRouterImpl
 import com.stslex.feature.follower.ui.store.FollowerStore
+import com.stslex.feature.follower.ui.store.FollowerStoreImpl
 import org.koin.dsl.module
 
 val featureFollowerModule = module {
-
-    factory<FollowerRepository> {
-        FollowerRepositoryImpl(
-            client = get()
-        )
-    }
-
-    factory<FollowerInteractor> {
-        FollowerInteractorImpl(
-            repository = get(),
-            pagingWorker = get()
-        )
-    }
-
+    factory<FollowerRepository> { FollowerRepositoryImpl(client = get()) }
+    factory<FollowerInteractor> { FollowerInteractorImpl(repository = get()) }
     factory<FollowerRouter> { FollowerRouterImpl(navigator = get()) }
-
-    factory {
-        FollowerStore(
+    factory<FollowerStore> {
+        FollowerStoreImpl(
             interactor = get(),
             appDispatcher = get(),
             router = get(),
+            pagerFactory = get(),
         )
     }
 }

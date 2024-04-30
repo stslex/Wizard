@@ -1,5 +1,7 @@
 package com.stslex.feature.follower.data.repository
 
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.core.core.paging.pagingMap
 import com.stslex.core.network.clients.profile.client.ProfileClient
 import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.feature.follower.data.model.FollowerDataModel
@@ -14,7 +16,7 @@ class FollowerRepositoryImpl(
         query: String,
         page: Int,
         pageSize: Int
-    ): List<FollowerDataModel> = client
+    ): PagingResponse<FollowerDataModel> = client
         .getFollowers(
             PagingProfileRequest(
                 uuid = uuid,
@@ -23,14 +25,15 @@ class FollowerRepositoryImpl(
                 pageSize = pageSize
             )
         )
-        .toData()
+        .pagingMap { it.toData() }
+
 
     override suspend fun getFollowing(
         uuid: String,
         query: String,
         page: Int,
         pageSize: Int
-    ): List<FollowerDataModel> = client
+    ): PagingResponse<FollowerDataModel> = client
         .getFollowing(
             PagingProfileRequest(
                 uuid = uuid,
@@ -39,5 +42,5 @@ class FollowerRepositoryImpl(
                 pageSize = pageSize
             )
         )
-        .toData()
+        .pagingMap { it.toData() }
 }

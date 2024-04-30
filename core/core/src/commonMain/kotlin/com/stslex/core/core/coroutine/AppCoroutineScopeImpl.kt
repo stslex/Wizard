@@ -5,6 +5,7 @@ import com.stslex.core.core.Logger
 import com.stslex.core.core.coroutineExceptionHandler
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -24,10 +25,12 @@ class AppCoroutineScopeImpl(
     }
 
     override fun <T> launch(
+        start: CoroutineStart,
         onError: suspend (Throwable) -> Unit,
         onSuccess: suspend CoroutineScope.(T) -> Unit,
         action: suspend CoroutineScope.() -> T
     ): Job = scope.launch(
+        start = start,
         context = exceptionHandler(onError) + appDispatcher.default,
         block = {
             onSuccess(action())

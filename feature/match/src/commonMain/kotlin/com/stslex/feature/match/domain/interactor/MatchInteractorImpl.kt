@@ -14,6 +14,7 @@ class MatchInteractorImpl(
 
     override suspend fun getMatches(
         uuid: String,
+        query: String,
         page: Int,
         pageSize: Int,
     ): PagingResponse<MatchDomainModel> = repository
@@ -21,7 +22,7 @@ class MatchInteractorImpl(
             uuid = uuid,
             page = page,
             pageSize = pageSize,
-            query = "" // todo add query
+            query = query
         )
         .pagingMap {
             it.toDomain()

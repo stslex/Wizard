@@ -23,10 +23,10 @@ import com.stslex.feature.auth.ui.model.screen.text_field.rememberLoginTextField
 import com.stslex.feature.auth.ui.model.screen.text_field.rememberPasswordInputTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.rememberPasswordSubmitTextFieldState
 import com.stslex.feature.auth.ui.model.screen.text_field.rememberUsernameTextFieldState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Action
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.State
+import com.stslex.feature.auth.ui.store.AuthStore.Action
+import com.stslex.feature.auth.ui.store.AuthStore.AuthFieldsState
+import com.stslex.feature.auth.ui.store.AuthStore.ScreenLoadingState
+import com.stslex.feature.auth.ui.store.AuthStore.State
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Stable

@@ -13,13 +13,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import com.stslex.core.ui.mvi.getStoreTest
 import com.stslex.core.ui.mvi.setupNavigator
 import com.stslex.feature.film.ui.components.FilmContentScreen
 import com.stslex.feature.film.ui.store.FilmScreenState
 import com.stslex.feature.film.ui.store.FilmStore
-import com.stslex.feature.film.ui.store.FilmStoreComponent.Action
-import com.stslex.feature.film.ui.store.FilmStoreComponent.State
+import com.stslex.feature.film.ui.store.FilmStore.Action
+import com.stslex.feature.film.ui.store.FilmStore.State
 
 data class FilmScreen(
     val id: String
@@ -28,8 +28,7 @@ data class FilmScreen(
     @Composable
     override fun Content() {
         setupNavigator()
-
-        val store = getScreenModel<FilmStore>()
+        val store = getStoreTest<FilmStore>()
         LaunchedEffect(Unit) {
             store.sendAction(Action.Init(id))
         }

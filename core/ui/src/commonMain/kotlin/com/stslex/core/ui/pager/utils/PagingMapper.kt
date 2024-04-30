@@ -1,4 +1,4 @@
-package com.stslex.core.ui.pager
+package com.stslex.core.ui.pager.utils
 
 import com.stslex.core.core.paging.PagingCoreItem
 import com.stslex.core.ui.base.paging.PagingItem

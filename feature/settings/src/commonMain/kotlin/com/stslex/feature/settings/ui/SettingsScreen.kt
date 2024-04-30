@@ -16,21 +16,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.core.ui.components.AppSnackbarHost
 import com.stslex.core.ui.components.AppToolbar
+import com.stslex.core.ui.mvi.getStoreTest
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.settings.ui.components.SettingsContent
 import com.stslex.feature.settings.ui.store.SettingsStore
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Action
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Event
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.State
+import com.stslex.feature.settings.ui.store.SettingsStore.Action
+import com.stslex.feature.settings.ui.store.SettingsStore.Event
+import com.stslex.feature.settings.ui.store.SettingsStore.State
 
 object SettingsScreen : Screen {
 
     @Composable
     override fun Content() {
-        val store = getScreenModel<SettingsStore>()
+        val store = getStoreTest<SettingsStore>()
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
         LaunchedEffect(Unit) {

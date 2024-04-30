@@ -1,142 +1,79 @@
 package com.stslex.feature.match.ui.store
 
-import com.stslex.core.core.AppDispatcher
-import com.stslex.core.database.store.UserStore
-import com.stslex.core.ui.base.mapToAppError
-import com.stslex.core.ui.mvi.BaseStore
+import androidx.compose.runtime.Stable
+import com.stslex.core.ui.base.paging.PagingConfig
+import com.stslex.core.ui.base.paging.PagingUiState
+import com.stslex.core.ui.mvi.Store
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
-import com.stslex.core.ui.pager.StorePager
-import com.stslex.core.ui.pager.StorePagerImpl
-import com.stslex.feature.match.domain.interactor.MatchInteractor
-import com.stslex.feature.match.navigation.MatchRouter
+import com.stslex.core.ui.navigation.args.MatchScreenArgs
 import com.stslex.feature.match.ui.model.MatchUiModel
-import com.stslex.feature.match.ui.model.toUi
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Event
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Navigation
-import com.stslex.feature.match.ui.store.MatchStoreComponent.State
+import com.stslex.feature.match.ui.store.MatchStore.Action
+import com.stslex.feature.match.ui.store.MatchStore.Event
+import com.stslex.feature.match.ui.store.MatchStore.State
 
-// todo refactor pager state for UI https://github.com/stslex/Wizard/issues/35
-// todo add base store pager binding https://github.com/stslex/Wizard/issues/36
-// todo add query support for pager https://github.com/stslex/Wizard/issues/37
+interface MatchStore : Store<State, Event, Action> {
 
-class MatchStore(
-    appDispatcher: AppDispatcher,
-    router: MatchRouter,
-    private val interactor: MatchInteractor,
-    private val userStore: UserStore
-) : BaseStore<State, Event, Action, Navigation>(
-    appDispatcher = appDispatcher,
-    router = router,
-    initialState = State.INITIAL
-) {
+    @Stable
+    data class State(
+        val screen: MatchScreenState,
+        val uuid: String,
+        val isSelf: Boolean,
+        val query: String,
+        val paging: PagingUiState<MatchUiModel>
+    ) : Store.State {
 
-    private val pager: StorePager<MatchUiModel> = StorePagerImpl(
-        request = { page, pageSize ->
-            interactor.getMatches(
-                uuid = state.value.uuid,
-                page = page,
-                pageSize = pageSize
-            )
-        },
-        scope = scope,
-        mapper = { it.toUi() }
-    )
+        companion object {
 
-    override fun process(action: Action) {
-        when (action) {
-            is Action.Init -> actionInit(action)
-            is Action.LoadMore -> actionLoadMore()
-            is Action.OnMatchClick -> actionOnMatchClick(action)
-            is Action.OnRetryClick -> actionRetryClick()
-            is Action.Refresh -> actionRefresh()
-            is Action.Logout -> actionLogout()
-            is Action.RepeatLastAction -> actionRepeatLastAction()
-        }
-    }
-
-    private fun actionInit(action: Action.Init) {
-        pager.state.launch { pagerState ->
-            updateState { currentState ->
-                currentState.copy(
-                    pagingState = pagerState
-                )
-            }
-        }
-        pager.loadState.launch { loadState ->
-            updateState { currentState ->
-                currentState.copy(
-                    screen = loadState.toUi()
-                )
-            }
-        }
-        pager.loadEvents.launch {
-            sendEvent(
-                Event.ShowSnackbar(Snackbar.Error("error load matches"))
+            val INITIAL = State(
+                screen = MatchScreenState.Shimmer,
+                paging = PagingUiState.default(PagingConfig.DEFAULT),
+                uuid = "",
+                isSelf = false,
+                query = ""
             )
         }
-        pager.initialLoad()
-        updateState { currentState ->
-            currentState.copy(
-                isSelf = action.args.isSelf,
-                uuid = action.args.uuid ?: userStore.uuid,
-            )
-        }
-        pager.initialLoad()
     }
 
-    private fun actionLoadMore() {
-        pager.load()
+    @Stable
+    sealed interface Event : Store.Event {
+
+        data class ShowSnackbar(
+            val snackbar: Snackbar
+        ) : Event
     }
 
-    private fun actionOnMatchClick(action: Action.OnMatchClick) {
-        navigate(Navigation.MatchDetails(action.matchUuid))
+    @Stable
+    sealed interface Action : Store.Action {
+
+        data class Init(
+            val args: MatchScreenArgs
+        ) : Action
+
+        data object Refresh : Action
+
+        data object LoadMore : Action
+
+        data class OnMatchClick(
+            val matchUuid: String
+        ) : Action
+
+        data object OnRetryClick : Action
+
+        data object Logout : Action
+
+        data object RepeatLastAction : Action, Store.Action.RepeatLastAction
+
+        data class OnQueryChanged(
+            val query: String
+        ) : Action
     }
 
-    private fun actionRetryClick() {
-        pager.retry()
-    }
+    @Stable
+    sealed interface Navigation : Store.Navigation {
 
-    private fun actionRefresh() {
-        pager.refresh()
-    }
+        data class MatchDetails(val matchUuid: String) : Navigation
 
-    private fun actionLogout() {
-        launch(
-            action = {
-                interactor.logout()
-            },
-            onSuccess = {
-                navigate(Navigation.LogOut)
-            },
-            onError = { error ->
-                val appError = error.mapToAppError("error logout")
-                if (state.value.screen is MatchScreenState.Content) {
-                    sendEvent(
-                        Event.ShowSnackbar(Snackbar.Error(appError.message))
-                    )
-                } else {
-                    updateState { currentState ->
-                        currentState.copy(
-                            screen = MatchScreenState.Error(appError)
-                        )
-                    }
-                }
-            }
-        )
-    }
-
-    private fun actionRepeatLastAction() {
-        val lastAction = lastAction ?: return
-        updateState { currentState ->
-            val screen = when (currentState.screen) {
-                is MatchScreenState.Content -> MatchScreenState.Content.Refresh
-                is MatchScreenState.Error,
-                is MatchScreenState.Shimmer,
-                is MatchScreenState.Empty -> MatchScreenState.Shimmer
-            }
-            currentState.copy(screen = screen)
-        }
-        process(lastAction)
+        data object LogOut : Navigation
     }
 }
+

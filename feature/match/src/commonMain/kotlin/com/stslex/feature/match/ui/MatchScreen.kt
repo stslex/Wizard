@@ -10,8 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.core.ui.components.AppSnackbarHost
+import com.stslex.core.ui.mvi.getStoreTest
 import com.stslex.core.ui.navigation.args.MatchScreenArgs
 import com.stslex.feature.match.ui.components.MatchScreenContent
 import com.stslex.feature.match.ui.components.MatchScreenEmpty
@@ -19,9 +19,9 @@ import com.stslex.feature.match.ui.components.MatchScreenError
 import com.stslex.feature.match.ui.components.MatchScreenShimmer
 import com.stslex.feature.match.ui.store.MatchScreenState
 import com.stslex.feature.match.ui.store.MatchStore
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Event
-import com.stslex.feature.match.ui.store.MatchStoreComponent.State
+import com.stslex.feature.match.ui.store.MatchStore.Action
+import com.stslex.feature.match.ui.store.MatchStore.Event
+import com.stslex.feature.match.ui.store.MatchStore.State
 
 data class MatchScreen(
     private val args: MatchScreenArgs
@@ -29,7 +29,7 @@ data class MatchScreen(
 
     @Composable
     override fun Content() {
-        val store = getScreenModel<MatchStore>()
+        val store = getStoreTest<MatchStore>()
         LaunchedEffect(Unit) {
             store.sendAction(Action.Init(args = args))
         }
@@ -69,7 +69,7 @@ private fun MatchScreen(
     ) {
         when (val screen = state.screen) {
             is MatchScreenState.Content -> MatchScreenContent(
-                state = state.pagingState,
+                state = state.paging,
                 screen = screen,
                 onAction = onAction
             )

@@ -4,7 +4,6 @@ import androidx.compose.runtime.Stable
 import com.stslex.core.core.asyncMap
 import com.stslex.core.core.paging.PagingCoreData
 import com.stslex.core.core.paging.PagingCoreData.Companion.DEFAULT_PAGE
-import com.stslex.core.core.paging.PagingCoreData.Companion.DEFAULT_PAGE_SIZE
 import com.stslex.core.core.paging.PagingCoreItem
 import com.stslex.core.core.paging.PagingResponse
 import kotlinx.collections.immutable.ImmutableList
@@ -23,10 +22,10 @@ data class PagingState<out T : PagingItem>(
     companion object {
 
         fun <T : PagingItem> default(
-            pageSize: Int = DEFAULT_PAGE_SIZE,
+            pagingConfig: PagingConfig,
         ) = PagingState(
             page = DEFAULT_PAGE,
-            pageSize = pageSize,
+            pageSize = pagingConfig.pageSize,
             total = 0,
             hasMore = true,
             result = persistentListOf<T>(),
