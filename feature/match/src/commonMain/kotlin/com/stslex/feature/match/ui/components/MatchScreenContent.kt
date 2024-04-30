@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -17,20 +15,15 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.core.ui.base.DotsPrintAnimation
+import com.stslex.core.ui.base.paging.PagingColumn
 import com.stslex.core.ui.base.paging.PagingUiState
 import com.stslex.core.ui.base.shimmerLoadingAnimation
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.match.ui.model.MatchUiModel
 import com.stslex.feature.match.ui.store.MatchScreenState
 import com.stslex.feature.match.ui.store.MatchStore.Action
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.filterNotNull
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -44,23 +37,6 @@ internal fun MatchScreenContent(
         refreshing = screen is MatchScreenState.Content.Refresh,
         onRefresh = { onAction(Action.Refresh) },
     )
-    val listState = rememberLazyListState()
-
-    LaunchedEffect(listState, state) {
-        snapshotFlow {
-            listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
-        }
-            .filterNotNull()
-            .filter { index ->
-                state.hasMore &&
-                        index >= (state.items.size - state.pageOffset) &&
-                        screen is MatchScreenState.Content.Data
-            }
-            .distinctUntilChanged()
-            .collect {
-                onAction(Action.LoadMore)
-            }
-    }
 
     Box(
         modifier = modifier
@@ -70,35 +46,23 @@ internal fun MatchScreenContent(
                 enabled = screen is MatchScreenState.Content,
             ),
     ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = listState,
-        ) {
-            items(
-                count = state.items.size,
-                key = { index ->
-                    state.items[index].uuid
+
+        PagingColumn(
+            pagingState = state,
+            onLoadNext = {
+                onAction(Action.LoadMore)
+            },
+            isAppend = screen is MatchScreenState.Content.Append,
+            bottomContent = {
+                Spacer(modifier = Modifier.height(AppDimension.Padding.medium))
+            }
+        ) { item ->
+            MatchItem(
+                item = item,
+                onItemClicked = { matchUuid ->
+                    onAction(Action.OnMatchClick(matchUuid))
                 },
-            ) { index ->
-                state.items.getOrNull(index)?.let { item ->
-                    MatchItem(
-                        item = item,
-                        onItemClicked = { matchUuid ->
-                            onAction(Action.OnMatchClick(matchUuid))
-                        },
-                    )
-                }
-            }
-            if (screen is MatchScreenState.Content.Append) {
-                item {
-                    DotsPrintAnimation(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(AppDimension.Padding.medium),
-                        dotsCount = 3,
-                    )
-                }
-            }
+            )
         }
         PullRefreshIndicator(
             modifier = Modifier.align(Alignment.TopCenter),

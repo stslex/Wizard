@@ -25,7 +25,7 @@ internal fun FavouriteScreen(
         when (state.screen) {
             is FavouriteScreenState.Content -> FavouriteScreenContent(
                 state = state.screen,
-                items = state.paging.items,
+                pagingState = state.paging,
                 query = state.query,
                 isLoading = state.isLoading,
                 onItemClick = { uuid ->
@@ -36,6 +36,9 @@ internal fun FavouriteScreen(
                 },
                 onSearch = { query ->
                     onAction(Action.InputSearch(query))
+                },
+                onLoadNext = {
+                    onAction(Action.LoadMore)
                 }
             )
 
