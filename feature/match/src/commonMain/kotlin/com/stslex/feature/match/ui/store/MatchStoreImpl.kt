@@ -1,6 +1,7 @@
 package com.stslex.feature.match.ui.store
 
 import com.stslex.core.core.AppDispatcher
+import com.stslex.core.core.Logger
 import com.stslex.core.database.store.UserStore
 import com.stslex.core.ui.base.mapToAppError
 import com.stslex.core.ui.mvi.BaseStore
@@ -46,6 +47,7 @@ class MatchStoreImpl(
     )
 
     override fun process(action: Action) {
+        Logger.debug("process: $action", TAG)
         when (action) {
             is Action.Init -> actionInit(action)
             is Action.LoadMore -> actionLoadMore()
@@ -165,5 +167,9 @@ class MatchStoreImpl(
                 )
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "MatchStore"
     }
 }

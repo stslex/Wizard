@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +28,8 @@ import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.match.ui.model.MatchUiModel
 import com.stslex.feature.match.ui.store.MatchScreenState
 import com.stslex.feature.match.ui.store.MatchStore.Action
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -40,15 +43,18 @@ internal fun MatchScreenContent(
         refreshing = screen is MatchScreenState.Content.Refresh,
         onRefresh = { onAction(Action.Refresh) },
     )
-    val lazyListState = rememberLazyListState()
+    val listState = rememberLazyListState()
 
-    LaunchedEffect(lazyListState) {
+    LaunchedEffect(listState, state.result.size, state.pageSize) {
         snapshotFlow {
-            lazyListState.firstVisibleItemIndex
+            listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
         }
-            .collect { firstVisibleItemIndex ->
+            .filterNotNull()
+            .distinctUntilChanged()
+            .collect { index ->
                 if (
-                    firstVisibleItemIndex >= state.result.size - state.pageSize * 0.5f
+                    screen != MatchScreenState.Content.Append &&
+                    index >= (state.result.size - state.pageSize * 0.5f)
                 ) {
                     onAction(Action.LoadMore)
                 }
@@ -56,11 +62,16 @@ internal fun MatchScreenContent(
     }
 
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .pullRefresh(
+                state = pullToRefreshState,
+                enabled = screen is MatchScreenState.Content,
+            ),
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            state = lazyListState,
+            state = listState,
         ) {
             items(
                 count = state.result.size,
