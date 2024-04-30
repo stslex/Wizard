@@ -13,4 +13,6 @@ data class MatchCreateRequest(
     val expiresAt: String,
     @SerialName("participants_uuid")
     val participantsUuid: List<String>,
+    @SerialName("cover_url")
+    val coverUrl: String
 )

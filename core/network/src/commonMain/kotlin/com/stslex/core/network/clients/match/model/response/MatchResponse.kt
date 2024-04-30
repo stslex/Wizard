@@ -14,10 +14,12 @@ data class MatchResponse(
     val description: String,
     @SerialName("status")
     val status: MatchStatusResponse,
+    @SerialName("creator_uuid")
+    val creatorUuid: String,
     @SerialName("participants")
     val participants: List<MatchUserResponse>,
-    @SerialName("is_creator")
-    val isCreator: Boolean,
     @SerialName("expires_at")
     val expiresAt: Long,
+    @SerialName("cover_url")
+    val coverUrl: String,
 ) : PagingCoreItem

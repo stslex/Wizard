@@ -15,12 +15,14 @@ data class MatchDetailResponse(
     val status: MatchStatusResponse = MatchStatusResponse.PENDING,
     @SerialName("participants")
     val participants: List<MatchUserResponse>,
-    @SerialName("is_creator")
-    val isCreator: Boolean,
+    @SerialName("creator_uuid")
+    val creatorUuid: String,
     @SerialName("created_at")
     val createdAt: Long,
     @SerialName("updated_at")
     val updatedAt: Long,
     @SerialName("expires_at")
     val expiresAt: Long,
+    @SerialName("cover_url")
+    val coverUrl: String,
 )

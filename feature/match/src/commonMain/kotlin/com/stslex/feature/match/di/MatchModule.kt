@@ -11,7 +11,12 @@ import com.stslex.feature.match.ui.store.MatchStoreImpl
 import org.koin.dsl.module
 
 val featureMatchModule = module {
-    factory<MatchRepository> { MatchRepositoryImpl(client = get()) }
+    factory<MatchRepository> {
+        MatchRepositoryImpl(
+            client = get(),
+            userStore = get()
+        )
+    }
     factory<MatchInteractor> {
         MatchInteractorImpl(
             repository = get(),

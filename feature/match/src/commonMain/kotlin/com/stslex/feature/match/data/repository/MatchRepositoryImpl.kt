@@ -2,13 +2,15 @@ package com.stslex.feature.match.data.repository
 
 import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.core.paging.pagingMap
+import com.stslex.core.database.store.UserStore
 import com.stslex.core.network.clients.match.client.MatchClient
 import com.stslex.core.network.model.PagingRequest
 import com.stslex.feature.match.data.model.MatchDataModel
 import com.stslex.feature.match.data.model.toData
 
 class MatchRepositoryImpl(
-    private val client: MatchClient
+    private val client: MatchClient,
+    private val userStore: UserStore
 ) : MatchRepository {
 
     override suspend fun getMatches(
@@ -25,5 +27,7 @@ class MatchRepositoryImpl(
                 query = query
             )
         )
-        .pagingMap { it.toData() }
+        .pagingMap {
+            it.toData(userUUID = userStore.uuid)
+        }
 }
