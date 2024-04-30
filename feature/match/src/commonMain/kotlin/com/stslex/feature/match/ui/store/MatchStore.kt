@@ -10,7 +10,6 @@ import com.stslex.feature.match.ui.store.MatchStore.Action
 import com.stslex.feature.match.ui.store.MatchStore.Event
 import com.stslex.feature.match.ui.store.MatchStore.State
 
-// todo make more representative logic with store components implementation https://github.com/stslex/Wizard/issues/34
 interface MatchStore : Store<State, Event, Action> {
 
     @Stable

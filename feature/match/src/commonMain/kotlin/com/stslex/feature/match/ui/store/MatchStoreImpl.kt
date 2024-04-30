@@ -20,9 +20,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 // todo refactor pager state for UI https://github.com/stslex/Wizard/issues/35
-// todo add base store pager binding https://github.com/stslex/Wizard/issues/36
-// todo add query support for pager https://github.com/stslex/Wizard/issues/37
-
 class MatchStoreImpl(
     appDispatcher: AppDispatcher,
     router: MatchRouter,
