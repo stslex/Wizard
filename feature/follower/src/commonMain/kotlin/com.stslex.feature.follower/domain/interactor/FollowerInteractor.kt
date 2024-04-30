@@ -1,24 +1,22 @@
 package com.stslex.feature.follower.domain.interactor
 
-import com.stslex.feature.follower.ui.model.FollowerModel
-import kotlinx.coroutines.flow.StateFlow
+import com.stslex.core.core.paging.PagingResponse
+import com.stslex.feature.follower.data.model.FollowerDataModel
 
 interface FollowerInteractor {
-
-    val followItems: StateFlow<List<FollowerModel>>
 
     suspend fun getFollowers(
         uuid: String,
         query: String,
         page: Int,
         pageSize: Int
-    )
+    ): PagingResponse<FollowerDataModel>
 
     suspend fun getFollowing(
         uuid: String,
         query: String,
         page: Int,
         pageSize: Int
-    )
+    ): PagingResponse<FollowerDataModel>
 }
 

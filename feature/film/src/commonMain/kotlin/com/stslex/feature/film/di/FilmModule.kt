@@ -7,11 +7,12 @@ import com.stslex.feature.film.domain.interactor.FilmInteractorImpl
 import com.stslex.feature.film.navigation.FilmRouter
 import com.stslex.feature.film.navigation.FilmRouterImpl
 import com.stslex.feature.film.ui.store.FilmStore
+import com.stslex.feature.film.ui.store.FilmStoreImpl
 import org.koin.dsl.module
 
 val featureFilmModule = module {
-    factory {
-        FilmStore(
+    factory<FilmStore> {
+        FilmStoreImpl(
             interactor = get(),
             appDispatcher = get(),
             router = get(),

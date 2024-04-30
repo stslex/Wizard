@@ -1,61 +1,43 @@
 package com.stslex.feature.settings.ui.store
 
-import com.stslex.core.core.AppDispatcher
-import com.stslex.core.ui.mvi.BaseStore
+import androidx.compose.runtime.Stable
+import com.stslex.core.ui.mvi.Store
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
-import com.stslex.feature.settings.domain.SettingsInteractor
-import com.stslex.feature.settings.navigation.SettingsRouter
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Action
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Event
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Navigation
-import com.stslex.feature.settings.ui.store.SettingsStoreComponent.State
+import com.stslex.feature.settings.ui.store.SettingsStore.Action
+import com.stslex.feature.settings.ui.store.SettingsStore.Event
+import com.stslex.feature.settings.ui.store.SettingsStore.State
 
-class SettingsStore(
-    private val interactor: SettingsInteractor,
-    router: SettingsRouter,
-    appDispatcher: AppDispatcher
-) : BaseStore<State, Event, Action, Navigation>(
-    router = router,
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL
-) {
+interface SettingsStore : Store<State, Event, Action> {
 
-    override fun process(action: Action) {
-        when (action) {
-            Action.LogOut -> actionLogout()
-            Action.BackButtonClicked -> actionBackClick()
+    @Stable
+    data class State(
+        val isLoading: Boolean
+    ) : Store.State {
+
+        companion object {
+
+            val INITIAL = State(isLoading = false)
         }
     }
 
-    private fun actionBackClick() {
-        navigate(Navigation.Back)
+    @Stable
+    sealed interface Action : Store.Action {
+
+        data object LogOut : Action
+
+        data object BackButtonClicked : Action
     }
 
-    private fun actionLogout() {
-        if (state.value.isLoading) return
-        updateState { currentState ->
-            currentState.copy(
-                isLoading = true
-            )
-        }
+    @Stable
+    sealed interface Event : Store.Event {
 
-        launch(
-            action = {
-                interactor.logOut()
-            },
-            onSuccess = {
-                updateState { currentState ->
-                    currentState.copy(
-                        isLoading = false
-                    )
-                }
-                navigate(Navigation.LogOut)
-            },
-            onError = { error ->
-                val message = error.message ?: "Logout error"
-                val snackbarType = Snackbar.Error(message)
-                sendEvent(Event.ShowSnackbar(snackbarType))
-            }
-        )
+        data class ShowSnackbar(val snackbar: Snackbar) : Event
+    }
+
+    sealed interface Navigation : Store.Navigation {
+
+        data object Back : Navigation
+
+        data object LogOut : Navigation
     }
 }

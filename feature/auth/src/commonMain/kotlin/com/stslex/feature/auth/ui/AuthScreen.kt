@@ -20,8 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.core.ui.components.AppSnackbarHost
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.core.ui.mvi.setupNavigator
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.core.ui.theme.toPx
@@ -30,16 +30,16 @@ import com.stslex.feature.auth.ui.components.AuthTitle
 import com.stslex.feature.auth.ui.model.screen.AuthScreenState
 import com.stslex.feature.auth.ui.model.screen.rememberAuthScreenState
 import com.stslex.feature.auth.ui.store.AuthStore
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Event
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
+import com.stslex.feature.auth.ui.store.AuthStore.AuthFieldsState
+import com.stslex.feature.auth.ui.store.AuthStore.Event
+import com.stslex.feature.auth.ui.store.AuthStore.ScreenLoadingState
 
 object AuthScreen : Screen {
 
     @Composable
     override fun Content() {
         setupNavigator()
-        val store = getScreenModel<AuthStore>()
+        val store = getStore<AuthStore>()
 
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }

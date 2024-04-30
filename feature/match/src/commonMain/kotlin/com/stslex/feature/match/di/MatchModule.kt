@@ -6,6 +6,7 @@ import com.stslex.feature.match.domain.interactor.MatchInteractor
 import com.stslex.feature.match.domain.interactor.MatchInteractorImpl
 import com.stslex.feature.match.navigation.MatchRouter
 import com.stslex.feature.match.navigation.MatchRouterImpl
+import com.stslex.feature.match.ui.store.MatchStore
 import com.stslex.feature.match.ui.store.MatchStoreImpl
 import org.koin.dsl.module
 
@@ -18,7 +19,7 @@ val featureMatchModule = module {
         )
     }
     factory<MatchRouter> { MatchRouterImpl(navigator = get()) }
-    factory {
+    factory<MatchStore> {
         MatchStoreImpl(
             interactor = get(),
             router = get(),

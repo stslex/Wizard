@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.stslex.feature.profile.ui.store.ProfileScreenState
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.feature.profile.ui.store.ProfileStore.Action
 
 @Composable
 internal fun ProfileScreenContent(

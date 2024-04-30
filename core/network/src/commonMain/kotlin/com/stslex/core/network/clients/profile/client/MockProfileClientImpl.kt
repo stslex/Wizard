@@ -6,7 +6,6 @@ import com.stslex.core.network.clients.profile.model.request.PagingProfileReques
 import com.stslex.core.network.clients.profile.model.response.BooleanResponse
 import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserFollowerResponse
-import com.stslex.core.network.clients.profile.model.response.UserFollowerResultResponse
 import com.stslex.core.network.clients.profile.model.response.UserResponse
 import com.stslex.core.network.clients.profile.model.response.UserSearchResponse
 import kotlinx.coroutines.delay
@@ -76,33 +75,41 @@ class MockProfileClientImpl : ProfileClient {
 
     override suspend fun getFollowers(
         request: PagingProfileRequest
-    ): UserFollowerResponse {
+    ): PagingResponse<UserFollowerResponse> {
         delay(2000)
-        return UserFollowerResponse(
+        return PagingResponse(
             result = listOf(
-                UserFollowerResultResponse(
+                UserFollowerResponse(
                     uuid = "uuid",
                     username = "John Doe",
                     avatarUrl = "https://avatars.githubusercontent.com/u/139426?s=460&u=8f6b6e2e4e9e4b0e9b5b5e4e9b5b5e4e9b5b5e4e&v=4",
                     isFollowing = false,
                 ),
-            )
+            ),
+            page = request.page,
+            pageSize = request.pageSize,
+            total = 1,
+            hasMore = true,
         )
     }
 
     override suspend fun getFollowing(
         request: PagingProfileRequest
-    ): UserFollowerResponse {
+    ): PagingResponse<UserFollowerResponse> {
         delay(2000)
-        return UserFollowerResponse(
+        return PagingResponse(
             result = listOf(
-                UserFollowerResultResponse(
+                UserFollowerResponse(
                     uuid = "uuid",
                     username = "John Doe",
                     avatarUrl = "https://avatars.githubusercontent.com/u/139426?s=460&u=8f6b6e2e4e9e4b0e9b5b5e4e9b5b5e4e9b5b5e4e&v=4",
                     isFollowing = false
                 ),
-            )
+            ),
+            page = request.page,
+            pageSize = request.pageSize,
+            total = 1,
+            hasMore = true,
         )
     }
 

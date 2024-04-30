@@ -10,8 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
 import com.stslex.core.ui.components.AppSnackbarHost
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.core.ui.navigation.args.MatchScreenArgs
 import com.stslex.feature.match.ui.components.MatchScreenContent
 import com.stslex.feature.match.ui.components.MatchScreenEmpty
@@ -22,7 +22,6 @@ import com.stslex.feature.match.ui.store.MatchStore
 import com.stslex.feature.match.ui.store.MatchStore.Action
 import com.stslex.feature.match.ui.store.MatchStore.Event
 import com.stslex.feature.match.ui.store.MatchStore.State
-import com.stslex.feature.match.ui.store.MatchStoreImpl
 
 data class MatchScreen(
     private val args: MatchScreenArgs
@@ -30,7 +29,7 @@ data class MatchScreen(
 
     @Composable
     override fun Content() {
-        val store: MatchStore = getScreenModel<MatchStoreImpl>()
+        val store = getStore<MatchStore>()
         LaunchedEffect(Unit) {
             store.sendAction(Action.Init(args = args))
         }

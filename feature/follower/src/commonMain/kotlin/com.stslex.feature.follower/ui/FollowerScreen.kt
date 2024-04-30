@@ -12,12 +12,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.follower.ui.store.FollowerScreenState
 import com.stslex.feature.follower.ui.store.FollowerStore
-import com.stslex.feature.follower.ui.store.FollowerStoreComponent.Action
-import com.stslex.feature.follower.ui.store.FollowerStoreComponent.State
+import com.stslex.feature.follower.ui.store.FollowerStore.Action
+import com.stslex.feature.follower.ui.store.FollowerStore.State
 
 data class FollowerScreen(
     val args: FollowerScreenArgs
@@ -25,7 +25,7 @@ data class FollowerScreen(
 
     @Composable
     override fun Content() {
-        val store = getScreenModel<FollowerStore>()
+        val store = getStore<FollowerStore>()
         val state by remember { store.state }.collectAsState()
 
         LaunchedEffect(key1 = Unit) {

@@ -5,11 +5,12 @@ import com.stslex.feature.settings.domain.SettingsInteractorImpl
 import com.stslex.feature.settings.navigation.SettingsRouter
 import com.stslex.feature.settings.navigation.SettingsRouterImpl
 import com.stslex.feature.settings.ui.store.SettingsStore
+import com.stslex.feature.settings.ui.store.SettingsStoreImpl
 import org.koin.dsl.module
 
 val featureSettingsModule = module {
-    factory {
-        SettingsStore(
+    factory<SettingsStore> {
+        SettingsStoreImpl(
             interactor = get(),
             appDispatcher = get(),
             router = get(),

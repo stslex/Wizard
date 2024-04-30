@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import com.stslex.feature.auth.ui.model.screen.text_field.base.AuthTextField
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Action.InputAction
+import com.stslex.feature.auth.ui.store.AuthStore.Action.InputAction
 
 @Stable
 data class UsernameTextFieldState(

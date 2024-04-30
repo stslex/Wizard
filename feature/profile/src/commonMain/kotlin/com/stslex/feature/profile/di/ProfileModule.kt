@@ -7,11 +7,12 @@ import com.stslex.feature.profile.domain.interactor.ProfileInteractorImpl
 import com.stslex.feature.profile.navigation.ProfileRouter
 import com.stslex.feature.profile.navigation.ProfileRouterImpl
 import com.stslex.feature.profile.ui.store.ProfileStore
+import com.stslex.feature.profile.ui.store.ProfileStoreImpl
 import org.koin.dsl.module
 
 val featureProfileModule = module {
-    factory {
-        ProfileStore(
+    factory<ProfileStore> {
+        ProfileStoreImpl(
             interactor = get(),
             userStore = get(),
             appDispatcher = get(),
