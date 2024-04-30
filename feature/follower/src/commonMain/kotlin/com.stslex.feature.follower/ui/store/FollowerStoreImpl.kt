@@ -2,6 +2,7 @@ package com.stslex.feature.follower.ui.store
 
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.ui.base.mapToAppError
+import com.stslex.core.ui.base.paging.toUi
 import com.stslex.core.ui.mvi.BaseStore
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.core.ui.pager.pager.StorePager
@@ -50,7 +51,8 @@ class FollowerStoreImpl(
             }
         },
         scope = scope,
-        mapper = { it.toUi() }
+        mapper = { it.toUi() },
+        config = state.value.paging.config
     )
 
     override fun process(action: Action) {
@@ -72,7 +74,7 @@ class FollowerStoreImpl(
         pager.state.launch { pagerState ->
             updateState { currentState ->
                 currentState.copy(
-                    pagingState = pagerState
+                    paging = pagerState.toUi(currentState.paging.config)
                 )
             }
         }

@@ -1,7 +1,8 @@
 package com.stslex.feature.favourite.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.paging.PagingState
+import com.stslex.core.ui.base.paging.PagingConfig
+import com.stslex.core.ui.base.paging.PagingUiState
 import com.stslex.core.ui.mvi.Store
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.favourite.ui.model.FavouriteModel
@@ -15,7 +16,7 @@ interface FavouriteStore : Store<State, Event, Action> {
     data class State(
         val uuid: String,
         val query: String,
-        val pagingState: PagingState<FavouriteModel>,
+        val paging: PagingUiState<FavouriteModel>,
         val screen: FavouriteScreenState,
         val isLoading: Boolean
     ) : Store.State {
@@ -25,7 +26,7 @@ interface FavouriteStore : Store<State, Event, Action> {
             val INITIAL = State(
                 uuid = "",
                 query = "",
-                pagingState = PagingState.default(),
+                paging = PagingUiState.default(PagingConfig.DEFAULT),
                 screen = FavouriteScreenState.Shimmer,
                 isLoading = true
             )

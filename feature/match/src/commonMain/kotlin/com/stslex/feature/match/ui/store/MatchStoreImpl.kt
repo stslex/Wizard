@@ -4,6 +4,7 @@ import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
 import com.stslex.core.database.store.UserStore
 import com.stslex.core.ui.base.mapToAppError
+import com.stslex.core.ui.base.paging.toUi
 import com.stslex.core.ui.mvi.BaseStore
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.core.ui.pager.pager.StorePager
@@ -20,7 +21,6 @@ import com.stslex.feature.match.ui.store.MatchStore.State
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
-// todo refactor pager state for UI https://github.com/stslex/Wizard/issues/35
 class MatchStoreImpl(
     appDispatcher: AppDispatcher,
     router: MatchRouter,
@@ -43,7 +43,8 @@ class MatchStoreImpl(
             )
         },
         scope = scope,
-        mapper = { it.toUi() }
+        mapper = { it.toUi() },
+        config = state.value.paging.config
     )
 
     override fun process(action: Action) {
@@ -64,7 +65,7 @@ class MatchStoreImpl(
         pager.state.launch { pagerState ->
             updateState { currentState ->
                 currentState.copy(
-                    pagingState = pagerState
+                    paging = pagerState.toUi(currentState.paging.config)
                 )
             }
         }

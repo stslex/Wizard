@@ -1,7 +1,8 @@
 package com.stslex.feature.match.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.paging.PagingState
+import com.stslex.core.ui.base.paging.PagingConfig
+import com.stslex.core.ui.base.paging.PagingUiState
 import com.stslex.core.ui.mvi.Store
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.core.ui.navigation.args.MatchScreenArgs
@@ -18,14 +19,14 @@ interface MatchStore : Store<State, Event, Action> {
         val uuid: String,
         val isSelf: Boolean,
         val query: String,
-        val pagingState: PagingState<MatchUiModel>
+        val paging: PagingUiState<MatchUiModel>
     ) : Store.State {
 
         companion object {
 
             val INITIAL = State(
                 screen = MatchScreenState.Shimmer,
-                pagingState = PagingState.default(),
+                paging = PagingUiState.default(PagingConfig.DEFAULT),
                 uuid = "",
                 isSelf = false,
                 query = ""

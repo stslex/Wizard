@@ -1,7 +1,8 @@
 package com.stslex.feature.follower.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.paging.PagingState
+import com.stslex.core.ui.base.paging.PagingConfig
+import com.stslex.core.ui.base.paging.PagingUiState
 import com.stslex.core.ui.mvi.Store
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
@@ -15,18 +16,16 @@ interface FollowerStore : Store<State, Event, Action> {
     @Stable
     data class State(
         val type: FollowerScreenArgs,
-        val pagingState: PagingState<FollowerModel>,
+        val paging: PagingUiState<FollowerModel>,
         val screen: FollowerScreenState,
         val query: String
     ) : Store.State {
 
         companion object {
 
-            const val DEFAULT_PAGE = -1
-
             val INITIAL = State(
                 type = FollowerScreenArgs.Follower(""),
-                pagingState = PagingState.default(),
+                paging = PagingUiState.default(PagingConfig.DEFAULT),
                 screen = FollowerScreenState.Shimmer,
                 query = ""
             )

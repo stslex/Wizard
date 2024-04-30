@@ -22,19 +22,20 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.core.ui.base.DotsPrintAnimation
-import com.stslex.core.ui.base.paging.PagingState
+import com.stslex.core.ui.base.paging.PagingUiState
 import com.stslex.core.ui.base.shimmerLoadingAnimation
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.match.ui.model.MatchUiModel
 import com.stslex.feature.match.ui.store.MatchScreenState
 import com.stslex.feature.match.ui.store.MatchStore.Action
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun MatchScreenContent(
-    state: PagingState<MatchUiModel>,
+    state: PagingUiState<MatchUiModel>,
     screen: MatchScreenState.Content,
     onAction: (Action) -> Unit,
     modifier: Modifier = Modifier,
@@ -45,19 +46,19 @@ internal fun MatchScreenContent(
     )
     val listState = rememberLazyListState()
 
-    LaunchedEffect(listState, state.result.size, state.pageSize) {
+    LaunchedEffect(listState, state) {
         snapshotFlow {
             listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
         }
             .filterNotNull()
+            .filter { index ->
+                state.hasMore &&
+                        index >= (state.items.size - state.pageOffset) &&
+                        screen is MatchScreenState.Content.Data
+            }
             .distinctUntilChanged()
-            .collect { index ->
-                if (
-                    screen != MatchScreenState.Content.Append &&
-                    index >= (state.result.size - state.pageSize * 0.5f)
-                ) {
-                    onAction(Action.LoadMore)
-                }
+            .collect {
+                onAction(Action.LoadMore)
             }
     }
 
@@ -74,12 +75,12 @@ internal fun MatchScreenContent(
             state = listState,
         ) {
             items(
-                count = state.result.size,
+                count = state.items.size,
                 key = { index ->
-                    state.result[index].uuid
+                    state.items[index].uuid
                 },
             ) { index ->
-                state.result.getOrNull(index)?.let { item ->
+                state.items.getOrNull(index)?.let { item ->
                     MatchItem(
                         item = item,
                         onItemClicked = { matchUuid ->

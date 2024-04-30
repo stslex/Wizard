@@ -11,5 +11,6 @@ interface PagingCoreData<out T : PagingCoreItem> {
 
         const val DEFAULT_PAGE_SIZE = 15
         const val DEFAULT_PAGE = 0
+        const val DEFAULT_PAGE_OFFSET = 0.5f
     }
 }

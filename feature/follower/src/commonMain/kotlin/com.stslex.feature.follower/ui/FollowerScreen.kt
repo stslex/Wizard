@@ -48,9 +48,9 @@ internal fun FollowerScreen(
     when (state.screen) {
         is FollowerScreenState.Content -> {
             LazyColumn {
-                items(state.pagingState.result.size) { index ->
+                items(state.paging.items.size) { index ->
                     Text(
-                        "test: ${state.pagingState.result[index].username}"
+                        "test: ${state.paging.items[index].username}"
                     )
                 }
             }

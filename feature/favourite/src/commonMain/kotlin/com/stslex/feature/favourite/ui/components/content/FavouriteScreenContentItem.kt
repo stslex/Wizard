@@ -7,7 +7,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.favourite.ui.model.FavouriteModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun FavouriteScreenContentItem(
     item: FavouriteModel,

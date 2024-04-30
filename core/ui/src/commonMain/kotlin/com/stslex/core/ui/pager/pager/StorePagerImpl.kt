@@ -1,10 +1,10 @@
 package com.stslex.core.ui.pager.pager
 
-import com.stslex.core.core.paging.PagingCoreData
 import com.stslex.core.core.paging.PagingCoreData.Companion.DEFAULT_PAGE
 import com.stslex.core.core.paging.PagingCoreItem
 import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.ui.base.mapToAppError
+import com.stslex.core.ui.base.paging.PagingConfig
 import com.stslex.core.ui.base.paging.PagingItem
 import com.stslex.core.ui.base.paging.PagingState
 import com.stslex.core.ui.base.paging.pagingMap
@@ -24,10 +24,10 @@ class StorePagerImpl<out T : PagingItem, in R : PagingCoreItem>(
     private val pagingWorker: PagingWorker,
     private val request: suspend (page: Int, pageSize: Int) -> PagingResponse<R>,
     private val mapper: PagingMapper<R, T>,
-    pageSize: Int = PagingCoreData.DEFAULT_PAGE_SIZE,
+    pagingConfig: PagingConfig,
 ) : StorePager<T> {
 
-    private val _state = MutableStateFlow<PagingState<T>>(PagingState.default(pageSize))
+    private val _state = MutableStateFlow<PagingState<T>>(PagingState.default(pagingConfig))
     override val state = _state.asStateFlow()
 
     private val _loadState = MutableStateFlow<PagerLoadState>(PagerLoadState.Initial)

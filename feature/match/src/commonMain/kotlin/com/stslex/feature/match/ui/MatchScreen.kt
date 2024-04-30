@@ -69,7 +69,7 @@ private fun MatchScreen(
     ) {
         when (val screen = state.screen) {
             is MatchScreenState.Content -> MatchScreenContent(
-                state = state.pagingState,
+                state = state.paging,
                 screen = screen,
                 onAction = onAction
             )

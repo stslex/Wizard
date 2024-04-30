@@ -2,6 +2,7 @@ package com.stslex.feature.favourite.ui.store
 
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.ui.base.mapToAppError
+import com.stslex.core.ui.base.paging.toUi
 import com.stslex.core.ui.mvi.BaseStore
 import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.core.ui.pager.pager.StorePager
@@ -44,7 +45,8 @@ class FavouriteStoreImpl(
             )
         },
         scope = scope,
-        mapper = { it.toUI() }
+        mapper = { it.toUI() },
+        config = state.value.paging.config
     )
 
     override fun process(action: Action) {
@@ -69,7 +71,7 @@ class FavouriteStoreImpl(
         pager.state.launch { pagerState ->
             updateState { currentState ->
                 currentState.copy(
-                    pagingState = pagerState
+                    paging = pagerState.toUi(currentState.paging.config)
                 )
             }
         }
@@ -116,20 +118,20 @@ class FavouriteStoreImpl(
 
     private fun actionLikeClick(action: Action.LikeClick) {
         if (likeJob?.isActive == true) return
-        val items = state.value.pagingState.result.toMutableList()
+        val items = state.value.paging.items.toMutableList()
         val itemIndex = items
             .indexOfFirst {
                 it.uuid == action.uuid
             }
             .takeIf { it != -1 }
             ?: return
-        val item = state.value.pagingState.result.getOrNull(itemIndex) ?: return
+        val item = state.value.paging.items.getOrNull(itemIndex) ?: return
         val newItem = item.copy(isFavourite = item.isFavourite.not())
         items[itemIndex] = newItem
         updateState { state ->
             state.copy(
-                pagingState = state.pagingState.copy(
-                    result = items.toImmutableList()
+                paging = state.paging.copy(
+                    items = items.toImmutableList()
                 )
             )
         }
