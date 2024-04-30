@@ -1,17 +1,21 @@
 package com.stslex.feature.follower.ui.store
 
 import com.stslex.core.core.AppDispatcher
+import com.stslex.core.ui.base.mapToAppError
 import com.stslex.core.ui.mvi.BaseStore
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
+import com.stslex.core.ui.pager.pager.StorePager
+import com.stslex.core.ui.pager.pager.StorePagerFactory
+import com.stslex.core.ui.pager.states.PagerLoadState
 import com.stslex.feature.follower.domain.interactor.FollowerInteractor
 import com.stslex.feature.follower.navigation.FollowerRouter
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
+import com.stslex.feature.follower.ui.model.FollowerModel
+import com.stslex.feature.follower.ui.model.toUi
 import com.stslex.feature.follower.ui.store.FollowerStore.Action
 import com.stslex.feature.follower.ui.store.FollowerStore.Event
 import com.stslex.feature.follower.ui.store.FollowerStore.Navigation
 import com.stslex.feature.follower.ui.store.FollowerStore.State
-import com.stslex.feature.follower.ui.store.FollowerStore.State.Companion.DEFAULT_PAGE
-import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
@@ -19,126 +23,124 @@ class FollowerStoreImpl(
     private val interactor: FollowerInteractor,
     router: FollowerRouter,
     appDispatcher: AppDispatcher,
+    pagerFactory: StorePagerFactory,
 ) : FollowerStore, BaseStore<State, Event, Action, Navigation>(
     router = router,
     appDispatcher = appDispatcher,
     initialState = State.INITIAL,
 ) {
 
-    private var loadingJob: Job? = null
+    private val pager: StorePager<FollowerModel> = pagerFactory.create(
+        request = { page, pageSize ->
+            val currentState = state.value
+            when (currentState.type) {
+                is FollowerScreenArgs.Follower -> interactor.getFollowers(
+                    uuid = currentState.type.uuid,
+                    query = currentState.query,
+                    page = page,
+                    pageSize = pageSize
+                )
+
+                is FollowerScreenArgs.Following -> interactor.getFollowing(
+                    uuid = currentState.type.uuid,
+                    query = currentState.query,
+                    page = page,
+                    pageSize = pageSize
+                )
+            }
+        },
+        scope = scope,
+        mapper = { it.toUi() }
+    )
 
     override fun process(action: Action) {
         when (action) {
             is Action.Init -> actionInit(action)
-            is Action.LoadMore -> actionLoadMore()
+            is Action.Load -> actionLoad()
+            is Action.OnUserClick -> actionUserClick(action)
+            is Action.QueryChanged -> actionQueryChanged(action)
+            Action.Refresh -> actionRefresh()
+            Action.Retry -> actionRetry()
         }
-    }
-
-    private fun actionLoadMore() {
-        loadNextItems()
     }
 
     private fun actionInit(action: Action.Init) {
         updateState { state ->
-            state.copy(
-                uuid = action.args.uuid,
-                type = action.args,
-                screen = FollowerScreenState.Shimmer
+            state.copy(type = action.args)
+        }
+
+        pager.state.launch { pagerState ->
+            updateState { currentState ->
+                currentState.copy(
+                    pagingState = pagerState
+                )
+            }
+        }
+
+        pager.loadState.launch { loadState ->
+            updateState { currentState ->
+                currentState.copy(
+                    screen = loadState.toUi()
+                )
+            }
+        }
+
+        pager.loadEvents.launch {
+            sendEvent(
+                Event.ShowSnackbar(Snackbar.Error("error load matches"))
             )
         }
 
-        state.map { it.query }
+        state
+            .map { it.query }
             .distinctUntilChanged()
-            .launch { query ->
-                updateState { state ->
-                    state.copy(
-                        page = DEFAULT_PAGE,
-                        query = query,
-                    )
-                }
-                loadNextItems()
-            }
-
-        interactor.followItems
-            .launch { data ->
-                val screen = if (data.isEmpty()) {
-                    FollowerScreenState.Empty
+            .launch(
+                onError = ::showError
+            ) {
+                if (pager.loadState.value is PagerLoadState.Initial) {
+                    pager.initialLoad()
                 } else {
-                    FollowerScreenState.Content.NotLoading
-                }
-                updateState { state ->
-                    state.copy(
-                        data = data.toImmutableList(),
-                        screen = screen,
-                    )
+                    pager.refresh(isForceLoad = false)
                 }
             }
     }
 
-    private fun loadNextItems() {
-        if (loadingJob?.isActive == true) return
-
-        val currentState = state.value
-
-        val loadingScreen = if (
-            currentState.screen is FollowerScreenState.Content &&
-            currentState.data.isNotEmpty()
-        ) {
-            FollowerScreenState.Content.Loading
-        } else {
-            FollowerScreenState.Shimmer
-        }
-
-        updateState { state -> state.copy(screen = loadingScreen) }
-
-        val page = if (currentState.page == DEFAULT_PAGE) {
-            FIRST_PAGE
-        } else {
-            currentState.page.inc()
-        }
-
-        launch(
-            action = {
-                when (val type = currentState.type) {
-                    is FollowerScreenArgs.Follower -> interactor.getFollowers(
-                        uuid = type.uuid,
-                        query = "", // todo add query
-                        page = page,
-                        pageSize = PAGE_SIZE
-                    )
-
-                    is FollowerScreenArgs.Following -> interactor.getFollowing(
-                        uuid = type.uuid,
-                        query = "", // todo add query
-                        page = page,
-                        pageSize = PAGE_SIZE
-                    )
-                }
-            },
-            onSuccess = {
-                updateState { state ->
-                    state.copy(
-                        page = page
-                    )
-                }
-            },
-            onError = { error ->
-                if (currentState.data.isEmpty()) {
-                    updateState { state ->
-                        state.copy(
-                            screen = FollowerScreenState.Error(error)
-                        )
-                    }
-                } else {
-                    updateState { it.copy(screen = FollowerScreenState.Content.NotLoading) }
-                    sendEvent(Event.ErrorSnackBar(error.message.orEmpty()))
-                }
-            }
-        )
+    private fun actionLoad() {
+        pager.load()
     }
 
-    companion object {
-        private const val PAGE_SIZE = 10
-        private const val FIRST_PAGE = 1
+    private fun actionUserClick(action: Action.OnUserClick) {
+        // todo ("navigate to user")
+    }
+
+    private fun actionQueryChanged(action: Action.QueryChanged) {
+        updateState { currentState ->
+            currentState.copy(
+                query = action.query
+            )
+        }
+    }
+
+    private fun actionRefresh() {
+        pager.refresh(isForceLoad = true)
+    }
+
+    private fun actionRetry() {
+        pager.retry()
+    }
+
+    private fun showError(error: Throwable) {
+        val appError = error.mapToAppError("error logout")
+        if (state.value.screen is FollowerScreenState.Content) {
+            sendEvent(
+                Event.ShowSnackbar(Snackbar.Error(appError.message))
+            )
+        } else {
+            updateState { currentState ->
+                currentState.copy(
+                    screen = FollowerScreenState.Error(appError)
+                )
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ class MatchFeedStoreImpl(
     }
 
     private fun actionFilmSwiped(action: Action.FilmSwiped) {
-        // TODO send action to backend
+        // todo send action to backend
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {

@@ -19,6 +19,7 @@ val featureFollowerModule = module {
             interactor = get(),
             appDispatcher = get(),
             router = get(),
+            pagerFactory = get(),
         )
     }
 }

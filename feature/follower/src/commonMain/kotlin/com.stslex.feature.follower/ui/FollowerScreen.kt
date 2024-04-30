@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getStore
+import com.stslex.core.ui.mvi.getStoreTest
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.follower.ui.store.FollowerScreenState
 import com.stslex.feature.follower.ui.store.FollowerStore
@@ -25,7 +25,7 @@ data class FollowerScreen(
 
     @Composable
     override fun Content() {
-        val store = getStore<FollowerStore>()
+        val store = getStoreTest<FollowerStore>()
         val state by remember { store.state }.collectAsState()
 
         LaunchedEffect(key1 = Unit) {
@@ -48,9 +48,9 @@ internal fun FollowerScreen(
     when (state.screen) {
         is FollowerScreenState.Content -> {
             LazyColumn {
-                items(state.data.size) { index ->
+                items(state.pagingState.result.size) { index ->
                     Text(
-                        "test: ${state.data[index].username}"
+                        "test: ${state.pagingState.result[index].username}"
                     )
                 }
             }

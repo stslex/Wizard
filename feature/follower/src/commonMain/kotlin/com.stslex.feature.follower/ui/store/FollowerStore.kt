@@ -1,23 +1,21 @@
 package com.stslex.feature.follower.ui.store
 
 import androidx.compose.runtime.Stable
+import com.stslex.core.ui.base.paging.PagingState
 import com.stslex.core.ui.mvi.Store
+import com.stslex.core.ui.mvi.Store.Event.Snackbar
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.follower.ui.model.FollowerModel
 import com.stslex.feature.follower.ui.store.FollowerStore.Action
 import com.stslex.feature.follower.ui.store.FollowerStore.Event
 import com.stslex.feature.follower.ui.store.FollowerStore.State
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
 
 interface FollowerStore : Store<State, Event, Action> {
 
     @Stable
     data class State(
-        val uuid: String,
-        val page: Int,
         val type: FollowerScreenArgs,
-        val data: ImmutableList<FollowerModel>,
+        val pagingState: PagingState<FollowerModel>,
         val screen: FollowerScreenState,
         val query: String
     ) : Store.State {
@@ -27,10 +25,8 @@ interface FollowerStore : Store<State, Event, Action> {
             const val DEFAULT_PAGE = -1
 
             val INITIAL = State(
-                uuid = "",
-                page = DEFAULT_PAGE,
                 type = FollowerScreenArgs.Follower(""),
-                data = emptyList<FollowerModel>().toImmutableList(),
+                pagingState = PagingState.default(),
                 screen = FollowerScreenState.Shimmer,
                 query = ""
             )
@@ -46,38 +42,27 @@ interface FollowerStore : Store<State, Event, Action> {
         ) : Action
 
         @Stable
-        data object LoadMore : Action
+        data object Load : Action
+
+        @Stable
+        data object Refresh : Action
+
+        @Stable
+        data object Retry : Action
+
+        @Stable
+        data class QueryChanged(val query: String) : Action
+
+        @Stable
+        data class OnUserClick(val uuid: String) : Action
     }
 
     @Stable
     sealed interface Event : Store.Event {
 
         @Stable
-        data class ErrorSnackBar(val message: String) : Event
+        data class ShowSnackbar(val snackbar: Snackbar) : Event
     }
 
     sealed interface Navigation : Store.Navigation
-}
-
-@Stable
-sealed interface FollowerScreenState {
-
-    @Stable
-    sealed interface Content : FollowerScreenState {
-
-        @Stable
-        data object NotLoading : Content
-
-        @Stable
-        data object Loading : Content
-    }
-
-    @Stable
-    data object Shimmer : FollowerScreenState
-
-    @Stable
-    data object Empty : FollowerScreenState
-
-    @Stable
-    data class Error(val error: Throwable) : FollowerScreenState
 }

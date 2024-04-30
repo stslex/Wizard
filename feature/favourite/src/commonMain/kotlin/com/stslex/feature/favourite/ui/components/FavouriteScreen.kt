@@ -25,7 +25,7 @@ internal fun FavouriteScreen(
         when (state.screen) {
             is FavouriteScreenState.Content -> FavouriteScreenContent(
                 state = state.screen,
-                items = state.pagingState,
+                items = state.pagingState.result,
                 query = state.query,
                 isLoading = state.isLoading,
                 onItemClick = { uuid ->

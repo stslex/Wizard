@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getStore
+import com.stslex.core.ui.mvi.getStoreTest
 import com.stslex.feature.match_feed.ui.components.MatchFeedScreenContent
 import com.stslex.feature.match_feed.ui.components.MatchFeedScreenError
 import com.stslex.feature.match_feed.ui.components.MatchFeedScreenLoading
@@ -23,7 +23,7 @@ object MatchFeedScreen : Screen {
 
     @Composable
     override fun Content() {
-        val store = getStore<MatchFeedStore>()
+        val store = getStoreTest<MatchFeedStore>()
         val state by remember { store.state }.collectAsState()
 
         LaunchedEffect(Unit) {

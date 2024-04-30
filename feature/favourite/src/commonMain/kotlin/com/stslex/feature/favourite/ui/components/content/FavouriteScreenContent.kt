@@ -37,7 +37,7 @@ internal fun FavouriteScreenContent(
                 onSearch = onSearch,
             )
             when (state) {
-                FavouriteScreenState.Content.Empty -> {
+                FavouriteScreenState.Empty -> {
                     Column {
                         if (isLoading) {
                             FavouriteScreenShimmer()
@@ -88,8 +88,14 @@ internal fun FavouriteScreenContent(
                         }
                     }
                 }
-            }
 
+                FavouriteScreenState.Content.Loading -> {
+//                    TODO()
+                }
+                FavouriteScreenState.Content.Refresh -> {
+//                    TODO()
+                }
+            }
         }
     }
 }

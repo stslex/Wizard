@@ -69,6 +69,7 @@ class MatchStoreImpl(
                 )
             }
         }
+
         pager.loadState.launch { loadState ->
             updateState { currentState ->
                 currentState.copy(
@@ -76,6 +77,7 @@ class MatchStoreImpl(
                 )
             }
         }
+
         pager.loadEvents.launch {
             sendEvent(
                 Event.ShowSnackbar(Snackbar.Error("error load matches"))
