@@ -5,13 +5,15 @@ import com.stslex.core.network.clients.match.model.response.MatchResponse
 import com.stslex.core.network.clients.match.model.response.MatchStatusResponse
 import com.stslex.core.network.clients.match.model.response.MatchUserResponse
 
-internal suspend fun MatchResponse.toData() = MatchDataModel(
+internal suspend fun MatchResponse.toData(
+    userUUID: String
+) = MatchDataModel(
     uuid = uuid,
     title = title,
     description = description,
     status = status.toData(),
     participants = participants.asyncMap { it.toData() },
-    isCreator = isCreator,
+    isCreator = userUUID == creatorUuid,
     expiresAt = expiresAt,
 )
 

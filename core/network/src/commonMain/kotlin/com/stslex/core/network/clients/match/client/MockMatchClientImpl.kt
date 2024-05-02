@@ -35,7 +35,8 @@ class MockMatchClientImpl : MatchClient {
                     description = it.description,
                     status = it.status,
                     participants = it.participants,
-                    isCreator = it.isCreator,
+                    creatorUuid = "creatorUuid",
+                    coverUrl = "coverUrl",
                     expiresAt = it.expiresAt
                 )
             },
@@ -70,10 +71,11 @@ class MockMatchClientImpl : MatchClient {
             description = "description$index",
             status = if (index % 2 == 0) MatchStatusResponse.PENDING else MatchStatusResponse.ACTIVE,
             participants = createMatchUsers(index),
-            isCreator = index % 2 == 0,
+            creatorUuid = "creatorUuid",
             createdAt = created,
             updatedAt = updated,
             expiresAt = expires,
+            coverUrl = "coverUrl"
         )
     }
 
