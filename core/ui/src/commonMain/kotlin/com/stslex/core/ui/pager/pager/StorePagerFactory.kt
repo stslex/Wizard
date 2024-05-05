@@ -5,7 +5,7 @@ import com.stslex.core.core.paging.PagingCoreItem
 import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.ui.base.paging.PagingConfig
 import com.stslex.core.ui.base.paging.PagingItem
-import com.stslex.core.ui.pager.utils.PagingMapper
+import com.stslex.core.ui.pager.mapper.PagingMapper
 
 interface StorePagerFactory {
 

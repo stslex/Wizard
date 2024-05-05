@@ -15,5 +15,8 @@ interface PagingCoreData<out T : PagingCoreItem> {
         const val DEFAULT_PAGING_TYPE = "ItemPaging"
         const val DEFAULT_APPEND_TYPE = "AppendPaging"
         const val DEFAULT_BOTTOM_TYPE = "BottomPaging"
+        const val DEFAULT_PAGING_DELAY = 300L
+        const val DEFAULT_PAGING_LOAD_SIZE = 3
+        const val DEFAULT_QUERY_LOAD_SIZE = 2
     }
 }
