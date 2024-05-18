@@ -1,5 +1,6 @@
 package com.stslex.feature.match_feed.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.match_feed.data.repository.MatchFeedMockRepositoryImpl
 import com.stslex.feature.match_feed.data.repository.MatchFeedRepository
 import com.stslex.feature.match_feed.domain.MatchFeedInteractor
@@ -14,7 +15,7 @@ val featureMatchFeedModule = module {
     factory<MatchFeedRepository> { MatchFeedMockRepositoryImpl(client = get()) }
     factory<MatchFeedInteractor> { MatchFeedInteractorImpl(repository = get()) }
     factory<MatchFeedRouter> { MatchFeedRouterImpl(navigator = get()) }
-    factory<MatchFeedStore> {
+    viewModelDefinition<MatchFeedStore, MatchFeedStoreImpl> {
         MatchFeedStoreImpl(
             interactor = get(),
             appDispatcher = get(),

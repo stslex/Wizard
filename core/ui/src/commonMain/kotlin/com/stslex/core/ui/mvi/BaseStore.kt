@@ -1,7 +1,7 @@
 package com.stslex.core.ui.mvi
 
-import cafe.adriel.voyager.core.model.StateScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.stslex.core.core.AppDispatcher
 import com.stslex.core.core.Logger
 import com.stslex.core.core.coroutine.AppCoroutineScope
@@ -16,8 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -25,7 +28,7 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val router: Router<N>,
     private val appDispatcher: AppDispatcher,
     initialState: S
-) : Store<S, E, A>, StateScreenModel<S>(initialState) {
+) : Store<S, E, A>, ViewModel() {
 
     private var _lastAction: A? = null
     protected val lastAction: A?
@@ -37,8 +40,11 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
     override val event: SharedFlow<E> = _event.asSharedFlow()
 
+    private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
+    override val state: StateFlow<S> = _state.asStateFlow()
+
     protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(
-        scope = screenModelScope,
+        scope = viewModelScope,
         appDispatcher = appDispatcher
     )
 
@@ -62,7 +68,7 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
         onError: suspend (cause: Throwable) -> Unit = {},
     ) = CoroutineExceptionHandler { _, throwable ->
         Logger.exception(throwable)
-        screenModelScope.launch(appDispatcher.default + coroutineExceptionHandler) {
+        viewModelScope.launch(appDispatcher.default + coroutineExceptionHandler) {
             onError(throwable)
         }
     }
@@ -72,7 +78,7 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
      * @param update - function that updates the state
      * */
     protected fun updateState(update: (S) -> S) {
-        mutableState.update(update)
+        _state.update(update)
     }
 
     /**
@@ -81,7 +87,7 @@ abstract class BaseStore<S : State, E : Event, A : Action, N : Navigation>(
      * @see AppDispatcher
      * */
     protected fun sendEvent(event: E) {
-        screenModelScope.launch(appDispatcher.default) {
+        viewModelScope.launch(appDispatcher.default) {
             this@BaseStore._event.emit(event)
         }
     }

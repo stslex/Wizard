@@ -1,5 +1,6 @@
 package com.stslex.feature.film.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.film.data.repository.FilmRepository
 import com.stslex.feature.film.data.repository.FilmRepositoryImpl
 import com.stslex.feature.film.domain.interactor.FilmInteractor
@@ -11,7 +12,7 @@ import com.stslex.feature.film.ui.store.FilmStoreImpl
 import org.koin.dsl.module
 
 val featureFilmModule = module {
-    factory<FilmStore> {
+    viewModelDefinition<FilmStore, FilmStoreImpl> {
         FilmStoreImpl(
             interactor = get(),
             appDispatcher = get(),

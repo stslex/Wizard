@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.core.ui.components.AppSnackbarHost
-import com.stslex.core.ui.mvi.getStoreTest
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.core.ui.mvi.setupNavigator
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.core.ui.theme.toPx
@@ -39,7 +39,7 @@ object AuthScreen : Screen {
     @Composable
     override fun Content() {
         setupNavigator()
-        val store = getStoreTest<AuthStore>()
+        val store = getStore<AuthStore>()
 
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }

@@ -1,5 +1,6 @@
 package com.stslex.feature.match.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.match.data.repository.MatchRepository
 import com.stslex.feature.match.data.repository.MatchRepositoryImpl
 import com.stslex.feature.match.domain.interactor.MatchInteractor
@@ -24,7 +25,7 @@ val featureMatchModule = module {
         )
     }
     factory<MatchRouter> { MatchRouterImpl(navigator = get()) }
-    factory<MatchStore> {
+    viewModelDefinition<MatchStore, MatchStoreImpl> {
         MatchStoreImpl(
             interactor = get(),
             router = get(),

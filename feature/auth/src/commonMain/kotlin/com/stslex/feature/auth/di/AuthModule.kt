@@ -1,5 +1,6 @@
 package com.stslex.feature.auth.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.auth.data.AuthRepository
 import com.stslex.feature.auth.data.AuthRepositoryImpl
 import com.stslex.feature.auth.domain.AuthInteractor
@@ -14,7 +15,7 @@ val featureAuthModule = module {
     factory<AuthRepository> { AuthRepositoryImpl(client = get()) }
     factory<AuthInteractor> { AuthInteractorImpl(authRepository = get()) }
     factory<AuthRouter> { AuthRouterImpl(navigator = get()) }
-    factory<AuthStore> {
+    viewModelDefinition<AuthStore, AuthStoreImpl> {
         AuthStoreImpl(
             interactor = get(),
             router = get(),

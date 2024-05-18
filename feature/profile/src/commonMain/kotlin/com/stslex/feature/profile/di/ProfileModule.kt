@@ -1,5 +1,6 @@
 package com.stslex.feature.profile.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.profile.data.repository.ProfileRepository
 import com.stslex.feature.profile.data.repository.ProfileRepositoryImpl
 import com.stslex.feature.profile.domain.interactor.ProfileInteractor
@@ -11,7 +12,7 @@ import com.stslex.feature.profile.ui.store.ProfileStoreImpl
 import org.koin.dsl.module
 
 val featureProfileModule = module {
-    factory<ProfileStore> {
+    viewModelDefinition<ProfileStore, ProfileStoreImpl> {
         ProfileStoreImpl(
             interactor = get(),
             userStore = get(),

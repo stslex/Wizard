@@ -1,5 +1,6 @@
 package com.stslex.feature.follower.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.follower.data.repository.FollowerRepository
 import com.stslex.feature.follower.data.repository.FollowerRepositoryImpl
 import com.stslex.feature.follower.domain.interactor.FollowerInteractor
@@ -14,7 +15,7 @@ val featureFollowerModule = module {
     factory<FollowerRepository> { FollowerRepositoryImpl(client = get()) }
     factory<FollowerInteractor> { FollowerInteractorImpl(repository = get()) }
     factory<FollowerRouter> { FollowerRouterImpl(navigator = get()) }
-    factory<FollowerStore> {
+    viewModelDefinition<FollowerStore, FollowerStoreImpl> {
         FollowerStoreImpl(
             interactor = get(),
             appDispatcher = get(),

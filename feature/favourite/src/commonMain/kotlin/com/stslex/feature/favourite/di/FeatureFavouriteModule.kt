@@ -1,5 +1,6 @@
 package com.stslex.feature.favourite.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.favourite.data.repository.FavouriteRepository
 import com.stslex.feature.favourite.data.repository.FavouriteRepositoryImpl
 import com.stslex.feature.favourite.domain.interactor.FavouriteInteractor
@@ -17,7 +18,7 @@ val featureFavouriteModule = module {
         FavouriteInteractorImpl(repository = get())
     }
     factory<FavouriteRouter> { FavouriteRouterImpl(navigator = get()) }
-    factory<FavouriteStore> {
+    viewModelDefinition<FavouriteStore, FavouriteStoreImpl> {
         FavouriteStoreImpl(
             interactor = get(),
             appDispatcher = get(),

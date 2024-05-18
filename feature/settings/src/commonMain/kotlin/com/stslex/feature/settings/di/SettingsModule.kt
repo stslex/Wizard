@@ -1,5 +1,6 @@
 package com.stslex.feature.settings.di
 
+import com.stslex.core.ui.mvi.viewModelDefinition
 import com.stslex.feature.settings.domain.SettingsInteractor
 import com.stslex.feature.settings.domain.SettingsInteractorImpl
 import com.stslex.feature.settings.navigation.SettingsRouter
@@ -9,7 +10,7 @@ import com.stslex.feature.settings.ui.store.SettingsStoreImpl
 import org.koin.dsl.module
 
 val featureSettingsModule = module {
-    factory<SettingsStore> {
+    viewModelDefinition<SettingsStore, SettingsStoreImpl> {
         SettingsStoreImpl(
             interactor = get(),
             appDispatcher = get(),

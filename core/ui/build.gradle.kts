@@ -41,6 +41,8 @@ kotlin {
             api(compose.components.resources)
             api(libs.bundles.voyager)
             api(libs.kamel)
+
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0-beta02")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
