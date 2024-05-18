@@ -1,5 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -15,8 +13,6 @@ kotlin {
             }
         }
     }
-
-    jvm("desktop")
 
     iosX64()
     iosArm64()
@@ -35,11 +31,6 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
-
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-        }
 
         commonMain.dependencies {
             implementation(project(":core:core"))
@@ -104,18 +95,6 @@ android {
 }
 dependencies {
     implementation(project(":feature:settings"))
-}
-
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.stslex.wizard"
-            packageVersion = "1.0.0"
-        }
-    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

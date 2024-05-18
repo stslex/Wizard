@@ -1,5 +1,3 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -16,8 +14,6 @@ kotlin {
         }
     }
 
-    jvm("desktop")
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -33,11 +29,6 @@ kotlin {
     }
 
     sourceSets {
-        val desktopMain by getting
-
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-        }
 
         commonMain.dependencies {
             implementation(project(":core:core"))
@@ -47,7 +38,6 @@ kotlin {
             api(compose.foundation)
             api(compose.material)
             api(compose.material3)
-            @OptIn(ExperimentalComposeLibrary::class)
             api(compose.components.resources)
             api(libs.bundles.voyager)
             api(libs.kamel)
