@@ -2,7 +2,7 @@ package com.stslex.feature.match.navigation
 
 import com.stslex.core.ui.navigation.AppNavigator
 import com.stslex.core.ui.navigation.AppScreen
-import com.stslex.feature.match.ui.store.MatchStore.Navigation
+import com.stslex.feature.match.ui.store.MatchStoreComponent.Navigation
 
 class MatchRouterImpl(
     private val navigator: AppNavigator

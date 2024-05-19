@@ -10,8 +10,9 @@ import com.stslex.core.ui.base.paging.PagingState
 import com.stslex.core.ui.base.paging.pagingMap
 import com.stslex.core.ui.pager.states.PagerLoadEvents
 import com.stslex.core.ui.pager.states.PagerLoadState
-import com.stslex.core.ui.pager.utils.PagingMapper
-import com.stslex.core.ui.pager.utils.PagingWorker
+import com.stslex.core.ui.pager.mapper.PagingMapper
+import com.stslex.core.ui.pager.paging_worker.PagingRequestType
+import com.stslex.core.ui.pager.paging_worker.PagingWorker
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -82,13 +83,14 @@ class StorePagerImpl<out T : PagingItem, in R : PagingCoreItem>(
     }
 
     private fun requestItems(
-        isForceLoad: Boolean
+        isForceLoad: Boolean,
+        requestType: PagingRequestType = PagingRequestType.DEFAULT
     ) {
         if (loadJob?.isActive == true && isForceLoad.not()) {
             return
         }
-        loadJob?.cancel()
-        loadJob = pagingWorker.launch(
+        pagingWorker.launch(
+            requestType = requestType,
             action = {
                 val page = state.value.page
                 val pageSize = state.value.pageSize

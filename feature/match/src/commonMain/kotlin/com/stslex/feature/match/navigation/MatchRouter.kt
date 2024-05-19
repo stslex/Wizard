@@ -1,6 +1,6 @@
 package com.stslex.feature.match.navigation
 
 import com.stslex.core.ui.mvi.Router
-import com.stslex.feature.match.ui.store.MatchStore.Navigation
+import com.stslex.feature.match.ui.store.MatchStoreComponent.Navigation
 
 interface MatchRouter : Router<Navigation>

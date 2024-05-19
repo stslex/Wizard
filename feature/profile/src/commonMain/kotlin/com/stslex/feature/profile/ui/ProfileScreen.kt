@@ -22,15 +22,15 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.core.network.api.server.model.ErrorRefresh
 import com.stslex.core.ui.components.AppSnackbarHost
-import com.stslex.core.ui.mvi.getStoreTest
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.profile.navigation.ProfileScreenArguments
 import com.stslex.feature.profile.ui.components.ProfileScreenContent
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStore
-import com.stslex.feature.profile.ui.store.ProfileStore.Action
-import com.stslex.feature.profile.ui.store.ProfileStore.Event
-import com.stslex.feature.profile.ui.store.ProfileStore.State
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Event
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
 
 data class ProfileScreen(
     val args: ProfileScreenArguments
@@ -38,7 +38,7 @@ data class ProfileScreen(
 
     @Composable
     override fun Content() {
-        val store = getStoreTest<ProfileStore>()
+        val store = getStore<ProfileStore>()
         LaunchedEffect(Unit) {
             store.sendAction(Action.Init(args = args))
         }

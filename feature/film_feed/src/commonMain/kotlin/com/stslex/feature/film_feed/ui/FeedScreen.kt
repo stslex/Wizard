@@ -9,21 +9,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getStoreTest
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.feature.film_feed.ui.components.FeedScreenContent
 import com.stslex.feature.film_feed.ui.components.FeedScreenError
 import com.stslex.feature.film_feed.ui.components.FeedScreenLoading
 import com.stslex.feature.film_feed.ui.model.ScreenState
 import com.stslex.feature.film_feed.ui.store.FeedStore
-import com.stslex.feature.film_feed.ui.store.FeedStore.Action
-import com.stslex.feature.film_feed.ui.store.FeedStore.Event
-import com.stslex.feature.film_feed.ui.store.FeedStore.State
+import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Action
+import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Event
+import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.State
 
 object FeedScreen : Screen {
 
     @Composable
     override fun Content() {
-        val store = getStoreTest<FeedStore>()
+        val store = getStore<FeedStore>()
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
             store.event.collect { event ->

@@ -1,19 +1,19 @@
 [versions]
 kotlin = "1.9.23"
-compose-plugin = "1.6.1"
+compose-plugin = "1.6.10-beta01"
 
 android-minSdk = "24"
 android-compileSdk = "34"
 android-targetSdk = "34"
 
 logback = "1.4.11"
-androidCompose = "1.6.6"
+androidCompose = "1.6.7"
 compose-compiler = "1.5.4"
 agp = "8.2.2"
 androidx-activityCompose = "1.9.0"
-androidx-core-ktx = "1.13.0"
+androidx-core-ktx = "1.13.1"
 androidx-appcompat = "1.6.1"
-androidx-material = "1.11.0"
+androidx-material = "1.12.0"
 androidx-constraintlayout = "2.1.4"
 androidx-test-junit = "1.1.5"
 androidx-espresso-core = "3.5.1"
@@ -23,7 +23,7 @@ koin = "3.4.3"
 koin-compose = "1.0.4"
 ktor = "2.3.6"
 immutableCollection = "0.3.5"
-coroutines = "1.7.3"
+coroutines = "1.8.0"
 
 voyagerVersion = "1.0.0-rc10"
 kermit = "2.0.2"
@@ -31,8 +31,8 @@ kamel = "0.9.0"
 coil = "2.5.0"
 
 buildConfig = "4.2.0"
-lifecycleRuntimeKtx = "2.7.0"
-androixComposeBom = "2024.04.01"
+lifecycleRuntimeKtx = "2.8.0"
+androixComposeBom = "2024.05.00"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }

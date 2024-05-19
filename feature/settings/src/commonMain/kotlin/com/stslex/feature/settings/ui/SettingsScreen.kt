@@ -18,19 +18,19 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.core.ui.components.AppSnackbarHost
 import com.stslex.core.ui.components.AppToolbar
-import com.stslex.core.ui.mvi.getStoreTest
+import com.stslex.core.ui.mvi.getStore
 import com.stslex.core.ui.theme.AppDimension
 import com.stslex.feature.settings.ui.components.SettingsContent
 import com.stslex.feature.settings.ui.store.SettingsStore
-import com.stslex.feature.settings.ui.store.SettingsStore.Action
-import com.stslex.feature.settings.ui.store.SettingsStore.Event
-import com.stslex.feature.settings.ui.store.SettingsStore.State
+import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Action
+import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Event
+import com.stslex.feature.settings.ui.store.SettingsStoreComponent.State
 
 object SettingsScreen : Screen {
 
     @Composable
     override fun Content() {
-        val store = getStoreTest<SettingsStore>()
+        val store = getStore<SettingsStore>()
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
         LaunchedEffect(Unit) {

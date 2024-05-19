@@ -20,7 +20,7 @@ fun ProfileScreenToolbar(
     AppToolbar(
         modifier = modifier,
         title = nickname,
-        onBackClick = onBackClick,
+        onBackClick = onBackClick.takeIf { isCurrentUser.not() },
         isActionVisible = isCurrentUser,
         actionIcon = {
             IconButton(

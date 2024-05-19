@@ -5,10 +5,12 @@ import com.stslex.core.core.paging.PagingCoreItem
 import com.stslex.core.core.paging.PagingResponse
 import com.stslex.core.ui.base.paging.PagingConfig
 import com.stslex.core.ui.base.paging.PagingItem
-import com.stslex.core.ui.pager.utils.PagingMapper
-import com.stslex.core.ui.pager.utils.PagingWorkerImpl
+import com.stslex.core.ui.pager.mapper.PagingMapper
+import com.stslex.core.ui.pager.paging_worker.PagingWorkerFactory
 
-class StorePagerFactoryImpl : StorePagerFactory {
+class StorePagerFactoryImpl(
+    private val workerFactory: PagingWorkerFactory
+) : StorePagerFactory {
 
     override fun <T : PagingItem, R : PagingCoreItem> create(
         scope: AppCoroutineScope,
@@ -17,7 +19,12 @@ class StorePagerFactoryImpl : StorePagerFactory {
         config: PagingConfig
     ): StorePager<T> {
         return StorePagerImpl(
-            pagingWorker = PagingWorkerImpl(scope = scope),
+            pagingWorker = workerFactory.create(
+                scope = scope,
+                delay = config.delay,
+                defaultLoadSize = config.defaultLoadSize,
+                queryLoadSize = config.queryLoadSize
+            ),
             request = request,
             mapper = mapper,
             pagingConfig = config

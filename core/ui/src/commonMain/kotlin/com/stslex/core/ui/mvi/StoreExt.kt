@@ -2,13 +2,15 @@ package com.stslex.core.ui.mvi
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.rememberScreenModel
-import cafe.adriel.voyager.core.screen.Screen
+import androidx.lifecycle.ViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.stslex.core.ui.navigation.AppNavigator
 import org.koin.compose.getKoin
+import org.koin.compose.koinInject
+import org.koin.core.definition.Definition
+import org.koin.core.definition.KoinDefinition
+import org.koin.core.module.Module
 import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.Qualifier
 
@@ -21,16 +23,21 @@ fun setupNavigator() {
     }
 }
 
+expect inline fun <reified T : ViewModel> Module.viewModelDefinition(
+    qualifier: Qualifier? = null,
+    noinline definition: Definition<T>
+): KoinDefinition<T>
+
+inline fun <reified T : Store<*, *, *, *>> Module.storeDefinition(
+    qualifier: Qualifier? = null,
+    noinline definition: Definition<T>
+): KoinDefinition<T> = viewModelDefinition(qualifier, definition)
+
 @Composable
-inline fun <reified T : Store<*, *, *>> Screen.getStoreTest(
+inline fun <reified T : Store<*, *, *, *>> getStore(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null
-): T {
-    val koin = getKoin()
-    return rememberScreenModel(tag = qualifier?.value) {
-        koin.get<T>(
-            qualifier,
-            parameters
-        ) as ScreenModel
-    } as T
-}
+): T = koinInject(
+    qualifier = qualifier,
+    parameters = parameters
+)
