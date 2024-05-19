@@ -39,7 +39,7 @@ class MatchFeedStore(
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {
-        navigate(Navigation.Film(action.uuid))
+        consumeNavigation(Navigation.Film(action.uuid))
     }
 
     private fun actionInit() {

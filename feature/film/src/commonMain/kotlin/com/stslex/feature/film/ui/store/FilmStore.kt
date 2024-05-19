@@ -62,7 +62,7 @@ class FilmStore(
     }
 
     private fun actionBackButtonClick() {
-        navigate(Navigation.Back)
+        consumeNavigation(Navigation.Back)
     }
 
     private fun actionInit(action: Action.Init) {

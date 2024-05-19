@@ -28,34 +28,24 @@ abstract class Store<S : State, E : Event, A : Action, N : Navigation>(
     private val router: Router<N>,
     private val appDispatcher: AppDispatcher,
     initialState: S
-) : ViewModel() {
-
-    private var _lastAction: A? = null
-    protected val lastAction: A?
-        get() = _lastAction
+) : ViewModel(), StoreAbstraction<S, E, A> {
 
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
-
-    /** Flow of events that are sent to the screen. */
-    val event: SharedFlow<E> = _event.asSharedFlow()
+    override val event: SharedFlow<E> = _event.asSharedFlow()
 
     private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
-
-    /** Flow of the state of the screen. */
-    val state: StateFlow<S> = _state.asStateFlow()
+    override val state: StateFlow<S> = _state.asStateFlow()
 
     protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(
         scope = viewModelScope,
         appDispatcher = appDispatcher
     )
 
-    /**
-     * Sends an action to the store. Checks if the action is not the same as the last action.
-     * If the action is not the same as the last action, the last action is updated.
-     * The action is then processed.
-     * @param action - action to be sent
-     */
-    fun sendAction(action: A) {
+    private var _lastAction: A? = null
+    protected val lastAction: A?
+        get() = _lastAction
+
+    override fun sendAction(action: A) {
         if (lastAction != action && action !is Action.RepeatLastAction) {
             _lastAction = action
         }
@@ -98,7 +88,7 @@ abstract class Store<S : State, E : Event, A : Action, N : Navigation>(
      * @param event - event to be passed to the router
      * @see Router
      * */
-    protected fun navigate(event: N) {
+    protected fun consumeNavigation(event: N) {
         router(event)
     }
 

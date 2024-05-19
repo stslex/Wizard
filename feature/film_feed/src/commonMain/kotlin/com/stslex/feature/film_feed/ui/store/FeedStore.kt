@@ -36,7 +36,7 @@ class FeedStore(
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {
-        navigate(Navigation.Film(action.filmId))
+        consumeNavigation(Navigation.Film(action.filmId))
     }
 
     private fun actionLoadFilms() {

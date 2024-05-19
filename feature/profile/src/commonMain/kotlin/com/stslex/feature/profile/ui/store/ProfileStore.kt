@@ -78,15 +78,15 @@ class ProfileStore(
     }
 
     private fun actionFavouriteClick() {
-        navigate(Navigation.Favourite(state.value.uuid))
+        consumeNavigation(Navigation.Favourite(state.value.uuid))
     }
 
     private fun actionFollowingClick() {
-        navigate(Navigation.Following(state.value.uuid))
+        consumeNavigation(Navigation.Following(state.value.uuid))
     }
 
     private fun actionFollowersClick() {
-        navigate(Navigation.Followers(state.value.uuid))
+        consumeNavigation(Navigation.Followers(state.value.uuid))
     }
 
     private fun actionRepeatLastAction() {
@@ -122,7 +122,7 @@ class ProfileStore(
                 interactor.logOut()
             },
             onSuccess = {
-                navigate(Navigation.LogIn)
+                consumeNavigation(Navigation.LogIn)
             },
             onError = { error ->
                 sendEvent(Event.ShowSnackbar(Snackbar.Error(error.message ?: "error logout")))
@@ -131,10 +131,10 @@ class ProfileStore(
     }
 
     private fun actionSettingsClick() {
-        navigate(Navigation.Settings)
+        consumeNavigation(Navigation.Settings)
     }
 
     private fun actionBackClick() {
-        navigate(Navigation.Back)
+        consumeNavigation(Navigation.Back)
     }
 }

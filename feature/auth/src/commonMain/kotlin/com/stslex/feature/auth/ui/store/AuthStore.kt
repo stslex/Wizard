@@ -118,7 +118,7 @@ class AuthStore(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
-                navigate(Navigation.HomeFeature)
+                consumeNavigation(Navigation.HomeFeature)
             })
     }
 
@@ -157,7 +157,7 @@ class AuthStore(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
-                navigate(Navigation.HomeFeature)
+                consumeNavigation(Navigation.HomeFeature)
             })
     }
 

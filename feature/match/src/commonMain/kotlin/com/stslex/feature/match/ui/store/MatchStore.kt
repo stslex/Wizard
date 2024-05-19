@@ -110,7 +110,7 @@ class MatchStore(
     }
 
     private fun actionOnMatchClick(action: Action.OnMatchClick) {
-        navigate(Navigation.MatchDetails(action.matchUuid))
+        consumeNavigation(Navigation.MatchDetails(action.matchUuid))
     }
 
     private fun actionRetryClick() {
@@ -127,7 +127,7 @@ class MatchStore(
                 interactor.logout()
             },
             onSuccess = {
-                navigate(Navigation.LogOut)
+                consumeNavigation(Navigation.LogOut)
             },
             onError = ::showError
         )
