@@ -30,9 +30,9 @@ import com.stslex.feature.auth.ui.components.AuthTitle
 import com.stslex.feature.auth.ui.model.screen.AuthScreenState
 import com.stslex.feature.auth.ui.model.screen.rememberAuthScreenState
 import com.stslex.feature.auth.ui.store.AuthStore
-import com.stslex.feature.auth.ui.store.AuthStore.AuthFieldsState
-import com.stslex.feature.auth.ui.store.AuthStore.Event
-import com.stslex.feature.auth.ui.store.AuthStore.ScreenLoadingState
+import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
+import com.stslex.feature.auth.ui.store.AuthStoreComponent.Event
+import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
 
 object AuthScreen : Screen {
 

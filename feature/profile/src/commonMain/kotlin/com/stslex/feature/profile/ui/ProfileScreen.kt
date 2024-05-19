@@ -28,9 +28,9 @@ import com.stslex.feature.profile.navigation.ProfileScreenArguments
 import com.stslex.feature.profile.ui.components.ProfileScreenContent
 import com.stslex.feature.profile.ui.store.ProfileScreenState
 import com.stslex.feature.profile.ui.store.ProfileStore
-import com.stslex.feature.profile.ui.store.ProfileStore.Action
-import com.stslex.feature.profile.ui.store.ProfileStore.Event
-import com.stslex.feature.profile.ui.store.ProfileStore.State
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Event
+import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
 
 data class ProfileScreen(
     val args: ProfileScreenArguments

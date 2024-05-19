@@ -9,7 +9,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.core.ui.mvi.getStore
 import com.stslex.feature.favourite.ui.components.FavouriteScreen
 import com.stslex.feature.favourite.ui.store.FavouriteStore
-import com.stslex.feature.favourite.ui.store.FavouriteStore.Action
+import com.stslex.feature.favourite.ui.store.FavouriteStoreComponent.Action
 
 data class FavouriteScreen(
     val uuid: String

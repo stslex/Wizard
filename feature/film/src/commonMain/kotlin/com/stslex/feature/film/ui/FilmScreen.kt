@@ -18,8 +18,8 @@ import com.stslex.core.ui.mvi.setupNavigator
 import com.stslex.feature.film.ui.components.FilmContentScreen
 import com.stslex.feature.film.ui.store.FilmScreenState
 import com.stslex.feature.film.ui.store.FilmStore
-import com.stslex.feature.film.ui.store.FilmStore.Action
-import com.stslex.feature.film.ui.store.FilmStore.State
+import com.stslex.feature.film.ui.store.FilmStoreComponent.Action
+import com.stslex.feature.film.ui.store.FilmStoreComponent.State
 
 data class FilmScreen(
     val id: String

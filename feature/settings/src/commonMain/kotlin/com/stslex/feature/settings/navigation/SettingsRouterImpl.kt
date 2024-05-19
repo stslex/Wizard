@@ -2,7 +2,7 @@ package com.stslex.feature.settings.navigation
 
 import com.stslex.core.ui.navigation.AppNavigator
 import com.stslex.core.ui.navigation.AppScreen
-import com.stslex.feature.settings.ui.store.SettingsStore.Navigation
+import com.stslex.feature.settings.ui.store.SettingsStoreComponent.Navigation
 
 class SettingsRouterImpl(
     private val navigator: AppNavigator

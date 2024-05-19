@@ -14,9 +14,9 @@ import com.stslex.feature.match_feed.ui.components.MatchFeedScreenContent
 import com.stslex.feature.match_feed.ui.components.MatchFeedScreenError
 import com.stslex.feature.match_feed.ui.components.MatchFeedScreenLoading
 import com.stslex.feature.match_feed.ui.store.MatchFeedStore
-import com.stslex.feature.match_feed.ui.store.MatchFeedStore.Action
-import com.stslex.feature.match_feed.ui.store.MatchFeedStore.Event.ErrorSnackBar
-import com.stslex.feature.match_feed.ui.store.MatchFeedStore.State
+import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Action
+import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Event.ErrorSnackBar
+import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.State
 import com.stslex.feature.match_feed.ui.store.ScreenState
 
 object MatchFeedScreen : Screen {

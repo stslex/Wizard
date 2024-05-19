@@ -19,9 +19,9 @@ import com.stslex.feature.match.ui.components.MatchScreenError
 import com.stslex.feature.match.ui.components.MatchScreenShimmer
 import com.stslex.feature.match.ui.store.MatchScreenState
 import com.stslex.feature.match.ui.store.MatchStore
-import com.stslex.feature.match.ui.store.MatchStore.Action
-import com.stslex.feature.match.ui.store.MatchStore.Event
-import com.stslex.feature.match.ui.store.MatchStore.State
+import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
+import com.stslex.feature.match.ui.store.MatchStoreComponent.Event
+import com.stslex.feature.match.ui.store.MatchStoreComponent.State
 
 data class MatchScreen(
     private val args: MatchScreenArgs

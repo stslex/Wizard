@@ -16,8 +16,8 @@ import com.stslex.core.ui.mvi.getStore
 import com.stslex.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.feature.follower.ui.store.FollowerScreenState
 import com.stslex.feature.follower.ui.store.FollowerStore
-import com.stslex.feature.follower.ui.store.FollowerStore.Action
-import com.stslex.feature.follower.ui.store.FollowerStore.State
+import com.stslex.feature.follower.ui.store.FollowerStoreComponent.Action
+import com.stslex.feature.follower.ui.store.FollowerStoreComponent.State
 
 data class FollowerScreen(
     val args: FollowerScreenArgs

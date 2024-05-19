@@ -2,6 +2,7 @@ package com.stslex.core.ui.mvi
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.ViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.stslex.core.ui.navigation.AppNavigator
@@ -22,16 +23,21 @@ fun setupNavigator() {
     }
 }
 
-expect inline fun <reified S : Store<*, *, *>, reified T : BaseStore<*, *, *, *>> Module.viewModelDefinition(
+expect inline fun <reified T : ViewModel> Module.viewModelDefinition(
     qualifier: Qualifier? = null,
     noinline definition: Definition<T>
-): KoinDefinition<S>
+): KoinDefinition<T>
+
+inline fun <reified T : Store<*, *, *, *>> Module.storeDefinition(
+    qualifier: Qualifier? = null,
+    noinline definition: Definition<T>
+): KoinDefinition<T> = viewModelDefinition(qualifier, definition)
 
 @Composable
-inline fun <reified S : Store<*, *, *>> getStore(
+inline fun <reified T : Store<*, *, *, *>> getStore(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null
-): S = koinInject(
+): T = koinInject(
     qualifier = qualifier,
     parameters = parameters
 )

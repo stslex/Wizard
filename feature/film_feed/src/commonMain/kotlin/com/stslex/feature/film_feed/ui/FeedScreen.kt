@@ -15,9 +15,9 @@ import com.stslex.feature.film_feed.ui.components.FeedScreenError
 import com.stslex.feature.film_feed.ui.components.FeedScreenLoading
 import com.stslex.feature.film_feed.ui.model.ScreenState
 import com.stslex.feature.film_feed.ui.store.FeedStore
-import com.stslex.feature.film_feed.ui.store.FeedStore.Action
-import com.stslex.feature.film_feed.ui.store.FeedStore.Event
-import com.stslex.feature.film_feed.ui.store.FeedStore.State
+import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Action
+import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Event
+import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.State
 
 object FeedScreen : Screen {
 

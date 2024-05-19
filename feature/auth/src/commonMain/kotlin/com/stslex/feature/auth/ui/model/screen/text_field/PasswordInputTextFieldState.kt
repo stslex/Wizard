@@ -5,10 +5,10 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.platform.LocalHapticFeedback
-import com.stslex.feature.auth.ui.model.screen.text_field.hidden.HiddenState
 import com.stslex.feature.auth.ui.model.screen.text_field.base.PasswordTextFieldState
-import com.stslex.feature.auth.ui.store.AuthStore.Action.InputAction
-import com.stslex.feature.auth.ui.store.AuthStore.AuthFieldsState
+import com.stslex.feature.auth.ui.model.screen.text_field.hidden.HiddenState
+import com.stslex.feature.auth.ui.store.AuthStoreComponent.Action.InputAction
+import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
 
 @Stable
 data class PasswordInputTextFieldState(
