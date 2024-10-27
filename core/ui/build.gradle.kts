@@ -42,7 +42,7 @@ kotlin {
             api(libs.bundles.voyager)
             api(libs.kamel)
 
-            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0-beta02")
+            implementation(libs.lifecycle.viewmodel.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -55,7 +55,7 @@ kotlin {
         }
         iosMain.dependencies {
             // TODO research TLS PROBLEM
-            implementation("io.ktor:ktor-client-darwin:2.3.2")
+            implementation(libs.ktor.client.darwin)
         }
         dependencies {
             debugApi(libs.compose.ui.tooling)

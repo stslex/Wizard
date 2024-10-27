@@ -1,38 +1,39 @@
 [versions]
 kotlin = "1.9.23"
-compose-plugin = "1.6.10-beta01"
+compose-plugin = "1.7.0"
 
 android-minSdk = "24"
 android-compileSdk = "34"
 android-targetSdk = "34"
 
+lifecycleViewmodelCompose = "2.8.2"
 logback = "1.4.11"
-androidCompose = "1.6.7"
+androidCompose = "1.7.4"
 compose-compiler = "1.5.4"
 agp = "8.2.2"
-androidx-activityCompose = "1.9.0"
+androidx-activityCompose = "1.9.3"
 androidx-core-ktx = "1.13.1"
-androidx-appcompat = "1.6.1"
+androidx-appcompat = "1.7.0"
 androidx-material = "1.12.0"
 androidx-constraintlayout = "2.1.4"
-androidx-test-junit = "1.1.5"
-androidx-espresso-core = "3.5.1"
+androidx-test-junit = "1.2.1"
+androidx-espresso-core = "3.6.1"
 junit = "4.13.2"
 
-koin = "3.4.3"
-koin-compose = "1.0.4"
+koin = "3.5.6"
+koin-compose = "1.1.5"
 ktor = "2.3.6"
 immutableCollection = "0.3.5"
-coroutines = "1.8.0"
+coroutines = "1.8.1"
 
 voyagerVersion = "1.0.0-rc10"
-kermit = "2.0.2"
+kermit = "2.0.3"
 kamel = "0.9.0"
 coil = "2.5.0"
 
 buildConfig = "4.2.0"
-lifecycleRuntimeKtx = "2.8.0"
-androixComposeBom = "2024.05.00"
+lifecycleRuntimeKtx = "2.8.6"
+androixComposeBom = "2024.10.00"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -58,6 +59,8 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerVersion" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyagerVersion" }
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyagerVersion" }
@@ -102,6 +105,7 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
+
 [bundles]
 voyager = [
     "voyager-navigator",
