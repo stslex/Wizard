@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinCocoapods)
-    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
@@ -42,7 +43,7 @@ kotlin {
             api(libs.bundles.voyager)
             api(libs.kamel)
 
-            implementation(libs.lifecycle.viewmodel.compose)
+            implementation(libs.lifecycle.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
