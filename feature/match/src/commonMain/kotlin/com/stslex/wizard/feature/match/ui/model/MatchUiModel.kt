@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match.ui.model
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.paging.PagingItem
+import com.stslex.wizard.core.ui.base.paging.PagingItem
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

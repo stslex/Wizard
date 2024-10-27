@@ -3,7 +3,7 @@ package com.stslex.wizard.core.ui.base
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.stslex.core.network.utils.currentTimeMs
+import com.stslex.wizard.core.network.utils.currentTimeMs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

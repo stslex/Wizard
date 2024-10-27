@@ -17,13 +17,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.core.ui.base.paging.PagingColumn
-import com.stslex.core.ui.base.paging.PagingUiState
-import com.stslex.core.ui.base.shimmerLoadingAnimation
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.base.paging.PagingColumn
+import com.stslex.wizard.core.ui.base.paging.PagingUiState
+import com.stslex.wizard.core.ui.base.shimmerLoadingAnimation
+import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.match.ui.model.MatchUiModel
-import com.stslex.feature.match.ui.store.MatchScreenState
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
+import com.stslex.wizard.feature.match.ui.store.MatchScreenState
+import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Action
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

@@ -25,7 +25,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.stslex.core.ui.theme.toPx
+import com.stslex.wizard.core.ui.theme.toPx
 import kotlin.math.roundToInt
 
 fun Modifier.shimmerLoadingAnimation(

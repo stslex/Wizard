@@ -1,7 +1,7 @@
 package com.stslex.wizard.core.ui.base
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.network.api.server.model.ErrorRefresh
+import com.stslex.wizard.core.network.api.server.model.ErrorRefresh
 
 @Stable
 sealed class AppError(open val message: String) {

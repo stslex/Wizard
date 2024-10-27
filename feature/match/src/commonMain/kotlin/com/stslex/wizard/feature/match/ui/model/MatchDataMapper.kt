@@ -1,11 +1,11 @@
 package com.stslex.wizard.feature.match.ui.model
 
 import com.stslex.wizard.core.core.asyncMap
-import com.stslex.core.ui.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.pager.states.PagerLoadState
 import com.stslex.wizard.feature.match.domain.model.MatchDomainModel
-import com.stslex.feature.match.domain.model.MatchDomainStatus
-import com.stslex.feature.match.domain.model.MatchUserDomainModel
-import com.stslex.feature.match.ui.store.MatchScreenState
+import com.stslex.wizard.feature.match.domain.model.MatchDomainStatus
+import com.stslex.wizard.feature.match.domain.model.MatchUserDomainModel
+import com.stslex.wizard.feature.match.ui.store.MatchScreenState
 import kotlinx.collections.immutable.toImmutableList
 
 internal suspend fun MatchDomainModel.toUi() =

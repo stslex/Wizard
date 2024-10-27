@@ -9,9 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import com.stslex.core.ui.base.image.NetworkImage
-import com.stslex.core.ui.theme.AppDimension
-import com.stslex.feature.profile.ui.model.ProfileAvatarModel
+import com.stslex.wizard.core.ui.base.image.NetworkImage
+import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.feature.profile.ui.model.ProfileAvatarModel
 
 @Composable
 fun ProfileAvatar(

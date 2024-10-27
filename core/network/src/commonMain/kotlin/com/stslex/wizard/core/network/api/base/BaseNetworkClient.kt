@@ -1,9 +1,9 @@
 package com.stslex.wizard.core.network.api.base
 
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.core.network.api.base.NetworkClientBuilder.setupDefaultRequest
-import com.stslex.core.network.api.base.NetworkClientBuilder.setupLogging
-import com.stslex.core.network.api.base.NetworkClientBuilder.setupNegotiation
+import com.stslex.wizard.core.network.api.base.NetworkClientBuilder.setupDefaultRequest
+import com.stslex.wizard.core.network.api.base.NetworkClientBuilder.setupLogging
+import com.stslex.wizard.core.network.api.base.NetworkClientBuilder.setupNegotiation
 import com.stslex.wizard.core.network.api.base.model.DefaultRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO

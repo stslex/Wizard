@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.settings.ui.store
 
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.core.ui.mvi.Store
-import com.stslex.core.ui.mvi.StoreComponent.Event.Snackbar
+import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
 import com.stslex.wizard.feature.settings.domain.SettingsInteractor
 import com.stslex.wizard.feature.settings.navigation.SettingsRouter
 import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Action

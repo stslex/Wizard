@@ -5,9 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import com.stslex.core.network.utils.AppKamelConfig
-import io.kamel.image.config.LocalKamelConfig
 
 @Composable
 fun AppTheme(
@@ -23,9 +20,8 @@ fun AppTheme(
         colorScheme = colors,
         content = content
     )
+// todo kamel migration test
 //    CompositionLocalProvider(
 //        LocalKamelConfig provides AppKamelConfig.KamelLoggingConfig
-//    ) {
-//
-//    }
+//    ) {}
 }

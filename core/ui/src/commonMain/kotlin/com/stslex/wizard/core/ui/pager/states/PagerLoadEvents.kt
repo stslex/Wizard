@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.ui.pager.states
 
-import com.stslex.core.ui.base.AppError
+import com.stslex.wizard.core.ui.base.AppError
 
 sealed interface PagerLoadEvents {
 

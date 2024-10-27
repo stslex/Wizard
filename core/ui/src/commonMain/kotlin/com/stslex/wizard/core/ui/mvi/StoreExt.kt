@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.ViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.stslex.core.ui.navigation.AppNavigator
+import com.stslex.wizard.core.ui.navigation.AppNavigator
 import org.koin.compose.getKoin
 import org.koin.compose.koinInject
 import org.koin.core.definition.Definition

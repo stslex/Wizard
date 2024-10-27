@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.film_feed.navigation
 
-import com.stslex.core.ui.navigation.AppNavigator
-import com.stslex.core.ui.navigation.AppScreen
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent
+import com.stslex.wizard.core.ui.navigation.AppNavigator
+import com.stslex.wizard.core.ui.navigation.AppScreen
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent
 
 class FeedScreenRouterImpl(
     private val navigator: AppNavigator

@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.film_feed.data.repository
 
-import com.stslex.feature.film_feed.data.model.FeedDataModel
+import com.stslex.wizard.feature.film_feed.data.model.FeedDataModel
 
 interface FeedRepository {
 

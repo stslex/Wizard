@@ -9,15 +9,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getStore
-import com.stslex.feature.film_feed.ui.components.FeedScreenContent
-import com.stslex.feature.film_feed.ui.components.FeedScreenError
-import com.stslex.feature.film_feed.ui.components.FeedScreenLoading
+import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenContent
+import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenError
+import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenLoading
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
-import com.stslex.feature.film_feed.ui.store.FeedStore
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Action
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Event
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.State
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStore
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Action
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Event
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.State
 
 object FeedScreen : Screen {
 

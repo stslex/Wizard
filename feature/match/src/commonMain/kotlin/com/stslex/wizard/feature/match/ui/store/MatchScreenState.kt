@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.AppError
+import com.stslex.wizard.core.ui.base.AppError
 
 @Stable
 sealed interface MatchScreenState {

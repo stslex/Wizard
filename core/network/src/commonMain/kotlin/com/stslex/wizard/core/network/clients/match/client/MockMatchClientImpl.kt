@@ -1,13 +1,13 @@
 package com.stslex.wizard.core.network.clients.match.client
 
 import com.stslex.wizard.core.core.paging.PagingResponse
-import com.stslex.core.network.clients.match.model.request.MatchCreateRequest
-import com.stslex.core.network.clients.match.model.response.MatchDetailResponse
-import com.stslex.core.network.clients.match.model.response.MatchResponse
-import com.stslex.core.network.clients.match.model.response.MatchStatusResponse
-import com.stslex.core.network.clients.match.model.response.MatchUserResponse
-import com.stslex.core.network.model.PagingRequest
-import com.stslex.core.network.utils.currentTimeMs
+import com.stslex.wizard.core.network.clients.match.model.request.MatchCreateRequest
+import com.stslex.wizard.core.network.clients.match.model.response.MatchDetailResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchStatusResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchUserResponse
+import com.stslex.wizard.core.network.model.PagingRequest
+import com.stslex.wizard.core.network.utils.currentTimeMs
 import kotlinx.coroutines.delay
 
 class MockMatchClientImpl : MatchClient {

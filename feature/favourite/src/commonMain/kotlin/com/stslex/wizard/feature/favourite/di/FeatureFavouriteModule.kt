@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.favourite.di
 
-import com.stslex.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeDefinition
 import com.stslex.wizard.feature.favourite.data.repository.FavouriteRepository
 import com.stslex.wizard.feature.favourite.data.repository.FavouriteRepositoryImpl
 import com.stslex.wizard.feature.favourite.domain.interactor.FavouriteInteractor

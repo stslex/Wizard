@@ -2,8 +2,8 @@ package com.stslex.wizard.core.network.clients.film.client
 
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.randomUuid
-import com.stslex.core.network.clients.film.model.FilmItemNetwork
-import com.stslex.core.network.clients.film.model.FilmListNetwork
+import com.stslex.wizard.core.network.clients.film.model.FilmItemNetwork
+import com.stslex.wizard.core.network.clients.film.model.FilmListNetwork
 import com.stslex.wizard.core.network.clients.film.model.FilmTrailerNetwork
 import com.stslex.wizard.core.network.clients.film.model.MovieNetwork
 import kotlinx.coroutines.delay

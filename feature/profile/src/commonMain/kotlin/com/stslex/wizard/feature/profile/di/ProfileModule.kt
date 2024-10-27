@@ -1,13 +1,13 @@
 package com.stslex.wizard.feature.profile.di
 
-import com.stslex.core.ui.mvi.storeDefinition
-import com.stslex.feature.profile.data.repository.ProfileRepository
-import com.stslex.feature.profile.data.repository.ProfileRepositoryImpl
-import com.stslex.feature.profile.domain.interactor.ProfileInteractor
-import com.stslex.feature.profile.domain.interactor.ProfileInteractorImpl
-import com.stslex.feature.profile.navigation.ProfileRouter
-import com.stslex.feature.profile.navigation.ProfileRouterImpl
-import com.stslex.feature.profile.ui.store.ProfileStore
+import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.feature.profile.data.repository.ProfileRepository
+import com.stslex.wizard.feature.profile.data.repository.ProfileRepositoryImpl
+import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
+import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractorImpl
+import com.stslex.wizard.feature.profile.navigation.ProfileRouter
+import com.stslex.wizard.feature.profile.navigation.ProfileRouterImpl
+import com.stslex.wizard.feature.profile.ui.store.ProfileStore
 import org.koin.dsl.module
 
 val featureProfileModule = module {

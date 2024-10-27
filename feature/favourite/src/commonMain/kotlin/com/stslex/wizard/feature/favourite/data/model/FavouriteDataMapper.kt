@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.favourite.data.model
 
-import com.stslex.core.network.clients.profile.model.response.UserFavouriteResultResponse
+import com.stslex.wizard.core.network.clients.profile.model.response.UserFavouriteResultResponse
 
 fun UserFavouriteResultResponse.toData() = FavouriteDataModel(
     uuid = uuid,

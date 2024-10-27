@@ -13,8 +13,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getStore
-import com.stslex.core.ui.mvi.setupNavigator
+import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.mvi.setupNavigator
 import com.stslex.wizard.feature.film.ui.components.FilmContentScreen
 import com.stslex.wizard.feature.film.ui.store.FilmScreenState
 import com.stslex.wizard.feature.film.ui.store.FilmStore

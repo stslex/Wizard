@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.feature.profile.ui.model.ProfileModel
+import com.stslex.wizard.feature.profile.ui.model.ProfileModel
 
 @Stable
 sealed interface ProfileScreenState {

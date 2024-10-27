@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Place
@@ -51,13 +52,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.stslex.wizard.core.ui.base.SwipeScrollConnection
-import com.stslex.core.ui.base.SwipeState
-import com.stslex.core.ui.base.image.NetworkImage
-import com.stslex.core.ui.base.onClick
-import com.stslex.core.ui.base.onClickDelay
-import com.stslex.core.ui.theme.AppDimension
-import com.stslex.core.ui.theme.toDp
-import com.stslex.core.ui.theme.toPx
+import com.stslex.wizard.core.ui.base.SwipeState
+import com.stslex.wizard.core.ui.base.image.NetworkImage
+import com.stslex.wizard.core.ui.base.onClick
+import com.stslex.wizard.core.ui.base.onClickDelay
+import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.theme.toDp
+import com.stslex.wizard.core.ui.theme.toPx
 import com.stslex.wizard.feature.film.ui.model.Film
 
 @OptIn(ExperimentalMaterialApi::class)

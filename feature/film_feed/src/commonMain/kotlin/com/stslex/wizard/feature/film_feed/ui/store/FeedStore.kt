@@ -3,15 +3,15 @@ package com.stslex.wizard.feature.film_feed.ui.store
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
-import com.stslex.core.ui.mvi.Store
-import com.stslex.feature.film_feed.domain.interactor.FeedInteractor
+import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.feature.film_feed.domain.interactor.FeedInteractor
 import com.stslex.wizard.feature.film_feed.navigation.FeedScreenRouter
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
-import com.stslex.feature.film_feed.ui.model.toUI
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Action
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Event
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.Navigation
-import com.stslex.feature.film_feed.ui.store.FeedStoreComponent.State
+import com.stslex.wizard.feature.film_feed.ui.model.toUI
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Action
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Event
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Navigation
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.State
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 

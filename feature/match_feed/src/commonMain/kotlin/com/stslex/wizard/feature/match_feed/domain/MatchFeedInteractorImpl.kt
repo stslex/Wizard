@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.match_feed.domain
 
 import com.stslex.wizard.feature.match_feed.data.repository.MatchFeedRepository
-import com.stslex.feature.match_feed.domain.model.MatchDomain
-import com.stslex.feature.match_feed.domain.model.MatchFilmsPagingDomain
-import com.stslex.feature.match_feed.domain.model.toDomain
+import com.stslex.wizard.feature.match_feed.domain.model.MatchDomain
+import com.stslex.wizard.feature.match_feed.domain.model.MatchFilmsPagingDomain
+import com.stslex.wizard.feature.match_feed.domain.model.toDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

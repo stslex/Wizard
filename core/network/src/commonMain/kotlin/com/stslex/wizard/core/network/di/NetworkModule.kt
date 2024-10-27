@@ -1,25 +1,25 @@
 package com.stslex.wizard.core.network.di
 
-import com.stslex.core.network.api.kinopoisk.api.KinopoiskApiClient
-import com.stslex.core.network.api.kinopoisk.api.KinopoiskApiClientImpl
+import com.stslex.wizard.core.network.api.kinopoisk.api.KinopoiskApiClient
+import com.stslex.wizard.core.network.api.kinopoisk.api.KinopoiskApiClientImpl
 import com.stslex.wizard.core.network.api.kinopoisk.source.KinopoiskNetworkClient
-import com.stslex.core.network.api.kinopoisk.source.KinopoiskNetworkClientImpl
-import com.stslex.core.network.api.server.client.ServerApiClient
-import com.stslex.core.network.api.server.client.ServerApiClientImpl
-import com.stslex.core.network.api.server.error_handler.ErrorHandler
-import com.stslex.core.network.api.server.error_handler.ErrorHandlerImpl
-import com.stslex.core.network.api.server.http_client.ServerHttpClient
+import com.stslex.wizard.core.network.api.kinopoisk.source.KinopoiskNetworkClientImpl
+import com.stslex.wizard.core.network.api.server.client.ServerApiClient
+import com.stslex.wizard.core.network.api.server.client.ServerApiClientImpl
+import com.stslex.wizard.core.network.api.server.error_handler.ErrorHandler
+import com.stslex.wizard.core.network.api.server.error_handler.ErrorHandlerImpl
+import com.stslex.wizard.core.network.api.server.http_client.ServerHttpClient
 import com.stslex.wizard.core.network.api.server.http_client.ServerHttpClientImpl
-import com.stslex.core.network.clients.auth.client.AuthClient
-import com.stslex.core.network.clients.auth.client.AuthClientImpl
-import com.stslex.core.network.clients.film.client.FilmClient
-import com.stslex.core.network.clients.film.client.MockFilmClientImpl
+import com.stslex.wizard.core.network.clients.auth.client.AuthClient
+import com.stslex.wizard.core.network.clients.auth.client.AuthClientImpl
+import com.stslex.wizard.core.network.clients.film.client.FilmClient
+import com.stslex.wizard.core.network.clients.film.client.MockFilmClientImpl
 import com.stslex.wizard.core.network.clients.match.client.MatchClient
-import com.stslex.core.network.clients.match.client.MockMatchClientImpl
-import com.stslex.core.network.clients.profile.client.ProfileClient
-import com.stslex.core.network.clients.profile.client.ProfileClientImpl
-import com.stslex.core.network.utils.token.AuthController
-import com.stslex.core.network.utils.token.AuthControllerImpl
+import com.stslex.wizard.core.network.clients.match.client.MockMatchClientImpl
+import com.stslex.wizard.core.network.clients.profile.client.ProfileClient
+import com.stslex.wizard.core.network.clients.profile.client.ProfileClientImpl
+import com.stslex.wizard.core.network.utils.token.AuthController
+import com.stslex.wizard.core.network.utils.token.AuthControllerImpl
 import org.koin.dsl.module
 
 val coreNetworkModule = module {

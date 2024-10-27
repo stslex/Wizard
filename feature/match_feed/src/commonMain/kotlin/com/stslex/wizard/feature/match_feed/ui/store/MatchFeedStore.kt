@@ -2,14 +2,14 @@ package com.stslex.wizard.feature.match_feed.ui.store
 
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
-import com.stslex.core.ui.mvi.Store
-import com.stslex.feature.match_feed.domain.MatchFeedInteractor
-import com.stslex.feature.match_feed.navigation.MatchFeedRouter
-import com.stslex.feature.match_feed.ui.model.toUI
-import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Action
-import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Event
-import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.Navigation
-import com.stslex.feature.match_feed.ui.store.MatchFeedStoreComponent.State
+import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
+import com.stslex.wizard.feature.match_feed.navigation.MatchFeedRouter
+import com.stslex.wizard.feature.match_feed.ui.model.toUI
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.Action
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.Event
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.Navigation
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.State
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 

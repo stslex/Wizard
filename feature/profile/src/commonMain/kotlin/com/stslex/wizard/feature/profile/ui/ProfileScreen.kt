@@ -20,17 +20,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.network.api.server.model.ErrorRefresh
-import com.stslex.core.ui.components.AppSnackbarHost
-import com.stslex.core.ui.mvi.getStore
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.network.api.server.model.ErrorRefresh
+import com.stslex.wizard.core.ui.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.profile.navigation.ProfileScreenArguments
-import com.stslex.feature.profile.ui.components.ProfileScreenContent
-import com.stslex.feature.profile.ui.store.ProfileScreenState
-import com.stslex.feature.profile.ui.store.ProfileStore
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Event
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
+import com.stslex.wizard.feature.profile.ui.components.ProfileScreenContent
+import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
+import com.stslex.wizard.feature.profile.ui.store.ProfileStore
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Event
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.State
 
 data class ProfileScreen(
     val args: ProfileScreenArguments

@@ -10,18 +10,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.components.AppSnackbarHost
-import com.stslex.core.ui.mvi.getStore
-import com.stslex.core.ui.navigation.args.MatchScreenArgs
-import com.stslex.feature.match.ui.components.MatchScreenContent
-import com.stslex.feature.match.ui.components.MatchScreenEmpty
-import com.stslex.feature.match.ui.components.MatchScreenError
-import com.stslex.feature.match.ui.components.MatchScreenShimmer
-import com.stslex.feature.match.ui.store.MatchScreenState
-import com.stslex.feature.match.ui.store.MatchStore
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Action
-import com.stslex.feature.match.ui.store.MatchStoreComponent.Event
-import com.stslex.feature.match.ui.store.MatchStoreComponent.State
+import com.stslex.wizard.core.ui.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.navigation.args.MatchScreenArgs
+import com.stslex.wizard.feature.match.ui.components.MatchScreenContent
+import com.stslex.wizard.feature.match.ui.components.MatchScreenEmpty
+import com.stslex.wizard.feature.match.ui.components.MatchScreenError
+import com.stslex.wizard.feature.match.ui.components.MatchScreenShimmer
+import com.stslex.wizard.feature.match.ui.store.MatchScreenState
+import com.stslex.wizard.feature.match.ui.store.MatchStore
+import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Action
+import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Event
+import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.State
 
 data class MatchScreen(
     private val args: MatchScreenArgs

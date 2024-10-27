@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.match_feed.domain.model
 
-import com.stslex.feature.match_feed.data.model.FilmData
-import com.stslex.feature.match_feed.data.model.MatchData
-import com.stslex.feature.match_feed.data.model.MatchFilmsPagingData
-import com.stslex.feature.match_feed.data.model.MatchParticipantData
+import com.stslex.wizard.feature.match_feed.data.model.FilmData
+import com.stslex.wizard.feature.match_feed.data.model.MatchData
+import com.stslex.wizard.feature.match_feed.data.model.MatchFilmsPagingData
+import com.stslex.wizard.feature.match_feed.data.model.MatchParticipantData
 
 fun MatchData.toDomain() = MatchDomain(
     uuid = uuid,

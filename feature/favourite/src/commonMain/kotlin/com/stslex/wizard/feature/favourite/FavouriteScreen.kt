@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.favourite.ui.components.FavouriteScreen
 import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore
 import com.stslex.wizard.feature.favourite.ui.store.FavouriteStoreComponent.Action

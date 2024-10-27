@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.profile.data.repository
 
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.core.network.clients.profile.client.ProfileClient
-import com.stslex.feature.profile.data.model.ProfileDataModel
-import com.stslex.feature.profile.data.model.toData
+import com.stslex.wizard.core.network.clients.profile.client.ProfileClient
+import com.stslex.wizard.feature.profile.data.model.ProfileDataModel
+import com.stslex.wizard.feature.profile.data.model.toData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

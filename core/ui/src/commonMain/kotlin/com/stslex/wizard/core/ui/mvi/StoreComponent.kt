@@ -2,7 +2,7 @@ package com.stslex.wizard.core.ui.mvi
 
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.components.SnackbarType
+import com.stslex.wizard.core.ui.components.SnackbarType
 
 interface StoreComponent {
 

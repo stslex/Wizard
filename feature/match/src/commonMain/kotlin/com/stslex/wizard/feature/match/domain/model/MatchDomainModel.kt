@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.match.domain.model
 
-import com.stslex.core.ui.base.paging.PagingItem
+import com.stslex.wizard.core.ui.base.paging.PagingItem
 
 data class MatchDomainModel(
     override val uuid: String,

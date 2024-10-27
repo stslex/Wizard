@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.follower.di
 
-import com.stslex.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeDefinition
 import com.stslex.wizard.feature.follower.data.repository.FollowerRepository
 import com.stslex.wizard.feature.follower.data.repository.FollowerRepositoryImpl
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor

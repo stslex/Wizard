@@ -1,10 +1,10 @@
 package com.stslex.wizard.core.network.api.server.http_client
 
 import Wizard.core.network.BuildConfig
-import com.stslex.core.network.api.base.NetworkClientBuilder.setupLogging
-import com.stslex.core.network.api.base.NetworkClientBuilder.setupNegotiation
-import com.stslex.core.network.api.server.error_handler.ErrorHandler
-import com.stslex.core.network.utils.token.AuthController
+import com.stslex.wizard.core.network.api.base.NetworkClientBuilder.setupLogging
+import com.stslex.wizard.core.network.api.base.NetworkClientBuilder.setupNegotiation
+import com.stslex.wizard.core.network.api.server.error_handler.ErrorHandler
+import com.stslex.wizard.core.network.utils.token.AuthController
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.HttpResponseValidator

@@ -23,9 +23,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
-import com.stslex.core.ui.base.image.NetworkImage
-import com.stslex.core.ui.base.onClickDelay
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.base.image.NetworkImage
+import com.stslex.wizard.core.ui.base.onClickDelay
+import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.film_feed.ui.model.FilmModel
 import kotlinx.collections.immutable.ImmutableList
 

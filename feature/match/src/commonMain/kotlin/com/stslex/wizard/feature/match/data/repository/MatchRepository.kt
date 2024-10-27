@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match.data.repository
 
 import com.stslex.wizard.core.core.paging.PagingResponse
-import com.stslex.feature.match.data.model.MatchDataModel
+import com.stslex.wizard.feature.match.data.model.MatchDataModel
 
 interface MatchRepository {
 

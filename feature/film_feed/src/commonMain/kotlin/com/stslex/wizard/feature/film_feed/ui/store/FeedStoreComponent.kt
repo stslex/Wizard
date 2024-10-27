@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film_feed.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.mvi.StoreComponent
+import com.stslex.wizard.core.ui.mvi.StoreComponent
 import com.stslex.wizard.feature.film_feed.ui.model.FilmModel
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
 import kotlinx.collections.immutable.ImmutableList

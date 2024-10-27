@@ -35,10 +35,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import com.stslex.core.ui.base.image.NetworkImage
-import com.stslex.core.ui.base.onClickDelay
-import com.stslex.core.ui.theme.AppDimension
-import com.stslex.feature.match_feed.ui.model.FilmUi
+import com.stslex.wizard.core.ui.base.image.NetworkImage
+import com.stslex.wizard.core.ui.base.onClickDelay
+import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.feature.match_feed.ui.model.FilmUi
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged

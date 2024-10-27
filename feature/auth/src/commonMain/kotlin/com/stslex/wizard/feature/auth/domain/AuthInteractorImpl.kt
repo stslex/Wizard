@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.auth.domain
 
-import com.stslex.feature.auth.data.AuthRepository
+import com.stslex.wizard.feature.auth.data.AuthRepository
 
 class AuthInteractorImpl(
     private val authRepository: AuthRepository

@@ -1,9 +1,9 @@
 package com.stslex.wizard.core.network.clients.film.model
 
-import com.stslex.core.network.api.kinopoisk.model.network.FilmItemKinopoisk
+import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmItemKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmListKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.MovieKinopoisk
-import com.stslex.core.network.api.kinopoisk.model.network.TrailerItemKinopoisk
+import com.stslex.wizard.core.network.api.kinopoisk.model.network.TrailerItemKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.TrailerKinopoisk
 
 fun FilmListKinopoisk.toNetwork() = FilmListNetwork(

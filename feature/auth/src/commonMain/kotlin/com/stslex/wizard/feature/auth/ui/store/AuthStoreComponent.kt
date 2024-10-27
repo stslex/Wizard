@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.auth.ui.store
 
-import com.stslex.core.ui.mvi.StoreComponent
+import com.stslex.wizard.core.ui.mvi.StoreComponent
 
 interface AuthStoreComponent : StoreComponent {
 

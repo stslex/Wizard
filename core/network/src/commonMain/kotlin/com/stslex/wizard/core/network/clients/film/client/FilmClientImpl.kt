@@ -1,11 +1,11 @@
 package com.stslex.wizard.core.network.clients.film.client
 
-import com.stslex.core.network.api.base.NetworkClient
+import com.stslex.wizard.core.network.api.base.NetworkClient
 import com.stslex.wizard.core.network.api.kinopoisk.source.KinopoiskNetworkClient
-import com.stslex.core.network.clients.film.model.FilmListNetwork
+import com.stslex.wizard.core.network.clients.film.model.FilmListNetwork
 import com.stslex.wizard.core.network.clients.film.model.FilmTrailerNetwork
 import com.stslex.wizard.core.network.clients.film.model.MovieNetwork
-import com.stslex.core.network.clients.film.model.toNetwork
+import com.stslex.wizard.core.network.clients.film.model.toNetwork
 
 class FilmClientImpl(
     private val client: NetworkClient,

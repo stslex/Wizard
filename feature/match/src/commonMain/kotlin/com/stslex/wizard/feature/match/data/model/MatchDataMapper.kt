@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.match.data.model
 
 import com.stslex.wizard.core.core.asyncMap
-import com.stslex.core.network.clients.match.model.response.MatchResponse
-import com.stslex.core.network.clients.match.model.response.MatchStatusResponse
-import com.stslex.core.network.clients.match.model.response.MatchUserResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchStatusResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchUserResponse
 
 internal suspend fun MatchResponse.toData(
     userUUID: String

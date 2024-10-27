@@ -7,7 +7,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 fun Project.configureKotlinAndroidCompose(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) = commonExtension.apply {
     buildFeatures.compose = true
     composeOptions.kotlinCompilerExtensionVersion = libs.findVersionString("compose-compiler")

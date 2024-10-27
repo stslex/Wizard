@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.favourite.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.AppError
-import com.stslex.core.ui.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.base.AppError
+import com.stslex.wizard.core.ui.pager.states.PagerLoadState
 
 @Stable
 sealed interface FavouriteScreenState {

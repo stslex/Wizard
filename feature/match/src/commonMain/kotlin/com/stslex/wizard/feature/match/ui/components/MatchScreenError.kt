@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.core.ui.base.AppError
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.base.AppError
+import com.stslex.wizard.core.ui.theme.AppDimension
 
 @Composable
 internal fun MatchScreenError(

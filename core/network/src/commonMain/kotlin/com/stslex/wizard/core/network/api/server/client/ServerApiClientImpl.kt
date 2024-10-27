@@ -1,7 +1,7 @@
 package com.stslex.wizard.core.network.api.server.client
 
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.core.network.api.server.http_client.ServerHttpClient
+import com.stslex.wizard.core.network.api.server.http_client.ServerHttpClient
 import com.stslex.wizard.core.network.api.server.model.ErrorRepeatEnd
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.withContext

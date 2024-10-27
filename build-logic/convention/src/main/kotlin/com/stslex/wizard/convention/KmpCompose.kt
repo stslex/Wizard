@@ -14,6 +14,7 @@ fun Project.configureKMPCompose(
             // todo need to add compose dependencies
             implementation(compose.ui)
             implementation(compose.material3)
+            implementation(compose.material)
             implementation(compose.foundation)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.components.resources)
@@ -21,6 +22,7 @@ fun Project.configureKMPCompose(
             implementation(libs.findLibrary("kotlinx-collections-immutable").get())
             implementation(libs.findLibrary("koin-compose").get())
             implementation(libs.findLibrary("lifecycle-viewmodel").get())
+            implementation(libs.findLibrary("kamel").get())
         }
     }
 }

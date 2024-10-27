@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.match.data.model
 
-import com.stslex.core.ui.base.paging.PagingItem
+import com.stslex.wizard.core.ui.base.paging.PagingItem
 
 data class MatchDataModel(
     override val uuid: String,

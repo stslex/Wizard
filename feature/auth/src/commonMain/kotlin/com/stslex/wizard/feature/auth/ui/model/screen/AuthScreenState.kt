@@ -15,18 +15,18 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
-import com.stslex.feature.auth.ui.model.screen.text_field.LoginTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.PasswordInputTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.PasswordSubmitTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.UsernameTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.rememberLoginTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.rememberPasswordInputTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.rememberPasswordSubmitTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.rememberUsernameTextFieldState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Action
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.State
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.LoginTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.PasswordInputTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.PasswordSubmitTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.UsernameTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberLoginTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberPasswordInputTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberPasswordSubmitTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberUsernameTextFieldState
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Action
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.State
 
 @Stable
 data class AuthScreenState @OptIn(ExperimentalMaterialApi::class) constructor(

@@ -7,10 +7,10 @@ import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScopeImpl
 import com.stslex.wizard.core.core.coroutineExceptionHandler
-import com.stslex.core.ui.mvi.StoreComponent.Action
-import com.stslex.core.ui.mvi.StoreComponent.Event
-import com.stslex.core.ui.mvi.StoreComponent.Navigation
-import com.stslex.core.ui.mvi.StoreComponent.State
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Action
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Navigation
+import com.stslex.wizard.core.ui.mvi.StoreComponent.State
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

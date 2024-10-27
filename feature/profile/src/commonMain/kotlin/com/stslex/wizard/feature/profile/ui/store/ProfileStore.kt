@@ -3,16 +3,16 @@ package com.stslex.wizard.feature.profile.ui.store
 import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.core.ui.mvi.Store
-import com.stslex.core.ui.mvi.StoreComponent.Event.Snackbar
-import com.stslex.feature.profile.domain.interactor.ProfileInteractor
-import com.stslex.feature.profile.navigation.ProfileRouter
-import com.stslex.feature.profile.ui.model.ProfileAvatarModel
-import com.stslex.feature.profile.ui.model.toUi
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Action
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Event
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.Navigation
-import com.stslex.feature.profile.ui.store.ProfileStoreComponent.State
+import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
+import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
+import com.stslex.wizard.feature.profile.navigation.ProfileRouter
+import com.stslex.wizard.feature.profile.ui.model.ProfileAvatarModel
+import com.stslex.wizard.feature.profile.ui.model.toUi
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Event
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Navigation
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.State
 
 class ProfileStore(
     private val interactor: ProfileInteractor,

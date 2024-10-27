@@ -20,19 +20,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.components.AppSnackbarHost
-import com.stslex.core.ui.mvi.getStore
-import com.stslex.core.ui.mvi.setupNavigator
-import com.stslex.core.ui.theme.AppDimension
-import com.stslex.core.ui.theme.toPx
-import com.stslex.feature.auth.ui.components.AuthFieldsColumn
-import com.stslex.feature.auth.ui.components.AuthTitle
-import com.stslex.feature.auth.ui.model.screen.AuthScreenState
-import com.stslex.feature.auth.ui.model.screen.rememberAuthScreenState
-import com.stslex.feature.auth.ui.store.AuthStore
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Event
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
+import com.stslex.wizard.core.ui.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.mvi.setupNavigator
+import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.theme.toPx
+import com.stslex.wizard.feature.auth.ui.components.AuthFieldsColumn
+import com.stslex.wizard.feature.auth.ui.components.AuthTitle
+import com.stslex.wizard.feature.auth.ui.model.screen.AuthScreenState
+import com.stslex.wizard.feature.auth.ui.model.screen.rememberAuthScreenState
+import com.stslex.wizard.feature.auth.ui.store.AuthStore
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Event
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
 
 object AuthScreen : Screen {
 

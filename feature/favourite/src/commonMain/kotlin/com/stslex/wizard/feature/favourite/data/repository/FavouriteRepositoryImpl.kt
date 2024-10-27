@@ -2,8 +2,8 @@ package com.stslex.wizard.feature.favourite.data.repository
 
 import com.stslex.wizard.core.core.paging.PagingResponse
 import com.stslex.wizard.core.core.paging.pagingMap
-import com.stslex.core.network.clients.profile.client.ProfileClient
-import com.stslex.core.network.clients.profile.model.request.PagingProfileRequest
+import com.stslex.wizard.core.network.clients.profile.client.ProfileClient
+import com.stslex.wizard.core.network.clients.profile.model.request.PagingProfileRequest
 import com.stslex.wizard.feature.favourite.data.model.FavouriteDataModel
 import com.stslex.wizard.feature.favourite.data.model.toData
 

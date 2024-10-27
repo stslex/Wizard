@@ -1,13 +1,13 @@
 package com.stslex.wizard.core.network.api.kinopoisk.source
 
-import com.stslex.core.network.api.kinopoisk.api.KinopoiskApiClient
+import com.stslex.wizard.core.network.api.kinopoisk.api.KinopoiskApiClient
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmListKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.MovieKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.TrailerKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.FilmListResponse
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.MovieResponse
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.TrailerResponse
-import com.stslex.core.network.api.kinopoisk.model.toNetwork
+import com.stslex.wizard.core.network.api.kinopoisk.model.toNetwork
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter

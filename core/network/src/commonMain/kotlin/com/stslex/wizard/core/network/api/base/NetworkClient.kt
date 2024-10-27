@@ -1,10 +1,10 @@
 package com.stslex.wizard.core.network.api.base
 
-import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE
-import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE_SIZE
-import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_QUERY
-import com.stslex.core.network.api.base.NetworkClient.Companion.PARAMETER_UUID
-import com.stslex.core.network.model.PagingRequest
+import com.stslex.wizard.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE
+import com.stslex.wizard.core.network.api.base.NetworkClient.Companion.PARAMETER_PAGE_SIZE
+import com.stslex.wizard.core.network.api.base.NetworkClient.Companion.PARAMETER_QUERY
+import com.stslex.wizard.core.network.api.base.NetworkClient.Companion.PARAMETER_UUID
+import com.stslex.wizard.core.network.model.PagingRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder

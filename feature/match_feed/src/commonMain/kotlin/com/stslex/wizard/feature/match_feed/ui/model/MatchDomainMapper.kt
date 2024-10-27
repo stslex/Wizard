@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.match_feed.ui.model
 
 import com.stslex.wizard.feature.match_feed.domain.model.FilmDomain
-import com.stslex.feature.match_feed.domain.model.MatchDomain
-import com.stslex.feature.match_feed.domain.model.MatchFilmsPagingDomain
-import com.stslex.feature.match_feed.domain.model.MatchParticipantDomain
+import com.stslex.wizard.feature.match_feed.domain.model.MatchDomain
+import com.stslex.wizard.feature.match_feed.domain.model.MatchFilmsPagingDomain
+import com.stslex.wizard.feature.match_feed.domain.model.MatchParticipantDomain
 import kotlinx.collections.immutable.toImmutableList
 
 fun List<FilmDomain>.toUI(): List<FilmUi> = map { it.toUI() }

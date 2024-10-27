@@ -12,9 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import com.stslex.feature.auth.ui.model.screen.text_field.PasswordInputTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.PasswordSubmitTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.base.PasswordTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.PasswordInputTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.PasswordSubmitTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.base.PasswordTextFieldState
 
 @Composable
 internal fun AuthPasswordTextField(

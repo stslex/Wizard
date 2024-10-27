@@ -1,11 +1,11 @@
 package com.stslex.wizard.feature.match.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.paging.PagingConfig
-import com.stslex.core.ui.base.paging.PagingUiState
-import com.stslex.core.ui.mvi.StoreComponent
-import com.stslex.core.ui.mvi.StoreComponent.Event.Snackbar
-import com.stslex.core.ui.navigation.args.MatchScreenArgs
+import com.stslex.wizard.core.ui.base.paging.PagingConfig
+import com.stslex.wizard.core.ui.base.paging.PagingUiState
+import com.stslex.wizard.core.ui.mvi.StoreComponent
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
+import com.stslex.wizard.core.ui.navigation.args.MatchScreenArgs
 import com.stslex.wizard.feature.match.ui.model.MatchUiModel
 
 interface MatchStoreComponent : StoreComponent {

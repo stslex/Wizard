@@ -1,8 +1,8 @@
 package com.stslex.wizard.core.ui.mvi
 
-import com.stslex.core.ui.mvi.StoreComponent.Action
-import com.stslex.core.ui.mvi.StoreComponent.Event
-import com.stslex.core.ui.mvi.StoreComponent.State
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Action
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event
+import com.stslex.wizard.core.ui.mvi.StoreComponent.State
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 

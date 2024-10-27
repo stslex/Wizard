@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.settings.di
 
-import com.stslex.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeDefinition
 import com.stslex.wizard.feature.settings.domain.SettingsInteractor
 import com.stslex.wizard.feature.settings.domain.SettingsInteractorImpl
 import com.stslex.wizard.feature.settings.navigation.SettingsRouter

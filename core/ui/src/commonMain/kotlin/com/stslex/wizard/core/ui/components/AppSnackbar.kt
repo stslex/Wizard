@@ -27,8 +27,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import com.stslex.core.ui.theme.AppDimension
-import com.stslex.core.ui.theme.toPx
+import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.theme.toPx
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlin.math.roundToInt

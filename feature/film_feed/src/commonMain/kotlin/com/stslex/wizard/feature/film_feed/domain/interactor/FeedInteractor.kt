@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.film_feed.domain.interactor
 
-import com.stslex.feature.film_feed.domain.model.FeedDomainModel
+import com.stslex.wizard.feature.film_feed.domain.model.FeedDomainModel
 
 interface FeedInteractor {
 

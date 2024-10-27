@@ -12,8 +12,8 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.core.core.paging.PagingCoreData.Companion.DEFAULT_APPEND_TYPE
 import com.stslex.wizard.core.core.paging.PagingCoreData.Companion.DEFAULT_BOTTOM_TYPE
-import com.stslex.core.ui.base.DotsPrintAnimation
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.base.DotsPrintAnimation
+import com.stslex.wizard.core.ui.theme.AppDimension
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull

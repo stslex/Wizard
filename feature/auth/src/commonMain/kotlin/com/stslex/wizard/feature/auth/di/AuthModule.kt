@@ -1,13 +1,13 @@
 package com.stslex.wizard.feature.auth.di
 
-import com.stslex.core.ui.mvi.storeDefinition
-import com.stslex.feature.auth.data.AuthRepository
-import com.stslex.feature.auth.data.AuthRepositoryImpl
-import com.stslex.feature.auth.domain.AuthInteractor
-import com.stslex.feature.auth.domain.AuthInteractorImpl
-import com.stslex.feature.auth.navigation.AuthRouter
-import com.stslex.feature.auth.navigation.AuthRouterImpl
-import com.stslex.feature.auth.ui.store.AuthStore
+import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.feature.auth.data.AuthRepository
+import com.stslex.wizard.feature.auth.data.AuthRepositoryImpl
+import com.stslex.wizard.feature.auth.domain.AuthInteractor
+import com.stslex.wizard.feature.auth.domain.AuthInteractorImpl
+import com.stslex.wizard.feature.auth.navigation.AuthRouter
+import com.stslex.wizard.feature.auth.navigation.AuthRouterImpl
+import com.stslex.wizard.feature.auth.ui.store.AuthStore
 import org.koin.dsl.module
 
 val featureAuthModule = module {

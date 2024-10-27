@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.mvi.StoreComponent
-import com.stslex.core.ui.mvi.StoreComponent.Event.Snackbar
+import com.stslex.wizard.core.ui.mvi.StoreComponent
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
 import com.stslex.wizard.feature.profile.navigation.ProfileScreenArguments
 
 interface ProfileStoreComponent : StoreComponent {

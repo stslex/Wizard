@@ -1,16 +1,16 @@
 package com.stslex.wizard.feature.auth.ui.store
 
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.core.ui.mvi.Store
-import com.stslex.core.ui.mvi.StoreComponent.Event.Snackbar
-import com.stslex.feature.auth.domain.AuthInteractor
-import com.stslex.feature.auth.navigation.AuthRouter
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Action
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Event
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.Navigation
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
-import com.stslex.feature.auth.ui.store.AuthStoreComponent.State
+import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
+import com.stslex.wizard.feature.auth.domain.AuthInteractor
+import com.stslex.wizard.feature.auth.navigation.AuthRouter
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Action
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Event
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Navigation
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.State
 import kotlinx.coroutines.delay
 
 class AuthStore(

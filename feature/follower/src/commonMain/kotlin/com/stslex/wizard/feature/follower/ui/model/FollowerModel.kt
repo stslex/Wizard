@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.follower.ui.model
 
 import androidx.compose.runtime.Stable
-import com.stslex.core.ui.base.paging.PagingItem
+import com.stslex.wizard.core.ui.base.paging.PagingItem
 
 @Stable
 data class FollowerModel(

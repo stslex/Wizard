@@ -20,10 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import com.stslex.core.ui.theme.AppDimension
-import com.stslex.feature.auth.ui.model.screen.AuthScreenState
-import com.stslex.feature.auth.ui.model.screen.text_field.LoginTextFieldState
-import com.stslex.feature.auth.ui.model.screen.text_field.UsernameTextFieldState
+import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.feature.auth.ui.model.screen.AuthScreenState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.LoginTextFieldState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.UsernameTextFieldState
 
 @Composable
 internal fun AuthFieldsColumn(

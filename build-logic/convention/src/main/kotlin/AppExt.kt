@@ -24,7 +24,7 @@ internal object AppExt {
     /**
      * Find the id of plugin
      */
-    fun VersionCatalog.findPluginId(name: String) = findPlugin(name)
+    fun VersionCatalog.findPluginId(name: String): String = findPlugin(name)
         .get()
         .get()
         .pluginId

@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.stslex.core.ui.base.paging.PagingColumn
-import com.stslex.core.ui.base.paging.PagingUiState
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.base.paging.PagingColumn
+import com.stslex.wizard.core.ui.base.paging.PagingUiState
+import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.favourite.ui.components.empty.FavouriteScreenEmpty
 import com.stslex.wizard.feature.favourite.ui.components.shimmer.FavouriteScreenShimmer
 import com.stslex.wizard.feature.favourite.ui.model.FavouriteModel

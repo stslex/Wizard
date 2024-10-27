@@ -1,9 +1,9 @@
 package com.stslex.wizard.core.ui.pager.pager
 
-import com.stslex.core.ui.base.paging.PagingItem
-import com.stslex.core.ui.base.paging.PagingState
-import com.stslex.core.ui.pager.states.PagerLoadEvents
-import com.stslex.core.ui.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.base.paging.PagingItem
+import com.stslex.wizard.core.ui.base.paging.PagingState
+import com.stslex.wizard.core.ui.pager.states.PagerLoadEvents
+import com.stslex.wizard.core.ui.pager.states.PagerLoadState
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 

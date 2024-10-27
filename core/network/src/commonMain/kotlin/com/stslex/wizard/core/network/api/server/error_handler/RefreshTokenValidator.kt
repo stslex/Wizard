@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.network.api.server.error_handler
 
-import com.stslex.core.network.api.server.model.ErrorRefresh
+import com.stslex.wizard.core.network.api.server.model.ErrorRefresh
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.CallRequestExceptionHandler
 import io.ktor.client.plugins.HttpResponseValidator

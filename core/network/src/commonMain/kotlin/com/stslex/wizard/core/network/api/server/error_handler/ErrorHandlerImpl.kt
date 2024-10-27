@@ -1,11 +1,11 @@
 package com.stslex.wizard.core.network.api.server.error_handler
 
-import com.stslex.core.network.api.server.error_handler.RefreshTokenValidator.setupResponseValidator
-import com.stslex.core.network.api.server.http_client.ServerHttpClient
+import com.stslex.wizard.core.network.api.server.error_handler.RefreshTokenValidator.setupResponseValidator
+import com.stslex.wizard.core.network.api.server.http_client.ServerHttpClient
 import com.stslex.wizard.core.network.api.server.model.ErrorRepeatEnd
-import com.stslex.core.network.api.server.model.TokenResponseModel
-import com.stslex.core.network.utils.token.AuthController
-import com.stslex.core.network.utils.token.toModel
+import com.stslex.wizard.core.network.api.server.model.TokenResponseModel
+import com.stslex.wizard.core.network.utils.token.AuthController
+import com.stslex.wizard.core.network.utils.token.toModel
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.request.HttpRequest

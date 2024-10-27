@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.network.clients.film.client
 
-import com.stslex.core.network.clients.film.model.FilmListNetwork
+import com.stslex.wizard.core.network.clients.film.model.FilmListNetwork
 import com.stslex.wizard.core.network.clients.film.model.FilmTrailerNetwork
 import com.stslex.wizard.core.network.clients.film.model.MovieNetwork
 

@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.profile.ui.model
 
-import com.stslex.feature.profile.domain.model.ProfileDomainModel
+import com.stslex.wizard.feature.profile.domain.model.ProfileDomainModel
 
 fun ProfileDomainModel.toUi(
     avatarModel: ProfileAvatarModel

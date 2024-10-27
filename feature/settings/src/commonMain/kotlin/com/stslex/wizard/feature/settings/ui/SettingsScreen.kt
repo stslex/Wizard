@@ -16,10 +16,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.components.AppSnackbarHost
-import com.stslex.core.ui.components.AppToolbar
-import com.stslex.core.ui.mvi.getStore
-import com.stslex.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.components.AppToolbar
+import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.settings.ui.components.SettingsContent
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore
 import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Action

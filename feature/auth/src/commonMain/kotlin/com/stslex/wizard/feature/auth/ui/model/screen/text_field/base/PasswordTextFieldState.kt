@@ -9,7 +9,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import com.stslex.feature.auth.ui.model.screen.text_field.hidden.HiddenState
+import com.stslex.wizard.feature.auth.ui.model.screen.text_field.hidden.HiddenState
 
 @Stable
 abstract class PasswordTextFieldState(

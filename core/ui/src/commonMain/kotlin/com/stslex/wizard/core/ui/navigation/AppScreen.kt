@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.ui.navigation
 
-import com.stslex.core.ui.navigation.args.MatchScreenArgs
+import com.stslex.wizard.core.ui.navigation.args.MatchScreenArgs
 
 sealed interface AppScreen {
 

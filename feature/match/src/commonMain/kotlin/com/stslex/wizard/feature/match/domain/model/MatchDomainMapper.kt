@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.match.domain.model
 
 import com.stslex.wizard.core.core.asyncMap
-import com.stslex.feature.match.data.model.MatchDataModel
-import com.stslex.feature.match.data.model.MatchDataStatusModel
-import com.stslex.feature.match.data.model.MatchUserDataModel
+import com.stslex.wizard.feature.match.data.model.MatchDataModel
+import com.stslex.wizard.feature.match.data.model.MatchDataStatusModel
+import com.stslex.wizard.feature.match.data.model.MatchUserDataModel
 
 suspend fun MatchDataModel.toDomain() =
     com.stslex.wizard.feature.match.domain.model.MatchDomainModel(

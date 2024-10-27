@@ -13,7 +13,7 @@ internal fun Project.configureKotlinMultiplatform(
     extension: KotlinMultiplatformExtension,
     kspExtension: KspExtension
 ) = extension.apply {
-    kspExtension.arg("KOIN_CONFIG_CHECK", "true")
+    kspExtension.arg("KOIN_CONFIG_CHECK", true.toString())
 
     jvmToolchain(17)
 

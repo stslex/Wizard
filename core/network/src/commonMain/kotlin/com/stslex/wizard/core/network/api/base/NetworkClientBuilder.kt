@@ -1,7 +1,7 @@
 package com.stslex.wizard.core.network.api.base
 
 import com.stslex.wizard.core.network.api.base.model.DefaultRequest
-import com.stslex.core.network.utils.KtorLogger
+import com.stslex.wizard.core.network.utils.KtorLogger
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.cio.CIOEngineConfig
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -11,12 +11,10 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.headers
 import io.ktor.http.URLProtocol
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 
 internal object NetworkClientBuilder {
 
-    @OptIn(ExperimentalSerializationApi::class)
     fun HttpClientConfig<CIOEngineConfig>.setupNegotiation() {
         install(ContentNegotiation) {
             json(

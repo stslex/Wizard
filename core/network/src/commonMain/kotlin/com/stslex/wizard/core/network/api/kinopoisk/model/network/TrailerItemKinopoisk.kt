@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.network.api.kinopoisk.model.network
 
-import com.stslex.core.network.clients.film.model.TrailerSiteType
+import com.stslex.wizard.core.network.clients.film.model.TrailerSiteType
 
 data class TrailerItemKinopoisk(
     val url: String,

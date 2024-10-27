@@ -1,11 +1,11 @@
 package com.stslex.wizard.core.network.clients.auth.client
 
-import com.stslex.core.network.api.server.client.ServerApiClient
-import com.stslex.core.network.clients.auth.request.LoginRequest
+import com.stslex.wizard.core.network.api.server.client.ServerApiClient
+import com.stslex.wizard.core.network.clients.auth.request.LoginRequest
 import com.stslex.wizard.core.network.clients.auth.request.RegisterRequest
-import com.stslex.core.network.clients.auth.response.LoginOkResponse
-import com.stslex.core.network.utils.token.AuthController
-import com.stslex.core.network.utils.token.toModel
+import com.stslex.wizard.core.network.clients.auth.response.LoginOkResponse
+import com.stslex.wizard.core.network.utils.token.AuthController
+import com.stslex.wizard.core.network.utils.token.toModel
 import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody

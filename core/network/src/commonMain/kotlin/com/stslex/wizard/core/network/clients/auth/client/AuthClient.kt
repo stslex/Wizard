@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.network.clients.auth.client
 
-import com.stslex.core.network.clients.auth.response.LoginOkResponse
+import com.stslex.wizard.core.network.clients.auth.response.LoginOkResponse
 
 interface AuthClient {
 

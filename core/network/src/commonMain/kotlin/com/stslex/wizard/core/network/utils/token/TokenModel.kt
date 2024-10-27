@@ -1,7 +1,7 @@
 package com.stslex.wizard.core.network.utils.token
 
-import com.stslex.core.network.api.server.model.TokenResponseModel
-import com.stslex.core.network.clients.auth.response.LoginOkResponse
+import com.stslex.wizard.core.network.api.server.model.TokenResponseModel
+import com.stslex.wizard.core.network.clients.auth.response.LoginOkResponse
 
 data class TokenModel(
     val uuid: String,

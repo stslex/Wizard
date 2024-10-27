@@ -1,6 +1,4 @@
-rootProject.name = "Wizard"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -17,7 +15,10 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+rootProject.name = "Wizard"
+
+include(":iosApp")
+include(":commonApp")
 
 include(":core:core")
 include(":core:network")

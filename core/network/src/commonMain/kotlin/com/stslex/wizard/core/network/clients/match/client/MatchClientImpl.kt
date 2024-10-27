@@ -1,14 +1,14 @@
 package com.stslex.wizard.core.network.clients.match.client
 
 import com.stslex.wizard.core.core.paging.PagingResponse
-import com.stslex.core.network.api.base.get
-import com.stslex.core.network.api.base.post
-import com.stslex.core.network.api.base.requestPaging
-import com.stslex.core.network.api.server.client.ServerApiClient
-import com.stslex.core.network.clients.match.model.request.MatchCreateRequest
-import com.stslex.core.network.clients.match.model.response.MatchDetailResponse
-import com.stslex.core.network.clients.match.model.response.MatchResponse
-import com.stslex.core.network.model.PagingRequest
+import com.stslex.wizard.core.network.api.base.get
+import com.stslex.wizard.core.network.api.base.post
+import com.stslex.wizard.core.network.api.base.requestPaging
+import com.stslex.wizard.core.network.api.server.client.ServerApiClient
+import com.stslex.wizard.core.network.clients.match.model.request.MatchCreateRequest
+import com.stslex.wizard.core.network.clients.match.model.response.MatchDetailResponse
+import com.stslex.wizard.core.network.clients.match.model.response.MatchResponse
+import com.stslex.wizard.core.network.model.PagingRequest
 import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 

@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.core.ui.base.paging.PagingColumn
-import com.stslex.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.base.paging.PagingColumn
+import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.wizard.feature.follower.ui.store.FollowerScreenState
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore

@@ -1,18 +1,18 @@
 package com.stslex.wizard.core.network.api.kinopoisk.model
 
-import com.stslex.core.network.api.kinopoisk.model.network.FilmItemKinopoisk
+import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmItemKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmListKinopoisk
-import com.stslex.core.network.api.kinopoisk.model.network.FilmProductionStatusNetwork
-import com.stslex.core.network.api.kinopoisk.model.network.FilmTypeNetwork
+import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmProductionStatusNetwork
+import com.stslex.wizard.core.network.api.kinopoisk.model.network.FilmTypeNetwork
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.MovieKinopoisk
-import com.stslex.core.network.api.kinopoisk.model.network.TrailerItemKinopoisk
+import com.stslex.wizard.core.network.api.kinopoisk.model.network.TrailerItemKinopoisk
 import com.stslex.wizard.core.network.api.kinopoisk.model.network.TrailerKinopoisk
-import com.stslex.core.network.api.kinopoisk.model.response.FilmItemResponse
+import com.stslex.wizard.core.network.api.kinopoisk.model.response.FilmItemResponse
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.FilmListResponse
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.MovieResponse
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.TrailerItemResponse
 import com.stslex.wizard.core.network.api.kinopoisk.model.response.TrailerResponse
-import com.stslex.core.network.clients.film.model.TrailerSiteType
+import com.stslex.wizard.core.network.clients.film.model.TrailerSiteType
 
 fun FilmListResponse.toNetwork(): FilmListKinopoisk =
     FilmListKinopoisk(

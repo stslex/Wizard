@@ -2,7 +2,7 @@ package com.stslex.wizard.core.network.api.kinopoisk.api
 
 import Wizard.core.network.BuildConfig
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.core.network.api.base.BaseNetworkClient
+import com.stslex.wizard.core.network.api.base.BaseNetworkClient
 import com.stslex.wizard.core.network.api.base.model.DefaultRequest
 
 class KinopoiskApiClientImpl(

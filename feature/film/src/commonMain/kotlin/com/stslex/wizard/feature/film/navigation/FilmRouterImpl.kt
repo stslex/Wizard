@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film.navigation
 
-import com.stslex.core.ui.navigation.AppNavigator
-import com.stslex.core.ui.navigation.AppScreen
+import com.stslex.wizard.core.ui.navigation.AppNavigator
+import com.stslex.wizard.core.ui.navigation.AppScreen
 import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent
 
 class FilmRouterImpl(

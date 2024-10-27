@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.film.di
 
-import com.stslex.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeDefinition
 import com.stslex.wizard.feature.film.data.repository.FilmRepository
 import com.stslex.wizard.feature.film.data.repository.FilmRepositoryImpl
 import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor

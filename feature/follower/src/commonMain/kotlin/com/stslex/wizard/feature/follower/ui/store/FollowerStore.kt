@@ -1,13 +1,13 @@
 package com.stslex.wizard.feature.follower.ui.store
 
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.core.ui.base.mapToAppError
-import com.stslex.core.ui.base.paging.toUi
-import com.stslex.core.ui.mvi.Store
-import com.stslex.core.ui.mvi.StoreComponent.Event.Snackbar
-import com.stslex.core.ui.pager.pager.StorePager
-import com.stslex.core.ui.pager.pager.StorePagerFactory
-import com.stslex.core.ui.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.base.mapToAppError
+import com.stslex.wizard.core.ui.base.paging.toUi
+import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
+import com.stslex.wizard.core.ui.pager.pager.StorePager
+import com.stslex.wizard.core.ui.pager.pager.StorePagerFactory
+import com.stslex.wizard.core.ui.pager.states.PagerLoadState
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor
 import com.stslex.wizard.feature.follower.navigation.FollowerRouter
 import com.stslex.wizard.feature.follower.navigation.FollowerScreenArgs

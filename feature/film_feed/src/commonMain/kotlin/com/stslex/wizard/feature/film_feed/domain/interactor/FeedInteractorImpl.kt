@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.film_feed.domain.interactor
 
-import com.stslex.feature.film_feed.data.repository.FeedRepository
-import com.stslex.feature.film_feed.domain.model.FeedDomainModel
-import com.stslex.feature.film_feed.domain.model.toDomain
+import com.stslex.wizard.feature.film_feed.data.repository.FeedRepository
+import com.stslex.wizard.feature.film_feed.domain.model.FeedDomainModel
+import com.stslex.wizard.feature.film_feed.domain.model.toDomain
 
 class FeedInteractorImpl(
     private val repository: FeedRepository

@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.profile.domain.model
 
-import com.stslex.feature.profile.data.model.ProfileDataModel
+import com.stslex.wizard.feature.profile.data.model.ProfileDataModel
 
 fun ProfileDataModel.toDomain() = ProfileDomainModel(
     uuid = uuid,
