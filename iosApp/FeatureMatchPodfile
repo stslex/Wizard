@@ -1,5 +1,0 @@
-target 'test' do
-  use_frameworks!
-  platform :ios, '16.0'
-  pod 'match', :path => '../feature/match'
-end
