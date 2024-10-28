@@ -3,6 +3,7 @@ package com.stslex.wizard.feature.match.ui.store
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.database.store.UserStore
+import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.base.mapToAppError
 import com.stslex.wizard.core.ui.base.paging.toUi
 import com.stslex.wizard.core.ui.mvi.Store
@@ -48,7 +49,7 @@ class MatchStore(
     )
 
     override fun process(action: Action) {
-        Logger.debug("process: $action", TAG)
+        Logger.d("process: $action", TAG)
         when (action) {
             is Action.Init -> actionInit(action)
             is Action.LoadMore -> actionLoadMore()
@@ -86,8 +87,8 @@ class MatchStore(
 
         updateState { currentState ->
             currentState.copy(
-                isSelf = action.args.isSelf,
-                uuid = action.args.uuid ?: userStore.uuid,
+                isSelf = action.type == Screen.Match.Type.SELF,
+                uuid = action.uuid.ifBlank { userStore.uuid } ,
             )
         }
 

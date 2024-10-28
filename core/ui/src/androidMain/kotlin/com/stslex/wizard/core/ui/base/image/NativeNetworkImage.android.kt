@@ -21,9 +21,9 @@ actual fun NativeNetworkImage(
         contentDescription = contentDescription,
         contentScale = contentScale,
         onState = { state ->
-            Logger.debug("state: $state", "NativeNetworkImage")
+            Logger.d("state: $state", "NativeNetworkImage")
             if (state is AsyncImagePainter.State.Error) {
-                Logger.exception(state.result.throwable, "NativeNetworkImage")
+                Logger.e(state.result.throwable, "NativeNetworkImage")
             }
         },
         filterQuality = FilterQuality.None

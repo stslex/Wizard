@@ -5,10 +5,9 @@ import com.russhwolf.settings.SharedPreferencesSettings
 import com.stslex.wizard.core.database.store.UserSettings
 import com.stslex.wizard.core.database.store.UserSettingsImpl
 import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import org.koin.core.module.Module
 
-actual val userSettingsModule = module {
-
+actual fun Module.declareUserSettingsStore() {
     single<UserSettings> {
         val delegate = androidContext()
             .getSharedPreferences(UserSettings.NAME, Context.MODE_PRIVATE)

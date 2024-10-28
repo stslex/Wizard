@@ -1,18 +1,19 @@
 package com.stslex.wizard.feature.follower.ui.store
 
 import androidx.compose.runtime.Stable
+import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.StoreComponent
 import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
-import com.stslex.wizard.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 
 interface FollowerStoreComponent : StoreComponent {
 
     @Stable
     data class State(
-        val type: FollowerScreenArgs,
+        val type: Screen.Follower.FollowerType,
+        val uuid: String,
         val paging: PagingUiState<FollowerModel>,
         val screen: FollowerScreenState,
         val query: String
@@ -21,7 +22,8 @@ interface FollowerStoreComponent : StoreComponent {
         companion object {
 
             val INITIAL = State(
-                type = FollowerScreenArgs.Follower(""),
+                type = Screen.Follower.FollowerType.FOLLOWER,
+                uuid = "",
                 paging = PagingUiState.default(PagingConfig.DEFAULT),
                 screen = FollowerScreenState.Shimmer,
                 query = ""
@@ -34,7 +36,8 @@ interface FollowerStoreComponent : StoreComponent {
 
         @Stable
         data class Init(
-            val args: FollowerScreenArgs
+            val followerType: Screen.Follower.FollowerType,
+            val uuid: String
         ) : Action
 
         @Stable

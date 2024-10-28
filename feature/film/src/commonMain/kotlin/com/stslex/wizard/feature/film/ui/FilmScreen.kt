@@ -6,49 +6,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.screen.Screen
-import com.stslex.wizard.core.ui.mvi.getStore
-import com.stslex.wizard.core.ui.mvi.setupNavigator
 import com.stslex.wizard.feature.film.ui.components.FilmContentScreen
 import com.stslex.wizard.feature.film.ui.store.FilmScreenState
-import com.stslex.wizard.feature.film.ui.store.FilmStore
 import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.Action
 import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.State
 
-data class FilmScreen(
-    val id: String
-) : Screen {
-
-    @Composable
-    override fun Content() {
-        setupNavigator()
-        val store = getStore<FilmStore>()
-        LaunchedEffect(Unit) {
-            store.sendAction(Action.Init(id))
-        }
-        val state by remember { store.state }.collectAsState()
-        LaunchedEffect(Unit) {
-            store.event.collect { event ->
-                when (event) {
-                    else -> Unit
-                }
-            }
-        }
-        FilmContent(
-            state = state,
-            onAction = store::sendAction
-        )
-    }
-}
-
 @Composable
-internal fun FilmContent(
+internal fun FilmScreen(
     modifier: Modifier = Modifier,
     state: State,
     onAction: (Action) -> Unit

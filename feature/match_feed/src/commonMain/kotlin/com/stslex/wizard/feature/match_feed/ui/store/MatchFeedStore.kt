@@ -59,7 +59,7 @@ class MatchFeedStore(
     private fun actionLoadFilms() {
         val matchUuid = state.value.match?.uuid
         if (matchUuid == null) {
-            Logger.debug("Match uuid is null")
+            Logger.d("Match uuid is null")
             return
         }
         loadFilms(matchUuid)
@@ -67,12 +67,12 @@ class MatchFeedStore(
 
     private fun loadFilms(uuid: String) {
         if (loadingJob?.isActive == true) {
-            Logger.debug("Loading job is active")
+            Logger.d("Loading job is active")
             return
         }
         val hasNextPage = state.value.hasNextPage
         if (hasNextPage.not()) {
-            Logger.debug("No more pages")
+            Logger.d("No more pages")
             return
         }
         val loadScreenState = when (state.value.screen) {

@@ -4,41 +4,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.wizard.core.ui.base.paging.PagingColumn
-import com.stslex.wizard.core.ui.mvi.getStore
-import com.stslex.wizard.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.wizard.feature.follower.ui.store.FollowerScreenState
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore
 import com.stslex.wizard.feature.follower.ui.store.FollowerStoreComponent.Action
 import com.stslex.wizard.feature.follower.ui.store.FollowerStoreComponent.State
-
-data class FollowerScreen(
-    val args: FollowerScreenArgs
-) : Screen {
-
-    @Composable
-    override fun Content() {
-        val store = getStore<FollowerStore>()
-        val state by remember { store.state }.collectAsState()
-
-        LaunchedEffect(key1 = Unit) {
-            store.sendAction(Action.Init(args = args))
-        }
-
-        FollowerScreen(
-            state = state,
-            onAction = store::sendAction
-        )
-    }
-}
-
 
 @Composable
 internal fun FollowerScreen(

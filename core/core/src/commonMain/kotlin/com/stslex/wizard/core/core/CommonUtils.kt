@@ -6,7 +6,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 
 val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-    Logger.exception(throwable)
+    Logger.e(throwable)
 }
 
 expect fun randomUuid(): String

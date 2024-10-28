@@ -7,7 +7,6 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(project(":core:network"))
-            api(libs.bundles.voyager)
         }
         androidMain.dependencies {
             api(libs.coil.compose)

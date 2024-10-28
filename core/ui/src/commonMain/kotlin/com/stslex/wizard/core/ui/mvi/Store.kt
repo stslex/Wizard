@@ -58,7 +58,7 @@ abstract class Store<S : State, E : Event, A : Action, N : Navigation>(
     private fun exceptionHandler(
         onError: suspend (cause: Throwable) -> Unit = {},
     ) = CoroutineExceptionHandler { _, throwable ->
-        Logger.exception(throwable)
+        Logger.e(throwable)
         viewModelScope.launch(appDispatcher.default + coroutineExceptionHandler) {
             onError(throwable)
         }

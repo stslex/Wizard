@@ -1,19 +1,15 @@
 package com.stslex.wizard.feature.settings.navigation
 
-import com.stslex.wizard.core.ui.navigation.AppNavigator
-import com.stslex.wizard.core.ui.navigation.AppScreen
+import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.navigator.Navigator
 import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Navigation
 
-class SettingsRouterImpl(
-    private val navigator: AppNavigator
-) : SettingsRouter {
+class SettingsRouterImpl(private val navigator: Navigator) : SettingsRouter {
 
-    override fun invoke(
-        event: Navigation
-    ) {
+    override fun invoke(event: Navigation) {
         when (event) {
-            Navigation.Back -> navigator.navigate(AppScreen.Back)
-            Navigation.LogOut -> navigator.navigate(AppScreen.Auth)
+            Navigation.Back -> navigator.popBack()
+            Navigation.LogOut -> navigator.navTo(Screen.Auth)
         }
     }
 }

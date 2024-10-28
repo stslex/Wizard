@@ -9,52 +9,17 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.screen.Screen
 import com.stslex.wizard.core.ui.components.AppSnackbarHost
 import com.stslex.wizard.core.ui.components.AppToolbar
-import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.settings.ui.components.SettingsContent
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore
 import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Action
-import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Event
 import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.State
 
-object SettingsScreen : Screen {
-
-    @Composable
-    override fun Content() {
-        val store = getStore<SettingsStore>()
-        val state by remember { store.state }.collectAsState()
-        val snackbarHostState = remember { SnackbarHostState() }
-        LaunchedEffect(Unit) {
-            store.event.collect { event ->
-                when (event) {
-                    is Event.ShowSnackbar -> snackbarHostState.showSnackbar(
-                        message = event.snackbar.message,
-                        actionLabel = event.snackbar.action,
-                        duration = event.snackbar.duration,
-                        withDismissAction = event.snackbar.withDismissAction,
-                    )
-                }
-            }
-        }
-        SettingsScreen(
-            state = state,
-            onAction = store::sendAction,
-            snackbarHostState = snackbarHostState
-        )
-    }
-}
-
 @Composable
-private fun SettingsScreen(
+internal fun SettingsScreen(
     state: State,
     onAction: (Action) -> Unit,
     snackbarHostState: SnackbarHostState,

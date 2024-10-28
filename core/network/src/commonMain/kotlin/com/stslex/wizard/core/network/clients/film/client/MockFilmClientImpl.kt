@@ -16,7 +16,7 @@ class MockFilmClientImpl : FilmClient {
         page: Int,
         pageSize: Int
     ): FilmListNetwork {
-        Logger.debug("context: $coroutineContext")
+        Logger.d("context: $coroutineContext")
         delay(1000)
         return FilmListNetwork(
             results = Array(pageSize) { index ->

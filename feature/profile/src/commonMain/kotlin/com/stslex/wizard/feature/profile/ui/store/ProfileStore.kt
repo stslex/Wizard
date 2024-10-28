@@ -3,6 +3,7 @@ package com.stslex.wizard.feature.profile.ui.store
 import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.database.store.UserStore
+import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
@@ -39,11 +40,11 @@ class ProfileStore(
     }
 
     private fun actionInit(action: Action.Init) {
-        val uuid = action.args.uuid ?: userStore.uuid
+        val uuid = action.uuid.ifBlank { userStore.uuid }
 
         updateState { currentState ->
             currentState.copy(
-                isSelf = action.args.isSelf,
+                isSelf = action.type == Screen.Profile.Type.SELF,
                 uuid = uuid,
             )
         }

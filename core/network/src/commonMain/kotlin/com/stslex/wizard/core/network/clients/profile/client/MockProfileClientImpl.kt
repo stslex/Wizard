@@ -114,7 +114,7 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun addFavourite(uuid: String, title: String) {
-        Logger.debug("Favourite added")
+        Logger.d("Favourite added")
     }
 
     override suspend fun isFavourite(favouriteUuid: String): BooleanResponse {
@@ -122,6 +122,6 @@ class MockProfileClientImpl : ProfileClient {
     }
 
     override suspend fun removeFavourite(uuid: String) {
-        Logger.debug("Favourite removed")
+        Logger.d("Favourite removed")
     }
 }

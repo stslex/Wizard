@@ -9,6 +9,7 @@ kotlin {
             implementation(project(":core:network"))
             implementation(project(":core:database"))
             implementation(project(":core:ui"))
+            implementation(project(":core:navigation"))
 
             implementation(project(":feature:film_feed"))
             implementation(project(":feature:film"))

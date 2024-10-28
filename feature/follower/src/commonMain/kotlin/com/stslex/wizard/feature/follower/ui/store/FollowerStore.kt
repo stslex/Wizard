@@ -1,6 +1,7 @@
 package com.stslex.wizard.feature.follower.ui.store
 
 import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.navigation.Screen.Follower.FollowerType
 import com.stslex.wizard.core.ui.base.mapToAppError
 import com.stslex.wizard.core.ui.base.paging.toUi
 import com.stslex.wizard.core.ui.mvi.Store
@@ -10,7 +11,6 @@ import com.stslex.wizard.core.ui.pager.pager.StorePagerFactory
 import com.stslex.wizard.core.ui.pager.states.PagerLoadState
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor
 import com.stslex.wizard.feature.follower.navigation.FollowerRouter
-import com.stslex.wizard.feature.follower.navigation.FollowerScreenArgs
 import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 import com.stslex.wizard.feature.follower.ui.model.toUi
 import com.stslex.wizard.feature.follower.ui.store.FollowerStoreComponent.Action
@@ -35,15 +35,15 @@ class FollowerStore(
         request = { page, pageSize ->
             val currentState = state.value
             when (currentState.type) {
-                is FollowerScreenArgs.Follower -> interactor.getFollowers(
-                    uuid = currentState.type.uuid,
+                FollowerType.FOLLOWER -> interactor.getFollowers(
+                    uuid = currentState.uuid,
                     query = currentState.query,
                     page = page,
                     pageSize = pageSize
                 )
 
-                is FollowerScreenArgs.Following -> interactor.getFollowing(
-                    uuid = currentState.type.uuid,
+                FollowerType.FOLLOWING -> interactor.getFollowing(
+                    uuid = currentState.uuid,
                     query = currentState.query,
                     page = page,
                     pageSize = pageSize
@@ -68,7 +68,10 @@ class FollowerStore(
 
     private fun actionInit(action: Action.Init) {
         updateState { state ->
-            state.copy(type = action.args)
+            state.copy(
+                type = action.followerType,
+                uuid = action.uuid
+            )
         }
 
         pager.state.launch { pagerState ->
