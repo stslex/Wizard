@@ -8,16 +8,32 @@ class ProfileRouterImpl(
     private val navigator: Navigator
 ) : ProfileRouter {
 
-    override fun invoke(
-        event: Navigation
-    ) {
+    override fun invoke(event: Navigation) {
         when (event) {
             Navigation.LogIn -> navigator.navTo(Screen.Auth)
             Navigation.Back -> navigator.popBack()
             Navigation.Settings -> navigator.navTo(Screen.Settings)
             is Navigation.Favourite -> navigator.navTo(Screen.Favourite(uuid = event.uuid))
-            is Navigation.Following -> navigator.navTo(Screen.Following(uuid = event.uuid))
-            is Navigation.Followers -> navigator.navTo(Screen.Followers(uuid = event.uuid))
+            is Navigation.Following -> navToFollowing(event)
+            is Navigation.Followers -> navToFollower(event)
         }
+    }
+
+    private fun navToFollower(event: Navigation.Followers) {
+        navigator.navTo(
+            Screen.Follower(
+                type = Screen.Follower.FollowerType.FOLLOWER,
+                uuid = event.uuid
+            )
+        )
+    }
+
+    private fun navToFollowing(event: Navigation.Following) {
+        navigator.navTo(
+            Screen.Follower(
+                type = Screen.Follower.FollowerType.FOLLOWING,
+                uuid = event.uuid
+            )
+        )
     }
 }

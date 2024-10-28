@@ -8,7 +8,7 @@ class AuthRouterImpl(private val navigator: Navigator) : AuthRouter {
 
     override fun invoke(event: Navigation) {
         when (event) {
-            is Navigation.HomeFeature -> navigator.navTo(Screen.Main)
+            is Navigation.HomeFeature -> navigator.navTo(Screen.FilmFeed)
         }
     }
 }

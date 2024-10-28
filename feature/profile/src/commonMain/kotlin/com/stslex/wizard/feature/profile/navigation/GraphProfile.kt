@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.auth.navigation
+package com.stslex.wizard.feature.profile.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
@@ -9,17 +9,25 @@ import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
-import com.stslex.wizard.feature.auth.ui.AuthScreen
-import com.stslex.wizard.feature.auth.ui.model.screen.rememberAuthScreenState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Event
+import com.stslex.wizard.feature.profile.ui.ProfileScreen
+import com.stslex.wizard.feature.profile.ui.store.ProfileStore
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Action
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Event
 
-fun NavGraphBuilder.graphAuth() {
-    navScreen<Screen.Auth> {
-        val store = getStore<AuthStore>()
+fun NavGraphBuilder.graphProfile() {
+    navScreen<Screen.Profile> { screen ->
+        val store = getStore<ProfileStore>()
+        LaunchedEffect(Unit) {
+            store.sendAction(
+                Action.Init(
+                    type = screen.type,
+                    uuid = screen.uuid
+                )
+            )
+        }
         val state by remember { store.state }.collectAsState()
-        val snackbarHostState = remember { SnackbarHostState() }
 
+        val snackbarHostState = remember { SnackbarHostState() }
         LaunchedEffect(Unit) {
             store.event.collect { event ->
                 when (event) {
@@ -32,12 +40,10 @@ fun NavGraphBuilder.graphAuth() {
                 }
             }
         }
-
-        val authScreenState = rememberAuthScreenState(
-            snackbarHostState = snackbarHostState,
-            screenState = state,
-            processAction = store::sendAction
+        ProfileScreen(
+            state = state,
+            onAction = store::sendAction,
+            snackbarHostState = snackbarHostState
         )
-        AuthScreen(authScreenState)
     }
 }

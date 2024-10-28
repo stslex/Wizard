@@ -1,13 +1,9 @@
 package com.stslex.wizard.core.navigation
 
-import com.stslex.wizard.core.navigation.args.MatchScreenArgs
 import kotlinx.serialization.Serializable
 
 @Serializable
 sealed interface Screen {
-
-    @Serializable
-    data object Main : Screen
 
     @Serializable
     data class Film(val id: String) : Screen
@@ -25,15 +21,36 @@ sealed interface Screen {
     data class Favourite(val uuid: String) : Screen
 
     @Serializable
-    data class Following(val uuid: String) : Screen
+    data class Follower(
+        val type: FollowerType,
+        val uuid: String
+    ) : Screen {
 
-    @Serializable
-    data class Followers(val uuid: String) : Screen
+        enum class FollowerType { FOLLOWER, FOLLOWING }
+    }
 
     @Serializable
     data class MatchDetails(val matchUuid: String) : Screen
 
     @Serializable
-    data class Match(val args: MatchScreenArgs) : Screen
+    data object FilmFeed : Screen
+
+    @Serializable
+    data class Match(
+        val type: Type,
+        val uuid: String = ""
+    ) : Screen {
+
+        enum class Type { SELF, OTHER }
+    }
+
+    @Serializable
+    data class Profile(
+        val type: Type,
+        val uuid: String = ""
+    ) : Screen {
+
+        enum class Type { SELF, OTHER }
+    }
 }
 

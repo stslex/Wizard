@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.favourite.ui.components
+package com.stslex.wizard.feature.favourite.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

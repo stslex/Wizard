@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.auth.navigation
+package com.stslex.wizard.feature.settings.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
@@ -9,17 +9,15 @@ import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
-import com.stslex.wizard.feature.auth.ui.AuthScreen
-import com.stslex.wizard.feature.auth.ui.model.screen.rememberAuthScreenState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Event
+import com.stslex.wizard.feature.settings.ui.SettingsScreen
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore
+import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Event
 
-fun NavGraphBuilder.graphAuth() {
-    navScreen<Screen.Auth> {
-        val store = getStore<AuthStore>()
+fun NavGraphBuilder.graphSettings() {
+    navScreen<Screen.Settings> {
+        val store = getStore<SettingsStore>()
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
-
         LaunchedEffect(Unit) {
             store.event.collect { event ->
                 when (event) {
@@ -32,12 +30,10 @@ fun NavGraphBuilder.graphAuth() {
                 }
             }
         }
-
-        val authScreenState = rememberAuthScreenState(
-            snackbarHostState = snackbarHostState,
-            screenState = state,
-            processAction = store::sendAction
+        SettingsScreen(
+            state = state,
+            onAction = store::sendAction,
+            snackbarHostState = snackbarHostState
         )
-        AuthScreen(authScreenState)
     }
 }

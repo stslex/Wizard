@@ -6,7 +6,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.feature.auth.navigation.authGraph
+import com.stslex.wizard.feature.auth.navigation.graphAuth
+import com.stslex.wizard.feature.favourite.navigation.graphFavourite
+import com.stslex.wizard.feature.film.navigation.graphFilm
+import com.stslex.wizard.feature.film_feed.navigation.graphFilmFeed
+import com.stslex.wizard.feature.follower.navigation.graphFollower
+import com.stslex.wizard.feature.match.navigation.graphMatch
+import com.stslex.wizard.feature.match_feed.navigation.graphMatchFeed
+import com.stslex.wizard.feature.profile.navigation.graphProfile
+import com.stslex.wizard.feature.settings.navigation.graphSettings
 
 @Composable
 fun AppNavigationHost(
@@ -19,8 +27,15 @@ fun AppNavigationHost(
             navController = navHostController,
             startDestination = startScreen
         ) {
-            authGraph()
-
+            graphAuth()
+            graphFavourite()
+            graphFilm()
+            graphFilmFeed()
+            graphFollower()
+            graphMatch()
+            graphMatchFeed()
+            graphProfile()
+            graphSettings()
         }
     }
 }

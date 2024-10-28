@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
+import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.mvi.StoreComponent
 import com.stslex.wizard.core.ui.mvi.StoreComponent.Event.Snackbar
-import com.stslex.wizard.feature.profile.navigation.ProfileScreenArguments
 
 interface ProfileStoreComponent : StoreComponent {
 
@@ -29,7 +29,8 @@ interface ProfileStoreComponent : StoreComponent {
 
         @Stable
         data class Init(
-            val args: ProfileScreenArguments
+            val type: Screen.Profile.Type,
+            val uuid: String
         ) : Action
 
         data object Logout : Action
