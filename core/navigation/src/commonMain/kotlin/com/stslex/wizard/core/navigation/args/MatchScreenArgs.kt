@@ -1,4 +1,4 @@
-package com.stslex.wizard.core.ui.navigation.args
+package com.stslex.wizard.core.navigation.args
 
 import androidx.compose.runtime.Stable
 

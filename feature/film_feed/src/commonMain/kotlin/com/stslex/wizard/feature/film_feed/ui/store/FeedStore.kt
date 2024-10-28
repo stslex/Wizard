@@ -41,12 +41,12 @@ class FeedStore(
 
     private fun actionLoadFilms() {
         if (loadingJob?.isActive == true) {
-            Logger.debug("Loading job is active")
+            Logger.d("Loading job is active")
             return
         }
         val hasNextPage = state.value.hasNextPage
         if (hasNextPage.not()) {
-            Logger.debug("No more pages")
+            Logger.d("No more pages")
             return
         }
         val loadScreenState = when (state.value.screen) {

@@ -9,36 +9,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.transitions.SlideTransition
+import androidx.navigation.NavHostController
+import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.network.utils.token.AuthController
-import com.stslex.wizard.core.ui.navigation.AppNavigator
-import com.stslex.wizard.core.ui.navigation.AppScreen
-import com.stslex.wizard.feature.auth.ui.AuthScreen
-import com.stslex.wizard.main_screen.MainScreen
+import com.stslex.wizard.host.AppNavigationHost
 import org.koin.compose.getKoin
 
 @Composable
 fun InitialApp(
+    navHostController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     val koin = getKoin()
     val userStore = remember {
         koin.get<AuthController>()
     }
-    val navigator = remember {
-        koin.get<AppNavigator>()
-    }
 
     LaunchedEffect(Unit) {
         userStore.isAuthFlow.collect { isAuth ->
-            val currentScreen = navigator.currentScreen
+            val currentScreen = navHostController.currentDestination
             if (
                 isAuth.not() &&
                 currentScreen != null &&
-                currentScreen != AppScreen.Auth
+                currentScreen.route != Screen.Auth.serializer().toString()
             ) {
-                navigator.navigate(AppScreen.Auth)
+                navHostController.navigate(Screen.Auth)
             }
         }
     }
@@ -51,11 +46,10 @@ fun InitialApp(
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            Navigator(
-                screen = if (userStore.isAuth) MainScreen else AuthScreen
-            ) {
-                SlideTransition(it)
-            }
+            AppNavigationHost(
+                navHostController = navHostController,
+                startScreen = if (userStore.isAuth) Screen.Auth else Screen.Main
+            )
         }
     }
 }

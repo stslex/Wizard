@@ -8,6 +8,6 @@ object KtorLogger : Logger {
     private const val TAG = "KTOR_LOGGER"
 
     override fun log(message: String) {
-        Log.debug(message, TAG)
+        Log.d(message, TAG)
     }
 }

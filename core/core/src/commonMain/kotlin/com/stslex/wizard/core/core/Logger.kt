@@ -6,7 +6,7 @@ object Logger {
 
     private const val DEFAULT_TAG = "WIZARD"
 
-    fun exception(
+    fun e(
         throwable: Throwable,
         tag: String? = null,
         message: String? = null
@@ -19,7 +19,7 @@ object Logger {
         )
     }
 
-    fun debug(
+    fun d(
         message: String,
         tag: String? = null,
     ) {

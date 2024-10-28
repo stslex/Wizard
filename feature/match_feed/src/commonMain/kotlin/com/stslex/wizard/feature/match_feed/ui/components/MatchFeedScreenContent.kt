@@ -45,7 +45,7 @@ internal fun MatchFeedScreenContent(
                     screenState != ScreenState.Content.AppendLoading
                     && index >= films.size - 5
                 ) {
-                    Logger.debug("index: $index, films.size: ${films.size}")
+                    Logger.d("index: $index, films.size: ${films.size}")
                     loadMore()
                 }
             }

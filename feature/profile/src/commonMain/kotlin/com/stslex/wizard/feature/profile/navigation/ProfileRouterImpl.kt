@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.profile.navigation
 
-import com.stslex.wizard.core.ui.navigation.AppNavigator
 import com.stslex.wizard.core.ui.navigation.AppScreen
 import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Navigation
 

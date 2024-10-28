@@ -48,7 +48,7 @@ class MatchStore(
     )
 
     override fun process(action: Action) {
-        Logger.debug("process: $action", TAG)
+        Logger.d("process: $action", TAG)
         when (action) {
             is Action.Init -> actionInit(action)
             is Action.LoadMore -> actionLoadMore()

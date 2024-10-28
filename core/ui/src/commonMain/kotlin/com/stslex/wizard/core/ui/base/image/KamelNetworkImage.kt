@@ -24,7 +24,7 @@ internal fun KamelNetworkImage(
         contentScale = contentScale,
         onLoading = onLoading,
         onFailure = { throwable ->
-            Logger.exception(throwable)
+            Logger.e(throwable)
             onFailure?.let { onFailure ->
                 onFailure(throwable)
             }

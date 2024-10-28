@@ -24,6 +24,7 @@ include(":core:core")
 include(":core:network")
 include(":core:ui")
 include(":core:database")
+include(":core:navigation")
 
 include(":feature:film_feed")
 include(":feature:film")

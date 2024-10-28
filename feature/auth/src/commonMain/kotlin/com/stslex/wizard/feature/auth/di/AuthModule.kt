@@ -8,12 +8,14 @@ import com.stslex.wizard.feature.auth.domain.AuthInteractorImpl
 import com.stslex.wizard.feature.auth.navigation.AuthRouter
 import com.stslex.wizard.feature.auth.navigation.AuthRouterImpl
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 val featureAuthModule = module {
-    factory<AuthRepository> { AuthRepositoryImpl(client = get()) }
-    factory<AuthInteractor> { AuthInteractorImpl(authRepository = get()) }
-    factory<AuthRouter> { AuthRouterImpl(navigator = get()) }
+    factoryOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
+    factoryOf(::AuthInteractorImpl) { bind<AuthInteractor>() }
+    factoryOf(::AuthRouterImpl) { bind<AuthRouter>() }
     storeDefinition {
         AuthStore(
             interactor = get(),
