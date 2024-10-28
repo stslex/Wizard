@@ -1,5 +1,6 @@
 package com.stslex.wizard.core.network.di
 
+import com.stslex.wizard.core.core.AppModule
 import com.stslex.wizard.core.network.api.kinopoisk.api.KinopoiskApiClient
 import com.stslex.wizard.core.network.api.kinopoisk.api.KinopoiskApiClientImpl
 import com.stslex.wizard.core.network.api.kinopoisk.source.KinopoiskNetworkClient
@@ -20,63 +21,36 @@ import com.stslex.wizard.core.network.clients.profile.client.ProfileClient
 import com.stslex.wizard.core.network.clients.profile.client.ProfileClientImpl
 import com.stslex.wizard.core.network.utils.token.AuthController
 import com.stslex.wizard.core.network.utils.token.AuthControllerImpl
-import org.koin.dsl.module
+import org.koin.core.annotation.Module
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.ModuleDeclaration
 
-val coreNetworkModule = module {
-    /*Clients*/
-    single<ErrorHandler> {
-        ErrorHandlerImpl(
-            client = lazy { get<ServerHttpClient>() },
-            tokenProvider = get()
-        )
-    }
+@Module
+class ModuleCoreNetwork : AppModule() {
 
-    single<ServerHttpClient> {
-        ServerHttpClientImpl(
-            errorHandler = get(),
-            tokenProvider = get()
-        )
-    }
+    override fun declaration(): ModuleDeclaration = {
 
-    /*Kinopoisk Api*/
-    single<KinopoiskApiClient> { KinopoiskApiClientImpl(appDispatcher = get()) }
-    single<KinopoiskNetworkClient> { KinopoiskNetworkClientImpl(apiClient = get()) }
+        /*Clients*/
+        single<ErrorHandler> { ErrorHandlerImpl(lazy { get<ServerHttpClient>() }, get()) }
+        singleOf(::ServerHttpClientImpl) { bind<ServerHttpClient>() }
 
-    /*Server Api*/
-    single<ServerApiClient> {
-        ServerApiClientImpl(
-            appDispatcher = get(),
-            client = get()
-        )
-    }
+        /*Kinopoisk Api*/
+        singleOf(::KinopoiskApiClientImpl) { bind<KinopoiskApiClient>() }
+        singleOf(::KinopoiskNetworkClientImpl) { bind<KinopoiskNetworkClient>() }
 
-    /*Clients*/
-    single<AuthClient> {
-        AuthClientImpl(
-            networkClient = get(),
-            tokenController = get()
-        )
-    }
-    single<FilmClient> {
+        /*Server Api*/
+        singleOf(::ServerApiClientImpl) { bind<ServerApiClient>() }
+
+        /*Clients*/
+        singleOf(::AuthClientImpl) { bind<AuthClient>() }
+        singleOf(::MockFilmClientImpl) { bind<FilmClient>() }
         // todo remove mock
-        MockFilmClientImpl()
-//        FilmClientImpl(
-//            client = get(),
-//            kinopoiskClient = get()
-//        )
-    }
-    single<ProfileClient> {
-        ProfileClientImpl(client = get())
-    }
-    single<MatchClient> {
-        // todo remove mock
-        MockMatchClientImpl()
-    }
+//        singleOf(::FilmClientImpl) { bind<FilmClient>() }
+        singleOf(::ProfileClientImpl) { bind<ProfileClient>() }
+        singleOf(::MockMatchClientImpl) { bind<MatchClient>() }
 
-    /*Utils*/
-    single<AuthController> {
-        AuthControllerImpl(
-            userStore = get(),
-        )
+        /*Utils*/
+        singleOf(::AuthControllerImpl) { bind<AuthController>() }
     }
 }

@@ -19,3 +19,6 @@ abstract class AppModule(
         )
     }
 }
+
+val List<AppModule>.modules: List<Module>
+    get() = map { it.module }

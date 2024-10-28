@@ -1,22 +1,23 @@
 package com.stslex.wizard.feature.profile.navigation
 
-import com.stslex.wizard.core.ui.navigation.AppScreen
+import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.navigator.Navigator
 import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Navigation
 
 class ProfileRouterImpl(
-    private val navigator: AppNavigator
+    private val navigator: Navigator
 ) : ProfileRouter {
 
     override fun invoke(
         event: Navigation
     ) {
         when (event) {
-            Navigation.LogIn -> navigator.navigate(AppScreen.Auth)
-            Navigation.Back -> navigator.navigate(AppScreen.Back)
-            Navigation.Settings -> navigator.navigate(AppScreen.Settings)
-            is Navigation.Favourite -> navigator.navigate(AppScreen.Favourite(uuid = event.uuid))
-            is Navigation.Following -> navigator.navigate(AppScreen.Following(uuid = event.uuid))
-            is Navigation.Followers -> navigator.navigate(AppScreen.Followers(uuid = event.uuid))
+            Navigation.LogIn -> navigator.navTo(Screen.Auth)
+            Navigation.Back -> navigator.popBack()
+            Navigation.Settings -> navigator.navTo(Screen.Settings)
+            is Navigation.Favourite -> navigator.navTo(Screen.Favourite(uuid = event.uuid))
+            is Navigation.Following -> navigator.navTo(Screen.Following(uuid = event.uuid))
+            is Navigation.Followers -> navigator.navTo(Screen.Followers(uuid = event.uuid))
         }
     }
 }

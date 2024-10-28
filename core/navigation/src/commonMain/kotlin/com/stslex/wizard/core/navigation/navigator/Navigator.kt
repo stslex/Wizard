@@ -4,7 +4,7 @@ import com.stslex.wizard.core.navigation.Screen
 
 interface Navigator {
 
-    fun navigateTo(
+    fun navTo(
         screen: Screen,
         options: NavigatorOptions = NavigatorOptions()
     )

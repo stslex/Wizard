@@ -10,7 +10,7 @@ class NavigatorImpl(
     private val navHostController: NavHostController
 ) : Navigator {
 
-    override fun navigateTo(screen: Screen, options: NavigatorOptions) {
+    override fun navTo(screen: Screen, options: NavigatorOptions) {
         Logger.d("navigateTo screen: $screen, options: $options", TAG)
         val currentRoute = navHostController.currentDestination?.route ?: return
         try {

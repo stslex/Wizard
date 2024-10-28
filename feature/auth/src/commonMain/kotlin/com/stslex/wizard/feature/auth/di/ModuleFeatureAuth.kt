@@ -1,5 +1,6 @@
 package com.stslex.wizard.feature.auth.di
 
+import com.stslex.wizard.core.core.AppModule
 import com.stslex.wizard.core.ui.mvi.storeDefinition
 import com.stslex.wizard.feature.auth.data.AuthRepository
 import com.stslex.wizard.feature.auth.data.AuthRepositoryImpl
@@ -8,19 +9,24 @@ import com.stslex.wizard.feature.auth.domain.AuthInteractorImpl
 import com.stslex.wizard.feature.auth.navigation.AuthRouter
 import com.stslex.wizard.feature.auth.navigation.AuthRouterImpl
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
+import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
-import org.koin.dsl.module
+import org.koin.dsl.ModuleDeclaration
 
-val featureAuthModule = module {
-    factoryOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
-    factoryOf(::AuthInteractorImpl) { bind<AuthInteractor>() }
-    factoryOf(::AuthRouterImpl) { bind<AuthRouter>() }
-    storeDefinition {
-        AuthStore(
-            interactor = get(),
-            router = get(),
-            dispatcher = get()
-        )
+@Module
+class ModuleFeatureAuth : AppModule() {
+
+    override fun declaration(): ModuleDeclaration = {
+        factoryOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
+        factoryOf(::AuthInteractorImpl) { bind<AuthInteractor>() }
+        factoryOf(::AuthRouterImpl) { bind<AuthRouter>() }
+        storeDefinition {
+            AuthStore(
+                interactor = get(),
+                router = get(),
+                dispatcher = get()
+            )
+        }
     }
 }
