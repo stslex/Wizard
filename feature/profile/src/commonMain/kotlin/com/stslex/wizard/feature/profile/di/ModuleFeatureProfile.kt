@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.profile.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.profile.data.repository.ProfileRepository
 import com.stslex.wizard.feature.profile.data.repository.ProfileRepositoryImpl
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
@@ -18,14 +18,7 @@ import org.koin.dsl.ModuleDeclaration
 class ModuleFeatureProfile : AppModule() {
 
     override fun declaration(): ModuleDeclaration = {
-        storeDefinition {
-            ProfileStore(
-                interactor = get(),
-                userStore = get(),
-                appDispatcher = get(),
-                router = get(),
-            )
-        }
+        storeOf(::ProfileStore)
         factoryOf(::ProfileRouterImpl) { bind<ProfileRouter>() }
         factoryOf(::ProfileInteractorImpl) { bind<ProfileInteractor>() }
         factoryOf(::ProfileRepositoryImpl) { bind<ProfileRepository>() }

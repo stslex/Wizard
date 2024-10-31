@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match_feed.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.match_feed.data.repository.MatchFeedMockRepositoryImpl
 import com.stslex.wizard.feature.match_feed.data.repository.MatchFeedRepository
 import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
@@ -21,12 +21,6 @@ class ModuleFeatureMatchFeed : AppModule() {
         factoryOf(::MatchFeedMockRepositoryImpl) { bind<MatchFeedRepository>() }
         factoryOf(::MatchFeedInteractorImpl) { bind<MatchFeedInteractor>() }
         factoryOf(::MatchFeedRouterImpl) { bind<MatchFeedRouter>() }
-        storeDefinition {
-            MatchFeedStore(
-                interactor = get(),
-                appDispatcher = get(),
-                router = get()
-            )
-        }
+        storeOf(::MatchFeedStore)
     }
 }
