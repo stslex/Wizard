@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.follower.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.follower.data.repository.FollowerRepository
 import com.stslex.wizard.feature.follower.data.repository.FollowerRepositoryImpl
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor
@@ -21,13 +21,6 @@ class ModuleFeatureFollower : AppModule() {
         factoryOf(::FollowerRepositoryImpl) { bind<FollowerRepository>() }
         factoryOf(::FollowerInteractorImpl) { bind<FollowerInteractor>() }
         factoryOf(::FollowerRouterImpl) { bind<FollowerRouter>() }
-        storeDefinition {
-            FollowerStore(
-                interactor = get(),
-                appDispatcher = get(),
-                router = get(),
-                pagerFactory = get(),
-            )
-        }
+        storeOf(::FollowerStore)
     }
 }

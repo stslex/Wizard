@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.auth.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.auth.data.AuthRepository
 import com.stslex.wizard.feature.auth.data.AuthRepositoryImpl
 import com.stslex.wizard.feature.auth.domain.AuthInteractor
@@ -21,12 +21,6 @@ class ModuleFeatureAuth : AppModule() {
         factoryOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
         factoryOf(::AuthInteractorImpl) { bind<AuthInteractor>() }
         factoryOf(::AuthRouterImpl) { bind<AuthRouter>() }
-        storeDefinition {
-            AuthStore(
-                interactor = get(),
-                router = get(),
-                dispatcher = get()
-            )
-        }
+        storeOf(::AuthStore)
     }
 }

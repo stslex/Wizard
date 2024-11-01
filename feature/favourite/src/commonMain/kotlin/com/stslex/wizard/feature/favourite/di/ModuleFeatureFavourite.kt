@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.favourite.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.favourite.data.repository.FavouriteRepository
 import com.stslex.wizard.feature.favourite.data.repository.FavouriteRepositoryImpl
 import com.stslex.wizard.feature.favourite.domain.interactor.FavouriteInteractor
@@ -21,13 +21,6 @@ class ModuleFeatureFavourite : AppModule() {
         factoryOf(::FavouriteRepositoryImpl) { bind<FavouriteRepository>() }
         factoryOf(::FavouriteInteractorImpl) { bind<FavouriteInteractor>() }
         factoryOf(::FavouriteRouterImpl) { bind<FavouriteRouter>() }
-        storeDefinition {
-            FavouriteStore(
-                interactor = get(),
-                appDispatcher = get(),
-                router = get(),
-                pagingFactory = get()
-            )
-        }
+        storeOf(::FavouriteStore)
     }
 }

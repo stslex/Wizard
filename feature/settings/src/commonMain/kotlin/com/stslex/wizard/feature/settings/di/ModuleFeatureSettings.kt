@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.settings.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.settings.domain.SettingsInteractor
 import com.stslex.wizard.feature.settings.domain.SettingsInteractorImpl
 import com.stslex.wizard.feature.settings.navigation.SettingsRouter
@@ -18,12 +18,6 @@ class ModuleFeatureSettings : AppModule() {
     override fun declaration(): ModuleDeclaration = {
         factoryOf(::SettingsInteractorImpl) { bind<SettingsInteractor>() }
         factoryOf(::SettingsRouterImpl) { bind<SettingsRouter>() }
-        storeDefinition {
-            SettingsStore(
-                interactor = get(),
-                appDispatcher = get(),
-                router = get(),
-            )
-        }
+        storeOf(::SettingsStore)
     }
 }

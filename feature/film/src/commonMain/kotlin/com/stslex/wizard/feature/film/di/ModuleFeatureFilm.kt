@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.film.data.repository.FilmRepository
 import com.stslex.wizard.feature.film.data.repository.FilmRepositoryImpl
 import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor
@@ -18,13 +18,7 @@ import org.koin.dsl.ModuleDeclaration
 class ModuleFeatureFilm : AppModule() {
 
     override fun declaration(): ModuleDeclaration = {
-        storeDefinition {
-            FilmStore(
-                interactor = get(),
-                appDispatcher = get(),
-                router = get(),
-            )
-        }
+        storeOf(::FilmStore)
         factoryOf(::FilmRouterImpl) { bind<FilmRouter>() }
         factoryOf(::FilmInteractorImpl) { bind<FilmInteractor>() }
         factoryOf(::FilmRepositoryImpl) { bind<FilmRepository>() }

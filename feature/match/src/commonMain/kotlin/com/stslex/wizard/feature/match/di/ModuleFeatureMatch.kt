@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.mvi.storeDefinition
+import com.stslex.wizard.core.ui.mvi.storeOf
 import com.stslex.wizard.feature.match.data.repository.MatchRepository
 import com.stslex.wizard.feature.match.data.repository.MatchRepositoryImpl
 import com.stslex.wizard.feature.match.domain.interactor.MatchInteractor
@@ -21,14 +21,6 @@ class ModuleFeatureMatch : AppModule() {
         factoryOf(::MatchRepositoryImpl) { bind<MatchRepository>() }
         factoryOf(::MatchInteractorImpl) { bind<MatchInteractor>() }
         factoryOf(::MatchRouterImpl) { bind<MatchRouter>() }
-        storeDefinition {
-            MatchStore(
-                interactor = get(),
-                router = get(),
-                appDispatcher = get(),
-                userStore = get(),
-                pagerFactory = get()
-            )
-        }
+        storeOf(::MatchStore)
     }
 }

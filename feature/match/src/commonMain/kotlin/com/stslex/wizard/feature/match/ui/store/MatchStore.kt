@@ -88,7 +88,7 @@ class MatchStore(
         updateState { currentState ->
             currentState.copy(
                 isSelf = action.type == Screen.Match.Type.SELF,
-                uuid = action.uuid.ifBlank { userStore.uuid } ,
+                uuid = action.uuid.ifBlank { userStore.uuid },
             )
         }
 
