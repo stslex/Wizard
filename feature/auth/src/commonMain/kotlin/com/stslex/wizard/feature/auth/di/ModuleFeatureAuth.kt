@@ -9,6 +9,7 @@ import com.stslex.wizard.feature.auth.domain.AuthInteractorImpl
 import com.stslex.wizard.feature.auth.navigation.AuthRouter
 import com.stslex.wizard.feature.auth.navigation.AuthRouterImpl
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -21,6 +22,6 @@ class ModuleFeatureAuth : AppModule() {
         factoryOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
         factoryOf(::AuthInteractorImpl) { bind<AuthInteractor>() }
         factoryOf(::AuthRouterImpl) { bind<AuthRouter>() }
-        storeOf(::AuthStore)
+        storeOf(::AuthStoreImpl) { bind<AuthStore>() }
     }
 }

@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.feature.film.ui.components.FilmContentScreen
 import com.stslex.wizard.feature.film.ui.store.FilmScreenState
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.Action
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.State
+import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
+import com.stslex.wizard.feature.film.ui.store.FilmStore.State
 
 @Composable
 internal fun FilmScreen(

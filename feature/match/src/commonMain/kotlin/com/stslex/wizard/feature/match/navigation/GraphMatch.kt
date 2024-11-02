@@ -11,8 +11,8 @@ import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.match.ui.MatchScreen
 import com.stslex.wizard.feature.match.ui.store.MatchStore
-import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Action
-import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Event
+import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
+import com.stslex.wizard.feature.match.ui.store.MatchStore.Event
 
 fun NavGraphBuilder.graphMatch() {
     navScreen<Screen.Match> { screen ->

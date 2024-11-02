@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.settings.navigation
 
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navigator.Navigator
-import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Navigation
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action.Navigation
 
 class SettingsRouterImpl(private val navigator: Navigator) : SettingsRouter {
 

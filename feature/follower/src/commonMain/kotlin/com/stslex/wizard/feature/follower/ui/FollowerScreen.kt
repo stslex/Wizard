@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.core.ui.base.paging.PagingColumn
 import com.stslex.wizard.feature.follower.ui.store.FollowerScreenState
-import com.stslex.wizard.feature.follower.ui.store.FollowerStoreComponent.Action
-import com.stslex.wizard.feature.follower.ui.store.FollowerStoreComponent.State
+import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
+import com.stslex.wizard.feature.follower.ui.store.FollowerStore.State
 
 @Composable
 internal fun FollowerScreen(

@@ -23,10 +23,10 @@ import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberLoginTe
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberPasswordInputTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberPasswordSubmitTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberUsernameTextFieldState
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Action
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.AuthFieldsState
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.ScreenLoadingState
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.State
+import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action
+import com.stslex.wizard.feature.auth.ui.store.AuthStore.AuthFieldsState
+import com.stslex.wizard.feature.auth.ui.store.AuthStore.ScreenLoadingState
+import com.stslex.wizard.feature.auth.ui.store.AuthStore.State
 
 @Stable
 data class AuthScreenState @OptIn(ExperimentalMaterialApi::class) constructor(

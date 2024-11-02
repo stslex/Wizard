@@ -9,12 +9,12 @@ import com.stslex.wizard.feature.favourite.ui.components.content.FavouriteScreen
 import com.stslex.wizard.feature.favourite.ui.components.error.FavouriteScreenError
 import com.stslex.wizard.feature.favourite.ui.components.shimmer.FavouriteScreenShimmer
 import com.stslex.wizard.feature.favourite.ui.store.FavouriteScreenState
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStoreComponent
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStoreComponent.Action
+import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore
+import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore.Action
 
 @Composable
 internal fun FavouriteScreen(
-    state: FavouriteStoreComponent.State,
+    state: FavouriteStore.State,
     onAction: (Action) -> Unit
 ) {
     Box(

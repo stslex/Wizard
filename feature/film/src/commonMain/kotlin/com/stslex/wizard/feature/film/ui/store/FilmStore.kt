@@ -1,85 +1,45 @@
 package com.stslex.wizard.feature.film.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
+import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.ui.mvi.Store
-import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor
-import com.stslex.wizard.feature.film.navigation.FilmRouter
-import com.stslex.wizard.feature.film.ui.model.toDomain
-import com.stslex.wizard.feature.film.ui.model.toUi
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.Action
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.Event
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.Navigation
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.State
-import kotlinx.coroutines.Job
+import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
+import com.stslex.wizard.feature.film.ui.store.FilmStore.Event
+import com.stslex.wizard.feature.film.ui.store.FilmStore.State
 
-class FilmStore(
-    private val interactor: FilmInteractor,
-    appDispatcher: AppDispatcher,
-    router: FilmRouter,
-) : Store<State, Event, Action, Navigation>(
-    router = router,
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL,
-) {
+interface FilmStore : Store<State, Action, Event> {
 
-    private var likeJob: Job? = null
+    @Stable
+    data class State(
+        val filmId: String,
+        val screenState: FilmScreenState
+    ) : Store.State {
 
-    override fun process(action: Action) {
-        when (action) {
-            is Action.Init -> actionInit(action)
-            is Action.BackButtonClick -> actionBackButtonClick()
-            is Action.LikeButtonClick -> actionLikeButtonClick()
-        }
-    }
-
-    private fun actionLikeButtonClick() {
-        if (likeJob?.isActive == true) return
-        val film = state.value.screenState.result ?: return
-        updateState { state ->
-            state.copy(
-                screenState = FilmScreenState.Content(film.copy(isFavorite = !film.isFavorite))
+        companion object {
+            val INITIAL = State(
+                filmId = "",
+                screenState = FilmScreenState.Loading
             )
         }
-        likeJob = launch(
-            onError = {
-                updateState { state ->
-                    state.copy(
-                        screenState = FilmScreenState.Content(film.copy(isFavorite = !film.isFavorite))
-                    )
-                }
-                sendEvent(Event.ErrorSnackbar(it))
-            },
-            onSuccess = {
-                // TODO show toast success
-            }
-        ) {
-            if (film.isFavorite) {
-                interactor.dislikeFilm(film.id)
-            } else {
-                interactor.likeFilm(film.toDomain())
-            }
+    }
+
+    @Stable
+    sealed interface Action : Store.Action {
+
+        @Stable
+        data class Init(val id: String) : Action
+
+        data object BackButtonClick : Action
+
+        data object LikeButtonClick : Action
+
+        sealed interface Navigation : Action, Store.Action.Navigation {
+
+            data object Back : Navigation
         }
     }
 
-    private fun actionBackButtonClick() {
-        consumeNavigation(Navigation.Back)
-    }
+    sealed interface Event : Store.Event {
 
-    private fun actionInit(action: Action.Init) {
-        updateState { currentState ->
-            currentState.copy(
-                screenState = FilmScreenState.Loading,
-                filmId = action.id
-            )
-        }
-        interactor
-            .getFilm(action.id)
-            .launch { film ->
-                updateState { currentState ->
-                    currentState.copy(
-                        screenState = FilmScreenState.Content(film.toUi())
-                    )
-                }
-            }
+        data class ErrorSnackbar(val throwable: Throwable) : Event
     }
 }

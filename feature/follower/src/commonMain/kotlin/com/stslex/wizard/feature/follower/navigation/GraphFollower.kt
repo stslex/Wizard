@@ -10,7 +10,7 @@ import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.follower.ui.FollowerScreen
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore
-import com.stslex.wizard.feature.follower.ui.store.FollowerStoreComponent.Action
+import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
 
 fun NavGraphBuilder.graphFollower() {
     navScreen<Screen.Follower> { screen ->

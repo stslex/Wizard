@@ -9,6 +9,7 @@ import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractorImpl
 import com.stslex.wizard.feature.match_feed.navigation.MatchFeedRouter
 import com.stslex.wizard.feature.match_feed.navigation.MatchFeedRouterImpl
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -21,6 +22,6 @@ class ModuleFeatureMatchFeed : AppModule() {
         factoryOf(::MatchFeedMockRepositoryImpl) { bind<MatchFeedRepository>() }
         factoryOf(::MatchFeedInteractorImpl) { bind<MatchFeedInteractor>() }
         factoryOf(::MatchFeedRouterImpl) { bind<MatchFeedRouter>() }
-        storeOf(::MatchFeedStore)
+        storeOf(::MatchFeedStoreImpl) { bind<MatchFeedStore>() }
     }
 }

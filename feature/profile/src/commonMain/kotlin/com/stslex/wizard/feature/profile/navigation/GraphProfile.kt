@@ -10,13 +10,13 @@ import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.profile.ui.ProfileScreen
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore
-import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Action
-import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Event
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreImpl
+import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
+import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 
 fun NavGraphBuilder.graphProfile() {
     navScreen<Screen.Profile> { screen ->
-        val store = getStore<ProfileStore>()
+        val store = getStore<ProfileStoreImpl>()
         LaunchedEffect(Unit) {
             store.sendAction(
                 Action.Init(

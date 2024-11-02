@@ -10,8 +10,8 @@ import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.match_feed.ui.MatchFeedScreen
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.Action
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.Event.ErrorSnackBar
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Action
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Event.ErrorSnackBar
 
 fun NavGraphBuilder.graphMatchFeed() {
     navScreen<Screen.MatchFeed> {

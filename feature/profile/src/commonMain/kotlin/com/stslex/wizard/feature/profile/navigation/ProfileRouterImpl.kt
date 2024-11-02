@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.profile.navigation
 
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navigator.Navigator
-import com.stslex.wizard.feature.profile.ui.store.ProfileStoreComponent.Navigation
+import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action.Navigation
 
 class ProfileRouterImpl(
     private val navigator: Navigator

@@ -9,6 +9,7 @@ import com.stslex.wizard.feature.favourite.domain.interactor.FavouriteInteractor
 import com.stslex.wizard.feature.favourite.navigation.FavouriteRouter
 import com.stslex.wizard.feature.favourite.navigation.FavouriteRouterImpl
 import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore
+import com.stslex.wizard.feature.favourite.ui.store.FavouriteStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -21,6 +22,6 @@ class ModuleFeatureFavourite : AppModule() {
         factoryOf(::FavouriteRepositoryImpl) { bind<FavouriteRepository>() }
         factoryOf(::FavouriteInteractorImpl) { bind<FavouriteInteractor>() }
         factoryOf(::FavouriteRouterImpl) { bind<FavouriteRouter>() }
-        storeOf(::FavouriteStore)
+        storeOf(::FavouriteStoreImpl) { bind<FavouriteStore>() }
     }
 }
