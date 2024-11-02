@@ -10,12 +10,12 @@ import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.settings.ui.SettingsScreen
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore
-import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Event
+import com.stslex.wizard.feature.settings.ui.store.SettingsStoreImpl
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Event
 
 fun NavGraphBuilder.graphSettings() {
     navScreen<Screen.Settings> {
-        val store = getStore<SettingsStore>()
+        val store = getStore<SettingsStoreImpl>()
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
         LaunchedEffect(Unit) {

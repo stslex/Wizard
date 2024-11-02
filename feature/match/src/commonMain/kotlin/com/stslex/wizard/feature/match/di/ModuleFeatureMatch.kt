@@ -9,6 +9,7 @@ import com.stslex.wizard.feature.match.domain.interactor.MatchInteractorImpl
 import com.stslex.wizard.feature.match.navigation.MatchRouter
 import com.stslex.wizard.feature.match.navigation.MatchRouterImpl
 import com.stslex.wizard.feature.match.ui.store.MatchStore
+import com.stslex.wizard.feature.match.ui.store.MatchStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -21,6 +22,6 @@ class ModuleFeatureMatch : AppModule() {
         factoryOf(::MatchRepositoryImpl) { bind<MatchRepository>() }
         factoryOf(::MatchInteractorImpl) { bind<MatchInteractor>() }
         factoryOf(::MatchRouterImpl) { bind<MatchRouter>() }
-        storeOf(::MatchStore)
+        storeOf(::MatchStoreImpl) { bind<MatchStore>() }
     }
 }

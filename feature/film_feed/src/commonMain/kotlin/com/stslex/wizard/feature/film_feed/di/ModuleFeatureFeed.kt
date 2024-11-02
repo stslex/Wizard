@@ -9,6 +9,7 @@ import com.stslex.wizard.feature.film_feed.domain.interactor.FeedInteractorImpl
 import com.stslex.wizard.feature.film_feed.navigation.FeedScreenRouter
 import com.stslex.wizard.feature.film_feed.navigation.FeedScreenRouterImpl
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -18,7 +19,7 @@ import org.koin.dsl.ModuleDeclaration
 class ModuleFeatureFeed : AppModule() {
 
     override fun declaration(): ModuleDeclaration = {
-        storeOf(::FeedStore)
+        storeOf(::FeedStoreImpl) { bind<FeedStore>() }
         factoryOf(::FeedScreenRouterImpl) { bind<FeedScreenRouter>() }
         factoryOf(::FeedInteractorImpl) { bind<FeedInteractor>() }
         factoryOf(::FeedRepositoryImpl) { bind<FeedRepository>() }

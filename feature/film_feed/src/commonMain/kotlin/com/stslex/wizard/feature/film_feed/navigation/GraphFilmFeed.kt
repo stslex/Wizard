@@ -10,8 +10,8 @@ import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.film_feed.ui.FeedScreen
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Action
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Event
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
 
 fun NavGraphBuilder.graphFilmFeed() {
     navScreen<Screen.FilmFeed> { screen ->

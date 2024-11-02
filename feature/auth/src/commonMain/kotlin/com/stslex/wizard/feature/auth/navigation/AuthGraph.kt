@@ -12,7 +12,7 @@ import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.auth.ui.AuthScreen
 import com.stslex.wizard.feature.auth.ui.model.screen.rememberAuthScreenState
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
-import com.stslex.wizard.feature.auth.ui.store.AuthStoreComponent.Event
+import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
 
 fun NavGraphBuilder.graphAuth() {
     navScreen<Screen.Auth> {

@@ -9,6 +9,7 @@ import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractorIm
 import com.stslex.wizard.feature.follower.navigation.FollowerRouter
 import com.stslex.wizard.feature.follower.navigation.FollowerRouterImpl
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore
+import com.stslex.wizard.feature.follower.ui.store.FollowerStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -21,6 +22,6 @@ class ModuleFeatureFollower : AppModule() {
         factoryOf(::FollowerRepositoryImpl) { bind<FollowerRepository>() }
         factoryOf(::FollowerInteractorImpl) { bind<FollowerInteractor>() }
         factoryOf(::FollowerRouterImpl) { bind<FollowerRouter>() }
-        storeOf(::FollowerStore)
+        storeOf(::FollowerStoreImpl) { bind<FollowerStore>() }
     }
 }

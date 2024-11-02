@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import com.stslex.wizard.feature.match_feed.ui.components.MatchFeedScreenContent
 import com.stslex.wizard.feature.match_feed.ui.components.MatchFeedScreenError
 import com.stslex.wizard.feature.match_feed.ui.components.MatchFeedScreenLoading
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.Action
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreComponent.State
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Action
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.State
 import com.stslex.wizard.feature.match_feed.ui.store.ScreenState
 
 @Composable

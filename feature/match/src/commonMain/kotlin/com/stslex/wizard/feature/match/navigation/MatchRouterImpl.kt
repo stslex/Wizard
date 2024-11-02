@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.match.navigation
 
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navigator.Navigator
-import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Navigation
+import com.stslex.wizard.feature.match.ui.store.MatchStore.Action.Navigation
 
 class MatchRouterImpl(private val navigator: Navigator) : MatchRouter {
 

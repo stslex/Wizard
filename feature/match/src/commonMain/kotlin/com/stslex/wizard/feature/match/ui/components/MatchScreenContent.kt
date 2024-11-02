@@ -23,7 +23,7 @@ import com.stslex.wizard.core.ui.base.shimmerLoadingAnimation
 import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.match.ui.model.MatchUiModel
 import com.stslex.wizard.feature.match.ui.store.MatchScreenState
-import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Action
+import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

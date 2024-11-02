@@ -15,8 +15,8 @@ import com.stslex.wizard.core.ui.components.AppSnackbarHost
 import com.stslex.wizard.core.ui.components.AppToolbar
 import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.settings.ui.components.SettingsContent
-import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.Action
-import com.stslex.wizard.feature.settings.ui.store.SettingsStoreComponent.State
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State
 
 @Composable
 internal fun SettingsScreen(

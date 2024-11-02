@@ -14,13 +14,8 @@ expect inline fun <reified T : ViewModel> Module.viewModelDefinition(
     noinline definition: Definition<T>
 ): KoinDefinition<T>
 
-inline fun <reified T : Store<*, *, *, *>> Module.storeDefinition(
-    qualifier: Qualifier? = null,
-    noinline definition: Definition<T>
-): KoinDefinition<T> = viewModelDefinition(qualifier, definition)
-
 @Composable
-inline fun <reified T : Store<*, *, *, *>> getStore(
+inline fun <reified T : Store<*, *, *>> getStore(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null
 ): T = koinInject(

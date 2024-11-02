@@ -11,8 +11,8 @@ import com.stslex.wizard.feature.match.ui.components.MatchScreenEmpty
 import com.stslex.wizard.feature.match.ui.components.MatchScreenError
 import com.stslex.wizard.feature.match.ui.components.MatchScreenShimmer
 import com.stslex.wizard.feature.match.ui.store.MatchScreenState
-import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.Action
-import com.stslex.wizard.feature.match.ui.store.MatchStoreComponent.State
+import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
+import com.stslex.wizard.feature.match.ui.store.MatchStore.State
 
 @Composable
 internal fun MatchScreen(

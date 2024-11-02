@@ -10,7 +10,7 @@ import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.getStore
 import com.stslex.wizard.feature.film.ui.FilmScreen
 import com.stslex.wizard.feature.film.ui.store.FilmStore
-import com.stslex.wizard.feature.film.ui.store.FilmStoreComponent.Action
+import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
 
 fun NavGraphBuilder.graphFilm() {
     navScreen<Screen.Film> { screen ->

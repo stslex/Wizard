@@ -9,8 +9,8 @@ import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenContent
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenError
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenLoading
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.Action
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreComponent.State
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
 
 @Composable
 internal fun FeedScreen(
