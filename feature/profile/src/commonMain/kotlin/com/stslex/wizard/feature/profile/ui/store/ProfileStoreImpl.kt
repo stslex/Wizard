@@ -1,7 +1,6 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.ui.graphics.Color
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.mvi.BaseStore
@@ -18,11 +17,7 @@ class ProfileStoreImpl(
     private val interactor: ProfileInteractor,
     private val userStore: UserStore,
     private val router: ProfileRouter,
-    appDispatcher: AppDispatcher,
-) : ProfileStore, BaseStore<State, Action, Event>(
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL,
-) {
+) : ProfileStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     override fun process(action: Action) {
         when (action) {

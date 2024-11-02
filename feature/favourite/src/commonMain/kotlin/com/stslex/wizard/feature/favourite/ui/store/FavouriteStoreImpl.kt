@@ -24,10 +24,9 @@ import kotlinx.coroutines.flow.map
 class FavouriteStoreImpl(
     private val interactor: FavouriteInteractor,
     private val router: FavouriteRouter,
-    appDispatcher: AppDispatcher,
+    private val appDispatcher: AppDispatcher,
     pagingFactory: StorePagerFactory,
 ) : BaseStore<State, Action, Event>(
-    appDispatcher = appDispatcher,
     initialState = State.INITIAL
 ), FavouriteStore {
 
@@ -95,7 +94,8 @@ class FavouriteStoreImpl(
             .map { it.query }
             .distinctUntilChanged()
             .launch(
-                onError = ::showError
+                onError = ::showError,
+                eachDispatcher = appDispatcher.default
             ) {
                 if (pager.loadState.value is PagerLoadState.Initial) {
                     pager.initialLoad()
@@ -119,9 +119,7 @@ class FavouriteStoreImpl(
         if (likeJob?.isActive == true) return
         val items = state.value.paging.items.toMutableList()
         val itemIndex = items
-            .indexOfFirst {
-                it.uuid == action.uuid
-            }
+            .indexOfFirst { it.uuid == action.uuid }
             .takeIf { it != -1 }
             ?: return
         val item = state.value.paging.items.getOrNull(itemIndex) ?: return
@@ -137,6 +135,7 @@ class FavouriteStoreImpl(
         likeJob = launch(
             onSuccess = { /* do nothing */ },
             onError = ::showError,
+            eachDispatcher = appDispatcher.default,
             action = {
                 interactor.setFavourite(newItem.toDomain())
             })

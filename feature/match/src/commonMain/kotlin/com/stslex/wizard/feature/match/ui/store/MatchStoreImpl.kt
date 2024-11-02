@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.match.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.Screen
@@ -22,15 +21,11 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 class MatchStoreImpl(
-    appDispatcher: AppDispatcher,
     pagerFactory: StorePagerFactory,
     private val router: MatchRouter,
     private val interactor: MatchInteractor,
     private val userStore: UserStore,
-) : MatchStore, BaseStore<State, Action, Event>(
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL
-) {
+) : MatchStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     private val pager: StorePager<MatchUiModel> = pagerFactory.create(
         request = { page, pageSize ->

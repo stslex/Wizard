@@ -3,6 +3,7 @@ package com.stslex.wizard.core.ui.mvi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.core.AppDispatcherImpl
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScopeImpl
@@ -10,6 +11,7 @@ import com.stslex.wizard.core.core.coroutineExceptionHandler
 import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -23,10 +25,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class BaseStore<S : State, A : Action, E : Event>(
-    private val appDispatcher: AppDispatcher,
-    initialState: S
-) : ViewModel(), Store<S, A, E> {
+abstract class BaseStore<S : State, A : Action, E : Event>(initialState: S) : ViewModel(),
+    Store<S, A, E> {
 
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
     override val event: SharedFlow<E> = _event.asSharedFlow()
@@ -34,10 +34,7 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
     private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
     override val state: StateFlow<S> = _state.asStateFlow()
 
-    protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(
-        scope = viewModelScope,
-        appDispatcher = appDispatcher
-    )
+    protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(viewModelScope)
 
     private var _lastAction: A? = null
     protected val lastAction: A?
@@ -57,7 +54,7 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
         onError: suspend (cause: Throwable) -> Unit = {},
     ) = CoroutineExceptionHandler { _, throwable ->
         Logger.e(throwable)
-        viewModelScope.launch(appDispatcher.default + coroutineExceptionHandler) {
+        viewModelScope.launch(coroutineExceptionHandler) {
             onError(throwable)
         }
     }
@@ -76,9 +73,7 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
      * @see AppDispatcher
      * */
     protected fun sendEvent(event: E) {
-        viewModelScope.launch(appDispatcher.default) {
-            this@BaseStore._event.emit(event)
-        }
+        viewModelScope.launch { _event.emit(event) }
     }
 
     /**
@@ -93,9 +88,13 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
     protected fun <T> launch(
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: suspend CoroutineScope.(T) -> Unit = {},
+        workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
+        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.main.immediate,
         action: suspend CoroutineScope.() -> T,
     ): Job = scope.launch(
         onError = onError,
+        workDispatcher = workDispatcher,
+        eachDispatcher = eachDispatcher,
         onSuccess = onSuccess,
         action = action
     )
@@ -111,9 +110,13 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
      * */
     protected fun <T> Flow<T>.launch(
         onError: suspend (cause: Throwable) -> Unit = {},
+        workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
+        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.main.immediate,
         each: suspend (T) -> Unit
     ): Job = scope.launch(
         flow = this,
+        workDispatcher = workDispatcher,
+        eachDispatcher = eachDispatcher,
         onError = onError,
         each = each,
     )

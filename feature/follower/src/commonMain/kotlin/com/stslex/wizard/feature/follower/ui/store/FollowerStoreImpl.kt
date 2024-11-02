@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.follower.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.navigation.Screen.Follower.FollowerType
 import com.stslex.wizard.core.ui.base.mapToAppError
 import com.stslex.wizard.core.ui.base.paging.toUi
@@ -22,12 +21,8 @@ import kotlinx.coroutines.flow.map
 class FollowerStoreImpl(
     private val interactor: FollowerInteractor,
     private val router: FollowerRouter,
-    appDispatcher: AppDispatcher,
     pagerFactory: StorePagerFactory,
-) : FollowerStore, BaseStore<State, Action, Event>(
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL,
-) {
+) : FollowerStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     private val pager: StorePager<FollowerModel> = pagerFactory.create(
         request = { page, pageSize ->

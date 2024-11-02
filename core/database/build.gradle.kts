@@ -8,5 +8,8 @@ kotlin {
             implementation(project(":core:core"))
             implementation(libs.multiplatformSettings)
         }
+        androidMain.dependencies {
+            implementation(libs.androidx.security.crypto)
+        }
     }
 }

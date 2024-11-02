@@ -48,10 +48,10 @@ fun InitialApp(
     LaunchedEffect(Unit) {
         userStore.isAuthFlow.collect { isAuth ->
             val currentScreen = navHostController.currentDestination
+            val authScreen = Screen.Auth::class.simpleName.orEmpty()
             if (
                 isAuth.not() &&
-                currentScreen != null &&
-                currentScreen.route != Screen.Auth.serializer().toString()
+                currentScreen?.route?.contains(authScreen) == true
             ) {
                 navHostController.navigate(Screen.Auth)
             }

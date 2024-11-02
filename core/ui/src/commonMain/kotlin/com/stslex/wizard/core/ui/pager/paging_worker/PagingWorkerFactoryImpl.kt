@@ -9,12 +9,10 @@ class PagingWorkerFactoryImpl : PagingWorkerFactory {
         delay: Long,
         defaultLoadSize: Int,
         queryLoadSize: Int
-    ): PagingWorker {
-        return PagingWorkerImpl(
-            scope = scope,
-            delay = delay,
-            defaultLoadSize = defaultLoadSize,
-            queryLoadSize = queryLoadSize
-        )
-    }
+    ): PagingWorker = PagingWorkerImpl(
+        scope = scope,
+        delay = delay,
+        defaultLoadSize = defaultLoadSize,
+        queryLoadSize = queryLoadSize
+    )
 }

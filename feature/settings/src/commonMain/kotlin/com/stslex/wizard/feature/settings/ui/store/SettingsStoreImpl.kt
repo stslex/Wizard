@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.settings.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.settings.domain.SettingsInteractor
@@ -12,11 +11,7 @@ import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State
 class SettingsStoreImpl(
     private val interactor: SettingsInteractor,
     private val router: SettingsRouter,
-    appDispatcher: AppDispatcher
-) : SettingsStore, BaseStore<State, Action, Event>(
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL
-) {
+) : SettingsStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     override fun process(action: Action) {
         when (action) {

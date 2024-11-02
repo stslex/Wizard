@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.stslex.wizard.core.network.utils.currentTimeMs
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -47,7 +46,7 @@ fun onClickDelay(
     val clicker = remember(onClick) { Clicker(throttle) }
     return remember(onClick) {
         {
-            coroutineScope.launch(Dispatchers.Default) {
+            coroutineScope.launch {
                 delay(delay)
                 clicker.click(onClick = onClick)
             }
