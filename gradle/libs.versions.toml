@@ -5,6 +5,7 @@ compose-plugin = "1.7.0"
 
 minSdk = "24"
 compileSdk = "34"
+securityCrypto = "1.1.0-alpha06"
 targetSdk = "34"
 versionName = "1.0"
 versionCode = "1"
@@ -40,6 +41,7 @@ serialization = "1.7.1"
 buildConfig = "4.2.0"
 [libraries]
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-gradlePlugin = { module = "org.jetbrains.compose:org.jetbrains.compose.gradle.plugin", version.ref = "compose-plugin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }

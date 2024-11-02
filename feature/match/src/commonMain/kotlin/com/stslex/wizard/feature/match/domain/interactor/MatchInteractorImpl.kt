@@ -29,6 +29,6 @@ class MatchInteractorImpl(
         }
 
     override suspend fun logout() {
-        authController.logOut()
+        authController.logout()
     }
 }

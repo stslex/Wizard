@@ -17,6 +17,6 @@ class ProfileInteractorImpl(
     ): Flow<ProfileDomainModel> = repository.getProfile(uuid).map { it.toDomain() }
 
     override suspend fun logOut() {
-        authController.logOut()
+        authController.logout()
     }
 }

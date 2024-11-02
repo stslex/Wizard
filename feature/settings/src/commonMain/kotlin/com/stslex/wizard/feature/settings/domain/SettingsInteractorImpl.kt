@@ -7,6 +7,6 @@ class SettingsInteractorImpl(
 ) : SettingsInteractor {
 
     override suspend fun logOut() {
-        authController.logOut()
+        authController.logout()
     }
 }
