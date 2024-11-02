@@ -1,7 +1,6 @@
 package com.stslex.wizard.feature.film_feed.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.feature.film_feed.domain.interactor.FeedInteractor
@@ -17,12 +16,8 @@ import kotlinx.coroutines.Job
 @Stable
 class FeedStoreImpl(
     private val interactor: FeedInteractor,
-    appDispatcher: AppDispatcher,
     private val router: FeedScreenRouter
-) : BaseStore<State, Action, Event>(
-    initialState = State.INITIAL,
-    appDispatcher = appDispatcher
-), FeedStore {
+) : BaseStore<State, Action, Event>(State.INITIAL), FeedStore {
 
     private var loadingJob: Job? = null
 

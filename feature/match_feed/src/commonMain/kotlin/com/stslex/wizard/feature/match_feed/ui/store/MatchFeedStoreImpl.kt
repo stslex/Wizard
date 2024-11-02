@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.match_feed.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
@@ -14,12 +13,8 @@ import kotlinx.coroutines.Job
 
 class MatchFeedStoreImpl(
     private val interactor: MatchFeedInteractor,
-    appDispatcher: AppDispatcher,
     private val router: MatchFeedRouter
-) : MatchFeedStore, BaseStore<State, Action, Event>(
-    initialState = State.INITIAL,
-    appDispatcher = appDispatcher,
-) {
+) : MatchFeedStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     private var loadingJob: Job? = null
 

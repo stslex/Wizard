@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.auth.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.auth.domain.AuthInteractor
@@ -14,12 +13,8 @@ import kotlinx.coroutines.delay
 
 class AuthStoreImpl(
     private val interactor: AuthInteractor,
-    dispatcher: AppDispatcher,
     private val router: AuthRouter
-) : BaseStore<State, Action, Event>(
-    appDispatcher = dispatcher,
-    initialState = State.INITIAL,
-), AuthStore {
+) : BaseStore<State, Action, Event>(State.INITIAL), AuthStore {
 
     override fun process(action: Action) {
         when (action) {
@@ -156,7 +151,7 @@ class AuthStoreImpl(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
-                process(Action.Navigation.HomeFeature)
+                sendAction(Action.Navigation.HomeFeature)
             })
     }
 

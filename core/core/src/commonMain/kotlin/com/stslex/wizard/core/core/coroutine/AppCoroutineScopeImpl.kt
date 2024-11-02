@@ -1,25 +1,25 @@
 package com.stslex.wizard.core.core.coroutine
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.Logger
-import com.stslex.wizard.core.core.coroutineExceptionHandler
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AppCoroutineScopeImpl(
     private val scope: CoroutineScope,
-    private val appDispatcher: AppDispatcher
 ) : AppCoroutineScope {
 
     private fun exceptionHandler(
+        eachDispatcher: CoroutineDispatcher,
         onError: suspend (cause: Throwable) -> Unit = {},
     ) = CoroutineExceptionHandler { _, throwable ->
         Logger.e(throwable)
-        scope.launch(appDispatcher.default + coroutineExceptionHandler) {
+        scope.launch(eachDispatcher) {
             onError(throwable)
         }
     }
@@ -28,23 +28,34 @@ class AppCoroutineScopeImpl(
         start: CoroutineStart,
         onError: suspend (Throwable) -> Unit,
         onSuccess: suspend CoroutineScope.(T) -> Unit,
-        action: suspend CoroutineScope.() -> T
+        workDispatcher: CoroutineDispatcher,
+        eachDispatcher: CoroutineDispatcher,
+        action: suspend CoroutineScope.() -> T,
     ): Job = scope.launch(
         start = start,
-        context = exceptionHandler(onError) + appDispatcher.default,
+        context = exceptionHandler(eachDispatcher, onError) + workDispatcher,
         block = {
-            onSuccess(action())
+            val result = action()
+            withContext(eachDispatcher) {
+                onSuccess(result)
+            }
         }
     )
 
     override fun <T> launch(
         flow: Flow<T>,
+        workDispatcher: CoroutineDispatcher,
+        eachDispatcher: CoroutineDispatcher,
         onError: suspend (cause: Throwable) -> Unit,
         each: suspend (T) -> Unit
     ): Job = scope.launch(
-        context = exceptionHandler(onError) + appDispatcher.default,
+        context = exceptionHandler(eachDispatcher, onError) + workDispatcher,
         block = {
-            flow.collect(each)
+            flow.collect {
+                withContext(eachDispatcher) {
+                    each(it)
+                }
+            }
         }
     )
 }

@@ -1,6 +1,5 @@
 package com.stslex.wizard.feature.film.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor
 import com.stslex.wizard.feature.film.navigation.FilmRouter
@@ -13,12 +12,8 @@ import kotlinx.coroutines.Job
 
 class FilmStoreImpl(
     private val interactor: FilmInteractor,
-    appDispatcher: AppDispatcher,
     private val router: FilmRouter,
-) : BaseStore<State, Action, Event>(
-    appDispatcher = appDispatcher,
-    initialState = State.INITIAL,
-), FilmStore {
+) : BaseStore<State, Action, Event>(State.INITIAL), FilmStore {
 
     private var likeJob: Job? = null
 

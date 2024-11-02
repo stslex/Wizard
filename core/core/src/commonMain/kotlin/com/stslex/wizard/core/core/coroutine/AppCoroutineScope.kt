@@ -1,6 +1,8 @@
 package com.stslex.wizard.core.core.coroutine
 
 import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.core.AppDispatcherImpl
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
@@ -21,6 +23,8 @@ interface AppCoroutineScope {
         start: CoroutineStart = CoroutineStart.DEFAULT,
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: suspend CoroutineScope.(T) -> Unit = {},
+        workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
+        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.main.immediate,
         action: suspend CoroutineScope.() -> T,
     ): Job
 
@@ -35,8 +39,10 @@ interface AppCoroutineScope {
      * */
     fun <T> launch(
         flow: Flow<T>,
+        workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
+        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.main.immediate,
         onError: suspend (cause: Throwable) -> Unit = {},
-        each: suspend (T) -> Unit
+        each: suspend (T) -> Unit,
     ): Job
 }
 
