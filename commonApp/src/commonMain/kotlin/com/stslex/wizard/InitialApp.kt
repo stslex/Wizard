@@ -51,7 +51,8 @@ fun InitialApp(
             val authScreen = Screen.Auth::class.simpleName.orEmpty()
             if (
                 isAuth.not() &&
-                currentScreen?.route?.contains(authScreen) == true
+                currentScreen != null &&
+                currentScreen.route?.contains(authScreen) == true
             ) {
                 navHostController.navigate(Screen.Auth)
             }
@@ -75,12 +76,10 @@ fun InitialApp(
             }
         }
     ) { _ ->
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
+        Box(modifier = Modifier.fillMaxSize()) {
             AppNavigationHost(
                 navHostController = navHostController,
-                startScreen = if (userStore.isAuth) Screen.Auth else Screen.FilmFeed
+                startScreen = if (userStore.isAuth) Screen.FilmFeed else Screen.Auth
             )
         }
     }

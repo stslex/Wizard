@@ -53,7 +53,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.stslex.wizard.core.ui.base.SwipeScrollConnection
 import com.stslex.wizard.core.ui.base.SwipeState
-import com.stslex.wizard.core.ui.base.image.NetworkImage
+import com.stslex.wizard.core.ui.base.image.AppImage
 import com.stslex.wizard.core.ui.base.onClick
 import com.stslex.wizard.core.ui.base.onClickDelay
 import com.stslex.wizard.core.ui.theme.AppDimension
@@ -408,7 +408,7 @@ internal fun FilmHeader(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    NetworkImage(
+    AppImage(
         modifier = modifier
             .fillMaxWidth(),
         url = url,

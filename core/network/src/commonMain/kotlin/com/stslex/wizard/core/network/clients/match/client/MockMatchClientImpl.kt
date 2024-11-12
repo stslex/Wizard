@@ -7,8 +7,8 @@ import com.stslex.wizard.core.network.clients.match.model.response.MatchResponse
 import com.stslex.wizard.core.network.clients.match.model.response.MatchStatusResponse
 import com.stslex.wizard.core.network.clients.match.model.response.MatchUserResponse
 import com.stslex.wizard.core.network.model.PagingRequest
-import com.stslex.wizard.core.network.utils.currentTimeMs
 import kotlinx.coroutines.delay
+import kotlinx.datetime.Clock
 
 class MockMatchClientImpl : MatchClient {
 
@@ -62,7 +62,7 @@ class MockMatchClientImpl : MatchClient {
     }
 
     private fun createMatch(index: Int): MatchDetailResponse {
-        val created = currentTimeMs
+        val created = Clock.System.now().epochSeconds
         val updated = created + 1000 * 60 * 60
         val expires = created + 1000 * 60 * 60 * 24
         return MatchDetailResponse(

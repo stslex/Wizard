@@ -14,7 +14,7 @@ kotlin {
             implementation(project(":core:database"))
             implementation(libs.bundles.ktor)
             implementation(libs.slf4j.simple)
-            implementation(libs.kamel)
+            implementation(libs.kotlinx.datetime)
         }
         buildConfig {
             setLocalProperty(project.rootProject)

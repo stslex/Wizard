@@ -1,4 +1,4 @@
-package com.stslex.wizard.core.network.api.server.model
+package com.stslex.wizard.core.core.error
 
 /**
  * Error refresh token response

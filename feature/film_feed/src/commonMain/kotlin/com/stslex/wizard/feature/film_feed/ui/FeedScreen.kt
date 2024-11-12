@@ -2,6 +2,7 @@ package com.stslex.wizard.feature.film_feed.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -19,7 +20,9 @@ internal fun FeedScreen(
     sendAction: (Action) -> Unit,
 ) {
     Box(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .statusBarsPadding()
     ) {
         when (val screenState = state.screen) {
             is ScreenState.Content -> FeedScreenContent(

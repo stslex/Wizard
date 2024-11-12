@@ -7,13 +7,16 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":core:core"))
             implementation(project(":core:network"))
-        }
-        androidMain.dependencies {
-            api(libs.coil.compose)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.bundles.coil)
+            implementation(libs.bundles.ktor)
+            implementation(libs.slf4j.simple)
         }
         iosMain.dependencies {
-            // TODO research TLS PROBLEM
-            implementation(libs.ktor.client.darwin)
+            api(libs.ktor.client.darwin)
+        }
+        androidMain.dependencies {
+            api(libs.ktor.client.android)
         }
     }
 }
