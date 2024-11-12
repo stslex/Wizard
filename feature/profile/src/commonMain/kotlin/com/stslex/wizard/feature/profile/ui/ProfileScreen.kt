@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.network.api.server.model.ErrorRefresh
+import com.stslex.wizard.core.core.error.ErrorRefresh
 import com.stslex.wizard.core.ui.components.AppSnackbarHost
 import com.stslex.wizard.core.ui.theme.AppDimension
 import com.stslex.wizard.feature.profile.ui.components.ProfileScreenContent

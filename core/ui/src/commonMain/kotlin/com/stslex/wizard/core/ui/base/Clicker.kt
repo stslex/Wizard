@@ -3,9 +3,9 @@ package com.stslex.wizard.core.ui.base
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import com.stslex.wizard.core.network.utils.currentTimeMs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 
 private class Clicker(
     private val throttle: Long = 500
@@ -14,7 +14,7 @@ private class Clicker(
     private var lastClickTime = 0L
 
     fun click(onClick: () -> Unit) {
-        val currentTime = currentTimeMs
+        val currentTime = Clock.System.now().epochSeconds
         if (currentTime - lastClickTime < throttle) {
             return
         }
