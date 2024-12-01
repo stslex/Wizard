@@ -7,7 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.kit.mvi.getStore
 import com.stslex.wizard.feature.film.ui.FilmScreen
 import com.stslex.wizard.feature.film.ui.store.FilmStore
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Action

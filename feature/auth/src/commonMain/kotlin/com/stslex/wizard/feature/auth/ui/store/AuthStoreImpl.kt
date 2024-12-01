@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.auth.ui.store
 
-import com.stslex.wizard.core.ui.mvi.BaseStore
-import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
+import com.stslex.wizard.core.ui.kit.mvi.BaseStore
+import com.stslex.wizard.core.ui.kit.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.auth.domain.AuthInteractor
 import com.stslex.wizard.feature.auth.navigation.AuthRouter
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action

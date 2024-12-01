@@ -2,8 +2,8 @@ package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.ui.mvi.CommonEvents
-import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.kit.mvi.CommonEvents
+import com.stslex.wizard.core.ui.kit.mvi.Store
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State

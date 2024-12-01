@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.film_feed.ui.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.core.Logger
-import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.kit.mvi.BaseStore
 import com.stslex.wizard.feature.film_feed.domain.interactor.FeedInteractor
 import com.stslex.wizard.feature.film_feed.navigation.FeedScreenRouter
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState

@@ -2,8 +2,8 @@ package com.stslex.wizard.feature.follower.data.repository
 
 import com.stslex.wizard.core.core.paging.PagingResponse
 import com.stslex.wizard.core.core.paging.pagingMap
-import com.stslex.wizard.core.network.clients.profile.client.ProfileClient
-import com.stslex.wizard.core.network.clients.profile.model.request.PagingProfileRequest
+import com.stslex.wizard.core.network.api.clients.profile.client.ProfileClient
+import com.stslex.wizard.core.network.api.clients.profile.model.request.PagingProfileRequest
 import com.stslex.wizard.feature.follower.data.model.FollowerDataModel
 import com.stslex.wizard.feature.follower.data.model.toData
 

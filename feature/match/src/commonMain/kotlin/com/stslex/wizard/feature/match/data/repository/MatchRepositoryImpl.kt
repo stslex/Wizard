@@ -3,8 +3,8 @@ package com.stslex.wizard.feature.match.data.repository
 import com.stslex.wizard.core.core.paging.PagingResponse
 import com.stslex.wizard.core.core.paging.pagingMap
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.wizard.core.network.clients.match.client.MatchClient
-import com.stslex.wizard.core.network.model.PagingRequest
+import com.stslex.wizard.core.network.api.clients.match.client.MatchClient
+import com.stslex.wizard.core.network.api.model.PagingRequest
 import com.stslex.wizard.feature.match.data.model.MatchDataModel
 import com.stslex.wizard.feature.match.data.model.toData
 

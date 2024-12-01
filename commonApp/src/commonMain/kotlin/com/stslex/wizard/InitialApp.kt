@@ -22,7 +22,7 @@ import com.stslex.wizard.bottom_bar.BottomAppBarResource.Companion.getByRoute
 import com.stslex.wizard.bottom_bar.MainBottomAppBar
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.network.utils.token.AuthController
+import com.stslex.wizard.core.network.api.utils.token.AuthController
 import com.stslex.wizard.host.AppNavigationHost
 import org.koin.compose.getKoin
 

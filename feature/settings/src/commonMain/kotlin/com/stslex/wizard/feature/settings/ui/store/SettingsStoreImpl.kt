@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.settings.ui.store
 
-import com.stslex.wizard.core.ui.mvi.BaseStore
-import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
+import com.stslex.wizard.core.ui.kit.mvi.BaseStore
+import com.stslex.wizard.core.ui.kit.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.settings.domain.SettingsInteractor
 import com.stslex.wizard.feature.settings.navigation.SettingsRouter
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action

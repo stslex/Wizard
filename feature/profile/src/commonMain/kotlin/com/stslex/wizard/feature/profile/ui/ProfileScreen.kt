@@ -16,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.core.core.error.ErrorRefresh
-import com.stslex.wizard.core.ui.components.AppSnackbarHost
-import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.profile.ui.components.ProfileScreenContent
 import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action

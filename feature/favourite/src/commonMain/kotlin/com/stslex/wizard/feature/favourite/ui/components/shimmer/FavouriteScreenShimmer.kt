@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.stslex.wizard.core.ui.base.shimmerLoadingAnimation
-import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.kit.base.shimmerLoadingAnimation
+import com.stslex.wizard.core.ui.kit.theme.AppDimension
 
 @Composable
 fun FavouriteScreenShimmer(

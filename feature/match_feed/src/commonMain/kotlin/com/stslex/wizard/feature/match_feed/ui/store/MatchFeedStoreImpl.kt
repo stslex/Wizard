@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match_feed.ui.store
 
 import com.stslex.wizard.core.core.Logger
-import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.kit.mvi.BaseStore
 import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
 import com.stslex.wizard.feature.match_feed.navigation.MatchFeedRouter
 import com.stslex.wizard.feature.match_feed.ui.model.toUI

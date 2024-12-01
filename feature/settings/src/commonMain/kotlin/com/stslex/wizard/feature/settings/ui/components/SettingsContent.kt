@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
-import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.settings.ui.model.SettingsColumnItems
 
 @Composable

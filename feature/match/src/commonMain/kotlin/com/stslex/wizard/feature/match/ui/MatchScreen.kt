@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
 import com.stslex.wizard.feature.match.ui.components.MatchScreenContent
 import com.stslex.wizard.feature.match.ui.components.MatchScreenEmpty
 import com.stslex.wizard.feature.match.ui.components.MatchScreenError

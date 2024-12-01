@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.match_feed.data.repository
 
-import com.stslex.wizard.core.network.clients.film.client.FilmClient
+import com.stslex.wizard.core.network.api.clients.film.client.FilmClient
 import com.stslex.wizard.feature.match_feed.data.model.FilmData
 import com.stslex.wizard.feature.match_feed.data.model.MatchData
 import com.stslex.wizard.feature.match_feed.data.model.MatchFilmsPagingData

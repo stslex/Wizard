@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.auth.data
 
-import com.stslex.wizard.core.network.clients.auth.client.AuthClient
+import com.stslex.wizard.core.network.api.clients.auth.client.AuthClient
 
 class AuthRepositoryImpl(
     private val client: AuthClient

@@ -7,7 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.getStore
+import com.stslex.wizard.core.ui.kit.mvi.getStore
 import com.stslex.wizard.feature.match_feed.ui.MatchFeedScreen
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Action

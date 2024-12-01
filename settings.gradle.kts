@@ -20,12 +20,18 @@ rootProject.name = "Wizard"
 include(":iosApp")
 include(":commonApp")
 
+// Core
 include(":core:core")
-include(":core:network")
-include(":core:ui")
+// Network
+include(":core:network:client")
+include(":core:network:api")
+// UI
+include(":core:ui:kit")
+include(":core:ui:image")
+// Other
 include(":core:database")
 include(":core:navigation")
-
+// Features
 include(":feature:film_feed")
 include(":feature:film")
 include(":feature:profile")
