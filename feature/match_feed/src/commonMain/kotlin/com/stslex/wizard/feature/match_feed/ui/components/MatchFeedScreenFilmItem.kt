@@ -35,7 +35,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import com.stslex.wizard.core.ui.kit.base.image.AppImage
+import com.stslex.wizard.core.ui.image.AppImage
 import com.stslex.wizard.core.ui.kit.base.onClickDelay
 import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.match_feed.ui.model.FilmUi

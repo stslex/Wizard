@@ -1,4 +1,4 @@
-package com.stslex.wizard.core.ui.kit.base.image
+package com.stslex.wizard.core.ui.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.BoxScope
