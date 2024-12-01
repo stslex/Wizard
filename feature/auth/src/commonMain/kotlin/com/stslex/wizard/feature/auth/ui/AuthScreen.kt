@@ -14,9 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.components.AppSnackbarHost
-import com.stslex.wizard.core.ui.theme.AppDimension
-import com.stslex.wizard.core.ui.theme.toPx
+import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.kit.theme.AppDimension
+import com.stslex.wizard.core.ui.kit.theme.toPx
 import com.stslex.wizard.feature.auth.ui.components.AuthFieldsColumn
 import com.stslex.wizard.feature.auth.ui.components.AuthTitle
 import com.stslex.wizard.feature.auth.ui.model.screen.AuthScreenState

@@ -51,14 +51,14 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.stslex.wizard.core.ui.base.SwipeScrollConnection
-import com.stslex.wizard.core.ui.base.SwipeState
-import com.stslex.wizard.core.ui.base.image.AppImage
-import com.stslex.wizard.core.ui.base.onClick
-import com.stslex.wizard.core.ui.base.onClickDelay
-import com.stslex.wizard.core.ui.theme.AppDimension
-import com.stslex.wizard.core.ui.theme.toDp
-import com.stslex.wizard.core.ui.theme.toPx
+import com.stslex.wizard.core.ui.kit.base.SwipeScrollConnection
+import com.stslex.wizard.core.ui.kit.base.SwipeState
+import com.stslex.wizard.core.ui.kit.base.image.AppImage
+import com.stslex.wizard.core.ui.kit.base.onClick
+import com.stslex.wizard.core.ui.kit.base.onClickDelay
+import com.stslex.wizard.core.ui.kit.theme.AppDimension
+import com.stslex.wizard.core.ui.kit.theme.toDp
+import com.stslex.wizard.core.ui.kit.theme.toPx
 import com.stslex.wizard.feature.film.ui.model.Film
 
 @OptIn(ExperimentalMaterialApi::class)

@@ -11,9 +11,9 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.components.AppSnackbarHost
-import com.stslex.wizard.core.ui.components.AppToolbar
-import com.stslex.wizard.core.ui.theme.AppDimension
+import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
+import com.stslex.wizard.core.ui.kit.components.AppToolbar
+import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.settings.ui.components.SettingsContent
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State

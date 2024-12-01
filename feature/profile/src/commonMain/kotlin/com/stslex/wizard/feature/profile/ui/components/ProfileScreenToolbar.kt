@@ -7,7 +7,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.components.AppToolbar
+import com.stslex.wizard.core.ui.kit.components.AppToolbar
 
 @Composable
 fun ProfileScreenToolbar(

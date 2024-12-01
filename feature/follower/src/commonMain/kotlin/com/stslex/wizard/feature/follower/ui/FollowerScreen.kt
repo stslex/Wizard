@@ -6,7 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.base.paging.PagingColumn
+import com.stslex.wizard.core.ui.kit.base.paging.PagingColumn
 import com.stslex.wizard.feature.follower.ui.store.FollowerScreenState
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore.State

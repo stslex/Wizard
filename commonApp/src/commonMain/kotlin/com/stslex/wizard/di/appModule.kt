@@ -7,7 +7,7 @@ import com.stslex.wizard.core.database.di.ModuleCoreDatabase
 import com.stslex.wizard.core.navigation.di.ModuleCoreNavigation
 import com.stslex.wizard.core.network.api.di.ModuleCoreNetworkApi
 import com.stslex.wizard.core.network.client.di.ModuleCoreNetworkClient
-import com.stslex.wizard.core.ui.di.ModuleCoreUi
+import com.stslex.wizard.core.ui.kit.di.ModuleCoreUi
 import com.stslex.wizard.feature.auth.di.ModuleFeatureAuth
 import com.stslex.wizard.feature.favourite.di.ModuleFeatureFavourite
 import com.stslex.wizard.feature.film.di.ModuleFeatureFilm

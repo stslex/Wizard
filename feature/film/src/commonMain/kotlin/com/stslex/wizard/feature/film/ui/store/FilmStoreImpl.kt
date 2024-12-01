@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.film.ui.store
 
-import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.kit.mvi.BaseStore
 import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor
 import com.stslex.wizard.feature.film.navigation.FilmRouter
 import com.stslex.wizard.feature.film.ui.model.toDomain

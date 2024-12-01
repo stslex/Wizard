@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.auth.ui.store
 
-import com.stslex.wizard.core.ui.mvi.CommonEvents
-import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.kit.mvi.CommonEvents
+import com.stslex.wizard.core.ui.kit.mvi.Store
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.State

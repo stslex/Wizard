@@ -1,13 +1,13 @@
 package com.stslex.wizard.feature.favourite.ui.store
 
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.wizard.core.ui.base.mapToAppError
-import com.stslex.wizard.core.ui.base.paging.toUi
-import com.stslex.wizard.core.ui.mvi.BaseStore
-import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
-import com.stslex.wizard.core.ui.pager.pager.StorePager
-import com.stslex.wizard.core.ui.pager.pager.StorePagerFactory
-import com.stslex.wizard.core.ui.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.kit.base.mapToAppError
+import com.stslex.wizard.core.ui.kit.base.paging.toUi
+import com.stslex.wizard.core.ui.kit.mvi.BaseStore
+import com.stslex.wizard.core.ui.kit.mvi.CommonEvents.Snackbar
+import com.stslex.wizard.core.ui.kit.pager.pager.StorePager
+import com.stslex.wizard.core.ui.kit.pager.pager.StorePagerFactory
+import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
 import com.stslex.wizard.feature.favourite.domain.interactor.FavouriteInteractor
 import com.stslex.wizard.feature.favourite.navigation.FavouriteRouter
 import com.stslex.wizard.feature.favourite.ui.model.FavouriteModel

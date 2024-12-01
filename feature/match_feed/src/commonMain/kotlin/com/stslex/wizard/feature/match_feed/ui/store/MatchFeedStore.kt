@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match_feed.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.kit.mvi.Store
 import com.stslex.wizard.feature.match_feed.ui.components.SwipeDirection
 import com.stslex.wizard.feature.match_feed.ui.model.FilmUi
 import com.stslex.wizard.feature.match_feed.ui.model.MatchUi

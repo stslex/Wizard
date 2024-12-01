@@ -2,10 +2,10 @@ package com.stslex.wizard.feature.follower.ui.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.ui.base.paging.PagingConfig
-import com.stslex.wizard.core.ui.base.paging.PagingUiState
-import com.stslex.wizard.core.ui.mvi.CommonEvents
-import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
+import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
+import com.stslex.wizard.core.ui.kit.mvi.CommonEvents
+import com.stslex.wizard.core.ui.kit.mvi.Store
 import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Event
