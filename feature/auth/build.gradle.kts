@@ -8,7 +8,7 @@ kotlin {
             implementation(project(":core:core"))
             implementation(project(":core:ui"))
             implementation(project(":core:navigation"))
-            implementation(project(":core:network"))
+            implementation(project(":core:network:api"))
             implementation(project(":core:database"))
         }
     }

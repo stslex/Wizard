@@ -6,7 +6,8 @@ kotlin {
     sourceSets.apply {
         commonMain.dependencies {
             implementation(project(":core:core"))
-            implementation(project(":core:network"))
+            implementation(project(":core:network:client"))
+            implementation(project(":core:network:api"))
             implementation(project(":core:database"))
             implementation(project(":core:ui"))
             implementation(project(":core:navigation"))

@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film_feed.data.model
 
-import com.stslex.wizard.core.network.clients.film.model.FilmItemNetwork
-import com.stslex.wizard.core.network.clients.film.model.FilmListNetwork
+import com.stslex.wizard.core.network.api.clients.film.model.FilmItemNetwork
+import com.stslex.wizard.core.network.api.clients.film.model.FilmListNetwork
 
 fun FilmListNetwork.toData() = FeedDataModel(
     films = results.map { it.toData() },

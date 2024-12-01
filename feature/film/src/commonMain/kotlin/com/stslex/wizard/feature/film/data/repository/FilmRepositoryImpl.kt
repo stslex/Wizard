@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.film.data.repository
 
 import com.stslex.wizard.core.database.sources.source.FavouriteFilmDataSource
-import com.stslex.wizard.core.network.clients.film.client.FilmClient
-import com.stslex.wizard.core.network.clients.profile.client.ProfileClient
+import com.stslex.wizard.core.network.api.clients.film.client.FilmClient
+import com.stslex.wizard.core.network.api.clients.profile.client.ProfileClient
 import com.stslex.wizard.feature.film.data.model.FilmData
 import com.stslex.wizard.feature.film.data.model.getTrailer
 import com.stslex.wizard.feature.film.data.model.toData

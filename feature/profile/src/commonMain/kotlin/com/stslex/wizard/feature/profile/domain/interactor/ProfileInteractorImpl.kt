@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.profile.domain.interactor
 
-import com.stslex.wizard.core.network.utils.token.AuthController
+import com.stslex.wizard.core.network.api.utils.token.AuthController
 import com.stslex.wizard.feature.profile.data.repository.ProfileRepository
 import com.stslex.wizard.feature.profile.domain.model.ProfileDomainModel
 import com.stslex.wizard.feature.profile.domain.model.toDomain

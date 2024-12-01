@@ -1,9 +1,9 @@
 package com.stslex.wizard.feature.film.data.model
 
 import com.stslex.wizard.core.database.sources.model.FilmEntity
-import com.stslex.wizard.core.network.clients.film.model.FilmTrailerNetwork
-import com.stslex.wizard.core.network.clients.film.model.MovieNetwork
-import com.stslex.wizard.core.network.clients.film.model.TrailerSiteType
+import com.stslex.wizard.core.network.api.clients.film.model.FilmTrailerNetwork
+import com.stslex.wizard.core.network.api.clients.film.model.MovieNetwork
+import com.stslex.wizard.core.network.api.clients.film.model.TrailerSiteType
 
 fun MovieNetwork.toData(
     isFavourite: Boolean,
