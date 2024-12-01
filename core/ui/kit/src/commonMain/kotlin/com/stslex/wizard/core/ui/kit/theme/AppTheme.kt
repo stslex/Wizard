@@ -5,6 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import com.stslex.wizard.core.ui.image.imageProvidedValue
 
 @Composable
 fun AppTheme(
@@ -18,7 +20,11 @@ fun AppTheme(
     }
     MaterialTheme(
         colorScheme = colors,
-        content = content
+        content = {
+            CompositionLocalProvider(imageProvidedValue) {
+                content()
+            }
+        }
     )
 // todo kamel migration test
 //    CompositionLocalProvider(
