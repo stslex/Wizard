@@ -27,6 +27,7 @@ include(":core:network:client")
 include(":core:network:api")
 // UI
 include(":core:ui:kit")
+include(":core:ui:mvi")
 include(":core:ui:image")
 // Other
 include(":core:database")

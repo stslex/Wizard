@@ -3,8 +3,8 @@ package com.stslex.wizard.feature.profile.ui.store
 import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.ui.kit.mvi.BaseStore
-import com.stslex.wizard.core.ui.kit.mvi.CommonEvents.Snackbar
+import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.wizard.feature.profile.navigation.ProfileRouter
 import com.stslex.wizard.feature.profile.ui.model.ProfileAvatarModel

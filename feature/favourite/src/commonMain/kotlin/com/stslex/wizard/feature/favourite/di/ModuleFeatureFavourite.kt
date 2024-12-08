@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.favourite.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.kit.mvi.storeOf
+import com.stslex.wizard.core.ui.mvi.store_di.storeOf
 import com.stslex.wizard.feature.favourite.data.repository.FavouriteRepository
 import com.stslex.wizard.feature.favourite.data.repository.FavouriteRepositoryImpl
 import com.stslex.wizard.feature.favourite.domain.interactor.FavouriteInteractor

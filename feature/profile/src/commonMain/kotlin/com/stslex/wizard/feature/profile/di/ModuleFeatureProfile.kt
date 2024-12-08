@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.profile.di
 
 import com.stslex.wizard.core.core.AppModule
-import com.stslex.wizard.core.ui.kit.mvi.storeOf
+import com.stslex.wizard.core.ui.mvi.store_di.storeOf
 import com.stslex.wizard.feature.profile.data.repository.ProfileRepository
 import com.stslex.wizard.feature.profile.data.repository.ProfileRepositoryImpl
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
