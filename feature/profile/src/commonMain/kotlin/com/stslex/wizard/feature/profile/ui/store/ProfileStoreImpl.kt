@@ -4,11 +4,11 @@ import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.navigator.Navigator
 import com.stslex.wizard.core.ui.mvi.v2.BaseStore
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
-import com.stslex.wizard.feature.profile.mvi.ClickersHandler
 import com.stslex.wizard.feature.profile.mvi.InitStorageHandler
 import com.stslex.wizard.feature.profile.mvi.LogoutHandler
 import com.stslex.wizard.feature.profile.mvi.NavigationHandler
 import com.stslex.wizard.feature.profile.mvi.RepeatLastActionHandler
+import com.stslex.wizard.feature.profile.mvi.clickersHandler
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
@@ -23,7 +23,8 @@ class ProfileStoreImpl(
         InitStorageHandler(interactor, userStore),
         LogoutHandler(interactor),
         RepeatLastActionHandler(),
-        ClickersHandler(),
+        clickersHandler(),
         NavigationHandler(navigator)
     )
 )
+
