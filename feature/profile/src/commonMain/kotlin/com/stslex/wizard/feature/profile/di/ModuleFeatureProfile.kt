@@ -6,8 +6,6 @@ import com.stslex.wizard.feature.profile.data.repository.ProfileRepository
 import com.stslex.wizard.feature.profile.data.repository.ProfileRepositoryImpl
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractorImpl
-import com.stslex.wizard.feature.profile.navigation.ProfileRouter
-import com.stslex.wizard.feature.profile.navigation.ProfileRouterImpl
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileStoreImpl
 import org.koin.core.annotation.Module
@@ -20,7 +18,6 @@ class ModuleFeatureProfile : AppModule() {
 
     override fun declaration(): ModuleDeclaration = {
         storeOf(::ProfileStoreImpl) { bind<ProfileStore>() }
-        factoryOf(::ProfileRouterImpl) { bind<ProfileRouter>() }
         factoryOf(::ProfileInteractorImpl) { bind<ProfileInteractor>() }
         factoryOf(::ProfileRepositoryImpl) { bind<ProfileRepository>() }
     }

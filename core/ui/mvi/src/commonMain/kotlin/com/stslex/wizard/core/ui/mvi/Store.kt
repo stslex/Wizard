@@ -24,7 +24,10 @@ interface Store<out S : State, in A : Action, out E : Event> {
 
     interface State
 
-    interface Event
+    interface Event {
+
+        data class Handler(val action: Action) : Event
+    }
 
     interface Action {
 
