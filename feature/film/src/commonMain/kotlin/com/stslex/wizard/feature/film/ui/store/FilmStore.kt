@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.ui.kit.mvi.Store
+import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Event
 import com.stslex.wizard.feature.film.ui.store.FilmStore.State

@@ -4,8 +4,8 @@ import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
-import com.stslex.wizard.core.ui.kit.mvi.CommonEvents
-import com.stslex.wizard.core.ui.kit.mvi.Store
+import com.stslex.wizard.core.ui.mvi.CommonEvents
+import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.feature.match.ui.model.MatchUiModel
 import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
 import com.stslex.wizard.feature.match.ui.store.MatchStore.Event

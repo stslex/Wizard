@@ -10,9 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AppCoroutineScopeImpl(
-    private val scope: CoroutineScope,
-) : AppCoroutineScope {
+// todo: add dispatchers from di
+class AppCoroutineScopeImpl(private val scope: CoroutineScope) : AppCoroutineScope {
 
     private fun exceptionHandler(
         eachDispatcher: CoroutineDispatcher,

@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film_feed.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.ui.kit.mvi.Store
+import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.feature.film_feed.ui.model.FilmModel
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action

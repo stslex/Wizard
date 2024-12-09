@@ -5,8 +5,8 @@ import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
-import com.stslex.wizard.core.ui.kit.mvi.BaseStore
-import com.stslex.wizard.core.ui.kit.mvi.CommonEvents.Snackbar
+import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePagerFactory
 import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
