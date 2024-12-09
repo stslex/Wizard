@@ -19,8 +19,8 @@ internal fun ProfileScreenContent(
             ProfileScreenToolbar(
                 nickname = state.data.username,
                 isCurrentUser = state.data.isCurrentUser,
-                onSettingsClick = { onAction(Action.SettingsClick) },
-                onBackClick = { onAction(Action.BackButtonClick) }
+                onSettingsClick = { onAction(Action.Click.SettingsClick) },
+                onBackClick = { onAction(Action.Click.BackButtonClick) }
             )
 
             ProfileAvatar(avatar = state.data.avatar)
@@ -30,9 +30,9 @@ internal fun ProfileScreenContent(
                 favouriteCount = state.data.favouriteCount,
                 followingCount = state.data.following,
                 followersCount = state.data.followers,
-                onFavouriteClick = { onAction(Action.FavouriteClick) },
-                onFollowingClick = { onAction(Action.FollowingClick) },
-                onFollowersClick = { onAction(Action.FollowersClick) },
+                onFavouriteClick = { onAction(Action.Click.FavouriteClick) },
+                onFollowingClick = { onAction(Action.Click.FollowingClick) },
+                onFollowersClick = { onAction(Action.Click.FollowersClick) },
             )
         }
 
