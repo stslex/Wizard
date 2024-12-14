@@ -5,17 +5,14 @@ import com.stslex.wizard.core.navigation.Screen.Follower.FollowerType.FOLLOWER
 import com.stslex.wizard.core.navigation.Screen.Follower.FollowerType.FOLLOWING
 import com.stslex.wizard.core.navigation.navigator.Navigator
 import com.stslex.wizard.core.ui.mvi.v2.Handler
-import com.stslex.wizard.core.ui.mvi.v2.HandlerStore
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
+import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action.Navigation
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
 
 class NavigationHandler(
     private val navigator: Navigator
-) : Handler<State, Navigation, Event, Action>(Navigation::class) {
+) : Handler<Navigation, ProfileHandlerStore> {
 
-    override fun HandlerStore<State, Action, Event>.invoke(action: Navigation) {
+    override fun ProfileHandlerStore.invoke(action: Navigation) {
         when (action) {
             Navigation.LogIn -> navigator.navTo(Screen.Auth)
             Navigation.Back -> navigator.popBack()

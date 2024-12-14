@@ -4,10 +4,10 @@ import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
 
-internal class BaseStoreImpl<S : State, A : Action, E : Event>(
+internal class BaseStoreImpl<S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>>(
     initialState: S,
-    handlers: Set<Handler<S, *, E, A>>
-) : BaseStore<S, A, E>(
+    handlerCreator: HandlerCreator<S, A, E, HStore>,
+) : BaseStore<S, A, E, HStore>(
     initialState = initialState,
-    handlers = handlers
+    handlerCreator = handlerCreator
 )

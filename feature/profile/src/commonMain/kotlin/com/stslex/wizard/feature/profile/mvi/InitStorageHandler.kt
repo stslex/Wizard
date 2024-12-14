@@ -4,22 +4,19 @@ import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.mvi.v2.Handler
-import com.stslex.wizard.core.ui.mvi.v2.HandlerStore
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.wizard.feature.profile.ui.model.ProfileAvatarModel
 import com.stslex.wizard.feature.profile.ui.model.toUi
+import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action.Init
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
 
 class InitStorageHandler(
     private val interactor: ProfileInteractor,
     private val userStore: UserStore,
-) : Handler<State, Init, Event, Action>(Init::class) {
+) : Handler<Action.Init, ProfileHandlerStore> {
 
-    override fun HandlerStore<State, Action, Event>.invoke(action: Init) {
+    override fun ProfileHandlerStore.invoke(action: Action.Init) {
         val uuid = action.uuid.ifBlank { userStore.uuid }
 
         updateState { currentState ->

@@ -6,13 +6,13 @@ import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
 
 @Suppress("UNCHECKED_CAST")
-fun <S : State, A : Action, E : Event, TStore : Store<S, A, E>> store(
+fun <S : State, A : Action, E : Event, TStore : Store<S, A, E>, HStore : HandlerStore<S, A, E>> store(
     initialState: S,
-    handlers: Set<Handler<S, *, E, A>>
-): TStore = BaseStoreImpl(initialState, handlers) as TStore
+    handlerCreator: HandlerCreator<S, A, E, HStore>
+): TStore = BaseStoreImpl(initialState, handlerCreator) as TStore
 
-fun <S : State, A : StoreAction, E : Event, StoreAction : Action> Handler<S, A, E, StoreAction>.invoke(
-    store: HandlerStore<S, StoreAction, E>,
+fun <S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>> Handler<A, HStore>.invoke(
+    store: HStore,
     action: A
 ) {
     with(store) {
@@ -20,11 +20,6 @@ fun <S : State, A : StoreAction, E : Event, StoreAction : Action> Handler<S, A, 
     }
 }
 
-inline fun <S : State, reified A : StoreAction, E : Event, StoreAction : Action> handler(
-    crossinline block: HandlerStore<S, StoreAction, E>.(action: A) -> Unit
-) = object : Handler<S, A, E, StoreAction>(A::class) {
-
-    override fun HandlerStore<S, StoreAction, E>.invoke(action: A) {
-        block(action)
-    }
-}
+inline fun <S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>> handler(
+    crossinline block: HandlerStore<S, A, E>.(action: A) -> Unit
+) = Handler<A, HStore> { block(it) }

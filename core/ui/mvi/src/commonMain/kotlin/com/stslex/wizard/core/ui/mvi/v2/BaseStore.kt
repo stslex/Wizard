@@ -22,9 +22,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-open class BaseStore<S : State, A : Action, E : Event>(
+open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>>(
     initialState: S,
-    private val handlers: Set<Handler<S, *, E, A>>
+    private val handlerCreator: HandlerCreator<S, A, E, HStore>,
 ) : ViewModel(), Store<S, A, E>, HandlerStore<S, A, E> {
 
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
@@ -44,9 +44,8 @@ open class BaseStore<S : State, A : Action, E : Event>(
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }
-        val handler = handlers.firstOrNull { it.checkAction(action) } as? Handler<S, A, E, A>
-            ?: throw IllegalStateException("Handler not found for action: ${action::class.simpleName}")
-        handler.invoke(this, action)
+        val handler = handlerCreator(action) as Handler<A, HStore>
+        handler.invoke(this as HStore, action)
     }
 
     /**

@@ -1,14 +1,9 @@
 package com.stslex.wizard.core.ui.mvi.v2
 
 import com.stslex.wizard.core.ui.mvi.Store.Action
-import com.stslex.wizard.core.ui.mvi.Store.Event
-import com.stslex.wizard.core.ui.mvi.Store.State
-import kotlin.reflect.KClass
 
-abstract class Handler<S : State, A : StoreAction, E : Event, StoreAction : Action>(val actionKClass: KClass<*>) {
+fun interface Handler<A : Action, TStore : HandlerStore<*, *, *>> {
 
-    inline fun checkAction(action: StoreAction): Boolean = actionKClass.isInstance(action)
-
-    abstract fun HandlerStore<S, StoreAction, E>.invoke(action: A)
+    fun TStore.invoke(action: A)
 
 }
