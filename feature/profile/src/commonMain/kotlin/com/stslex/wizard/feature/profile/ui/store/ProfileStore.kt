@@ -40,18 +40,20 @@ interface ProfileStore : Store<State, Action, Event> {
 
         data object RepeatLastAction : Action, Store.Action.RepeatLast
 
-        data object FavouriteClick : Action
+        sealed interface Click : Action {
 
-        data object FollowingClick : Action
+            data object FavouriteClick : Click
 
-        data object FollowersClick : Action
+            data object FollowingClick : Click
 
-        data object SettingsClick : Action
+            data object FollowersClick : Click
 
-        data object BackButtonClick : Action
+            data object SettingsClick : Click
 
+            data object BackButtonClick : Click
+        }
 
-        sealed interface Navigation : Action, Store.Action.Navigation {
+        sealed interface Navigation : Action {
 
             data object LogIn : Navigation
 
@@ -78,5 +80,6 @@ interface ProfileStore : Store<State, Action, Event> {
 
         @Stable
         data class ShowSnackbar(val snackbar: CommonEvents.Snackbar) : Event
+
     }
 }

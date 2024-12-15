@@ -1,11 +1,11 @@
-package com.stslex.wizard.core.ui.mvi
+package com.stslex.wizard.core.ui.mvi.v2
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.wizard.core.core.AppDispatcherImpl
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScopeImpl
+import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
@@ -22,9 +22,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class BaseStore<S : State, A : Action, E : Event>(
-    initialState: S
-) : ViewModel(), Store<S, A, E> {
+open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>>(
+    initialState: S,
+    private val handlerCreator: HandlerCreator<S, A, E, HStore>,
+) : ViewModel(), Store<S, A, E>, HandlerStore<S, A, E> {
 
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
     override val event: SharedFlow<E> = _event.asSharedFlow()
@@ -35,24 +36,23 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
     protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(viewModelScope)
 
     private var _lastAction: A? = null
-    protected val lastAction: A?
+    override val lastAction: A?
         get() = _lastAction
 
+    @Suppress("UNCHECKED_CAST")
     override fun sendAction(action: A) {
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }
-        process(action)
+        val handler = handlerCreator(action) as Handler<A, HStore>
+        handler.invoke(this as HStore, action)
     }
-
-    /** Process the action. This method should be overridden in the child class.*/
-    protected abstract fun process(action: A)
 
     /**
      * Updates the state of the screen.
      * @param update - function that updates the state
      * */
-    protected fun updateState(update: (S) -> S) {
+    override fun updateState(update: (S) -> S) {
         _state.update(update)
     }
 
@@ -61,7 +61,7 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
      * @param event - event to be sent
      * @see AppDispatcher
      * */
-    protected fun sendEvent(event: E) {
+    override fun sendEvent(event: E) {
         viewModelScope.launch { _event.emit(event) }
     }
 
@@ -74,13 +74,13 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
      * @see Job
      * @see AppDispatcher
      * */
-    protected fun <T> launch(
-        onError: suspend (Throwable) -> Unit = {},
-        onSuccess: suspend CoroutineScope.(T) -> Unit = {},
-        workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
-        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.main.immediate,
+    override fun <T> launch(
+        onError: suspend (Throwable) -> Unit,
+        onSuccess: suspend CoroutineScope.(T) -> Unit,
+        workDispatcher: CoroutineDispatcher,
+        eachDispatcher: CoroutineDispatcher,
         action: suspend CoroutineScope.() -> T,
-    ): Job = scope.launch(
+    ) = scope.launch(
         onError = onError,
         workDispatcher = workDispatcher,
         eachDispatcher = eachDispatcher,
@@ -97,10 +97,10 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
      * @see Job
      * @see AppDispatcher
      * */
-    protected fun <T> Flow<T>.launch(
-        onError: suspend (cause: Throwable) -> Unit = {},
-        workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
-        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.main.immediate,
+    override fun <T> Flow<T>.launch(
+        onError: suspend (cause: Throwable) -> Unit,
+        workDispatcher: CoroutineDispatcher,
+        eachDispatcher: CoroutineDispatcher,
         each: suspend (T) -> Unit
     ): Job = scope.launch(
         flow = this,
@@ -109,4 +109,6 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
         onError = onError,
         each = each,
     )
+
+
 }
