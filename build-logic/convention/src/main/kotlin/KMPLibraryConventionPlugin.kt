@@ -7,7 +7,6 @@ import com.stslex.wizard.convention.configureKotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KMPLibraryConventionPlugin : Plugin<Project> {
@@ -17,15 +16,11 @@ class KMPLibraryConventionPlugin : Plugin<Project> {
             apply(libs.findPluginId("kotlinMultiplatform"))
             apply(libs.findPluginId("kotlinCocoapods"))
             apply(libs.findPluginId("androidLibrary"))
-            apply(libs.findPluginId("ksp"))
             apply(libs.findPluginId("serialization"))
         }
 
         extensions.configure<KotlinMultiplatformExtension> {
-            configureKotlinMultiplatform(
-                extension = this,
-                kspExtension = extensions.getByType()
-            )
+            configureKotlinMultiplatform(extension = this)
         }
         extensions.configure<LibraryExtension> {
             configureKotlinAndroid(this)

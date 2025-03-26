@@ -1,19 +1,26 @@
 package com.stslex.wizard.convention
 
+import AppExt.findPluginId
 import AppExt.libs
 import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
 
 internal fun Project.configureKotlinMultiplatform(
     extension: KotlinMultiplatformExtension,
-    kspExtension: KspExtension
 ) = extension.apply {
-    kspExtension.arg("KOIN_CONFIG_CHECK", true.toString())
+
+    pluginManager.apply(libs.findPluginId("ksp"))
+//    plugins.withId(libs.findPluginId("ksp")) {
+//        extensions.getByType<KspExtension>().run {
+//            arg("koin_config_check", true.toString())
+//        }
+//    }
 
     jvmToolchain(17)
 

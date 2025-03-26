@@ -4,7 +4,6 @@ import AppExt.findVersionInt
 import AppExt.findVersionString
 import AppExt.libs
 import com.android.build.api.dsl.ApplicationExtension
-import com.google.devtools.ksp.gradle.KspExtension
 import com.stslex.wizard.convention.configureKMPCompose
 import com.stslex.wizard.convention.configureKotlin
 import com.stslex.wizard.convention.configureKotlinAndroid
@@ -15,6 +14,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KMPApplicationConventionPlugin : Plugin<Project> {
@@ -26,16 +26,14 @@ class KMPApplicationConventionPlugin : Plugin<Project> {
             apply(libs.findPluginId("androidApplication"))
             apply(libs.findPluginId("jetbrainsCompose"))
             apply(libs.findPluginId("composeCompiler"))
-            apply(libs.findPluginId("ksp"))
             apply(libs.findPluginId("serialization"))
         }
 
         extensions.configure<KotlinMultiplatformExtension> {
-            val kspExtension = extensions.getByType<KspExtension>()
-            configureKotlinMultiplatform(this, kspExtension)
+            configureKotlinMultiplatform(this)
             configureKMPCompose(
                 extension = this,
-                compose = extensions.getByType<ComposeExtension>().dependencies
+                compose = extensions.getByType<ComposePlugin.Dependencies>()
             )
         }
 
