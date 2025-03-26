@@ -26,6 +26,6 @@ class ProfileStoreImpl(
             is Action.Click -> clickersHandler
             is Action.Navigation -> navigationHandler
         }
-    }
+    },
 )
 
