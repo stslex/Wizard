@@ -36,7 +36,7 @@ fun NavGraphBuilder.graphAuth() {
         val authScreenState = rememberAuthScreenState(
             snackbarHostState = snackbarHostState,
             screenState = state,
-            processAction = store::sendAction
+            processAction = store::consume
         )
         AuthScreen(authScreenState)
     }

@@ -18,7 +18,7 @@ fun NavGraphBuilder.graphMatch() {
     navScreen<Screen.Match> { screen ->
         val store = getStore<MatchStore>()
         LaunchedEffect(Unit) {
-            store.sendAction(
+            store.consume(
                 Action.Init(
                     type = screen.type,
                     uuid = screen.uuid
@@ -43,7 +43,7 @@ fun NavGraphBuilder.graphMatch() {
 
         MatchScreen(
             state = state,
-            onAction = store::sendAction,
+            onAction = store::consume,
             snackbarHostState = snackbarHostState
         )
     }

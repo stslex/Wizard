@@ -33,7 +33,7 @@ class LogoutHandler(
                 interactor.logOut()
             },
             onSuccess = {
-                sendAction(Action.Navigation.LogIn)
+                consume(Action.Navigation.LogIn)
             },
             onError = { error ->
                 sendEvent(Event.ShowSnackbar(Snackbar.Error(error.message ?: "error logout")))

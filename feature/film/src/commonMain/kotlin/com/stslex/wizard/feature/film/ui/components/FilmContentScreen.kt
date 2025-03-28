@@ -51,9 +51,9 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.stslex.wizard.core.ui.image.AppImage
 import com.stslex.wizard.core.ui.kit.base.SwipeScrollConnection
 import com.stslex.wizard.core.ui.kit.base.SwipeState
-import com.stslex.wizard.core.ui.image.AppImage
 import com.stslex.wizard.core.ui.kit.base.onClick
 import com.stslex.wizard.core.ui.kit.base.onClickDelay
 import com.stslex.wizard.core.ui.kit.theme.AppDimension

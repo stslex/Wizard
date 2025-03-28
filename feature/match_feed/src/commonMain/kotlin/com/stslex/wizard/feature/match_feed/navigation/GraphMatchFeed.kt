@@ -28,11 +28,11 @@ fun NavGraphBuilder.graphMatchFeed() {
             }
         }
         LaunchedEffect(Unit) {
-            store.sendAction(Action.Init)
+            store.consume(Action.Init)
         }
         MatchFeedScreen(
             state = state,
-            sendAction = store::sendAction
+            sendAction = store::consume
         )
     }
 }

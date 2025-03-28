@@ -18,7 +18,7 @@ fun NavGraphBuilder.graphFollower() {
         val state by remember { store.state }.collectAsState()
 
         LaunchedEffect(key1 = Unit) {
-            store.sendAction(
+            store.consume(
                 Action.Init(
                     followerType = screen.type,
                     uuid = screen.uuid
@@ -28,7 +28,7 @@ fun NavGraphBuilder.graphFollower() {
 
         FollowerScreen(
             state = state,
-            onAction = store::sendAction
+            onAction = store::consume
         )
     }
 }

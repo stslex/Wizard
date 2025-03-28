@@ -8,11 +8,11 @@ class ClickersHandler : Handler<Action.Click, ProfileHandlerStore> {
 
     override fun ProfileHandlerStore.invoke(action: Action.Click) {
         when (action) {
-            Action.Click.BackButtonClick -> sendAction(Action.Navigation.Back)
-            Action.Click.FavouriteClick -> sendAction(Action.Navigation.Favourite(state.value.uuid))
-            Action.Click.FollowersClick -> sendAction(Action.Navigation.Followers(state.value.uuid))
-            Action.Click.FollowingClick -> sendAction(Action.Navigation.Following(state.value.uuid))
-            Action.Click.SettingsClick -> sendAction(Action.Navigation.Settings)
+            Action.Click.BackButtonClick -> consume(Action.Navigation.Back)
+            Action.Click.FavouriteClick -> consume(Action.Navigation.Favourite(state.value.uuid))
+            Action.Click.FollowersClick -> consume(Action.Navigation.Followers(state.value.uuid))
+            Action.Click.FollowingClick -> consume(Action.Navigation.Following(state.value.uuid))
+            Action.Click.SettingsClick -> consume(Action.Navigation.Settings)
         }
     }
 }

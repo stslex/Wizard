@@ -32,7 +32,7 @@ fun NavGraphBuilder.graphSettings() {
         }
         SettingsScreen(
             state = state,
-            onAction = store::sendAction,
+            onAction = store::consume,
             snackbarHostState = snackbarHostState
         )
     }

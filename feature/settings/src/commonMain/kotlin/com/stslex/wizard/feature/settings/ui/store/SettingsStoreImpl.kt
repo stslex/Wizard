@@ -22,7 +22,7 @@ class SettingsStoreImpl(
     }
 
     private fun actionBackClick() {
-        sendAction(Action.Navigation.Back)
+        consume(Action.Navigation.Back)
     }
 
     private fun actionLogout() {
@@ -43,7 +43,7 @@ class SettingsStoreImpl(
                         isLoading = false
                     )
                 }
-                sendAction(Action.Navigation.LogOut)
+                consume(Action.Navigation.LogOut)
             },
             onError = { error ->
                 val message = error.message ?: "Logout error"

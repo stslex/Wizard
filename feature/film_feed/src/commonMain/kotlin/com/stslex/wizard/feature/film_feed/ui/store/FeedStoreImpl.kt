@@ -30,7 +30,7 @@ class FeedStoreImpl(
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {
-        sendAction(Action.Navigation.Film(action.filmId))
+        consume(Action.Navigation.Film(action.filmId))
     }
 
     private fun actionLoadFilms() {

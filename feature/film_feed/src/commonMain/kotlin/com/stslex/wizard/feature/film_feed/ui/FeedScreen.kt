@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenContent
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenError
@@ -17,7 +16,7 @@ import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
 internal fun FeedScreen(
     modifier: Modifier = Modifier,
     state: State,
-    sendAction: (Action) -> Unit,
+    consume: (Action) -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -26,10 +25,10 @@ internal fun FeedScreen(
     ) {
         when (val screenState = state.screen) {
             is ScreenState.Content -> FeedScreenContent(
-                loadMore = remember { { sendAction(Action.LoadFilms) } },
+                loadMore = { consume(Action.LoadFilms) },
                 films = state.films,
                 screenState = screenState,
-                onFilmClick = remember { { sendAction(Action.FilmClick(it)) } },
+                onFilmClick = { consume(Action.FilmClick(it)) },
             )
 
             is ScreenState.Error -> FeedScreenError(screenState.message)

@@ -16,7 +16,7 @@ fun NavGraphBuilder.graphFilm() {
     navScreen<Screen.Film> { screen ->
         val store = getStore<FilmStore>()
         LaunchedEffect(Unit) {
-            store.sendAction(Action.Init(screen.id))
+            store.consume(Action.Init(screen.id))
         }
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
@@ -28,7 +28,7 @@ fun NavGraphBuilder.graphFilm() {
         }
         FilmScreen(
             state = state,
-            onAction = store::sendAction
+            onAction = store::consume
         )
     }
 }

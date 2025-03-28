@@ -41,11 +41,11 @@ open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, 
         get() = _lastAction
 
     init {
-        initialActions.forEach { sendAction(it) }
+        initialActions.forEach { consume(it) }
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun sendAction(action: A) {
+    override fun consume(action: A) {
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }

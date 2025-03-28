@@ -56,7 +56,7 @@ class FilmStoreImpl(
     }
 
     private fun actionBackButtonClick() {
-        sendAction(Action.Navigation.Back)
+        consume(Action.Navigation.Back)
     }
 
     private fun actionInit(action: Action.Init) {

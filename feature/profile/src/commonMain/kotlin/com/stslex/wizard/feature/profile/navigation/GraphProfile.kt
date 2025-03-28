@@ -18,7 +18,7 @@ fun NavGraphBuilder.graphProfile() {
     navScreen<Screen.Profile> { screen ->
         val store = getStore<ProfileStore>()
         LaunchedEffect(Unit) {
-            store.sendAction(
+            store.consume(
                 Action.Init(
                     type = screen.type,
                     uuid = screen.uuid
@@ -42,7 +42,7 @@ fun NavGraphBuilder.graphProfile() {
         }
         ProfileScreen(
             state = state,
-            onAction = store::sendAction,
+            onAction = store::consume,
             snackbarHostState = snackbarHostState
         )
     }

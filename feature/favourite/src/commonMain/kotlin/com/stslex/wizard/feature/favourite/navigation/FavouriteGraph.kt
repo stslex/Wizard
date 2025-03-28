@@ -18,12 +18,12 @@ fun NavGraphBuilder.graphFavourite() {
         val state by remember { store.state }.collectAsState()
 
         LaunchedEffect(key1 = Unit) {
-            store.sendAction(Action.Init(uuid = screen.uuid))
+            store.consume(Action.Init(uuid = screen.uuid))
         }
 
         FavouriteScreen(
             state = state,
-            onAction = store::sendAction
+            onAction = store::consume
         )
     }
 }

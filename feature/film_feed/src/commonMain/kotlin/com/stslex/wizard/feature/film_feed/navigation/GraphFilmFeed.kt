@@ -18,6 +18,7 @@ fun NavGraphBuilder.graphFilmFeed() {
         val store = getStore<FeedStore>()
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
+            store.consume(Action.LoadFilms)
             store.event.collect { event ->
                 when (event) {
                     is Event.ErrorSnackBar -> {
@@ -26,12 +27,9 @@ fun NavGraphBuilder.graphFilmFeed() {
                 }
             }
         }
-        LaunchedEffect(Unit) {
-            store.sendAction(Action.LoadFilms)
-        }
         FeedScreen(
             state = state,
-            sendAction = store::sendAction
+            consume = store::consume
         )
     }
 }

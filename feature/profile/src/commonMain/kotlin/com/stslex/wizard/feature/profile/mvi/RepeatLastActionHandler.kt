@@ -17,6 +17,6 @@ class RepeatLastActionHandler : Handler<Action.RepeatLastAction, ProfileHandlerS
             }
             currentState.copy(screen = screen)
         }
-        sendAction(lastAction)
+        consume(lastAction)
     }
 }
