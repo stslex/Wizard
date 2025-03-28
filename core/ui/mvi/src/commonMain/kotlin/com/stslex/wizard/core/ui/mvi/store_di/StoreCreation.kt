@@ -1,6 +1,7 @@
 package com.stslex.wizard.core.ui.mvi.store_di
 
 import androidx.compose.runtime.Composable
+import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.Store
 import org.koin.compose.koinInject
 import org.koin.core.parameter.ParametersDefinition
@@ -11,6 +12,16 @@ inline fun <reified T : Store<*, *, *>> getStore(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null
 ): T = koinInject(
+    qualifier = qualifier,
+    parameters = parameters
+)
+
+
+@Composable
+inline fun <reified R : Store<*, *, *>, T : BaseStore<*, *, *>> getStore(
+    qualifier: Qualifier? = null,
+    noinline parameters: ParametersDefinition? = null
+): T = koinViewModel(
     qualifier = qualifier,
     parameters = parameters
 )

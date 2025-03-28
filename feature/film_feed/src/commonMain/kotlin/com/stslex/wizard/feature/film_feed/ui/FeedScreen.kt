@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenContent
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenError
-import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenLoading
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
@@ -32,7 +31,6 @@ internal fun FeedScreen(
             )
 
             is ScreenState.Error -> FeedScreenError(screenState.message)
-            ScreenState.Loading -> FeedScreenLoading()
         }
     }
 }

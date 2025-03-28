@@ -9,14 +9,14 @@ sealed interface ScreenState {
     sealed interface Content : ScreenState {
 
         @Stable
+        data object Shimmer : Content
+
+        @Stable
         data object AppendLoading : Content
 
         @Stable
         data object Success : Content
     }
-
-    @Stable
-    data object Loading : ScreenState
 
     @Stable
     data class Error(val message: String) : ScreenState

@@ -25,7 +25,8 @@ class MockFilmClientImpl : FilmClient {
                 } else {
                     filmsList[index]
                 }
-            }.toList(),
+            }.toList()
+                .takeLast(10),
             hasNext = true
         )
     }

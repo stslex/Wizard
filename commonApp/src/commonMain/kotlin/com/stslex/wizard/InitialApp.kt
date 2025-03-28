@@ -5,8 +5,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -75,12 +75,13 @@ fun InitialApp(
                 )
             }
         }
-    ) { _ ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            AppNavigationHost(
-                navHostController = navHostController,
-                startScreen = if (userStore.isAuth) Screen.FilmFeed else Screen.Auth
-            )
-        }
+    ) { paddingValues ->
+        AppNavigationHost(
+            modifier = Modifier.padding(
+                bottom = paddingValues.calculateBottomPadding()
+            ),
+            navHostController = navHostController,
+            startScreen = if (userStore.isAuth) Screen.FilmFeed else Screen.Auth
+        )
     }
 }

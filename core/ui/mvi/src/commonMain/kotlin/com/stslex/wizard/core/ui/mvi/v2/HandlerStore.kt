@@ -19,7 +19,7 @@ interface HandlerStore<S : State, A : Store.Action, E : Event> {
 
     fun sendEvent(event: E)
 
-    fun sendAction(action: A)
+    fun consume(action: A)
 
     fun updateState(update: (S) -> S)
 

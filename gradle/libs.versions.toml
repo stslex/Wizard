@@ -19,7 +19,6 @@ ksp = "2.1.20-1.0.32" # https://github.com/google/ksp/releases
 room = "2.7.0-rc03"
 sqlite = "2.5.0-alpha07"
 koin = "4.0.3"
-koin-compose = "4.0.0"
 koin-ksp = "2.0.0"
 
 junit = "4.13.2"
@@ -61,9 +60,11 @@ compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-co
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-android-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin" }
+
 koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-ksp" }
 koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-ksp" }
-koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin-compose" }
 
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
