@@ -4,24 +4,22 @@ import androidx.compose.runtime.Composable
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.Store
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.Qualifier
 
 @Composable
 inline fun <reified T : Store<*, *, *>> getStore(
     qualifier: Qualifier? = null,
-    noinline parameters: ParametersDefinition? = null
-): T = koinInject(
-    qualifier = qualifier,
-    parameters = parameters
-)
+): T = koinInject(qualifier)
 
 
+@Suppress("UNCHECKED_CAST")
 @Composable
-inline fun <reified R : Store<*, *, *>, T : BaseStore<*, *, *>> getStore(
+inline fun <R : Store<*, *, *>, reified T : BaseStore<*, *, *>> getStore(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null
-): T = koinViewModel(
+): R = koinViewModel<T>(
     qualifier = qualifier,
     parameters = parameters
-)
+) as R

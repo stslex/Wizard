@@ -12,10 +12,11 @@ import com.stslex.wizard.feature.film_feed.ui.FeedScreen
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
+import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreImpl
 
 fun NavGraphBuilder.graphFilmFeed() {
     navScreen<Screen.FilmFeed> { screen ->
-        val store = getStore<FeedStore>()
+        val store = getStore<FeedStore, FeedStoreImpl>()
         val state by remember { store.state }.collectAsState()
         LaunchedEffect(Unit) {
             store.consume(Action.LoadFilms)

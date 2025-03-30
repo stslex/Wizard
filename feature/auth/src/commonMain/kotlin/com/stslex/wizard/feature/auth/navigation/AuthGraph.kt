@@ -13,10 +13,11 @@ import com.stslex.wizard.feature.auth.ui.AuthScreen
 import com.stslex.wizard.feature.auth.ui.model.screen.rememberAuthScreenState
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreImpl
 
 fun NavGraphBuilder.graphAuth() {
     navScreen<Screen.Auth> {
-        val store = getStore<AuthStore>()
+        val store = getStore<AuthStore, AuthStoreImpl>()
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
 
