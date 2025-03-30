@@ -6,15 +6,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.core.ui.mvi.navComponentScreen
 import com.stslex.wizard.feature.film.ui.FilmScreen
 import com.stslex.wizard.feature.film.ui.store.FilmStore
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
+import com.stslex.wizard.feature.film.ui.store.FilmStoreImpl
 
 fun NavGraphBuilder.graphFilm() {
-    navScreen<Screen.Film> { screen ->
-        val store = getStore<FilmStore>()
+    navComponentScreen<Screen.Film, FilmStore, FilmStoreImpl> { screen, store ->
         LaunchedEffect(Unit) {
             store.consume(Action.Init(screen.id))
         }

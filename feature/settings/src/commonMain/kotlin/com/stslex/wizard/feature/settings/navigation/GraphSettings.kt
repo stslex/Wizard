@@ -7,15 +7,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.core.ui.mvi.navComponentScreen
 import com.stslex.wizard.feature.settings.ui.SettingsScreen
-import com.stslex.wizard.feature.settings.ui.store.SettingsStoreImpl
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Event
+import com.stslex.wizard.feature.settings.ui.store.SettingsStoreImpl
 
 fun NavGraphBuilder.graphSettings() {
-    navScreen<Screen.Settings> {
-        val store = getStore<SettingsStoreImpl>()
+    navComponentScreen<Screen.Settings, SettingsStore, SettingsStoreImpl> { screen, store ->
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
         LaunchedEffect(Unit) {

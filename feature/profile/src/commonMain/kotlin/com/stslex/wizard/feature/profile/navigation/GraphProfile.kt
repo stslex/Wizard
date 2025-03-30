@@ -7,15 +7,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.navigation.navScreen
 import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.core.ui.mvi.v2.navComponentScreen
 import com.stslex.wizard.feature.profile.ui.ProfileScreen
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
+import com.stslex.wizard.feature.profile.ui.store.ProfileStoreImpl
 
 fun NavGraphBuilder.graphProfile() {
-    navScreen<Screen.Profile> { screen ->
+    navComponentScreen<Screen.Profile, ProfileStore, ProfileStoreImpl> { screen, store ->
         val store = getStore<ProfileStore>()
         LaunchedEffect(Unit) {
             store.consume(
