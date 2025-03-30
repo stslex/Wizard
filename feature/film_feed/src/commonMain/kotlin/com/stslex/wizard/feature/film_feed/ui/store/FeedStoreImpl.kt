@@ -10,12 +10,7 @@ import com.stslex.wizard.feature.film_feed.ui.model.toUI
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
-import com.stslex.wizard.feature.film_feed.ui.store.Test.counter
 import kotlinx.coroutines.Job
-
-object Test {
-    var counter = 0
-}
 
 @Stable
 class FeedStoreImpl(
@@ -38,13 +33,6 @@ class FeedStoreImpl(
     }
 
     private fun actionLoadFilms() {
-        if (counter != 0) {
-            return
-            counter--
-        } else {
-            counter++
-        }
-
         if (loadingJob?.isActive == true) {
             Logger.d("Loading job is active")
             return

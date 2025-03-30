@@ -26,7 +26,7 @@ import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
 
 @Composable
 internal fun ProfileScreen(
-    state: State,
+    state: androidx.compose.runtime.State<State>,
     onAction: (Action) -> Unit,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
@@ -36,7 +36,7 @@ internal fun ProfileScreen(
             .fillMaxSize()
             .systemBarsPadding(),
     ) {
-        when (val screen = state.screen) {
+        when (val screen = state.value.screen) {
             is ProfileScreenState.Content -> ProfileScreenContent(
                 state = screen,
                 onAction = onAction
