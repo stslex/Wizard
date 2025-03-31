@@ -2,40 +2,58 @@ package com.stslex.wizard.core.ui.mvi.v2.processor
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.core.ui.mvi.Store.Action
+import com.stslex.wizard.core.ui.mvi.Store.Event
+import com.stslex.wizard.core.ui.mvi.Store.State
 import com.stslex.wizard.core.ui.mvi.v2.BaseStore
 import kotlinx.coroutines.CoroutineScope
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.component.KoinScopeComponent
+import androidx.compose.runtime.State as ComposeState
 
+
+/**
+ * StoreProcessor is an interface that defines the contract for processing actions and events in a store.
+ * It provides methods to consume actions and handle events.
+ *
+ * @param S The type of the state.
+ * @param A The type of the action.
+ * @param E The type of the event.
+ */
 @Immutable
-interface StoreProcessor<S : Store.State, A : Store.Action, E : Store.Event> {
+interface StoreProcessor<S : State, A : Action, E : Event> {
 
-    val state: State<S>
+    val state: ComposeState<S>
 
     fun consume(action: A)
 
     @Composable
     fun handle(block: suspend CoroutineScope.(E) -> Unit)
+}
 
-    companion object {
-
-        @Composable
-        inline fun <reified TStoreImpl : BaseStore<S, A, E, *>, S : Store.State, A : Store.Action, E : Store.Event> rememberStoreProcessor(): StoreProcessor<S, A, E> {
-            val store = koinViewModel<TStoreImpl>()
-            val actionProcessor = remember { ActionProcessor(store) }
-            val effectsProcessor = remember { EffectsProcessor(store) }
-            val state = remember { store.state }.collectAsState()
-            return remember {
-                StoreProcessorImpl<S, A, E, TStoreImpl>(
-                    actionProcessor = actionProcessor,
-                    eventProcessor = effectsProcessor,
-                    state = state,
-                )
-            }
-        }
+/**
+ * StoreProcessorImpl is an implementation of the StoreProcessor interface.
+ * It provides methods to consume actions and handle events in a store.
+ *
+ * @param S The type of the state.
+ * @param A The type of the action.
+ * @param E The type of the event.
+ * @param TStoreImpl The type of the store implementation.
+ */
+@Composable
+inline fun <S : State, A : Action, E : Event, reified TStoreImpl : BaseStore<S, A, E, *>> KoinScopeComponent.rememberStoreProcessor(): StoreProcessor<S, A, E> {
+    val store = koinViewModel<TStoreImpl>(scope = scope)
+    val actionProcessor = remember { ActionProcessor(store) }
+    val effectsProcessor = remember { EffectsProcessor(store) }
+    val state = remember { store.state }.collectAsState()
+    return remember {
+        StoreProcessorImpl<S, A, E, TStoreImpl>(
+            actionProcessor = actionProcessor,
+            eventProcessor = effectsProcessor,
+            state = state,
+        )
     }
 }
 

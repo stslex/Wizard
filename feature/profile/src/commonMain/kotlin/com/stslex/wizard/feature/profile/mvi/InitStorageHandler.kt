@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.database.store.UserStore
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.core.ui.mvi.v2.Handler
+import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.wizard.feature.profile.ui.model.ProfileAvatarModel
 import com.stslex.wizard.feature.profile.ui.model.toUi
@@ -11,8 +12,12 @@ import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
 @Factory
+@Scope(ProfileScope::class)
+@Scoped
 class InitStorageHandler(
     private val interactor: ProfileInteractor,
     private val userStore: UserStore,

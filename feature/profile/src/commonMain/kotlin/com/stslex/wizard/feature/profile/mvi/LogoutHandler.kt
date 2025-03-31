@@ -2,14 +2,19 @@ package com.stslex.wizard.feature.profile.mvi
 
 import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.core.ui.mvi.v2.Handler
+import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
 @Factory
+@Scope(ProfileScope::class)
+@Scoped
 class LogoutHandler(
     private val interactor: ProfileInteractor,
 ) : Handler<Action.Logout, ProfileHandlerStore> {

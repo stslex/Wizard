@@ -15,9 +15,7 @@ import com.stslex.wizard.feature.film_feed.di.ModuleFeatureFeed
 import com.stslex.wizard.feature.follower.di.ModuleFeatureFollower
 import com.stslex.wizard.feature.match.di.ModuleFeatureMatch
 import com.stslex.wizard.feature.match_feed.di.ModuleFeatureMatchFeed
-import com.stslex.wizard.feature.profile.di.ModuleFeatureProfile
 import com.stslex.wizard.feature.settings.di.ModuleFeatureSettings
-import org.koin.ksp.generated.module
 
 fun appModules(navHostController: NavHostController) = listOf(
     ModuleCore(),
@@ -34,4 +32,4 @@ fun appModules(navHostController: NavHostController) = listOf(
     ModuleFeatureFavourite(),
     ModuleFeatureSettings(),
     ModuleFeatureMatch(),
-).modules + ModuleFeatureProfile().module
+).modules
