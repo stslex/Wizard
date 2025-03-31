@@ -6,7 +6,9 @@ import com.stslex.wizard.feature.profile.domain.model.ProfileDomainModel
 import com.stslex.wizard.feature.profile.domain.model.toDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Factory
 
+@Factory
 class ProfileInteractorImpl(
     private val repository: ProfileRepository,
     private val authController: AuthController

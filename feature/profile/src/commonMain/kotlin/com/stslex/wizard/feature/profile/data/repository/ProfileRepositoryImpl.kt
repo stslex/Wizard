@@ -6,7 +6,9 @@ import com.stslex.wizard.feature.profile.data.model.ProfileDataModel
 import com.stslex.wizard.feature.profile.data.model.toData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.koin.core.annotation.Factory
 
+@Factory
 class ProfileRepositoryImpl(
     private val client: ProfileClient,
     private val dataStore: UserStore

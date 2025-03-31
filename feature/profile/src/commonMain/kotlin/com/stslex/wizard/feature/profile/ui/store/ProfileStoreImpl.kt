@@ -1,6 +1,7 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import com.stslex.wizard.core.ui.mvi.v2.BaseStore
+import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.mvi.ClickersHandler
 import com.stslex.wizard.feature.profile.mvi.InitStorageHandler
 import com.stslex.wizard.feature.profile.mvi.LogoutHandler
@@ -9,8 +10,14 @@ import com.stslex.wizard.feature.profile.mvi.RepeatLastActionHandler
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
+import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class ProfileStoreImpl(
+@KoinViewModel
+@Scope(ProfileScope::class)
+@Scoped
+internal class ProfileStoreImpl(
     initStorageHandler: InitStorageHandler,
     logoutHandler: LogoutHandler,
     repeatLastActionHandler: RepeatLastActionHandler,

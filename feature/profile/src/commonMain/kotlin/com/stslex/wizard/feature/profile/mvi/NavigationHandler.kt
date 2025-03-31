@@ -7,7 +7,9 @@ import com.stslex.wizard.core.navigation.navigator.Navigator
 import com.stslex.wizard.core.ui.mvi.v2.Handler
 import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action.Navigation
+import org.koin.core.annotation.Factory
 
+@Factory
 class NavigationHandler(
     private val navigator: Navigator
 ) : Handler<Navigation, ProfileHandlerStore> {

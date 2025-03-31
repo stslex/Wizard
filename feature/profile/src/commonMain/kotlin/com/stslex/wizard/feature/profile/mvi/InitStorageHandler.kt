@@ -10,7 +10,9 @@ import com.stslex.wizard.feature.profile.ui.model.toUi
 import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
+import org.koin.core.annotation.Factory
 
+@Factory
 class InitStorageHandler(
     private val interactor: ProfileInteractor,
     private val userStore: UserStore,

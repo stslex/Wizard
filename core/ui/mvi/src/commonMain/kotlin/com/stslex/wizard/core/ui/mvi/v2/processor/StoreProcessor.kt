@@ -9,7 +9,6 @@ import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.core.ui.mvi.v2.BaseStore
 import kotlinx.coroutines.CoroutineScope
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.qualifier.Qualifier
 
 @Immutable
 interface StoreProcessor<S : Store.State, A : Store.Action, E : Store.Event> {
@@ -24,15 +23,13 @@ interface StoreProcessor<S : Store.State, A : Store.Action, E : Store.Event> {
     companion object {
 
         @Composable
-        fun <S : Store.State, A : Store.Action, E : Store.Event, TStore : Store<S, A, E>> rememberStoreProcessor(
-            qualifier: Qualifier
-        ): StoreProcessor<S, A, E> {
-            val store = koinViewModel<BaseStore<S, A, E, *>>(qualifier) as TStore
+        inline fun <reified TStoreImpl : BaseStore<S, A, E, *>, S : Store.State, A : Store.Action, E : Store.Event> rememberStoreProcessor(): StoreProcessor<S, A, E> {
+            val store = koinViewModel<TStoreImpl>()
             val actionProcessor = remember { ActionProcessor(store) }
             val effectsProcessor = remember { EffectsProcessor(store) }
             val state = remember { store.state }.collectAsState()
             return remember {
-                StoreProcessorImpl<S, A, E, TStore>(
+                StoreProcessorImpl<S, A, E, TStoreImpl>(
                     actionProcessor = actionProcessor,
                     eventProcessor = effectsProcessor,
                     state = state,

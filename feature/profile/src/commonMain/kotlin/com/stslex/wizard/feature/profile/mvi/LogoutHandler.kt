@@ -7,7 +7,9 @@ import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
 import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
+import org.koin.core.annotation.Factory
 
+@Factory
 class LogoutHandler(
     private val interactor: ProfileInteractor,
 ) : Handler<Action.Logout, ProfileHandlerStore> {
