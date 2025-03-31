@@ -28,7 +28,6 @@ interface StoreProcessor<S : Store.State, A : Store.Action, E : Store.Event> {
             qualifier: Qualifier
         ): StoreProcessor<S, A, E> {
             val store = koinViewModel<BaseStore<S, A, E, *>>(qualifier) as TStore
-//            val store = getStoreV2<TStore, BaseStore<S, A, E, *>>(qualifier)
             val actionProcessor = remember { ActionProcessor(store) }
             val effectsProcessor = remember { EffectsProcessor(store) }
             val state = remember { store.state }.collectAsState()

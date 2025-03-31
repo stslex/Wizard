@@ -4,6 +4,7 @@ import com.stslex.wizard.core.ui.mvi.BaseStore
 import org.koin.core.definition.BeanDefinition
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModelOf
 
 inline fun <reified R : BaseStore<*, *, *>> Module.storeOf(
     crossinline constructor: () -> R,

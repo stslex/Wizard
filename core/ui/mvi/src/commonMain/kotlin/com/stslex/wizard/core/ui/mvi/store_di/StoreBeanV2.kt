@@ -7,6 +7,7 @@ import com.stslex.wizard.core.ui.mvi.v2.HandlerStore
 import org.koin.core.definition.KoinDefinition
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.qualifier
 import kotlin.reflect.KClass
 
