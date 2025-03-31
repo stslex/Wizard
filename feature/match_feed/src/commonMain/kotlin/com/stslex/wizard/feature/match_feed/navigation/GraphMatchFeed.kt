@@ -6,16 +6,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.core.ui.mvi.navComponentScreen
 import com.stslex.wizard.feature.match_feed.ui.MatchFeedScreen
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Action
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Event.ErrorSnackBar
+import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStoreImpl
 
 fun NavGraphBuilder.graphMatchFeed() {
-    navScreen<Screen.MatchFeed> {
-        val store = getStore<MatchFeedStore>()
+    navComponentScreen<Screen.MatchFeed, MatchFeedStore, MatchFeedStoreImpl> { _, store ->
         val state by remember { store.state }.collectAsState()
 
         LaunchedEffect(Unit) {
@@ -28,11 +27,11 @@ fun NavGraphBuilder.graphMatchFeed() {
             }
         }
         LaunchedEffect(Unit) {
-            store.sendAction(Action.Init)
+            store.consume(Action.Init)
         }
         MatchFeedScreen(
             state = state,
-            sendAction = store::sendAction
+            sendAction = store::consume
         )
     }
 }

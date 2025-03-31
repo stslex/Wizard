@@ -10,6 +10,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.compose.ComposeExtension
+import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KMPLibraryComposeConventionPlugin : Plugin<Project> {
@@ -21,19 +22,15 @@ class KMPLibraryComposeConventionPlugin : Plugin<Project> {
             apply(libs.findPluginId("composeCompiler"))
             apply(libs.findPluginId("kotlinCocoapods"))
             apply(libs.findPluginId("androidLibrary"))
-            apply(libs.findPluginId("ksp"))
             apply(libs.findPluginId("serialization"))
         }
 
         extensions.configure<KotlinMultiplatformExtension> {
             configureKMPCompose(
                 extension = this,
-                compose = extensions.getByType<ComposeExtension>().dependencies
+                compose = extensions.getByType<ComposePlugin.Dependencies>()
             )
-            configureKotlinMultiplatform(
-                extension = this,
-                kspExtension = extensions.getByType()
-            )
+            configureKotlinMultiplatform(extension = this)
         }
 
         extensions.configure<LibraryExtension> {

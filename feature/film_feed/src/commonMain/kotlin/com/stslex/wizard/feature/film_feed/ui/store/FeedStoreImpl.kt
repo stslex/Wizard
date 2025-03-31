@@ -10,7 +10,6 @@ import com.stslex.wizard.feature.film_feed.ui.model.toUI
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 
 @Stable
@@ -30,7 +29,7 @@ class FeedStoreImpl(
     }
 
     private fun actionFilmClick(action: Action.FilmClick) {
-        sendAction(Action.Navigation.Film(action.filmId))
+        consume(Action.Navigation.Film(action.filmId))
     }
 
     private fun actionLoadFilms() {
@@ -44,9 +43,9 @@ class FeedStoreImpl(
             return
         }
         val loadScreenState = when (state.value.screen) {
-            is ScreenState.Content -> ScreenState.Content.AppendLoading
-            is ScreenState.Loading -> ScreenState.Loading
-            is ScreenState.Error -> ScreenState.Loading
+            is ScreenState.Content.Shimmer -> ScreenState.Content.Shimmer
+            is ScreenState.Content.Success, is ScreenState.Content.AppendLoading -> ScreenState.Content.AppendLoading
+            is ScreenState.Error -> ScreenState.Content.Shimmer
         }
 
         updateState { currentState ->
@@ -66,10 +65,8 @@ class FeedStoreImpl(
             onSuccess = { feed ->
                 val films = feed.films.toUI()
                 updateState { currentState ->
-                    val currentFilms = currentState.films.toMutableList()
-                    currentFilms.addAll(films)
+                    currentState.films.addItems(films)
                     currentState.copy(
-                        films = currentFilms.toImmutableList(),
                         screen = ScreenState.Content.Success,
                         currentPage = currentPage.inc(),
                         hasNextPage = films.size == PAGE_SIZE

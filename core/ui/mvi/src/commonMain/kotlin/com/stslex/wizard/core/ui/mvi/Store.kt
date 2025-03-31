@@ -20,7 +20,7 @@ interface Store<out S : State, in A : Action, out E : Event> {
      * The action is then processed.
      * @param action - action to be sent
      */
-    fun sendAction(action: A)
+    fun consume(action: A)
 
     interface State
 

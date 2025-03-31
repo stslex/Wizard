@@ -112,7 +112,7 @@ class AuthStoreImpl(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
-                sendAction(Action.Navigation.HomeFeature)
+                consume(Action.Navigation.HomeFeature)
             })
     }
 
@@ -151,7 +151,7 @@ class AuthStoreImpl(
                         authFieldsState = AuthFieldsState.AUTH
                     )
                 }
-                sendAction(Action.Navigation.HomeFeature)
+                consume(Action.Navigation.HomeFeature)
             })
     }
 

@@ -1,19 +1,20 @@
 package com.stslex.wizard.convention
 
+import AppExt.findPluginId
 import AppExt.libs
-import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinMultiplatform(
     extension: KotlinMultiplatformExtension,
-    kspExtension: KspExtension
 ) = extension.apply {
-    kspExtension.arg("KOIN_CONFIG_CHECK", true.toString())
+
+    pluginManager.apply(libs.findPluginId("ksp"))
 
     jvmToolchain(17)
 
@@ -25,16 +26,17 @@ internal fun Project.configureKotlinMultiplatform(
 
     applyDefaultHierarchyTemplate()
 
-    //common dependencies
+    dependencies {
+        add("kspCommonMainMetadata", libs.findLibrary("koin-ksp-compiler").get())
+    }
+
     sourceSets.apply {
-        dependencies {
-            val koinCompiler = libs.findLibrary("koin-ksp-compiler").get()
-            add("kspAndroid", koinCompiler)
-            add("kspIosSimulatorArm64", koinCompiler)
-            add("kspIosX64", koinCompiler)
-            add("kspIosArm64", koinCompiler)
-        }
+
         commonMain {
+            kotlin.srcDirs(
+                "build/generated/ksp/metadata/commonMain/kotlin",
+                "build/generated/ksp/commonMain/kotlin"
+            )
             dependencies {
                 implementation(libs.findLibrary("koin-core").get())
                 implementation(libs.findLibrary("koin-annotations").get())
@@ -60,4 +62,8 @@ internal fun Project.configureKotlinMultiplatform(
 
     //applying the Cocoapods Configuration we made
     (this as ExtensionAware).extensions.configure<CocoapodsExtension>(::configureKotlinCocoapods)
+
+    tasks.withType(KotlinCompile::class.java).all {
+        if (name != "kspCommonMainKotlinMetadata") dependsOn("kspCommonMainKotlinMetadata")
+    }
 }

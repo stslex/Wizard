@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>>(
     initialState: S,
     private val handlerCreator: HandlerCreator<S, A, E, HStore>,
+    vararg initialActions: A,
 ) : ViewModel(), Store<S, A, E>, HandlerStore<S, A, E> {
 
     private val _event: MutableSharedFlow<E> = MutableSharedFlow()
@@ -39,8 +40,12 @@ open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, 
     override val lastAction: A?
         get() = _lastAction
 
+    init {
+        initialActions.forEach { consume(it) }
+    }
+
     @Suppress("UNCHECKED_CAST")
-    override fun sendAction(action: A) {
+    override fun consume(action: A) {
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }

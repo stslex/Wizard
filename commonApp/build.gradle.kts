@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.convention.kmp.application)
 }
 
+ksp {
+    arg("KOIN_CONFIG_CHECK", "true")
+}
+
 kotlin {
     sourceSets.apply {
         commonMain.dependencies {

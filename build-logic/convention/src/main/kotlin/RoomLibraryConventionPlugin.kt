@@ -14,8 +14,8 @@ class RoomLibraryConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply {
                 apply(libs.findPluginId("room"))
-                apply(libs.findPluginId("ksp"))
                 apply(libs.findPluginId("kotlinMultiplatform"))
+                apply(libs.findPluginId("ksp"))
                 apply(libs.findPluginId("serialization"))
             }
 

@@ -26,7 +26,6 @@ internal fun FilmScreen(
             val screenState = state.screenState
         ) {
             FilmScreenState.Loading -> FilmLoading()
-
             is FilmScreenState.Content -> FilmContentScreen(
                 film = screenState.data,
                 onLikeClick = {

@@ -112,7 +112,7 @@ class FavouriteStoreImpl(
     }
 
     private fun actionItemClick(action: Action.ItemClick) {
-        sendAction(Action.Navigation.OpenFilm(action.uuid))
+        consume(Action.Navigation.OpenFilm(action.uuid))
     }
 
     private fun actionLikeClick(action: Action.LikeClick) {

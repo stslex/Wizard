@@ -7,18 +7,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.core.ui.mvi.navComponentScreen
 import com.stslex.wizard.feature.match.ui.MatchScreen
 import com.stslex.wizard.feature.match.ui.store.MatchStore
 import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
 import com.stslex.wizard.feature.match.ui.store.MatchStore.Event
+import com.stslex.wizard.feature.match.ui.store.MatchStoreImpl
 
 fun NavGraphBuilder.graphMatch() {
-    navScreen<Screen.Match> { screen ->
-        val store = getStore<MatchStore>()
+    navComponentScreen<Screen.Match, MatchStore, MatchStoreImpl> { screen, store ->
         LaunchedEffect(Unit) {
-            store.sendAction(
+            store.consume(
                 Action.Init(
                     type = screen.type,
                     uuid = screen.uuid
@@ -43,7 +42,7 @@ fun NavGraphBuilder.graphMatch() {
 
         MatchScreen(
             state = state,
-            onAction = store::sendAction,
+            onAction = store::consume,
             snackbarHostState = snackbarHostState
         )
     }

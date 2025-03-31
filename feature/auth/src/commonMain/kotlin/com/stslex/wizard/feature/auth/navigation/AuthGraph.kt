@@ -7,16 +7,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavGraphBuilder
 import com.stslex.wizard.core.navigation.Screen
-import com.stslex.wizard.core.navigation.navScreen
-import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.core.ui.mvi.navComponentScreen
 import com.stslex.wizard.feature.auth.ui.AuthScreen
 import com.stslex.wizard.feature.auth.ui.model.screen.rememberAuthScreenState
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
+import com.stslex.wizard.feature.auth.ui.store.AuthStoreImpl
 
 fun NavGraphBuilder.graphAuth() {
-    navScreen<Screen.Auth> {
-        val store = getStore<AuthStore>()
+    navComponentScreen<Screen.Auth, AuthStore, AuthStoreImpl> { _, store ->
         val state by remember { store.state }.collectAsState()
         val snackbarHostState = remember { SnackbarHostState() }
 
@@ -36,7 +35,7 @@ fun NavGraphBuilder.graphAuth() {
         val authScreenState = rememberAuthScreenState(
             snackbarHostState = snackbarHostState,
             screenState = state,
-            processAction = store::sendAction
+            processAction = store::consume
         )
         AuthScreen(authScreenState)
     }

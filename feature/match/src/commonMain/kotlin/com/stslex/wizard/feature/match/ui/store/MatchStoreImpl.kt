@@ -105,7 +105,7 @@ class MatchStoreImpl(
     }
 
     private fun actionOnMatchClick(action: Action.OnMatchClick) {
-        sendAction(Action.Navigation.MatchDetails(action.matchUuid))
+        consume(Action.Navigation.MatchDetails(action.matchUuid))
     }
 
     private fun actionRetryClick() {
@@ -122,7 +122,7 @@ class MatchStoreImpl(
                 interactor.logout()
             },
             onSuccess = {
-                sendAction(Action.Navigation.LogOut)
+                consume(Action.Navigation.LogOut)
             },
             onError = ::showError
         )
