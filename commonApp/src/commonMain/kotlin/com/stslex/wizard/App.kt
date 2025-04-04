@@ -1,34 +1,66 @@
 package com.stslex.wizard
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.fade
-import com.arkivanov.decompose.extensions.compose.stack.animation.plus
-import com.arkivanov.decompose.extensions.compose.stack.animation.scale
-import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
+import com.stslex.wizard.bottom_bar.MainBottomAppBar
+import com.stslex.wizard.core.navigation.v2.Config
 import com.stslex.wizard.core.ui.kit.theme.AppTheme
-import com.stslex.wizard.feature.auth.navigation.AuthInitScreen
-import com.stslex.wizard.feature.film.ui.FilmScreen
-import com.stslex.wizard.feature.film_feed.ui.FilmFeedScreen
+import com.stslex.wizard.host.AppNavigationHost
 import com.stslex.wizard.host.RootComponent
 
 @Composable
 fun App(rootComponent: RootComponent) {
     AppTheme {
-//        InitialApp(navHostController)
+        var currentDestination by remember {
+            mutableStateOf<Config>(rootComponent.stack.value.active.configuration)
+        }
 
-        Children(
-            stack = rootComponent.stack,
-            modifier = Modifier.fillMaxSize(),
-            animation = stackAnimation(fade().plus(scale())),
-        ) { created ->
-            when (val instance = created.instance) {
-                is RootComponent.Child.Auth -> AuthInitScreen(instance.component)
-                is RootComponent.Child.FeedFilm -> FilmFeedScreen(instance.component)
-                is RootComponent.Child.Film -> FilmScreen(instance.filmId, instance.component)
+        DisposableEffect(rootComponent) {
+            val cancellable = rootComponent.onConfigChanged { currentDestination = it }
+            onDispose {
+                cancellable.cancel()
             }
+        }
+
+        Scaffold(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            bottomBar = {
+                AnimatedVisibility(
+                    visible = currentDestination is Config.BottomBar,
+                    enter = slideInVertically(tween(300)) { it },
+                    exit = slideOutVertically(tween(300)) { it }
+                ) {
+                    MainBottomAppBar(
+                        onBottomAppBarClick = {
+                            rootComponent.onBottomAppBarClick(it)
+                        },
+                        currentDestination = currentDestination
+                    )
+                }
+            }
+        ) { paddingValues ->
+            AppNavigationHost(
+                modifier = Modifier.padding(
+                    bottom = paddingValues.calculateBottomPadding()
+                ),
+                rootComponent = rootComponent
+            )
         }
     }
 }

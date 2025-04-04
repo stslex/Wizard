@@ -3,6 +3,7 @@ package com.stslex.wizard.feature.auth.navigation
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -18,6 +19,7 @@ import com.stslex.wizard.feature.auth.ui.store.AuthStore
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
 import com.stslex.wizard.feature.auth.ui.store.AuthStoreImpl
 
+@Stable
 class AuthComponentImpl(
     context: ComponentContext
 ) : AuthComponent, ComponentContext by context

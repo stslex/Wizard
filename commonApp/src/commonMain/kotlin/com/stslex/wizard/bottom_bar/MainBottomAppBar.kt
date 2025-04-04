@@ -8,14 +8,13 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.v2.Config
 
 @Composable
-fun MainBottomAppBar(
-    onBottomAppBarClick: (Screen) -> Unit,
-    currentDestination: Screen?
+internal fun MainBottomAppBar(
+    onBottomAppBarClick: (Config.BottomBar) -> Unit,
+    currentDestination: Config?
 ) {
     NavigationBar(
         modifier = Modifier
@@ -25,13 +24,10 @@ fun MainBottomAppBar(
         BottomAppBarResource
             .entries
             .forEach { item ->
-                val isSelected = currentDestination == item.screen
                 BottomAppBarItem(
                     item = item,
-                    isSelected = isSelected,
-                    onBottomAppBarClick = remember(item) {
-                        onBottomAppBarClick
-                    }
+                    isSelected = currentDestination == item.config,
+                    onBottomAppBarClick = onBottomAppBarClick
                 )
             }
     }
@@ -41,12 +37,12 @@ fun MainBottomAppBar(
 private fun RowScope.BottomAppBarItem(
     item: BottomAppBarResource,
     isSelected: Boolean,
-    onBottomAppBarClick: (Screen) -> Unit
+    onBottomAppBarClick: (Config.BottomBar) -> Unit
 ) {
     NavigationBarItem(
         selected = isSelected,
         onClick = {
-            onBottomAppBarClick(item.screen)
+            onBottomAppBarClick(item.config)
         },
         icon = {
             Icon(

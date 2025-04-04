@@ -25,30 +25,38 @@ class DefaultRootComponent(
         serializer = Config.serializer(),
         childFactory = ::child,
         handleBackButton = true,
-        initialConfiguration = Config.FeedFilm
+        initialConfiguration = Config.BottomBar.FilmFeed
     )
 
-    override val stack: Value<ChildStack<*, Child>> = _stack
+    override val stack: Value<ChildStack<Config, Child>> = _stack
+
+    override fun onConfigChanged(block: (Config) -> Unit) = stack.subscribe {
+        block(it.active.configuration)
+    }
+
+    override fun onBottomAppBarClick(config: Config.BottomBar) {
+        navigateTo(config)
+    }
 
     private fun child(
         config: Config,
         context: ComponentContext
     ): Child = when (config) {
-        is Config.MatchFeed -> TODO()
-        is Config.Auth -> Child.Auth(AuthComponentImpl(context))
-        is Config.Favourite -> TODO()
-        is Config.FeedFilm -> Child.FeedFilm(
+        is Config.BottomBar.FilmFeed -> Child.FeedFilm(
             context.createFilmFeedComponent(navigateTo = ::navigateTo)
         )
 
+        is Config.BottomBar.Match -> TODO()
+        is Config.BottomBar.Profile -> TODO()
+        is Config.Auth -> Child.Auth(AuthComponentImpl(context))
+        is Config.Favourite -> TODO()
         is Config.Film -> Child.Film(
             context.createFilmComponent(popBack = ::popBack),
             filmId = config.id
         )
 
         is Config.Follower -> TODO()
-        is Config.Match -> TODO()
-        is Config.Profile -> TODO()
+        is Config.MatchFeed -> TODO()
         is Config.Settings -> TODO()
     }
 
