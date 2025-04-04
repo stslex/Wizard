@@ -35,6 +35,9 @@ mockito = "5.12.0"
 multiplatformSettings = "1.1.1"
 serialization = "1.8.0"
 kotlinxDatetime = "0.6.0"
+decompose = "3.3.0"
+essenty = "2.5.0"
+parcelize = "0.2.4"
 
 buildConfig = "4.2.0"
 [libraries]
@@ -56,6 +59,13 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "android-compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
+
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-extensions = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
+essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
+essenty-stateKeeper = { module = "com.arkivanov.essenty:state-keeper", version.ref = "essenty" }
+essenty-backHandler = { module = "com.arkivanov.essenty:back-handler", version.ref = "essenty" }
+parcelize-darwin = { module = "com.arkivanov.parcelize.darwin:runtime", version.ref = "parcelize" }
 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }

@@ -12,7 +12,7 @@ import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
 
 @Composable
-internal fun FeedScreen(
+internal fun FilmFeedWidget(
     modifier: Modifier = Modifier,
     state: State,
     consume: (Action) -> Unit,

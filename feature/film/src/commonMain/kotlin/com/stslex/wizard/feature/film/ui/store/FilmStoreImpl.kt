@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.film.ui.store
 
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor
-import com.stslex.wizard.feature.film.navigation.FilmRouter
+import com.stslex.wizard.feature.film.navigation.FilmComponent
 import com.stslex.wizard.feature.film.ui.model.toDomain
 import com.stslex.wizard.feature.film.ui.model.toUi
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 
 class FilmStoreImpl(
     private val interactor: FilmInteractor,
-    private val router: FilmRouter,
+    private val component: FilmComponent,
 ) : BaseStore<State, Action, Event>(State.INITIAL), FilmStore {
 
     private var likeJob: Job? = null
@@ -22,7 +22,13 @@ class FilmStoreImpl(
             is Action.Init -> actionInit(action)
             is Action.BackButtonClick -> actionBackButtonClick()
             is Action.LikeButtonClick -> actionLikeButtonClick()
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> actionNavigation(action)
+        }
+    }
+
+    private fun actionNavigation(action: Action.Navigation) {
+        when (action) {
+            Action.Navigation.Back -> component.back()
         }
     }
 

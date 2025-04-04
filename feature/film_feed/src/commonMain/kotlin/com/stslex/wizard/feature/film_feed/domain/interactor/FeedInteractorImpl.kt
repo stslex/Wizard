@@ -3,7 +3,9 @@ package com.stslex.wizard.feature.film_feed.domain.interactor
 import com.stslex.wizard.feature.film_feed.data.repository.FeedRepository
 import com.stslex.wizard.feature.film_feed.domain.model.FeedDomainModel
 import com.stslex.wizard.feature.film_feed.domain.model.toDomain
+import org.koin.core.annotation.Factory
 
+@Factory
 class FeedInteractorImpl(
     private val repository: FeedRepository
 ) : FeedInteractor {

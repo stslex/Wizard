@@ -5,6 +5,7 @@ import AppExt.findVersionString
 import AppExt.libs
 import com.android.build.api.dsl.ApplicationExtension
 import com.stslex.wizard.convention.configureKMPCompose
+import com.stslex.wizard.convention.configureKMPComposeNavigation
 import com.stslex.wizard.convention.configureKotlin
 import com.stslex.wizard.convention.configureKotlinAndroid
 import com.stslex.wizard.convention.configureKotlinAndroidCompose
@@ -13,7 +14,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
-import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.compose.ComposePlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
@@ -35,6 +35,7 @@ class KMPApplicationConventionPlugin : Plugin<Project> {
                 extension = this,
                 compose = extensions.getByType<ComposePlugin.Dependencies>()
             )
+            configureKMPComposeNavigation(this)
         }
 
         extensions.configure<ApplicationExtension> {
