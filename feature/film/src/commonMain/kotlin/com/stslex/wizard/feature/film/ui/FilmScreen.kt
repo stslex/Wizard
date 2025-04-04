@@ -1,57 +1,43 @@
 package com.stslex.wizard.feature.film.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.stslex.wizard.feature.film.ui.components.FilmContentScreen
-import com.stslex.wizard.feature.film.ui.store.FilmScreenState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import com.stslex.wizard.feature.film.di.ModuleFeatureFilm
+import com.stslex.wizard.feature.film.navigation.FilmComponent
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
-import com.stslex.wizard.feature.film.ui.store.FilmStore.State
+import com.stslex.wizard.feature.film.ui.store.FilmStoreImpl
+import org.koin.compose.module.rememberKoinModules
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-internal fun FilmScreen(
-    modifier: Modifier = Modifier,
-    state: State,
-    onAction: (Action) -> Unit
+fun FilmScreen(
+    filmId: String,
+    component: FilmComponent,
 ) {
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
-        when (
-            val screenState = state.screenState
-        ) {
-            FilmScreenState.Loading -> FilmLoading()
-            is FilmScreenState.Content -> FilmContentScreen(
-                film = screenState.data,
-                onLikeClick = {
-                    onAction(Action.LikeButtonClick)
-                },
-                onBackClick = {
-                    onAction(Action.BackButtonClick)
-                }
-            )
-        }
+    rememberKoinModules(unloadModules = true) {
+        listOf(ModuleFeatureFilm().module)
     }
-}
+    val store = koinViewModel<FilmStoreImpl>(
+        parameters = { parametersOf(component) }
+    )
 
-@Composable
-internal fun FilmLoading(
-    modifier: Modifier = Modifier,
-) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "Loading...")
-            CircularProgressIndicator()
+    LaunchedEffect(Unit) {
+        store.consume(Action.Init(filmId))
+    }
+    val state by remember { store.state }.collectAsState()
+    LaunchedEffect(Unit) {
+        store.event.collect { event ->
+            when (event) {
+                else -> Unit
+            }
         }
     }
+    FilmScreenWidget(
+        state = state,
+        onAction = store::consume
+    )
 }

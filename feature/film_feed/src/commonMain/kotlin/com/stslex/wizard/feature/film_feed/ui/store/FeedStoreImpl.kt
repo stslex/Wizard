@@ -1,21 +1,21 @@
 package com.stslex.wizard.feature.film_feed.ui.store
 
-import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.feature.film_feed.domain.interactor.FeedInteractor
-import com.stslex.wizard.feature.film_feed.navigation.FeedScreenRouter
+import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
 import com.stslex.wizard.feature.film_feed.ui.model.toUI
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
 import kotlinx.coroutines.Job
+import org.koin.android.annotation.KoinViewModel
 
-@Stable
+@KoinViewModel
 class FeedStoreImpl(
     private val interactor: FeedInteractor,
-    private val router: FeedScreenRouter
+    private val component: FilmFeedComponent
 ) : BaseStore<State, Action, Event>(State.INITIAL), FeedStore {
 
     private var loadingJob: Job? = null
@@ -24,7 +24,13 @@ class FeedStoreImpl(
         when (action) {
             is Action.LoadFilms -> actionLoadFilms()
             is Action.FilmClick -> actionFilmClick(action)
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> actionNavigation(action)
+        }
+    }
+
+    private fun actionNavigation(action: Action.Navigation) {
+        when (action) {
+            is Action.Navigation.Film -> component.openFilm(action.filmId)
         }
     }
 

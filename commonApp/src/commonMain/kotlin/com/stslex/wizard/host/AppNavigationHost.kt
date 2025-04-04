@@ -8,8 +8,6 @@ import androidx.navigation.compose.NavHost
 import com.stslex.wizard.core.navigation.Screen
 import com.stslex.wizard.feature.auth.navigation.graphAuth
 import com.stslex.wizard.feature.favourite.navigation.graphFavourite
-import com.stslex.wizard.feature.film.navigation.graphFilm
-import com.stslex.wizard.feature.film_feed.navigation.graphFilmFeed
 import com.stslex.wizard.feature.follower.navigation.graphFollower
 import com.stslex.wizard.feature.match.navigation.graphMatch
 import com.stslex.wizard.feature.match_feed.navigation.graphMatchFeed
@@ -29,8 +27,8 @@ fun AppNavigationHost(
         ) {
             graphAuth()
             graphFavourite()
-            graphFilm()
-            graphFilmFeed()
+//            graphFilm()
+//            graphFilmFeed() refactor
             graphFollower()
             graphMatch()
             graphMatchFeed()
