@@ -5,6 +5,7 @@ import com.stslex.wizard.core.navigation.v2.Config
 
 internal class FavouriteComponentImpl(
     context: ComponentContext,
+    override val uuid: String,
     private val navTo: (Config) -> Unit
 ) : FavouriteComponent, ComponentContext by context {
 

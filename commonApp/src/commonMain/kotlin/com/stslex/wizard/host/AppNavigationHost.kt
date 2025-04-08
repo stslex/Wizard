@@ -31,10 +31,7 @@ internal fun AppNavigationHost(
                 is RootComponent.Child.Auth -> AuthInitScreen(instance.component)
                 is RootComponent.Child.FeedFilm -> FilmFeedScreen(instance.component)
                 is RootComponent.Child.Film -> FilmScreen(instance.filmId, instance.component)
-                is RootComponent.Child.Favourite -> FavouriteScreen(
-                    instance.component,
-                    instance.uuid
-                )
+                is RootComponent.Child.Favourite -> FavouriteScreen(instance.component)
 
                 is RootComponent.Child.Follower -> FollowerScreen(
                     component = instance.component,

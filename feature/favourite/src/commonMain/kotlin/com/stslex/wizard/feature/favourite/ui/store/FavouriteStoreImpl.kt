@@ -27,7 +27,7 @@ class FavouriteStoreImpl(
     pagingFactory: StorePagerFactory,
     private val component: FavouriteComponent
 ) : BaseStore<State, Action, Event>(
-    initialState = State.INITIAL
+    initialState = State.initial(component.uuid)
 ), FavouriteStore {
 
     private var likeJob: Job? = null
@@ -48,7 +48,7 @@ class FavouriteStoreImpl(
 
     override fun process(action: Action) {
         when (action) {
-            is Action.Init -> actionInit(action)
+            is Action.Init -> actionInit()
             is Action.LoadMore -> actionLoadMore()
             is Action.ItemClick -> actionItemClick(action)
             is Action.LikeClick -> actionLikeClick(action)
@@ -65,13 +65,7 @@ class FavouriteStoreImpl(
         }
     }
 
-    private fun actionInit(action: Action.Init) {
-        updateState { state ->
-            state.copy(
-                uuid = action.uuid,
-            )
-        }
-
+    private fun actionInit() {
         pager.state.launch { pagerState ->
             updateState { currentState ->
                 currentState.copy(
@@ -90,10 +84,6 @@ class FavouriteStoreImpl(
             sendEvent(
                 Event.ShowSnackbar(Snackbar.Error("error load matches"))
             )
-        }
-
-        updateState { currentState ->
-            currentState.copy(uuid = action.uuid)
         }
 
         state

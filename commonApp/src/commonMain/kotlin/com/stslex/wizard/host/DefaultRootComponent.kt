@@ -67,8 +67,10 @@ class DefaultRootComponent(
 
         is Config.Auth -> Child.Auth(context.createAuthComponent(::navigateTo))
         is Config.Favourite -> Child.Favourite(
-            component = context.createFavouriteComponent(::navigateTo),
-            uuid = config.uuid
+            component = context.createFavouriteComponent(
+                uuid = config.uuid,
+                navTo = ::navigateTo
+            ),
         )
 
         is Config.Film -> Child.Film(

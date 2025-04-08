@@ -42,7 +42,6 @@ interface RootComponent {
 
         data class Favourite(
             val component: FavouriteComponent,
-            val uuid: String
         ) : Child
 
         data class Follower(

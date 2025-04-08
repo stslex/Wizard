@@ -13,18 +13,13 @@ import com.stslex.wizard.feature.favourite.ui.store.FavouriteStoreImpl
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun FavouriteScreen(
-    component: FavouriteComponent,
-    uuid: String
-) {
+fun FavouriteScreen(component: FavouriteComponent) {
     val store = getStore<FavouriteStore, FavouriteStoreImpl>(
         parameters = { parametersOf(component) }
     )
     val state by remember { store.state }.collectAsState()
 
-    LaunchedEffect(key1 = Unit) {
-        store.consume(Action.Init(uuid = uuid))
-    }
+    LaunchedEffect(key1 = Unit) { store.consume(Action.Init) }
 
     FavouriteScreenWidget(
         state = state,
