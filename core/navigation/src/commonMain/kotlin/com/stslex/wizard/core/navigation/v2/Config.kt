@@ -7,7 +7,13 @@ import kotlinx.serialization.Serializable
 @Stable
 sealed interface Config {
 
+    val isBackAllow: Boolean
+        get() = true
+
     sealed interface BottomBar : Config {
+
+        override val isBackAllow: Boolean
+            get() = false
 
         data object FilmFeed : BottomBar
 

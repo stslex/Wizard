@@ -5,8 +5,8 @@ import com.arkivanov.decompose.DelicateDecomposeApi
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.stslex.wizard.core.navigation.v2.Config
 import com.stslex.wizard.feature.auth.navigation.AuthComponent.Companion.createAuthComponent
@@ -94,7 +94,13 @@ class DefaultRootComponent(
 
     @OptIn(DelicateDecomposeApi::class)
     private fun navigateTo(config: Config) {
-        navigation.push(config)
+        navigation.navigate { currentStack ->
+            if (config.isBackAllow) {
+                currentStack + config
+            } else {
+                listOf(config)
+            }
+        }
     }
 
     private fun popBack() {
