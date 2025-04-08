@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Profile
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
@@ -32,7 +32,7 @@ interface ProfileStore : Store<State, Action, Event> {
 
         @Stable
         data class Init(
-            val type: Screen.Profile.Type,
+            val type: Profile.Type,
             val uuid: String
         ) : Action
 

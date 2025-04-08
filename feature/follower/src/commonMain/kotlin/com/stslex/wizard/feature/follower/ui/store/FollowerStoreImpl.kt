@@ -1,15 +1,15 @@
 package com.stslex.wizard.feature.follower.ui.store
 
-import com.stslex.wizard.core.navigation.Screen.Follower.FollowerType
+import com.stslex.wizard.core.navigation.v2.Config.Follower.FollowerType
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
-import com.stslex.wizard.core.ui.mvi.BaseStore
-import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePagerFactory
 import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor
-import com.stslex.wizard.feature.follower.navigation.FollowerRouter
+import com.stslex.wizard.feature.follower.navigation.FollowerComponent
 import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 import com.stslex.wizard.feature.follower.ui.model.toUi
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
@@ -20,8 +20,8 @@ import kotlinx.coroutines.flow.map
 
 class FollowerStoreImpl(
     private val interactor: FollowerInteractor,
-    private val router: FollowerRouter,
     pagerFactory: StorePagerFactory,
+    component: FollowerComponent
 ) : FollowerStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     private val pager: StorePager<FollowerModel> = pagerFactory.create(
@@ -54,10 +54,14 @@ class FollowerStoreImpl(
             is Action.Load -> actionLoad()
             is Action.OnUserClick -> actionUserClick(action)
             is Action.QueryChanged -> actionQueryChanged(action)
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> processNavigation(action)
             Action.Refresh -> actionRefresh()
             Action.Retry -> actionRetry()
         }
+    }
+
+    private fun processNavigation(action: Action.Navigation) {
+        TODO("Not yet implemented")
     }
 
     private fun actionInit(action: Action.Init) {

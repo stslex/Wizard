@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.profile.mvi
 
 import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Profile
 import com.stslex.wizard.core.ui.mvi.v2.Handler
 import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
@@ -28,7 +28,7 @@ class InitStorageHandler(
 
         updateState { currentState ->
             currentState.copy(
-                isSelf = action.type == Screen.Profile.Type.SELF,
+                isSelf = action.type == Profile.Type.SELF,
                 uuid = uuid,
             )
         }

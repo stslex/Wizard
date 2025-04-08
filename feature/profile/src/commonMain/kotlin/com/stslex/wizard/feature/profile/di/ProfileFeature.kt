@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import com.stslex.wizard.core.ui.mvi.v2.Feature
 import com.stslex.wizard.core.ui.mvi.v2.processor.StoreProcessor
 import com.stslex.wizard.core.ui.mvi.v2.processor.rememberStoreProcessor
+import com.stslex.wizard.feature.profile.navigation.ProfileComponent
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
-import com.stslex.wizard.feature.profile.ui.store.ProfileStoreImpl
 import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.core.scope.Scope
@@ -21,7 +21,7 @@ internal typealias ProfileStoreProcessor = StoreProcessor<State, Action, Event>
  *
  * @see [ProfileStore]
  * */
-internal object ProfileFeature : Feature<ProfileStoreProcessor> {
+internal object ProfileFeature : Feature<ProfileStoreProcessor, ProfileComponent> {
 
     override val module: Module by lazy { ModuleFeatureProfile().module }
 
@@ -37,5 +37,6 @@ internal object ProfileFeature : Feature<ProfileStoreProcessor> {
     }
 
     @Composable
-    override fun processor() = rememberStoreProcessor<State, Action, Event, ProfileStoreImpl>()
+    override fun processor(component: ProfileComponent): ProfileStoreProcessor =
+        rememberStoreProcessor(component)
 }

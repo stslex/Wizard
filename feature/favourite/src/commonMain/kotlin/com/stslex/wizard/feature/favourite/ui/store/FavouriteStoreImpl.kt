@@ -3,13 +3,13 @@ package com.stslex.wizard.feature.favourite.ui.store
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
-import com.stslex.wizard.core.ui.mvi.BaseStore
-import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePagerFactory
 import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.favourite.domain.interactor.FavouriteInteractor
-import com.stslex.wizard.feature.favourite.navigation.FavouriteRouter
+import com.stslex.wizard.feature.favourite.navigation.FavouriteComponent
 import com.stslex.wizard.feature.favourite.ui.model.FavouriteModel
 import com.stslex.wizard.feature.favourite.ui.model.toDomain
 import com.stslex.wizard.feature.favourite.ui.model.toUI
@@ -23,9 +23,9 @@ import kotlinx.coroutines.flow.map
 
 class FavouriteStoreImpl(
     private val interactor: FavouriteInteractor,
-    private val router: FavouriteRouter,
     private val appDispatcher: AppDispatcher,
     pagingFactory: StorePagerFactory,
+    private val component: FavouriteComponent
 ) : BaseStore<State, Action, Event>(
     initialState = State.INITIAL
 ), FavouriteStore {
@@ -55,7 +55,13 @@ class FavouriteStoreImpl(
             is Action.InputSearch -> actionInputSearch(action)
             is Action.Refresh -> actionRefresh()
             is Action.Retry -> actionRetryClick()
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> processNavigation(action)
+        }
+    }
+
+    private fun processNavigation(action: Action.Navigation) {
+        when (action) {
+            is Action.Navigation.OpenFilm -> component.openFilm(action.uuid)
         }
     }
 

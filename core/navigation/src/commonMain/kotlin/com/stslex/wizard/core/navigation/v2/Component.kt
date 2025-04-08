@@ -5,6 +5,3 @@ import com.arkivanov.decompose.ComponentContext
 
 @Stable
 interface Component : ComponentContext
-
-@Stable
-interface AuthComponent : Component

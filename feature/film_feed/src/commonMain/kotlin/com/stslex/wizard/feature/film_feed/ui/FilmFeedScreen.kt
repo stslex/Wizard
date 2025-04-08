@@ -5,12 +5,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import com.stslex.wizard.feature.film_feed.di.ModuleFeatureFilmFeed
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStoreImpl
-import org.koin.compose.module.rememberKoinModules
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parametersOf
@@ -20,9 +18,6 @@ import org.koin.core.parameter.parametersOf
 fun FilmFeedScreen(
     component: FilmFeedComponent,
 ) {
-    rememberKoinModules(unloadModules = true) {
-        listOf(ModuleFeatureFilmFeed().module)
-    }
     val store = koinViewModel<FeedStoreImpl>(
         parameters = { parametersOf(component) }
     )

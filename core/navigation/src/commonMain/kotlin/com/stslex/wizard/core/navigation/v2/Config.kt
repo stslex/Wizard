@@ -19,7 +19,6 @@ sealed interface Config {
             enum class Type { SELF, OTHER }
         }
 
-        @Serializable
         data class Profile(
             val type: Type,
             val uuid: String = ""
@@ -31,13 +30,25 @@ sealed interface Config {
 
     data object Auth : Config
 
-    data class Film(val id: String) : Config
+    data class Film(
+        val uuid: String
+    ) : Config
 
-    data object Favourite : Config
+    data class Favourite(
+        val uuid: String
+    ) : Config
 
-    data object MatchFeed : Config
+    data class MatchDetails(
+        val uuid: String
+    ) : Config
 
     data object Settings : Config
 
-    data object Follower : Config
+    data class Follower(
+        val type: FollowerType,
+        val uuid: String
+    ) : Config {
+
+        enum class FollowerType { FOLLOWER, FOLLOWING }
+    }
 }

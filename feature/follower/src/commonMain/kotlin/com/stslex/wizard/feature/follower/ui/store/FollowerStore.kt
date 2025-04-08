@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.follower.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.v2.Config
 import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.CommonEvents
@@ -15,7 +15,7 @@ interface FollowerStore : Store<State, Action, Event> {
 
     @Stable
     data class State(
-        val type: Screen.Follower.FollowerType,
+        val type: Config.Follower.FollowerType,
         val uuid: String,
         val paging: PagingUiState<FollowerModel>,
         val screen: FollowerScreenState,
@@ -25,7 +25,7 @@ interface FollowerStore : Store<State, Action, Event> {
         companion object {
 
             val INITIAL = State(
-                type = Screen.Follower.FollowerType.FOLLOWER,
+                type = Config.Follower.FollowerType.FOLLOWER,
                 uuid = "",
                 paging = PagingUiState.default(PagingConfig.DEFAULT),
                 screen = FollowerScreenState.Shimmer,
@@ -39,7 +39,7 @@ interface FollowerStore : Store<State, Action, Event> {
 
         @Stable
         data class Init(
-            val followerType: Screen.Follower.FollowerType,
+            val followerType: Config.Follower.FollowerType,
             val uuid: String
         ) : Action
 

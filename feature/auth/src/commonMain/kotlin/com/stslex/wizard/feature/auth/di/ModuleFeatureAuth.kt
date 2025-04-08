@@ -6,8 +6,6 @@ import com.stslex.wizard.feature.auth.data.AuthRepository
 import com.stslex.wizard.feature.auth.data.AuthRepositoryImpl
 import com.stslex.wizard.feature.auth.domain.AuthInteractor
 import com.stslex.wizard.feature.auth.domain.AuthInteractorImpl
-import com.stslex.wizard.feature.auth.navigation.AuthRouter
-import com.stslex.wizard.feature.auth.navigation.AuthRouterImpl
 import com.stslex.wizard.feature.auth.ui.store.AuthStore
 import com.stslex.wizard.feature.auth.ui.store.AuthStoreImpl
 import org.koin.core.annotation.Module
@@ -21,7 +19,6 @@ class ModuleFeatureAuth : AppModule() {
     override fun declaration(): ModuleDeclaration = {
         factoryOf(::AuthRepositoryImpl) { bind<AuthRepository>() }
         factoryOf(::AuthInteractorImpl) { bind<AuthInteractor>() }
-        factoryOf(::AuthRouterImpl) { bind<AuthRouter>() }
         storeOf(::AuthStoreImpl) { bind<AuthStore>() }
     }
 }

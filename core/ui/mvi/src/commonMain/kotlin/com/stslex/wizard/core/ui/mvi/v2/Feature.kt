@@ -1,6 +1,7 @@
 package com.stslex.wizard.core.ui.mvi.v2
 
 import androidx.compose.runtime.Composable
+import com.stslex.wizard.core.navigation.v2.Component
 import com.stslex.wizard.core.ui.mvi.v2.processor.StoreProcessor
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.module.Module
@@ -11,10 +12,11 @@ import org.koin.core.module.Module
  *
  * @see [StoreProcessor]
  * */
-interface Feature<TProcessor : StoreProcessor<*, *, *>> : KoinScopeComponent {
+interface Feature<TProcessor : StoreProcessor<*, *, *>, TComponent : Component> :
+    KoinScopeComponent {
 
     val module: Module
 
     @Composable
-    fun processor(): TProcessor
+    fun processor(component: TComponent): TProcessor
 }

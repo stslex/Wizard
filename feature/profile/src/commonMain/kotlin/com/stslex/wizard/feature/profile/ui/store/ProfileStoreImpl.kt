@@ -5,8 +5,8 @@ import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.mvi.ClickersHandler
 import com.stslex.wizard.feature.profile.mvi.InitStorageHandler
 import com.stslex.wizard.feature.profile.mvi.LogoutHandler
-import com.stslex.wizard.feature.profile.mvi.NavigationHandler
 import com.stslex.wizard.feature.profile.mvi.RepeatLastActionHandler
+import com.stslex.wizard.feature.profile.navigation.ProfileComponent
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
@@ -22,7 +22,7 @@ internal class ProfileStoreImpl(
     logoutHandler: LogoutHandler,
     repeatLastActionHandler: RepeatLastActionHandler,
     clickersHandler: ClickersHandler,
-    navigationHandler: NavigationHandler
+    component: ProfileComponent
 ) : ProfileHandlerStore, BaseStore<State, Action, Event, ProfileHandlerStore>(
     initialState = State.INITIAL,
     handlerCreator = { action ->
@@ -31,7 +31,7 @@ internal class ProfileStoreImpl(
             is Action.Logout -> logoutHandler
             is Action.RepeatLastAction -> repeatLastActionHandler
             is Action.Click -> clickersHandler
-            is Action.Navigation -> navigationHandler
+            is Action.Navigation -> component
         }
     },
 )

@@ -13,7 +13,7 @@ import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.State
 import com.stslex.wizard.feature.match_feed.ui.store.ScreenState
 
 @Composable
-internal fun MatchFeedScreen(
+internal fun MatchDetailsScreenWidget(
     state: State,
     sendAction: (Action) -> Unit,
     modifier: Modifier = Modifier,

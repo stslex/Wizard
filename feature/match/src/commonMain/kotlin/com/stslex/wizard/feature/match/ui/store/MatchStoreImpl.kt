@@ -2,16 +2,16 @@ package com.stslex.wizard.feature.match.ui.store
 
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Match.Type
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
-import com.stslex.wizard.core.ui.mvi.BaseStore
-import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePagerFactory
 import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
+import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.match.domain.interactor.MatchInteractor
-import com.stslex.wizard.feature.match.navigation.MatchRouter
+import com.stslex.wizard.feature.match.navigation.MatchComponent
 import com.stslex.wizard.feature.match.ui.model.MatchUiModel
 import com.stslex.wizard.feature.match.ui.model.toUi
 import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.map
 
 class MatchStoreImpl(
     pagerFactory: StorePagerFactory,
-    private val router: MatchRouter,
+    private val component: MatchComponent,
     private val interactor: MatchInteractor,
     private val userStore: UserStore,
 ) : MatchStore, BaseStore<State, Action, Event>(State.INITIAL) {
@@ -52,7 +52,14 @@ class MatchStoreImpl(
             is Action.Logout -> actionLogout()
             is Action.RepeatLastAction -> actionRepeatLastAction()
             is Action.OnQueryChanged -> actionOnQueryChanged(action)
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> processNavigation(action)
+        }
+    }
+
+    private fun processNavigation(navigation: Action.Navigation) {
+        when (navigation) {
+            is Action.Navigation.MatchDetails -> component.openMatchDetails(navigation.uuid)
+            is Action.Navigation.LogOut -> component.openAuth()
         }
     }
 
@@ -81,7 +88,7 @@ class MatchStoreImpl(
 
         updateState { currentState ->
             currentState.copy(
-                isSelf = action.type == Screen.Match.Type.SELF,
+                isSelf = action.type == Type.SELF,
                 uuid = action.uuid.ifBlank { userStore.uuid },
             )
         }

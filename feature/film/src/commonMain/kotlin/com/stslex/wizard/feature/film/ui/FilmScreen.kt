@@ -5,12 +5,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import com.stslex.wizard.feature.film.di.ModuleFeatureFilm
+import com.stslex.wizard.core.ui.mvi.store_di.getStore
 import com.stslex.wizard.feature.film.navigation.FilmComponent
+import com.stslex.wizard.feature.film.ui.store.FilmStore
 import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
 import com.stslex.wizard.feature.film.ui.store.FilmStoreImpl
-import org.koin.compose.module.rememberKoinModules
-import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -18,10 +17,7 @@ fun FilmScreen(
     filmId: String,
     component: FilmComponent,
 ) {
-    rememberKoinModules(unloadModules = true) {
-        listOf(ModuleFeatureFilm().module)
-    }
-    val store = koinViewModel<FilmStoreImpl>(
+    val store = getStore<FilmStore, FilmStoreImpl>(
         parameters = { parametersOf(component) }
     )
 

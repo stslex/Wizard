@@ -3,7 +3,7 @@ package com.stslex.wizard.feature.auth.ui.store
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.auth.domain.AuthInteractor
-import com.stslex.wizard.feature.auth.navigation.AuthRouter
+import com.stslex.wizard.feature.auth.navigation.AuthComponent
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.AuthFieldsState
 import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 
 class AuthStoreImpl(
     private val interactor: AuthInteractor,
-    private val router: AuthRouter
+    private val component: AuthComponent
 ) : BaseStore<State, Action, Event>(State.INITIAL), AuthStore {
 
     override fun process(action: Action) {
@@ -24,7 +24,13 @@ class AuthStoreImpl(
             is Action.InputAction.UsernameInput -> processUsernameInput(action)
             is Action.OnAuthFieldChange -> processAuthFieldChange(action)
             is Action.OnSubmitClicked -> processSubmitClicked(action)
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> processNavigation(action)
+        }
+    }
+
+    private fun processNavigation(action: Action.Navigation) {
+        when (action) {
+            Action.Navigation.HomeFeature -> component.navToFilmFeed()
         }
     }
 

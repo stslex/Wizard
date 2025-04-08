@@ -3,21 +3,28 @@ package com.stslex.wizard.feature.settings.ui.store
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.settings.domain.SettingsInteractor
-import com.stslex.wizard.feature.settings.navigation.SettingsRouter
+import com.stslex.wizard.feature.settings.navigation.SettingsComponent
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Event
 import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State
 
 class SettingsStoreImpl(
     private val interactor: SettingsInteractor,
-    private val router: SettingsRouter,
+    private val component: SettingsComponent,
 ) : SettingsStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     override fun process(action: Action) {
         when (action) {
             Action.LogOut -> actionLogout()
             Action.BackButtonClicked -> actionBackClick()
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> processNavigation(action)
+        }
+    }
+
+    private fun processNavigation(action: Action.Navigation) {
+        when (action) {
+            Action.Navigation.Back -> component.back()
+            Action.Navigation.LogOut -> component.openAuth()
         }
     }
 

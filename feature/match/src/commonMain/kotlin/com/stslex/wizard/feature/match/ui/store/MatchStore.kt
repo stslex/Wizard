@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.navigation.Screen
+import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Match.Type
 import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.CommonEvents
@@ -46,7 +46,7 @@ interface MatchStore : Store<State, Action, Event> {
     sealed interface Action : Store.Action {
 
         data class Init(
-            val type: Screen.Match.Type,
+            val type: Type,
             val uuid: String
         ) : Action
 
@@ -72,7 +72,7 @@ interface MatchStore : Store<State, Action, Event> {
         @Stable
         sealed interface Navigation : Action, Store.Action.Navigation {
 
-            data class MatchDetails(val matchUuid: String) : Navigation
+            data class MatchDetails(val uuid: String) : Navigation
 
             data object LogOut : Navigation
         }
