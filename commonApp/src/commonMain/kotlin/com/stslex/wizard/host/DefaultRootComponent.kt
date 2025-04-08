@@ -57,9 +57,12 @@ class DefaultRootComponent(
         )
 
         is Config.BottomBar.Profile -> Child.Profile(
-            component = context.createProfileComponent(::navigateTo, ::popBack),
-            type = config.type,
-            uuid = config.uuid
+            component = context.createProfileComponent(
+                type = config.type,
+                uuid = config.uuid,
+                navTo = ::navigateTo,
+                popBack = ::popBack
+            ),
         )
 
         is Config.Auth -> Child.Auth(context.createAuthComponent(::navigateTo))

@@ -24,7 +24,7 @@ internal class ProfileStoreImpl(
     clickersHandler: ClickersHandler,
     component: ProfileComponent
 ) : ProfileHandlerStore, BaseStore<State, Action, Event, ProfileHandlerStore>(
-    initialState = State.INITIAL,
+    initialState = State.createInitial(component.uuid, component.type),
     handlerCreator = { action ->
         when (action) {
             is Action.Init -> initStorageHandler
@@ -34,5 +34,6 @@ internal class ProfileStoreImpl(
             is Action.Navigation -> component
         }
     },
+    initialActions = listOf(Action.Init),
 )
 

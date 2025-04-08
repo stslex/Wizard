@@ -68,8 +68,6 @@ interface RootComponent {
 
         data class Profile(
             val component: ProfileComponent,
-            val type: BottomBar.Profile.Type,
-            val uuid: String = ""
         ) : Child
     }
 

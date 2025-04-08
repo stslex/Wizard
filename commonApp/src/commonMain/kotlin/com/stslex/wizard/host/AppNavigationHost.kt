@@ -53,12 +53,7 @@ internal fun AppNavigationHost(
                     uuid = instance.uuid
                 )
 
-                is RootComponent.Child.Profile -> ProfileScreen(
-                    component = instance.component,
-                    type = instance.type,
-                    uuid = instance.uuid
-                )
-
+                is RootComponent.Child.Profile -> ProfileScreen(instance.component)
                 is RootComponent.Child.Settings -> SettingsScreen(instance.component)
             }
         }

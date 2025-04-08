@@ -2,7 +2,6 @@ package com.stslex.wizard.feature.profile.mvi
 
 import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Profile
 import com.stslex.wizard.core.ui.mvi.v2.Handler
 import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
@@ -24,16 +23,7 @@ class InitStorageHandler(
 ) : Handler<Action.Init, ProfileHandlerStore> {
 
     override fun ProfileHandlerStore.invoke(action: Action.Init) {
-        val uuid = action.uuid.ifBlank { userStore.uuid }
-
-        updateState { currentState ->
-            currentState.copy(
-                isSelf = action.type == Profile.Type.SELF,
-                uuid = uuid,
-            )
-        }
-
-        interactor.getProfile(uuid)
+        interactor.getProfile(userStore.uuid)
             .launch(
                 onError = { error ->
                     updateState { currentState ->
