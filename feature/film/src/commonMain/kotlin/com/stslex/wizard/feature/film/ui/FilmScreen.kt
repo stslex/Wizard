@@ -13,17 +13,13 @@ import com.stslex.wizard.feature.film.ui.store.FilmStoreImpl
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun FilmScreen(
-    filmId: String,
-    component: FilmComponent,
-) {
+fun FilmScreen(component: FilmComponent) {
     val store = getStore<FilmStore, FilmStoreImpl>(
         parameters = { parametersOf(component) }
     )
 
-    LaunchedEffect(Unit) {
-        store.consume(Action.Init(filmId))
-    }
+    LaunchedEffect(Unit) { store.consume(Action.Init) }
+
     val state by remember { store.state }.collectAsState()
     LaunchedEffect(Unit) {
         store.event.collect { event ->

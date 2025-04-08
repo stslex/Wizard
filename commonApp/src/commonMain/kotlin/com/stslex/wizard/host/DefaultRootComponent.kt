@@ -74,8 +74,10 @@ class DefaultRootComponent(
         )
 
         is Config.Film -> Child.Film(
-            context.createFilmComponent(popBack = ::popBack),
-            filmId = config.uuid
+            context.createFilmComponent(
+                uuid = config.uuid,
+                popBack = ::popBack
+            ),
         )
 
         is Config.Follower -> Child.Follower(

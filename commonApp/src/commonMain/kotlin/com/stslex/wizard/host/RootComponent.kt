@@ -36,7 +36,6 @@ interface RootComponent {
 
         data class Film(
             val component: FilmComponent,
-            val filmId: String
         ) : Child
 
 

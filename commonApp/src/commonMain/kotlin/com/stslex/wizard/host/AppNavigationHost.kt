@@ -30,9 +30,8 @@ internal fun AppNavigationHost(
             when (val instance = created.instance) {
                 is RootComponent.Child.Auth -> AuthInitScreen(instance.component)
                 is RootComponent.Child.FeedFilm -> FilmFeedScreen(instance.component)
-                is RootComponent.Child.Film -> FilmScreen(instance.filmId, instance.component)
+                is RootComponent.Child.Film -> FilmScreen(instance.component)
                 is RootComponent.Child.Favourite -> FavouriteScreen(instance.component)
-
                 is RootComponent.Child.Follower -> FollowerScreen(
                     component = instance.component,
                     type = instance.type,
