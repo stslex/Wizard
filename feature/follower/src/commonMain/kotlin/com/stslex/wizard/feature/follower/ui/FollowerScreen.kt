@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import com.stslex.wizard.core.navigation.v2.Config.Follower.FollowerType
+import com.stslex.wizard.core.navigation.Config.Follower.FollowerType
 import com.stslex.wizard.core.ui.mvi.store_di.getStore
 import com.stslex.wizard.feature.follower.navigation.FollowerComponent
 import com.stslex.wizard.feature.follower.ui.store.FollowerStore

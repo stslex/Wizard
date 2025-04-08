@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.match.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Match.Type
+import com.stslex.wizard.core.navigation.Config.BottomBar.Match.Type
 import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.CommonEvents

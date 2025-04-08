@@ -1,4 +1,4 @@
-package com.stslex.wizard.core.navigation.v2
+package com.stslex.wizard.core.navigation
 
 import androidx.compose.runtime.Stable
 import kotlinx.serialization.Serializable

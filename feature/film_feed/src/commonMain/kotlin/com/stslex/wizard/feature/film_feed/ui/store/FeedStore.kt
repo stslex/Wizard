@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film_feed.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.navigation.v2.Target
+import com.stslex.wizard.core.navigation.Target
 import com.stslex.wizard.core.ui.kit.pager.PagingUIList
 import com.stslex.wizard.core.ui.kit.pager.PagingUIList.Companion.pagingUiListOf
 import com.stslex.wizard.core.ui.mvi.Store

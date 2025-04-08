@@ -17,7 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.bottom_bar.MainBottomAppBar
-import com.stslex.wizard.core.navigation.v2.Config
+import com.stslex.wizard.core.navigation.Config
 import com.stslex.wizard.core.ui.kit.theme.AppTheme
 import com.stslex.wizard.host.AppNavigationHost
 import com.stslex.wizard.host.RootComponent

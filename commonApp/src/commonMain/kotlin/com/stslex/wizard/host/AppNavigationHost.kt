@@ -1,6 +1,5 @@
 package com.stslex.wizard.host
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,37 +20,35 @@ internal fun AppNavigationHost(
     rootComponent: RootComponent,
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier) {
-        Children(
-            stack = rootComponent.stack,
-            modifier = Modifier.fillMaxSize(),
-            animation = stackAnimation(),
-        ) { created ->
-            when (val instance = created.instance) {
-                is RootComponent.Child.Auth -> AuthInitScreen(instance.component)
-                is RootComponent.Child.FeedFilm -> FilmFeedScreen(instance.component)
-                is RootComponent.Child.Film -> FilmScreen(instance.component)
-                is RootComponent.Child.Favourite -> FavouriteScreen(instance.component)
-                is RootComponent.Child.Follower -> FollowerScreen(
-                    component = instance.component,
-                    type = instance.type,
-                    uuid = instance.uuid
-                )
+    Children(
+        stack = rootComponent.stack,
+        modifier = modifier.fillMaxSize(),
+        animation = stackAnimation(),
+    ) { created ->
+        when (val instance = created.instance) {
+            is RootComponent.Child.Auth -> AuthInitScreen(instance.component)
+            is RootComponent.Child.FeedFilm -> FilmFeedScreen(instance.component)
+            is RootComponent.Child.Film -> FilmScreen(instance.component)
+            is RootComponent.Child.Favourite -> FavouriteScreen(instance.component)
+            is RootComponent.Child.Follower -> FollowerScreen(
+                component = instance.component,
+                type = instance.type,
+                uuid = instance.uuid
+            )
 
-                is RootComponent.Child.Match -> MatchScreen(
-                    component = instance.component,
-                    type = instance.type,
-                    uuid = instance.uuid
-                )
+            is RootComponent.Child.Match -> MatchScreen(
+                component = instance.component,
+                type = instance.type,
+                uuid = instance.uuid
+            )
 
-                is RootComponent.Child.MatchDetails -> MatchDetailsScreen(
-                    component = instance.component,
-                    uuid = instance.uuid
-                )
+            is RootComponent.Child.MatchDetails -> MatchDetailsScreen(
+                component = instance.component,
+                uuid = instance.uuid
+            )
 
-                is RootComponent.Child.Profile -> ProfileScreen(instance.component)
-                is RootComponent.Child.Settings -> SettingsScreen(instance.component)
-            }
+            is RootComponent.Child.Profile -> ProfileScreen(instance.component)
+            is RootComponent.Child.Settings -> SettingsScreen(instance.component)
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.follower.ui.store
 
-import com.stslex.wizard.core.navigation.v2.Config.Follower.FollowerType
+import com.stslex.wizard.core.navigation.Config.Follower.FollowerType
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager

@@ -2,8 +2,8 @@ package com.stslex.wizard.feature.auth.navigation
 
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.ComponentContext
-import com.stslex.wizard.core.navigation.v2.Component
-import com.stslex.wizard.core.navigation.v2.Config
+import com.stslex.wizard.core.navigation.Component
+import com.stslex.wizard.core.navigation.Config
 
 @Stable
 interface AuthComponent : Component {

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import com.stslex.wizard.core.navigation.v2.Component
+import com.stslex.wizard.core.navigation.Component
 import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State

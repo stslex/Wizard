@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.film.navigation
 
 import com.arkivanov.decompose.ComponentContext
-import com.stslex.wizard.core.navigation.v2.Component
+import com.stslex.wizard.core.navigation.Component
 
 interface FilmComponent : Component {
 

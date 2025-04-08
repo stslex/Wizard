@@ -2,7 +2,7 @@ package com.stslex.wizard.feature.match.ui.store
 
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.database.store.UserStore
-import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Match.Type
+import com.stslex.wizard.core.navigation.Config.BottomBar.Match.Type
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager

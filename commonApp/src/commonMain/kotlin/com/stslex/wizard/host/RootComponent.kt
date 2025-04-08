@@ -3,9 +3,9 @@ package com.stslex.wizard.host
 import com.arkivanov.decompose.Cancellation
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import com.stslex.wizard.core.navigation.v2.Config
-import com.stslex.wizard.core.navigation.v2.Config.BottomBar
-import com.stslex.wizard.core.navigation.v2.Config.Follower.FollowerType
+import com.stslex.wizard.core.navigation.Config
+import com.stslex.wizard.core.navigation.Config.BottomBar
+import com.stslex.wizard.core.navigation.Config.Follower.FollowerType
 import com.stslex.wizard.feature.auth.navigation.AuthComponent
 import com.stslex.wizard.feature.favourite.navigation.FavouriteComponent
 import com.stslex.wizard.feature.film.navigation.FilmComponent

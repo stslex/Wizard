@@ -1,8 +1,7 @@
 package com.stslex.wizard.feature.profile.ui.store
 
 import androidx.compose.runtime.Stable
-import com.stslex.wizard.core.navigation.v2.Config
-import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Profile.Type
+import com.stslex.wizard.core.navigation.Config.BottomBar.Profile.Type
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action

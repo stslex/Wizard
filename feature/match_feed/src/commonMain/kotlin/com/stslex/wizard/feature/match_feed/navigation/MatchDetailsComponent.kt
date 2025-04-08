@@ -1,8 +1,8 @@
 package com.stslex.wizard.feature.match_feed.navigation
 
 import com.arkivanov.decompose.ComponentContext
-import com.stslex.wizard.core.navigation.v2.Component
-import com.stslex.wizard.core.navigation.v2.Config
+import com.stslex.wizard.core.navigation.Component
+import com.stslex.wizard.core.navigation.Config
 
 interface MatchDetailsComponent : Component {
 

@@ -1,7 +1,7 @@
 package com.stslex.wizard.core.ui.mvi.v2
 
 import androidx.compose.runtime.Composable
-import com.stslex.wizard.core.navigation.v2.Component
+import com.stslex.wizard.core.navigation.Component
 import com.stslex.wizard.core.ui.mvi.v2.processor.StoreProcessor
 import org.koin.core.component.KoinScopeComponent
 import org.koin.core.module.Module

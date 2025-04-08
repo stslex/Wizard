@@ -8,7 +8,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
-import com.stslex.wizard.core.navigation.v2.Config
+import com.stslex.wizard.core.navigation.Config
 import com.stslex.wizard.feature.auth.navigation.AuthComponent.Companion.createAuthComponent
 import com.stslex.wizard.feature.favourite.navigation.FavouriteComponent.Companion.createFavouriteComponent
 import com.stslex.wizard.feature.film.navigation.FilmComponent.Companion.createFilmComponent

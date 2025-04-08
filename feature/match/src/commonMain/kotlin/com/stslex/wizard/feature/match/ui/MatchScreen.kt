@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import com.stslex.wizard.core.navigation.v2.Config.BottomBar.Match.Type
+import com.stslex.wizard.core.navigation.Config.BottomBar.Match.Type
 import com.stslex.wizard.core.ui.mvi.store_di.getStore
 import com.stslex.wizard.feature.match.navigation.MatchComponent
 import com.stslex.wizard.feature.match.ui.store.MatchStore

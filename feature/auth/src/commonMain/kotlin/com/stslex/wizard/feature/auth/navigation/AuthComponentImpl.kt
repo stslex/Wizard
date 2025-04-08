@@ -1,7 +1,7 @@
 package com.stslex.wizard.feature.auth.navigation
 
 import com.arkivanov.decompose.ComponentContext
-import com.stslex.wizard.core.navigation.v2.Config
+import com.stslex.wizard.core.navigation.Config
 
 internal class AuthComponentImpl(
     componentContext: ComponentContext,
