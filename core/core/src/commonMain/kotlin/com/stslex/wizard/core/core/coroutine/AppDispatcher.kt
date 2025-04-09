@@ -1,11 +1,11 @@
-package com.stslex.wizard.core.core
+package com.stslex.wizard.core.core.coroutine
 
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.MainCoroutineDispatcher
 
 interface AppDispatcher {
     val io: CoroutineDispatcher
-    val main: MainCoroutineDispatcher
+    val main: CoroutineDispatcher
     val default: CoroutineDispatcher
+    val immediate: CoroutineDispatcher
 }
 

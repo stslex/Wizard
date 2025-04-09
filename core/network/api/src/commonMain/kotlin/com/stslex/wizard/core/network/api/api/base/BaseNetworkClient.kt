@@ -1,6 +1,6 @@
 package com.stslex.wizard.core.network.api.api.base
 
-import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.network.client.DefaultRequest
 import com.stslex.wizard.core.network.client.NetworkClientBuilder.setupDefaultRequest
 import io.ktor.client.HttpClient

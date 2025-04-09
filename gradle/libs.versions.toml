@@ -38,7 +38,7 @@ kotlinxDatetime = "0.6.0"
 decompose = "3.3.0"
 essenty = "2.5.0"
 parcelize = "0.2.4"
-
+mockmp = "2.0.2"
 buildConfig = "4.2.0"
 [libraries]
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -101,7 +101,7 @@ slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version = "1.7.9" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 koin-test = { group = "io.insert-koin", name = "koin-test" }
 koin-test-junit = { group = "io.insert-koin", name = "koin-test-junit4" }
-coroutine-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version = "1.8.0" }
+coroutine-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version = "1.10.1" }
 mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 
@@ -124,7 +124,7 @@ convention-kmp-library-room = { id = "convention.kmp.library.room", version = "1
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-
+mockmp = { id = "org.kodein.mock.mockmp", version.ref = "mockmp" }
 [bundles]
 test = [
     "kotlin-test",

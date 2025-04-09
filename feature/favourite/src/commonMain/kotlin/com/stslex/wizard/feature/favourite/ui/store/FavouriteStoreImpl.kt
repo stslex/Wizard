@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.favourite.ui.store
 
-import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.ui.kit.base.mapToAppError
 import com.stslex.wizard.core.ui.kit.base.paging.toUi
 import com.stslex.wizard.core.ui.kit.pager.pager.StorePager
