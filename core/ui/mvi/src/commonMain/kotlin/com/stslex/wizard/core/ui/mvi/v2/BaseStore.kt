@@ -3,6 +3,7 @@ package com.stslex.wizard.core.ui.mvi.v2
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScopeImpl
 import com.stslex.wizard.core.ui.mvi.Store
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, A, E>>(
+    name: String,
     initialState: S,
     private val handlerCreator: HandlerCreator<S, A, E, HStore>,
     initialActions: List<A> = emptyList(),
@@ -35,6 +37,7 @@ open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, 
     override val state: StateFlow<S> = _state.asStateFlow()
 
     protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(viewModelScope)
+    override val logger = Logger.tag(name)
 
     private var _lastAction: A? = null
     override val lastAction: A?
@@ -46,6 +49,7 @@ open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, 
 
     @Suppress("UNCHECKED_CAST")
     override fun consume(action: A) {
+        logger.i("consume: $action")
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }
@@ -67,6 +71,7 @@ open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, 
      * @see AppDispatcher
      * */
     override fun sendEvent(event: E) {
+        logger.i("sendEvent: $event")
         viewModelScope.launch { _event.emit(event) }
     }
 

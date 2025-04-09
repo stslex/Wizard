@@ -2,6 +2,7 @@ package com.stslex.wizard.core.ui.mvi.v2
 
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.AppDispatcherImpl
+import com.stslex.wizard.core.core.AppLogger
 import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
@@ -16,6 +17,8 @@ interface HandlerStore<S : State, A : Store.Action, E : Event> {
     val state: StateFlow<S>
 
     val lastAction: A?
+
+    val logger: AppLogger
 
     fun sendEvent(event: E)
 

@@ -10,11 +10,12 @@ import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenError
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
 import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
+import androidx.compose.runtime.State as ComposeState
 
 @Composable
 internal fun FilmFeedWidget(
     modifier: Modifier = Modifier,
-    state: State,
+    state: ComposeState<State>,
     consume: (Action) -> Unit,
 ) {
     Box(
@@ -22,12 +23,12 @@ internal fun FilmFeedWidget(
             .fillMaxSize()
             .statusBarsPadding()
     ) {
-        when (val screenState = state.screen) {
+        when (val screenState = state.value.screen) {
             is ScreenState.Content -> FeedScreenContent(
                 loadMore = { consume(Action.LoadFilms) },
-                films = state.films,
+                films = state.value.films,
                 screenState = screenState,
-                onFilmClick = { consume(Action.FilmClick(it)) },
+                onFilmClick = { consume(Action.Click.FilmClick(it)) },
             )
 
             is ScreenState.Error -> FeedScreenError(screenState.message)

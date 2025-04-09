@@ -43,13 +43,16 @@ interface FeedStore : Store<State, Action, Event> {
 
         data object LoadFilms : Action
 
-        @Stable
-        data class FilmClick(val filmId: String) : Action
+        sealed interface Click : Action {
+
+            @Stable
+            data class FilmClick(val uuid: String) : Click
+        }
 
         @Stable
         sealed interface Navigation : Action, Store.Action.Navigation, Target {
 
-            data class Film(val filmId: String) : Navigation
+            data class Film(val uuid: String) : Navigation
         }
     }
 }

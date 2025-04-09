@@ -11,12 +11,14 @@ import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
 import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
 import org.koin.android.annotation.KoinViewModel
+import org.koin.core.annotation.Qualifier
 import org.koin.core.annotation.Scope
 import org.koin.core.annotation.Scoped
 
 @KoinViewModel
 @Scope(ProfileScope::class)
 @Scoped
+@Qualifier(ProfileScope::class)
 internal class ProfileStoreImpl(
     initStorageHandler: InitStorageHandler,
     logoutHandler: LogoutHandler,
@@ -24,6 +26,7 @@ internal class ProfileStoreImpl(
     clickersHandler: ClickersHandler,
     component: ProfileComponent
 ) : ProfileHandlerStore, BaseStore<State, Action, Event, ProfileHandlerStore>(
+    name = TAG,
     initialState = State.createInitial(component.uuid, component.type),
     handlerCreator = { action ->
         when (action) {
@@ -35,5 +38,11 @@ internal class ProfileStoreImpl(
         }
     },
     initialActions = listOf(Action.Init),
-)
+) {
+
+    internal companion object {
+
+        private const val TAG = "ProfileStore"
+    }
+}
 

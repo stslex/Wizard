@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.stslex.wizard.core.core.AppDispatcher
 import com.stslex.wizard.core.core.AppDispatcherImpl
+import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScopeImpl
 import com.stslex.wizard.core.ui.mvi.Store.Action
@@ -34,11 +35,14 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
 
     protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(viewModelScope)
 
+    protected val logger = Logger.tag("Store")
+
     private var _lastAction: A? = null
     protected val lastAction: A?
         get() = _lastAction
 
     override fun consume(action: A) {
+        logger.v("consume: $action")
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }
