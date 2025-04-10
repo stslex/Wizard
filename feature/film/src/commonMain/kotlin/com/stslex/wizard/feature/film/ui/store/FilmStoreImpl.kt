@@ -13,13 +13,13 @@ import kotlinx.coroutines.Job
 class FilmStoreImpl(
     private val interactor: FilmInteractor,
     private val component: FilmComponent,
-) : BaseStore<State, Action, Event>(State.INITIAL), FilmStore {
+) : BaseStore<State, Action, Event>(State.initial(component.uuid)), FilmStore {
 
     private var likeJob: Job? = null
 
     override fun process(action: Action) {
         when (action) {
-            is Action.Init -> actionInit(action)
+            is Action.Init -> actionInit()
             is Action.BackButtonClick -> actionBackButtonClick()
             is Action.LikeButtonClick -> actionLikeButtonClick()
             is Action.Navigation -> actionNavigation(action)
@@ -65,15 +65,14 @@ class FilmStoreImpl(
         consume(Action.Navigation.Back)
     }
 
-    private fun actionInit(action: Action.Init) {
+    private fun actionInit() {
         updateState { currentState ->
             currentState.copy(
                 screenState = FilmScreenState.Loading,
-                filmId = action.id
             )
         }
         interactor
-            .getFilm(action.id)
+            .getFilm(state.value.uuid)
             .launch { film ->
                 updateState { currentState ->
                     currentState.copy(

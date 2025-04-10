@@ -23,8 +23,8 @@ interface FavouriteStore : Store<State, Action, Event> {
 
         companion object {
 
-            val INITIAL = State(
-                uuid = "",
+            fun initial(uuid: String) = State(
+                uuid = uuid,
                 query = "",
                 paging = PagingUiState.default(PagingConfig.DEFAULT),
                 screen = FavouriteScreenState.Shimmer,
@@ -37,9 +37,7 @@ interface FavouriteStore : Store<State, Action, Event> {
     sealed interface Action : Store.Action {
 
         @Stable
-        data class Init(
-            val uuid: String
-        ) : Action
+        data object Init : Action
 
         @Stable
         data object LoadMore : Action

@@ -3,7 +3,7 @@ package com.stslex.wizard.feature.match_feed.ui.store
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
-import com.stslex.wizard.feature.match_feed.navigation.MatchFeedRouter
+import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent
 import com.stslex.wizard.feature.match_feed.ui.model.toUI
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Action
 import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Event
@@ -13,7 +13,7 @@ import kotlinx.coroutines.Job
 
 class MatchFeedStoreImpl(
     private val interactor: MatchFeedInteractor,
-    private val router: MatchFeedRouter
+    private val component: MatchDetailsComponent,
 ) : MatchFeedStore, BaseStore<State, Action, Event>(State.INITIAL) {
 
     private var loadingJob: Job? = null
@@ -24,7 +24,13 @@ class MatchFeedStoreImpl(
             Action.LoadFilms -> actionLoadFilms()
             is Action.FilmClick -> actionFilmClick(action)
             is Action.FilmSwiped -> actionFilmSwiped(action)
-            is Action.Navigation -> router(action)
+            is Action.Navigation -> processNavigation(action)
+        }
+    }
+
+    private fun processNavigation(action: Action.Navigation) {
+        when (action) {
+            is Action.Navigation.Film -> component.openFilm(action.uuid)
         }
     }
 

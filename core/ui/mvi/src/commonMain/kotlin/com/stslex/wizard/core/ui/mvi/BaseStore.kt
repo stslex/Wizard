@@ -2,10 +2,10 @@ package com.stslex.wizard.core.ui.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.stslex.wizard.core.core.AppDispatcher
-import com.stslex.wizard.core.core.AppDispatcherImpl
+import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
-import com.stslex.wizard.core.core.coroutine.AppCoroutineScopeImpl
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
+import com.stslex.wizard.core.core.coroutine.AppDispatcherImpl
 import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
@@ -32,13 +32,16 @@ abstract class BaseStore<S : State, A : Action, E : Event>(
     private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
     override val state: StateFlow<S> = _state.asStateFlow()
 
-    protected val scope: AppCoroutineScope = AppCoroutineScopeImpl(viewModelScope)
+    protected val scope: AppCoroutineScope = AppCoroutineScope(viewModelScope, AppDispatcherImpl)
+
+    protected val logger = Logger.tag("Store")
 
     private var _lastAction: A? = null
     protected val lastAction: A?
         get() = _lastAction
 
     override fun consume(action: A) {
+        logger.v("consume: $action")
         if (lastAction != action && action !is Action.RepeatLast) {
             _lastAction = action
         }

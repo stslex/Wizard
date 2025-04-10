@@ -1,45 +1,56 @@
 package com.stslex.wizard.feature.match.ui
 
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
-import com.stslex.wizard.feature.match.ui.components.MatchScreenContent
-import com.stslex.wizard.feature.match.ui.components.MatchScreenEmpty
-import com.stslex.wizard.feature.match.ui.components.MatchScreenError
-import com.stslex.wizard.feature.match.ui.components.MatchScreenShimmer
-import com.stslex.wizard.feature.match.ui.store.MatchScreenState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import com.stslex.wizard.core.navigation.Config.BottomBar.Match.Type
+import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.feature.match.navigation.MatchComponent
+import com.stslex.wizard.feature.match.ui.store.MatchStore
 import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
-import com.stslex.wizard.feature.match.ui.store.MatchStore.State
+import com.stslex.wizard.feature.match.ui.store.MatchStore.Event
+import com.stslex.wizard.feature.match.ui.store.MatchStoreImpl
+import org.koin.core.parameter.parametersOf
 
 @Composable
-internal fun MatchScreen(
-    state: State,
-    onAction: (Action) -> Unit,
-    snackbarHostState: SnackbarHostState,
-    modifier: Modifier = Modifier,
+fun MatchScreen(
+    component: MatchComponent,
+    uuid: String,
+    type: Type
 ) {
-    BoxWithConstraints(
-        modifier = modifier.fillMaxSize(),
-    ) {
-        when (val screen = state.screen) {
-            is MatchScreenState.Content -> MatchScreenContent(
-                state = state.paging,
-                screen = screen,
-                onAction = onAction
+    val store = getStore<MatchStore, MatchStoreImpl>(
+        parameters = { parametersOf(component) }
+    )
+    LaunchedEffect(Unit) {
+        store.consume(
+            Action.Init(
+                type = type,
+                uuid = uuid
             )
-
-            is MatchScreenState.Error -> MatchScreenError(
-                error = screen.error,
-                logOut = { onAction(Action.Logout) },
-                repeatLastAction = { onAction(Action.RepeatLastAction) }
-            )
-
-            MatchScreenState.Empty -> MatchScreenEmpty()
-            MatchScreenState.Shimmer -> MatchScreenShimmer()
-        }
-        AppSnackbarHost(snackbarHostState)
+        )
     }
+    val state by remember { store.state }.collectAsState()
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    LaunchedEffect(Unit) {
+        store.event.collect { event ->
+            when (event) {
+                is Event.ShowSnackbar -> snackbarHostState.showSnackbar(
+                    message = event.snackbar.message,
+                    actionLabel = event.snackbar.action,
+                    duration = event.snackbar.duration,
+                    withDismissAction = event.snackbar.withDismissAction,
+                )
+            }
+        }
+    }
+
+    MatchScreenWidget(
+        state = state,
+        onAction = store::consume,
+        snackbarHostState = snackbarHostState
+    )
 }

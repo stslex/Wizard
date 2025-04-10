@@ -8,7 +8,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.stslex.wizard.core.navigation.v2.Config
+import com.stslex.wizard.core.navigation.Config
 
 enum class BottomAppBarResource(
     val unselectedIcon: ImageVector,

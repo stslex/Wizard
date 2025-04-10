@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import com.stslex.wizard.core.navigation.Component
 import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
 import com.stslex.wizard.core.ui.mvi.Store.State
@@ -11,6 +12,7 @@ import com.stslex.wizard.core.ui.mvi.v2.BaseStore
 import kotlinx.coroutines.CoroutineScope
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.component.KoinScopeComponent
+import org.koin.core.parameter.parametersOf
 import androidx.compose.runtime.State as ComposeState
 
 
@@ -43,8 +45,19 @@ interface StoreProcessor<S : State, A : Action, E : Event> {
  * @param TStoreImpl The type of the store implementation.
  */
 @Composable
-inline fun <S : State, A : Action, E : Event, reified TStoreImpl : BaseStore<S, A, E, *>> KoinScopeComponent.rememberStoreProcessor(): StoreProcessor<S, A, E> {
-    val store = koinViewModel<TStoreImpl>(scope = scope)
+inline fun <S : State,
+        A : Action,
+        E : Event,
+        reified TStoreImpl : BaseStore<S, A, E, *>,
+        TComponent : Component
+        > KoinScopeComponent.rememberStoreProcessor(component: TComponent): StoreProcessor<S, A, E> {
+    val store = koinViewModel<TStoreImpl>(
+        scope = scope,
+        qualifier = scope.scopeQualifier,
+        parameters = {
+            parametersOf(component)
+        }
+    )
     val actionProcessor = remember { ActionProcessor(store) }
     val effectsProcessor = remember { EffectsProcessor(store) }
     val state = remember { store.state }.collectAsState()

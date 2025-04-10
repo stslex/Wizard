@@ -1,7 +1,7 @@
 package com.stslex.wizard.core.network.api.api.kinopoisk.api
 
 import Wizard.core.network.api.BuildConfig
-import com.stslex.wizard.core.core.AppDispatcher
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.network.api.api.base.BaseNetworkClient
 import com.stslex.wizard.core.network.client.DefaultRequest
 import io.ktor.client.HttpClient

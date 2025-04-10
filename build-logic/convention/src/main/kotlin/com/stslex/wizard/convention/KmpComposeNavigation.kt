@@ -12,11 +12,14 @@ fun Project.configureKMPComposeNavigation(
 ) = extension.apply {
     sourceSets.apply {
         commonMain.dependencies {
-            implementation(libs.findLibrary("decompose").get())
+            api(libs.findLibrary("decompose").get())
             implementation(libs.findLibrary("decompose.extensions").get())
-            implementation(libs.findLibrary("essenty.lifecycle").get())
-            implementation(libs.findLibrary("essenty.stateKeeper").get())
-            implementation(libs.findLibrary("essenty.backHandler").get())
+            api(libs.findLibrary("essenty.lifecycle").get())
+            api(libs.findLibrary("essenty.stateKeeper").get())
+            api(libs.findLibrary("essenty.backHandler").get())
+        }
+        iosMain.dependencies {
+            api(libs.findLibrary("parcelize.darwin").get())
         }
     }
     (this as ExtensionAware).extensions.configure<CocoapodsExtension> {

@@ -1,5 +1,6 @@
 package com.stslex.wizard.feature.film.di
 
+import com.stslex.wizard.core.core.AppModule
 import com.stslex.wizard.feature.film.data.repository.FilmRepository
 import com.stslex.wizard.feature.film.data.repository.FilmRepositoryImpl
 import com.stslex.wizard.feature.film.domain.interactor.FilmInteractor
@@ -10,12 +11,12 @@ import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
-import org.koin.dsl.module
+import org.koin.dsl.ModuleDeclaration
 
 @Module
-class ModuleFeatureFilm {
+class ModuleFeatureFilm : AppModule() {
 
-    val module = module(createdAtStart = false) {
+    override fun declaration(): ModuleDeclaration = {
         viewModelOf(::FilmStoreImpl) { bind<FilmStore>() }
         factoryOf(::FilmInteractorImpl) { bind<FilmInteractor>() }
         factoryOf(::FilmRepositoryImpl) { bind<FilmRepository>() }

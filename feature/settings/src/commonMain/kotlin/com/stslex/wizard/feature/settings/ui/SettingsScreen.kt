@@ -1,55 +1,40 @@
 package com.stslex.wizard.feature.settings.ui
 
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
-import com.stslex.wizard.core.ui.kit.components.AppToolbar
-import com.stslex.wizard.core.ui.kit.theme.AppDimension
-import com.stslex.wizard.feature.settings.ui.components.SettingsContent
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import com.stslex.wizard.core.ui.mvi.store_di.getStore
+import com.stslex.wizard.feature.settings.navigation.SettingsComponent
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore
+import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Event
+import com.stslex.wizard.feature.settings.ui.store.SettingsStoreImpl
+import org.koin.core.parameter.parametersOf
 
 @Composable
-internal fun SettingsScreen(
-    state: State,
-    onAction: (Action) -> Unit,
-    snackbarHostState: SnackbarHostState,
-    modifier: Modifier = Modifier,
+fun SettingsScreen(
+    component: SettingsComponent
 ) {
-    BoxWithConstraints(
-        modifier = modifier
-            .fillMaxSize()
-            .statusBarsPadding(),
-    ) {
-        Column(
-            modifier = modifier.fillMaxSize(),
-        ) {
-            AppToolbar(
-                modifier = modifier,
-                title = "Settings", // todo("resources")
-                onBackClick = { onAction(Action.BackButtonClicked) }
-            )
-            Spacer(modifier = Modifier.height(AppDimension.Padding.big))
-            SettingsContent(
-                logOut = { onAction(Action.LogOut) }
-            )
+    val store = getStore<SettingsStore, SettingsStoreImpl> { parametersOf(component) }
+    val state by remember { store.state }.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    LaunchedEffect(Unit) {
+        store.event.collect { event ->
+            when (event) {
+                is Event.ShowSnackbar -> snackbarHostState.showSnackbar(
+                    message = event.snackbar.message,
+                    actionLabel = event.snackbar.action,
+                    duration = event.snackbar.duration,
+                    withDismissAction = event.snackbar.withDismissAction,
+                )
+            }
         }
-        if (state.isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-        AppSnackbarHost(
-            snackbarHostState = snackbarHostState
-        )
     }
+    SettingsScreenWidget(
+        state = state,
+        onAction = store::consume,
+        snackbarHostState = snackbarHostState
+    )
 }
