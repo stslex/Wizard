@@ -17,6 +17,8 @@ fun Project.configureKMPComposeNavigation(
             api(libs.findLibrary("essenty.lifecycle").get())
             api(libs.findLibrary("essenty.stateKeeper").get())
             api(libs.findLibrary("essenty.backHandler").get())
+        }
+        iosMain.dependencies {
             api(libs.findLibrary("parcelize.darwin").get())
         }
     }

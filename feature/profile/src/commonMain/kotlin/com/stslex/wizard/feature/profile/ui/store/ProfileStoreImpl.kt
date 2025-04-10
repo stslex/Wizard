@@ -1,5 +1,6 @@
 package com.stslex.wizard.feature.profile.ui.store
 
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.ui.mvi.v2.BaseStore
 import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.mvi.ClickersHandler
@@ -24,7 +25,8 @@ internal class ProfileStoreImpl(
     logoutHandler: LogoutHandler,
     repeatLastActionHandler: RepeatLastActionHandler,
     clickersHandler: ClickersHandler,
-    component: ProfileComponent
+    component: ProfileComponent,
+    appDispatcher: AppDispatcher
 ) : ProfileHandlerStore, BaseStore<State, Action, Event, ProfileHandlerStore>(
     name = TAG,
     initialState = State.createInitial(component.uuid, component.type),
@@ -37,6 +39,7 @@ internal class ProfileStoreImpl(
             is Action.Navigation -> component
         }
     },
+    appDispatcher = appDispatcher,
     initialActions = listOf(Action.Init),
 ) {
 

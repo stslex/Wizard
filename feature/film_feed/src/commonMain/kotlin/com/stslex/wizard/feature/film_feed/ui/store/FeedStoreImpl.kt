@@ -1,5 +1,6 @@
 package com.stslex.wizard.feature.film_feed.ui.store
 
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.ui.mvi.v2.BaseStore
 import com.stslex.wizard.feature.film_feed.di.FilmFeedScope
 import com.stslex.wizard.feature.film_feed.mvi.ClickersHandler
@@ -20,7 +21,8 @@ import org.koin.core.annotation.Scoped
 internal class FeedStoreImpl(
     private val component: FilmFeedComponent,
     private val feedClickersHandler: ClickersHandler,
-    private val loadFilmsHandler: LoadFilmsHandler
+    private val loadFilmsHandler: LoadFilmsHandler,
+    appDispatcher: AppDispatcher
 ) : FeedHandlerStore, BaseStore<State, Action, Event, FeedHandlerStore>(
     name = TAG,
     initialState = State.INITIAL,
@@ -31,6 +33,7 @@ internal class FeedStoreImpl(
             is Action.Navigation.Film -> component
         }
     },
+    appDispatcher = appDispatcher,
     initialActions = listOf(Action.LoadFilms),
 ) {
 
