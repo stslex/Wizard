@@ -20,8 +20,8 @@ import com.stslex.wizard.core.ui.kit.theme.toPx
 import com.stslex.wizard.feature.auth.ui.components.AuthFieldsColumn
 import com.stslex.wizard.feature.auth.ui.components.AuthTitle
 import com.stslex.wizard.feature.auth.ui.model.screen.AuthScreenState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.AuthFieldsState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.ScreenLoadingState
+import com.stslex.wizard.feature.auth.mvi.AuthStore.AuthFieldsState
+import com.stslex.wizard.feature.auth.mvi.AuthStore.ScreenLoadingState
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

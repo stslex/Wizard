@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.base.AuthTextField
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action.InputAction
+import com.stslex.wizard.feature.auth.mvi.AuthStore.Action.InputAction
 
 @Stable
 data class LoginTextFieldState(

@@ -25,7 +25,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.stslex.wizard.core.ui.kit.theme.AppDimension
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.AuthFieldsState
+import com.stslex.wizard.feature.auth.mvi.AuthStore.AuthFieldsState
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)

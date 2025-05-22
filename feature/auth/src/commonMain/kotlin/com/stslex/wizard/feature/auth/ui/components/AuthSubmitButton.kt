@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.AuthFieldsState
+import com.stslex.wizard.feature.auth.mvi.AuthStore.AuthFieldsState
 
 @Composable
 internal fun AuthSubmitButton(

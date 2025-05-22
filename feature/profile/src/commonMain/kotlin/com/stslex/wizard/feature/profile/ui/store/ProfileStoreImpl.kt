@@ -28,7 +28,7 @@ internal class ProfileStoreImpl(
     component: ProfileComponent,
     appDispatcher: AppDispatcher
 ) : ProfileHandlerStore, BaseStore<State, Action, Event, ProfileHandlerStore>(
-    name = TAG,
+    name = "ProfileStore",
     initialState = State.createInitial(component.uuid, component.type),
     handlerCreator = { action ->
         when (action) {
@@ -41,11 +41,5 @@ internal class ProfileStoreImpl(
     },
     appDispatcher = appDispatcher,
     initialActions = listOf(Action.Init),
-) {
-
-    internal companion object {
-
-        private const val TAG = "ProfileStore"
-    }
-}
+)
 
