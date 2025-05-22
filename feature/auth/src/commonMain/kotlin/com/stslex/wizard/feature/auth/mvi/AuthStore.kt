@@ -1,10 +1,10 @@
-package com.stslex.wizard.feature.auth.ui.store
+package com.stslex.wizard.feature.auth.mvi
 
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.Event
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.State
+import com.stslex.wizard.feature.auth.mvi.AuthStore.Action
+import com.stslex.wizard.feature.auth.mvi.AuthStore.Event
+import com.stslex.wizard.feature.auth.mvi.AuthStore.State
 
 interface AuthStore : Store<State, Action, Event> {
 
@@ -37,13 +37,18 @@ interface AuthStore : Store<State, Action, Event> {
 
     sealed interface Action : Store.Action {
 
-        data class OnSubmitClicked(
-            val state: AuthFieldsState
-        ) : Action
+        sealed interface Click : Action {
 
-        data class OnAuthFieldChange(
-            val targetState: AuthFieldsState
-        ) : Action
+            data class OnSubmitClicked(
+                val state: AuthFieldsState
+            ) : Click
+
+            data class OnAuthFieldChange(
+                val targetState: AuthFieldsState
+            ) : Click
+
+        }
+
 
         sealed class InputAction(
             open val value: String

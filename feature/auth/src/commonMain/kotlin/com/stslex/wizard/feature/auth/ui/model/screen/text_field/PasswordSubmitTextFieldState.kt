@@ -7,7 +7,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.platform.LocalHapticFeedback
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.base.PasswordTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.hidden.HiddenState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action.InputAction.PasswordSubmitInput
+import com.stslex.wizard.feature.auth.mvi.AuthStore.Action.InputAction.PasswordSubmitInput
 
 @Stable
 data class PasswordSubmitTextFieldState(
