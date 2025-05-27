@@ -15,7 +15,7 @@ import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.favourite.ui.components.empty.FavouriteScreenEmpty
 import com.stslex.wizard.feature.favourite.ui.components.shimmer.FavouriteScreenShimmer
 import com.stslex.wizard.feature.favourite.ui.model.FavouriteModel
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteScreenState
+import com.stslex.wizard.feature.favourite.mvi.FavouriteScreenState
 
 @Composable
 internal fun FavouriteScreenContent(

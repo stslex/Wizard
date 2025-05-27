@@ -1,14 +1,14 @@
-package com.stslex.wizard.feature.favourite.ui.store
+package com.stslex.wizard.feature.favourite.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
+import com.stslex.wizard.feature.favourite.mvi.FavouriteStore.Action
+import com.stslex.wizard.feature.favourite.mvi.FavouriteStore.Event
+import com.stslex.wizard.feature.favourite.mvi.FavouriteStore.State
 import com.stslex.wizard.feature.favourite.ui.model.FavouriteModel
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore.Action
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore.Event
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore.State
 
 interface FavouriteStore : Store<State, Action, Event> {
 
@@ -36,26 +36,34 @@ interface FavouriteStore : Store<State, Action, Event> {
     @Stable
     sealed interface Action : Store.Action {
 
-        @Stable
-        data object Init : Action
+        sealed interface Paging : Action {
 
-        @Stable
-        data object LoadMore : Action
+            @Stable
+            data object Init : Paging
 
-        @Stable
-        data object Refresh : Action
+            @Stable
+            data object LoadMore : Paging
 
-        @Stable
-        data object Retry : Action
+            @Stable
+            data object Refresh : Paging
 
-        @Stable
-        data class LikeClick(val uuid: String) : Action
+            @Stable
+            data object Retry : Paging
+        }
 
-        @Stable
-        data class ItemClick(val uuid: String) : Action
+        sealed interface Click : Action {
+
+            @Stable
+            data class LikeClick(val uuid: String) : Click
+
+            @Stable
+            data class ItemClick(val uuid: String) : Click
+        }
 
         @Stable
         data class InputSearch(val query: String) : Action
+
+        data class ShowError(val error: Throwable) : Action
 
         sealed interface Navigation : Action, Store.Action.Navigation {
 

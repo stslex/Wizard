@@ -6,7 +6,14 @@ import com.stslex.wizard.core.network.api.clients.profile.client.ProfileClient
 import com.stslex.wizard.core.network.api.clients.profile.model.request.PagingProfileRequest
 import com.stslex.wizard.feature.favourite.data.model.FavouriteDataModel
 import com.stslex.wizard.feature.favourite.data.model.toData
+import com.stslex.wizard.feature.favourite.di.FavouriteScope
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
+@Factory
+@Scope(FavouriteScope::class)
+@Scoped
 class FavouriteRepositoryImpl(
     private val client: ProfileClient
 ) : FavouriteRepository {

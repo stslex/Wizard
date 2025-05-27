@@ -16,17 +16,17 @@ import org.koin.ksp.generated.module
 internal typealias AuthStoreProcessor = StoreProcessor<State, Action, Event>
 
 /**
- * ProfileFeature is a Koin feature module that provides the ProfileStore processor.
+ * ProfileFeature is a Koin feature module that provides the AuthStore processor.
  * It is responsible for managing the state and actions related to the profile feature.
  *
- * @see [ProfileStore]
+ * @see [com.stslex.wizard.feature.auth.mvi.AuthStore]
  * */
 internal object AuthFeature : Feature<AuthStoreProcessor, AuthComponent> {
 
     override val module: Module by lazy { ModuleFeatureAuth().module }
 
     private val scopeName = requireNotNull(AuthScope::class.qualifiedName) {
-        "Scope name is null. Please check the ProfileFeature class."
+        "Scope name is null. Please check the AuthFeature class."
     }
 
     override val scope: Scope by lazy {
