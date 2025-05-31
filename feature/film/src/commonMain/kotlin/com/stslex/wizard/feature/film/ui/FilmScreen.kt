@@ -1,35 +1,16 @@
 package com.stslex.wizard.feature.film.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import com.stslex.wizard.core.ui.mvi.store_di.getStore
-import com.stslex.wizard.feature.film.navigation.FilmComponent
-import com.stslex.wizard.feature.film.ui.store.FilmStore
-import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
-import com.stslex.wizard.feature.film.ui.store.FilmStoreImpl
-import org.koin.core.parameter.parametersOf
+import com.stslex.wizard.core.ui.mvi.v2.NavComponentScreen
+import com.stslex.wizard.feature.film.di.FilmFeature
+import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent
 
 @Composable
 fun FilmScreen(component: FilmComponent) {
-    val store = getStore<FilmStore, FilmStoreImpl>(
-        parameters = { parametersOf(component) }
-    )
-
-    LaunchedEffect(Unit) { store.consume(Action.Init) }
-
-    val state by remember { store.state }.collectAsState()
-    LaunchedEffect(Unit) {
-        store.event.collect { event ->
-            when (event) {
-                else -> Unit
-            }
-        }
+    NavComponentScreen(FilmFeature, component) { processor ->
+        FilmScreenWidget(
+            state = processor.state.value,
+            onAction = processor::consume
+        )
     }
-    FilmScreenWidget(
-        state = state,
-        onAction = store::consume
-    )
 }

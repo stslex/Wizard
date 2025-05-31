@@ -10,9 +10,9 @@ import com.stslex.wizard.feature.match.ui.components.MatchScreenContent
 import com.stslex.wizard.feature.match.ui.components.MatchScreenEmpty
 import com.stslex.wizard.feature.match.ui.components.MatchScreenError
 import com.stslex.wizard.feature.match.ui.components.MatchScreenShimmer
-import com.stslex.wizard.feature.match.ui.store.MatchScreenState
-import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
-import com.stslex.wizard.feature.match.ui.store.MatchStore.State
+import com.stslex.wizard.feature.match.ui.mvi.MatchScreenState
+import com.stslex.wizard.feature.match.ui.mvi.MatchStore.Action
+import com.stslex.wizard.feature.match.ui.mvi.MatchStore.State
 
 @Composable
 internal fun MatchScreenWidget(
@@ -33,8 +33,8 @@ internal fun MatchScreenWidget(
 
             is MatchScreenState.Error -> MatchScreenError(
                 error = screen.error,
-                logOut = { onAction(Action.Logout) },
-                repeatLastAction = { onAction(Action.RepeatLastAction) }
+                logOut = { onAction(Action.Common.Logout) },
+                repeatLastAction = { onAction(Action.Common.RepeatLastAction) }
             )
 
             MatchScreenState.Empty -> MatchScreenEmpty()

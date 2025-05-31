@@ -6,9 +6,8 @@ import com.stslex.wizard.feature.film_feed.di.FilmFeedScope
 import com.stslex.wizard.feature.film_feed.domain.interactor.FeedInteractor
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
 import com.stslex.wizard.feature.film_feed.ui.model.toUI
-import com.stslex.wizard.feature.film_feed.ui.store.FeedHandlerStore
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action.LoadFilms
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.Action.LoadFilms
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.Event
 import kotlinx.coroutines.Job
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Scope

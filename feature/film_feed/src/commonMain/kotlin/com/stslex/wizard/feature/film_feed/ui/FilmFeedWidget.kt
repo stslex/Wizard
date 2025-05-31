@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenContent
 import com.stslex.wizard.feature.film_feed.ui.components.FeedScreenError
 import com.stslex.wizard.feature.film_feed.ui.model.ScreenState
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.Action
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.State
 import androidx.compose.runtime.State as ComposeState
 
 @Composable

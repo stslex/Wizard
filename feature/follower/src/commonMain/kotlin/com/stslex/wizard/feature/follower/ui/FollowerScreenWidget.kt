@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.core.ui.kit.base.paging.PagingColumn
-import com.stslex.wizard.feature.follower.ui.store.FollowerScreenState
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.State
+import com.stslex.wizard.feature.follower.mvi.FollowerScreenState
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.Action
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.State
 
 @Composable
 internal fun FollowerScreenWidget(
@@ -20,7 +20,7 @@ internal fun FollowerScreenWidget(
         is FollowerScreenState.Content -> {
             PagingColumn(
                 pagingState = state.paging,
-                onLoadNext = { onAction(Action.Load) },
+                onLoadNext = { onAction(Action.Paging.Load) },
                 isAppend = state.screen is FollowerScreenState.Content.Loading,
                 item = { item ->
                     Text(text = item.username)

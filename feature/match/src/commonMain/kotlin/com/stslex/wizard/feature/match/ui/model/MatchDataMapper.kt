@@ -5,7 +5,7 @@ import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
 import com.stslex.wizard.feature.match.domain.model.MatchDomainModel
 import com.stslex.wizard.feature.match.domain.model.MatchDomainStatus
 import com.stslex.wizard.feature.match.domain.model.MatchUserDomainModel
-import com.stslex.wizard.feature.match.ui.store.MatchScreenState
+import com.stslex.wizard.feature.match.ui.mvi.MatchScreenState
 import kotlinx.collections.immutable.toImmutableList
 
 internal suspend fun MatchDomainModel.toUi() =

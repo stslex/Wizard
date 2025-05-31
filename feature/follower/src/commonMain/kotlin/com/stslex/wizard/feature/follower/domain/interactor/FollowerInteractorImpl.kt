@@ -3,8 +3,15 @@ package com.stslex.wizard.feature.follower.domain.interactor
 import com.stslex.wizard.core.core.paging.PagingResponse
 import com.stslex.wizard.feature.follower.data.model.FollowerDataModel
 import com.stslex.wizard.feature.follower.data.repository.FollowerRepository
+import com.stslex.wizard.feature.follower.di.FollowerScope
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class FollowerInteractorImpl(
+@Factory
+@Scope(FollowerScope::class)
+@Scoped
+internal class FollowerInteractorImpl(
     private val repository: FollowerRepository,
 ) : FollowerInteractor {
 

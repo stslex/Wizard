@@ -2,9 +2,9 @@ package com.stslex.wizard.core.ui.mvi.v2
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
+import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.core.ui.mvi.Store.Action
 import com.stslex.wizard.core.ui.mvi.Store.Event
@@ -48,7 +48,7 @@ open class BaseStore<S : State, A : Action, E : Event, HStore : HandlerStore<S, 
     private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
     override val state: StateFlow<S> = _state.asStateFlow()
 
-    protected val scope: AppCoroutineScope = AppCoroutineScope(viewModelScope, appDispatcher)
+    override val scope: AppCoroutineScope = AppCoroutineScope(viewModelScope, appDispatcher)
     override val logger = Logger.tag(name)
 
     private var _lastAction: A? = null

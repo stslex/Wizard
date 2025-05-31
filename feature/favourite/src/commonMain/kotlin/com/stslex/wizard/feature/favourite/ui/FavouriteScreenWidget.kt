@@ -5,16 +5,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.stslex.wizard.feature.favourite.mvi.FavouriteScreenState
+import com.stslex.wizard.feature.favourite.mvi.FavouriteStore.Action
+import com.stslex.wizard.feature.favourite.mvi.FavouriteStore.State
 import com.stslex.wizard.feature.favourite.ui.components.content.FavouriteScreenContent
 import com.stslex.wizard.feature.favourite.ui.components.error.FavouriteScreenError
 import com.stslex.wizard.feature.favourite.ui.components.shimmer.FavouriteScreenShimmer
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteScreenState
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteStore.Action
 
 @Composable
 internal fun FavouriteScreenWidget(
-    state: FavouriteStore.State,
+    state: State,
     onAction: (Action) -> Unit
 ) {
     Box(
@@ -29,16 +29,16 @@ internal fun FavouriteScreenWidget(
                 query = state.query,
                 isLoading = state.isLoading,
                 onItemClick = { uuid ->
-                    onAction(Action.ItemClick(uuid))
+                    onAction(Action.Click.ItemClick(uuid))
                 },
                 onLikeClick = { uuid ->
-                    onAction(Action.LikeClick(uuid))
+                    onAction(Action.Click.LikeClick(uuid))
                 },
                 onSearch = { query ->
                     onAction(Action.InputSearch(query))
                 },
                 onLoadNext = {
-                    onAction(Action.LoadMore)
+                    onAction(Action.Paging.LoadMore)
                 }
             )
 

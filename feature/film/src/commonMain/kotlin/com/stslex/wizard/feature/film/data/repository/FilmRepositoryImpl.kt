@@ -7,12 +7,19 @@ import com.stslex.wizard.feature.film.data.model.FilmData
 import com.stslex.wizard.feature.film.data.model.getTrailer
 import com.stslex.wizard.feature.film.data.model.toData
 import com.stslex.wizard.feature.film.data.model.toEntity
+import com.stslex.wizard.feature.film.di.FilmScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class FilmRepositoryImpl(
+@Factory
+@Scope(FilmScope::class)
+@Scoped
+internal class FilmRepositoryImpl(
     private val client: FilmClient,
     private val profileClient: ProfileClient,
     private val favouriteDatasource: FavouriteFilmDataSource
@@ -22,7 +29,7 @@ class FilmRepositoryImpl(
         coroutineScope {
             /*TODO: Implement caching for favourite films in the local database
             *  with extra remote saving*/
-            val isFavouriteLocal = async {
+            async {
                 favouriteDatasource.getFilm(id) != null
             }
 

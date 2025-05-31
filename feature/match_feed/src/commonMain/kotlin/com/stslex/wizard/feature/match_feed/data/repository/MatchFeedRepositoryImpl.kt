@@ -7,7 +7,7 @@ import com.stslex.wizard.feature.match_feed.data.model.MatchPagingData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class MatchFeedRepositoryImpl(
+internal class MatchFeedRepositoryImpl(
     private val client: FilmClient
 ) : MatchFeedRepository {
 

@@ -9,15 +9,15 @@ import com.arkivanov.decompose.router.stack.navigate
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import com.stslex.wizard.core.navigation.Config
-import com.stslex.wizard.feature.auth.navigation.AuthComponent.Companion.createAuthComponent
-import com.stslex.wizard.feature.favourite.navigation.FavouriteComponent.Companion.createFavouriteComponent
-import com.stslex.wizard.feature.film.navigation.FilmComponent.Companion.createFilmComponent
+import com.stslex.wizard.feature.auth.mvi.handler.AuthComponent.Companion.createAuthComponent
+import com.stslex.wizard.feature.favourite.mvi.handler.FavouriteComponent.Companion.createFavouriteComponent
+import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent.Companion.createFilmComponent
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent.Companion.createFilmFeedComponent
-import com.stslex.wizard.feature.follower.navigation.FollowerComponent.Companion.createFollowerComponent
-import com.stslex.wizard.feature.match.navigation.MatchComponent.Companion.createMatchComponent
-import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent.Companion.createMatchDetailsComponent
+import com.stslex.wizard.feature.follower.mvi.handlers.FollowerComponent.Companion.createFollowerComponent
+import com.stslex.wizard.feature.match.ui.mvi.handlers.MatchComponent.Companion.createMatchComponent
+import com.stslex.wizard.feature.match_feed.ui.mvi.handlers.MatchDetailsComponent.Companion.createMatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent.Companion.createProfileComponent
-import com.stslex.wizard.feature.settings.navigation.SettingsComponent.Companion.createSettingsComponent
+import com.stslex.wizard.feature.settings.ui.mvi.handlers.SettingsComponent.Companion.createSettingsComponent
 import com.stslex.wizard.host.RootComponent.Child
 
 class DefaultRootComponent(
@@ -51,9 +51,11 @@ class DefaultRootComponent(
         is Config.BottomBar.FilmFeed -> Child.FeedFilm(context.createFilmFeedComponent(::navigateTo))
 
         is Config.BottomBar.Match -> Child.Match(
-            component = context.createMatchComponent(::navigateTo),
-            type = config.type,
-            uuid = config.uuid
+            component = context.createMatchComponent(
+                type = config.type,
+                uuid = config.uuid,
+                navTo = ::navigateTo
+            ),
         )
 
         is Config.BottomBar.Profile -> Child.Profile(
@@ -81,14 +83,17 @@ class DefaultRootComponent(
         )
 
         is Config.Follower -> Child.Follower(
-            component = context.createFollowerComponent(),
-            type = config.type,
-            uuid = config.uuid
+            component = context.createFollowerComponent(
+                followerType = config.type,
+                uuid = config.uuid
+            ),
         )
 
         is Config.MatchDetails -> Child.MatchDetails(
-            component = context.createMatchDetailsComponent(::navigateTo),
-            uuid = config.uuid
+            component = context.createMatchDetailsComponent(
+                navTo = ::navigateTo,
+                uuid = config.uuid
+            ),
         )
 
         is Config.Settings -> Child.Settings(

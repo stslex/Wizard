@@ -15,8 +15,8 @@ import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
 import com.stslex.wizard.core.ui.kit.components.AppToolbar
 import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.settings.ui.components.SettingsContent
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State
+import com.stslex.wizard.feature.settings.ui.mvi.SettingsStore.Action
+import com.stslex.wizard.feature.settings.ui.mvi.SettingsStore.State
 
 @Composable
 internal fun SettingsScreenWidget(
@@ -36,11 +36,11 @@ internal fun SettingsScreenWidget(
             AppToolbar(
                 modifier = modifier,
                 title = "Settings", // todo("resources")
-                onBackClick = { onAction(Action.BackButtonClicked) }
+                onBackClick = { onAction(Action.Click.BackButton) }
             )
             Spacer(modifier = Modifier.height(AppDimension.Padding.big))
             SettingsContent(
-                logOut = { onAction(Action.LogOut) }
+                logOut = { onAction(Action.Click.LogOut) }
             )
         }
         if (state.isLoading) {

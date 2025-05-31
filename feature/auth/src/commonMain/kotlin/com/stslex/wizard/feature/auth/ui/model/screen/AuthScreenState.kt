@@ -15,6 +15,10 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
+import com.stslex.wizard.feature.auth.mvi.AuthStore.Action
+import com.stslex.wizard.feature.auth.mvi.AuthStore.AuthFieldsState
+import com.stslex.wizard.feature.auth.mvi.AuthStore.ScreenLoadingState
+import com.stslex.wizard.feature.auth.mvi.AuthStore.State
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.LoginTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.PasswordInputTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.PasswordSubmitTextFieldState
@@ -23,10 +27,6 @@ import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberLoginTe
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberPasswordInputTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberPasswordSubmitTextFieldState
 import com.stslex.wizard.feature.auth.ui.model.screen.text_field.rememberUsernameTextFieldState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.Action
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.AuthFieldsState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.ScreenLoadingState
-import com.stslex.wizard.feature.auth.ui.store.AuthStore.State
 
 @Stable
 data class AuthScreenState @OptIn(ExperimentalMaterialApi::class) constructor(
@@ -57,7 +57,7 @@ data class AuthScreenState @OptIn(ExperimentalMaterialApi::class) constructor(
 
     fun onSubmitClicked(state: AuthFieldsState) {
         keyboardController?.hide()
-        processAction(Action.OnSubmitClicked(state))
+        processAction(Action.Click.OnSubmitClicked(state))
     }
 }
 
@@ -102,7 +102,7 @@ fun rememberAuthScreenState(
     )
 
     LaunchedEffect(key1 = swipeableState.targetValue) {
-        processAction(Action.OnAuthFieldChange(swipeableState.targetValue))
+        processAction(Action.Click.OnAuthFieldChange(swipeableState.targetValue))
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
     }
 

@@ -6,7 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.stslex.wizard.feature.favourite.ui.store.FavouriteScreenState
+import com.stslex.wizard.feature.favourite.mvi.FavouriteScreenState
 
 @Composable
 internal fun FavouriteScreenError(

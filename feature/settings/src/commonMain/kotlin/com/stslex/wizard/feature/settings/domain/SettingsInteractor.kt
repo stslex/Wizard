@@ -1,6 +1,6 @@
 package com.stslex.wizard.feature.settings.domain
 
-interface SettingsInteractor {
+internal interface SettingsInteractor {
 
     suspend fun logOut()
 }

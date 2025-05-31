@@ -5,9 +5,9 @@ import com.stslex.wizard.core.ui.mvi.v2.Feature
 import com.stslex.wizard.core.ui.mvi.v2.processor.StoreProcessor
 import com.stslex.wizard.core.ui.mvi.v2.processor.rememberStoreProcessor
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Action
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.Event
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore.State
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.Action
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.Event
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore.State
 import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.core.scope.Scope

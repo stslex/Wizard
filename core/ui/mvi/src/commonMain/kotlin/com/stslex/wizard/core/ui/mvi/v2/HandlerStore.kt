@@ -1,6 +1,7 @@
 package com.stslex.wizard.core.ui.mvi.v2
 
 import com.stslex.wizard.core.core.AppLogger
+import com.stslex.wizard.core.core.coroutine.AppCoroutineScope
 import com.stslex.wizard.core.core.coroutine.AppDispatcher
 import com.stslex.wizard.core.core.coroutine.AppDispatcherImpl
 import com.stslex.wizard.core.ui.mvi.Store
@@ -29,6 +30,8 @@ interface HandlerStore<S : State, A : Store.Action, E : Event> {
 
     val appDispatcher: AppDispatcher
 
+    val scope: AppCoroutineScope
+
     fun sendEvent(event: E)
 
     fun consume(action: A)
@@ -48,7 +51,7 @@ interface HandlerStore<S : State, A : Store.Action, E : Event> {
         onError: suspend (Throwable) -> Unit = {},
         onSuccess: suspend CoroutineScope.(T) -> Unit = {},
         workDispatcher: CoroutineDispatcher = appDispatcher.default,
-        eachDispatcher: CoroutineDispatcher = appDispatcher.immediate,
+        eachDispatcher: CoroutineDispatcher = appDispatcher.default,
         action: suspend CoroutineScope.() -> T,
     ): Job
 
@@ -64,7 +67,7 @@ interface HandlerStore<S : State, A : Store.Action, E : Event> {
     fun <T> Flow<T>.launch(
         onError: suspend (cause: Throwable) -> Unit = {},
         workDispatcher: CoroutineDispatcher = AppDispatcherImpl.default,
-        eachDispatcher: CoroutineDispatcher = AppDispatcherImpl.immediate,
+        eachDispatcher: CoroutineDispatcher = appDispatcher.default,
         each: suspend (T) -> Unit
     ): Job
 }

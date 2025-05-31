@@ -4,7 +4,7 @@ import com.stslex.wizard.feature.match_feed.domain.model.MatchDomain
 import com.stslex.wizard.feature.match_feed.domain.model.MatchFilmsPagingDomain
 import kotlinx.coroutines.flow.Flow
 
-interface MatchFeedInteractor {
+internal interface MatchFeedInteractor {
 
     fun getLatestMatch(): Flow<MatchDomain>
 

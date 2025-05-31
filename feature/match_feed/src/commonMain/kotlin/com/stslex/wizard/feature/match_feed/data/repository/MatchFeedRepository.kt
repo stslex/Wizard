@@ -5,7 +5,7 @@ import com.stslex.wizard.feature.match_feed.data.model.MatchFilmsPagingData
 import com.stslex.wizard.feature.match_feed.data.model.MatchPagingData
 import kotlinx.coroutines.flow.Flow
 
-interface MatchFeedRepository {
+internal interface MatchFeedRepository {
 
     fun getMatch(uuid: String): Flow<MatchData>
 

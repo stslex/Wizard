@@ -30,23 +30,9 @@ internal fun AppNavigationHost(
             is RootComponent.Child.FeedFilm -> FilmFeedScreen(instance.component)
             is RootComponent.Child.Film -> FilmScreen(instance.component)
             is RootComponent.Child.Favourite -> FavouriteScreen(instance.component)
-            is RootComponent.Child.Follower -> FollowerScreen(
-                component = instance.component,
-                type = instance.type,
-                uuid = instance.uuid
-            )
-
-            is RootComponent.Child.Match -> MatchScreen(
-                component = instance.component,
-                type = instance.type,
-                uuid = instance.uuid
-            )
-
-            is RootComponent.Child.MatchDetails -> MatchDetailsScreen(
-                component = instance.component,
-                uuid = instance.uuid
-            )
-
+            is RootComponent.Child.Follower -> FollowerScreen(instance.component)
+            is RootComponent.Child.Match -> MatchScreen(instance.component)
+            is RootComponent.Child.MatchDetails -> MatchDetailsScreen(instance.component)
             is RootComponent.Child.Profile -> ProfileScreen(instance.component)
             is RootComponent.Child.Settings -> SettingsScreen(instance.component)
         }

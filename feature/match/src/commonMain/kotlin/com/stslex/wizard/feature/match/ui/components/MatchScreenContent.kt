@@ -22,8 +22,8 @@ import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.kit.base.shimmerLoadingAnimation
 import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.match.ui.model.MatchUiModel
-import com.stslex.wizard.feature.match.ui.store.MatchScreenState
-import com.stslex.wizard.feature.match.ui.store.MatchStore.Action
+import com.stslex.wizard.feature.match.ui.mvi.MatchScreenState
+import com.stslex.wizard.feature.match.ui.mvi.MatchStore.Action
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -35,7 +35,7 @@ internal fun MatchScreenContent(
 ) {
     val pullToRefreshState = rememberPullRefreshState(
         refreshing = screen is MatchScreenState.Content.Refresh,
-        onRefresh = { onAction(Action.Refresh) },
+        onRefresh = { onAction(Action.Paging.Refresh) },
     )
 
     Box(
@@ -50,7 +50,7 @@ internal fun MatchScreenContent(
         PagingColumn(
             pagingState = state,
             onLoadNext = {
-                onAction(Action.LoadMore)
+                onAction(Action.Paging.LoadMore)
             },
             isAppend = screen is MatchScreenState.Content.Append,
             bottomContent = {
@@ -60,7 +60,7 @@ internal fun MatchScreenContent(
             MatchItem(
                 item = item,
                 onItemClicked = { matchUuid ->
-                    onAction(Action.OnMatchClick(matchUuid))
+                    onAction(Action.Common.MatchClick(matchUuid))
                 },
             )
         }

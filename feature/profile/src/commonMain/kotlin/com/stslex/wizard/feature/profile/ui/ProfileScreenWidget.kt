@@ -20,9 +20,9 @@ import com.stslex.wizard.core.core.error.ErrorRefresh
 import com.stslex.wizard.core.ui.kit.components.AppSnackbarHost
 import com.stslex.wizard.core.ui.kit.theme.AppDimension
 import com.stslex.wizard.feature.profile.ui.components.ProfileScreenContent
-import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileScreenState
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Action
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.State
 
 @Composable
 internal fun ProfileScreenWidget(
