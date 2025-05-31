@@ -4,11 +4,11 @@ import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.core.ui.mvi.v2.Handler
 import com.stslex.wizard.feature.match_feed.di.MatchDetailsScope
 import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
+import com.stslex.wizard.feature.match_feed.ui.model.toUI
 import com.stslex.wizard.feature.match_feed.ui.mvi.MatchFeedHandlerStore
 import com.stslex.wizard.feature.match_feed.ui.mvi.MatchFeedStore.Action
 import com.stslex.wizard.feature.match_feed.ui.mvi.MatchFeedStore.Event
 import com.stslex.wizard.feature.match_feed.ui.mvi.ScreenState
-import com.stslex.wizard.feature.match_feed.ui.model.toUI
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
 import org.koin.core.annotation.Factory
@@ -18,7 +18,7 @@ import org.koin.core.annotation.Scoped
 @Factory
 @Scope(MatchDetailsScope::class)
 @Scoped
-class CommonHandler(
+internal class CommonHandler(
     private val interactor: MatchFeedInteractor
 ) : Handler<Action.Common, MatchFeedHandlerStore> {
 

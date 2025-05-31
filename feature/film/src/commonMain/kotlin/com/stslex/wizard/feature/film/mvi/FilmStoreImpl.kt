@@ -31,7 +31,7 @@ internal class FilmStoreImpl(
         when (action) {
             is Action.Click -> clickHandler
             is Action.Init -> initialHandler
-            else -> throw IllegalArgumentException("Unknown action: $action")
+            is Action.Navigation -> component
         }
     },
     initialActions = listOf(Action.Init)

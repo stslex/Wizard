@@ -36,11 +36,11 @@ internal fun SettingsScreenWidget(
             AppToolbar(
                 modifier = modifier,
                 title = "Settings", // todo("resources")
-                onBackClick = { onAction(Action.BackButtonClicked) }
+                onBackClick = { onAction(Action.Click.BackButton) }
             )
             Spacer(modifier = Modifier.height(AppDimension.Padding.big))
             SettingsContent(
-                logOut = { onAction(Action.LogOut) }
+                logOut = { onAction(Action.Click.LogOut) }
             )
         }
         if (state.isLoading) {

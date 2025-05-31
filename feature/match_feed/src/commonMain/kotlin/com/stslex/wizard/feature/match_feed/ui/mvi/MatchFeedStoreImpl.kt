@@ -18,7 +18,7 @@ import org.koin.core.annotation.Scoped
 @Scope(MatchDetailsScope::class)
 @Scoped
 @Qualifier(MatchDetailsScope::class)
-class MatchFeedStoreImpl(
+internal class MatchFeedStoreImpl(
     appDispatcher: AppDispatcher,
     component: MatchDetailsComponent,
     commonHandler: CommonHandler,
