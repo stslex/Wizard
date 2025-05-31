@@ -13,7 +13,7 @@ import com.stslex.wizard.feature.auth.mvi.handler.AuthComponent.Companion.create
 import com.stslex.wizard.feature.favourite.mvi.handler.FavouriteComponent.Companion.createFavouriteComponent
 import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent.Companion.createFilmComponent
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent.Companion.createFilmFeedComponent
-import com.stslex.wizard.feature.follower.mvi.FollowerComponent.Companion.createFollowerComponent
+import com.stslex.wizard.feature.follower.mvi.handlers.FollowerComponent.Companion.createFollowerComponent
 import com.stslex.wizard.feature.match.navigation.MatchComponent.Companion.createMatchComponent
 import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent.Companion.createMatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent.Companion.createProfileComponent
@@ -81,9 +81,10 @@ class DefaultRootComponent(
         )
 
         is Config.Follower -> Child.Follower(
-            component = context.createFollowerComponent(),
-            type = config.type,
-            uuid = config.uuid
+            component = context.createFollowerComponent(
+                followerType = config.type,
+                uuid = config.uuid
+            ),
         )
 
         is Config.MatchDetails -> Child.MatchDetails(

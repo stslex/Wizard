@@ -3,7 +3,7 @@ package com.stslex.wizard.feature.follower.data.repository
 import com.stslex.wizard.core.core.paging.PagingResponse
 import com.stslex.wizard.feature.follower.data.model.FollowerDataModel
 
-interface FollowerRepository {
+internal interface FollowerRepository {
 
     suspend fun getFollowers(
         uuid: String,

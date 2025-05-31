@@ -6,10 +6,10 @@ import com.stslex.wizard.core.ui.kit.base.paging.PagingConfig
 import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
-import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 import com.stslex.wizard.feature.follower.mvi.FollowerStore.Action
 import com.stslex.wizard.feature.follower.mvi.FollowerStore.Event
 import com.stslex.wizard.feature.follower.mvi.FollowerStore.State
+import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 
 interface FollowerStore : Store<State, Action, Event> {
 
@@ -24,9 +24,12 @@ interface FollowerStore : Store<State, Action, Event> {
 
         companion object {
 
-            val INITIAL = State(
-                type = Config.Follower.FollowerType.FOLLOWER,
-                uuid = "",
+            fun initial(
+                type: Config.Follower.FollowerType,
+                uuid: String
+            ) = State(
+                type = type,
+                uuid = uuid,
                 paging = PagingUiState.default(PagingConfig.DEFAULT),
                 screen = FollowerScreenState.Shimmer,
                 query = ""
@@ -38,25 +41,33 @@ interface FollowerStore : Store<State, Action, Event> {
     sealed interface Action : Store.Action {
 
         @Stable
-        data class Init(
-            val followerType: Config.Follower.FollowerType,
-            val uuid: String
-        ) : Action
+        sealed interface Paging : Action {
+
+            @Stable
+            data object Init : Paging
+
+            @Stable
+            data object Load : Paging
+
+            @Stable
+            data object Refresh : Paging
+
+            @Stable
+            data object Retry : Paging
+        }
 
         @Stable
-        data object Load : Action
+        sealed interface Common : Action {
 
-        @Stable
-        data object Refresh : Action
+            @Stable
+            data class OnUserClick(val uuid: String) : Common
 
-        @Stable
-        data object Retry : Action
+            @Stable
+            data class QueryChanged(val query: String) : Common
 
-        @Stable
-        data class QueryChanged(val query: String) : Action
-
-        @Stable
-        data class OnUserClick(val uuid: String) : Action
+            @Stable
+            data class ShowError(val error: Throwable) : Common
+        }
 
         sealed interface Navigation : Action, Store.Action.Navigation
     }

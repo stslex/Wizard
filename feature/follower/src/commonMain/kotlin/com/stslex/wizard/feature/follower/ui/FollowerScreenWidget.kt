@@ -20,7 +20,7 @@ internal fun FollowerScreenWidget(
         is FollowerScreenState.Content -> {
             PagingColumn(
                 pagingState = state.paging,
-                onLoadNext = { onAction(Action.Load) },
+                onLoadNext = { onAction(Action.Paging.Load) },
                 isAppend = state.screen is FollowerScreenState.Content.Loading,
                 item = { item ->
                     Text(text = item.username)

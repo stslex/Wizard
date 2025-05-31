@@ -6,8 +6,15 @@ import com.stslex.wizard.core.network.api.clients.profile.client.ProfileClient
 import com.stslex.wizard.core.network.api.clients.profile.model.request.PagingProfileRequest
 import com.stslex.wizard.feature.follower.data.model.FollowerDataModel
 import com.stslex.wizard.feature.follower.data.model.toData
+import com.stslex.wizard.feature.follower.di.FollowerScope
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class FollowerRepositoryImpl(
+@Factory
+@Scope(FollowerScope::class)
+@Scoped
+internal class FollowerRepositoryImpl(
     private val client: ProfileClient
 ) : FollowerRepository {
 
