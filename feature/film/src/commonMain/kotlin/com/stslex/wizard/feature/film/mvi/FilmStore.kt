@@ -1,10 +1,10 @@
-package com.stslex.wizard.feature.film.ui.store
+package com.stslex.wizard.feature.film.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.ui.mvi.Store
-import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
-import com.stslex.wizard.feature.film.ui.store.FilmStore.Event
-import com.stslex.wizard.feature.film.ui.store.FilmStore.State
+import com.stslex.wizard.feature.film.mvi.FilmStore.Action
+import com.stslex.wizard.feature.film.mvi.FilmStore.Event
+import com.stslex.wizard.feature.film.mvi.FilmStore.State
 
 interface FilmStore : Store<State, Action, Event> {
 
@@ -31,9 +31,12 @@ interface FilmStore : Store<State, Action, Event> {
         @Stable
         data object Init : Action
 
-        data object BackButtonClick : Action
+        sealed interface Click : Action {
 
-        data object LikeButtonClick : Action
+            data object BackButtonClick : Click
+
+            data object LikeButtonClick : Click
+        }
 
         sealed interface Navigation : Action, Store.Action.Navigation {
 

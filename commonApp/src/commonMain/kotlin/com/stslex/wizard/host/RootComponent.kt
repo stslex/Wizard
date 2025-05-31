@@ -8,7 +8,7 @@ import com.stslex.wizard.core.navigation.Config.BottomBar
 import com.stslex.wizard.core.navigation.Config.Follower.FollowerType
 import com.stslex.wizard.feature.auth.mvi.handler.AuthComponent
 import com.stslex.wizard.feature.favourite.mvi.handler.FavouriteComponent
-import com.stslex.wizard.feature.film.navigation.FilmComponent
+import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent
 import com.stslex.wizard.feature.follower.navigation.FollowerComponent
 import com.stslex.wizard.feature.match.navigation.MatchComponent

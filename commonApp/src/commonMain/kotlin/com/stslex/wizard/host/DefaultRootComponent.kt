@@ -11,7 +11,7 @@ import com.arkivanov.decompose.value.Value
 import com.stslex.wizard.core.navigation.Config
 import com.stslex.wizard.feature.auth.mvi.handler.AuthComponent.Companion.createAuthComponent
 import com.stslex.wizard.feature.favourite.mvi.handler.FavouriteComponent.Companion.createFavouriteComponent
-import com.stslex.wizard.feature.film.navigation.FilmComponent.Companion.createFilmComponent
+import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent.Companion.createFilmComponent
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent.Companion.createFilmFeedComponent
 import com.stslex.wizard.feature.follower.navigation.FollowerComponent.Companion.createFollowerComponent
 import com.stslex.wizard.feature.match.navigation.MatchComponent.Companion.createMatchComponent

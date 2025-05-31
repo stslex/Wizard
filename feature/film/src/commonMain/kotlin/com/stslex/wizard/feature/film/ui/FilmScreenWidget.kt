@@ -8,10 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.stslex.wizard.feature.film.mvi.FilmScreenState
+import com.stslex.wizard.feature.film.mvi.FilmStore.Action
+import com.stslex.wizard.feature.film.mvi.FilmStore.State
 import com.stslex.wizard.feature.film.ui.components.FilmContentScreen
-import com.stslex.wizard.feature.film.ui.store.FilmScreenState
-import com.stslex.wizard.feature.film.ui.store.FilmStore.Action
-import com.stslex.wizard.feature.film.ui.store.FilmStore.State
 
 @Composable
 internal fun FilmScreenWidget(
@@ -29,10 +29,10 @@ internal fun FilmScreenWidget(
             is FilmScreenState.Content -> FilmContentScreen(
                 film = screenState.data,
                 onLikeClick = {
-                    onAction(Action.LikeButtonClick)
+                    onAction(Action.Click.LikeButtonClick)
                 },
                 onBackClick = {
-                    onAction(Action.BackButtonClick)
+                    onAction(Action.Click.BackButtonClick)
                 }
             )
         }

@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.film.ui.store
+package com.stslex.wizard.feature.film.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.feature.film.ui.model.Film
