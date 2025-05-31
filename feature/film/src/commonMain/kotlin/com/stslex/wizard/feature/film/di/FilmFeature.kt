@@ -19,14 +19,14 @@ internal typealias FilmStoreProcessor = StoreProcessor<State, Action, Event>
  * ProfileFeature is a Koin feature module that provides the FavouriteStore processor.
  * It is responsible for managing the state and actions related to the profile feature.
  *
- * @see [com.stslex.wizard.feature.favourite.mvi.FavouriteStore]
+ * @see [com.stslex.wizard.feature.film.mvi.FilmStoreImpl]
  * */
 internal object FilmFeature : Feature<FilmStoreProcessor, FilmComponent> {
 
     override val module: Module by lazy { ModuleFeatureFilm().module }
 
     private val scopeName = requireNotNull(FilmScope::class.qualifiedName) {
-        "Scope name is null. Please check the FavouriteFeature class."
+        "Scope name is null. Please check the FilmFeature class."
     }
 
     override val scope: Scope by lazy {

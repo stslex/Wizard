@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.follower.ui.store
+package com.stslex.wizard.feature.follower.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.ui.kit.base.AppError

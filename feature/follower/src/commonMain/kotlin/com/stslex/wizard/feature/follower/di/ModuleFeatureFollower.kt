@@ -5,7 +5,7 @@ import com.stslex.wizard.feature.follower.data.repository.FollowerRepository
 import com.stslex.wizard.feature.follower.data.repository.FollowerRepositoryImpl
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractorImpl
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore
+import com.stslex.wizard.feature.follower.mvi.FollowerStore
 import com.stslex.wizard.feature.follower.ui.store.FollowerStoreImpl
 import org.koin.core.annotation.Module
 import org.koin.core.module.dsl.bind

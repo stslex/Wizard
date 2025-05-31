@@ -9,12 +9,15 @@ import com.stslex.wizard.core.ui.kit.pager.states.PagerLoadState
 import com.stslex.wizard.core.ui.mvi.BaseStore
 import com.stslex.wizard.core.ui.mvi.CommonEvents.Snackbar
 import com.stslex.wizard.feature.follower.domain.interactor.FollowerInteractor
-import com.stslex.wizard.feature.follower.navigation.FollowerComponent
+import com.stslex.wizard.feature.follower.mvi.FollowerComponent
+import com.stslex.wizard.feature.follower.mvi.FollowerScreenState
+import com.stslex.wizard.feature.follower.mvi.FollowerStore
 import com.stslex.wizard.feature.follower.ui.model.FollowerModel
 import com.stslex.wizard.feature.follower.ui.model.toUi
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Event
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.State
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.Action
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.Event
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.State
+import com.stslex.wizard.feature.follower.mvi.toUi
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 

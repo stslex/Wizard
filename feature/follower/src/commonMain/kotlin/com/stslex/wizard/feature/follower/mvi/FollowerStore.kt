@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.follower.ui.store
+package com.stslex.wizard.feature.follower.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.navigation.Config
@@ -7,9 +7,9 @@ import com.stslex.wizard.core.ui.kit.base.paging.PagingUiState
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
 import com.stslex.wizard.feature.follower.ui.model.FollowerModel
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Action
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.Event
-import com.stslex.wizard.feature.follower.ui.store.FollowerStore.State
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.Action
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.Event
+import com.stslex.wizard.feature.follower.mvi.FollowerStore.State
 
 interface FollowerStore : Store<State, Action, Event> {
 

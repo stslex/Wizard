@@ -10,7 +10,7 @@ import com.stslex.wizard.feature.auth.mvi.handler.AuthComponent
 import com.stslex.wizard.feature.favourite.mvi.handler.FavouriteComponent
 import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent
-import com.stslex.wizard.feature.follower.navigation.FollowerComponent
+import com.stslex.wizard.feature.follower.mvi.FollowerComponent
 import com.stslex.wizard.feature.match.navigation.MatchComponent
 import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent

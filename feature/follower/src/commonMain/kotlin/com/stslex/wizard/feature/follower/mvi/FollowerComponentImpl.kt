@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.follower.navigation
+package com.stslex.wizard.feature.follower.mvi
 
 import com.arkivanov.decompose.ComponentContext
 

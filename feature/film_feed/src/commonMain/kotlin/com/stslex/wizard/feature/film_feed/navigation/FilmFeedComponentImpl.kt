@@ -2,8 +2,8 @@ package com.stslex.wizard.feature.film_feed.navigation
 
 import com.arkivanov.decompose.ComponentContext
 import com.stslex.wizard.core.navigation.Config
-import com.stslex.wizard.feature.film_feed.ui.store.FeedHandlerStore
-import com.stslex.wizard.feature.film_feed.ui.store.FeedStore
+import com.stslex.wizard.feature.film_feed.mvi.FeedHandlerStore
+import com.stslex.wizard.feature.film_feed.mvi.FeedStore
 
 internal class FeedFilmComponentImpl(
     componentContext: ComponentContext,
