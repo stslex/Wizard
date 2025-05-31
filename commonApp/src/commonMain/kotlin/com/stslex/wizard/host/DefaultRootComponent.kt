@@ -17,7 +17,7 @@ import com.stslex.wizard.feature.follower.mvi.handlers.FollowerComponent.Compani
 import com.stslex.wizard.feature.match.ui.mvi.handlers.MatchComponent.Companion.createMatchComponent
 import com.stslex.wizard.feature.match_feed.ui.mvi.handlers.MatchDetailsComponent.Companion.createMatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent.Companion.createProfileComponent
-import com.stslex.wizard.feature.settings.navigation.SettingsComponent.Companion.createSettingsComponent
+import com.stslex.wizard.feature.settings.ui.mvi.handlers.SettingsComponent.Companion.createSettingsComponent
 import com.stslex.wizard.host.RootComponent.Child
 
 class DefaultRootComponent(

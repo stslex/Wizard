@@ -1,11 +1,11 @@
-package com.stslex.wizard.feature.settings.ui.store
+package com.stslex.wizard.feature.settings.ui.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Action
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.Event
-import com.stslex.wizard.feature.settings.ui.store.SettingsStore.State
+import com.stslex.wizard.feature.settings.ui.mvi.SettingsStore.Action
+import com.stslex.wizard.feature.settings.ui.mvi.SettingsStore.Event
+import com.stslex.wizard.feature.settings.ui.mvi.SettingsStore.State
 
 interface SettingsStore : Store<State, Action, Event> {
 
@@ -23,14 +23,23 @@ interface SettingsStore : Store<State, Action, Event> {
     @Stable
     sealed interface Action : Store.Action {
 
-        data object LogOut : Action
+        @Stable
+        sealed interface Click : Action {
 
-        data object BackButtonClicked : Action
+            @Stable
+            data object LogOut : Click
 
+            @Stable
+            data object BackButton : Click
+        }
+
+        @Stable
         sealed interface Navigation : Action, Store.Action.Navigation {
 
+            @Stable
             data object Back : Navigation
 
+            @Stable
             data object LogOut : Navigation
         }
     }

@@ -6,7 +6,6 @@ import com.stslex.wizard.core.database.di.ModuleCoreDatabase
 import com.stslex.wizard.core.network.api.di.ModuleCoreNetworkApi
 import com.stslex.wizard.core.network.client.di.ModuleCoreNetworkClient
 import com.stslex.wizard.core.ui.kit.di.ModuleCoreUi
-import com.stslex.wizard.feature.settings.di.ModuleFeatureSettings
 
 val appModules = listOf(
     ModuleCore(),
@@ -14,8 +13,6 @@ val appModules = listOf(
     ModuleCoreNetworkClient(),
     ModuleCoreNetworkApi(),
     ModuleCoreDatabase(),
-    ModuleFeatureMatchFeed(),
-    ModuleFeatureSettings(),
 ).modules
 
 

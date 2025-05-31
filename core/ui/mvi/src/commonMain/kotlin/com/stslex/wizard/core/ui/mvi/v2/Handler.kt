@@ -4,6 +4,6 @@ import com.stslex.wizard.core.ui.mvi.Store.Action
 
 fun interface Handler<A : Action, TStore : HandlerStore<*, *, *>> {
 
-    fun TStore.invoke(action: A)
+    operator fun TStore.invoke(action: A)
 
 }

@@ -13,7 +13,7 @@ import com.stslex.wizard.feature.follower.mvi.handlers.FollowerComponent
 import com.stslex.wizard.feature.match.ui.mvi.handlers.MatchComponent
 import com.stslex.wizard.feature.match_feed.ui.mvi.handlers.MatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent
-import com.stslex.wizard.feature.settings.navigation.SettingsComponent
+import com.stslex.wizard.feature.settings.ui.mvi.handlers.SettingsComponent
 
 interface RootComponent {
 
