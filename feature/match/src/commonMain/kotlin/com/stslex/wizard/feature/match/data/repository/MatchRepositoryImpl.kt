@@ -7,8 +7,15 @@ import com.stslex.wizard.core.network.api.clients.match.client.MatchClient
 import com.stslex.wizard.core.network.api.model.PagingRequest
 import com.stslex.wizard.feature.match.data.model.MatchDataModel
 import com.stslex.wizard.feature.match.data.model.toData
+import com.stslex.wizard.feature.match.di.MatchScope
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class MatchRepositoryImpl(
+@Factory
+@Scope(MatchScope::class)
+@Scoped
+internal class MatchRepositoryImpl(
     private val client: MatchClient,
     private val userStore: UserStore
 ) : MatchRepository {

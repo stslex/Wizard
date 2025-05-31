@@ -3,7 +3,7 @@ package com.stslex.wizard.feature.match.domain.interactor
 import com.stslex.wizard.core.core.paging.PagingResponse
 import com.stslex.wizard.feature.match.domain.model.MatchDomainModel
 
-interface MatchInteractor {
+internal interface MatchInteractor {
 
     suspend fun getMatches(
         uuid: String,

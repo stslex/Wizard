@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.match.ui.store
+package com.stslex.wizard.feature.match.ui.mvi
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.ui.kit.base.AppError
