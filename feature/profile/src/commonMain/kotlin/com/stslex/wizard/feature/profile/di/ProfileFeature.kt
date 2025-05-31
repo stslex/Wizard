@@ -5,9 +5,9 @@ import com.stslex.wizard.core.ui.mvi.v2.Feature
 import com.stslex.wizard.core.ui.mvi.v2.processor.StoreProcessor
 import com.stslex.wizard.core.ui.mvi.v2.processor.rememberStoreProcessor
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Action
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Event
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.State
 import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.core.scope.Scope

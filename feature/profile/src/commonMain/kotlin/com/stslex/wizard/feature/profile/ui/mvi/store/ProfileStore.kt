@@ -1,12 +1,12 @@
-package com.stslex.wizard.feature.profile.ui.store
+package com.stslex.wizard.feature.profile.ui.mvi.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.core.navigation.Config.BottomBar.Profile.Type
 import com.stslex.wizard.core.ui.mvi.CommonEvents
 import com.stslex.wizard.core.ui.mvi.Store
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.State
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Action
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Event
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.State
 
 interface ProfileStore : Store<State, Action, Event> {
 

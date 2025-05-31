@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.profile.ui.store
+package com.stslex.wizard.feature.profile.ui.mvi.store
 
 import androidx.compose.runtime.Stable
 import com.stslex.wizard.feature.profile.ui.model.ProfileModel

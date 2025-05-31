@@ -5,8 +5,8 @@ import com.stslex.wizard.core.navigation.Component
 import com.stslex.wizard.core.navigation.Config
 import com.stslex.wizard.core.navigation.Config.BottomBar.Profile.Type
 import com.stslex.wizard.core.ui.mvi.v2.Handler
-import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action.Navigation
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileHandlerStore
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Action.Navigation
 
 interface ProfileComponent : Component, Handler<Navigation, ProfileHandlerStore> {
 

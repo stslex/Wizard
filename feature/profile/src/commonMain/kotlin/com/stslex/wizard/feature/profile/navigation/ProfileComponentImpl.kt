@@ -5,8 +5,8 @@ import com.stslex.wizard.core.navigation.Config
 import com.stslex.wizard.core.navigation.Config.BottomBar.Profile.Type
 import com.stslex.wizard.core.navigation.Config.Follower.FollowerType.FOLLOWER
 import com.stslex.wizard.core.navigation.Config.Follower.FollowerType.FOLLOWING
-import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action.Navigation
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileHandlerStore
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Action.Navigation
 
 internal class ProfileComponentImpl(
     context: ComponentContext,

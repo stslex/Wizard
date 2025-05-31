@@ -1,4 +1,4 @@
-package com.stslex.wizard.feature.profile.mvi
+package com.stslex.wizard.feature.profile.ui.mvi.handlers
 
 import androidx.compose.ui.graphics.Color
 import com.stslex.wizard.core.database.store.UserStore
@@ -7,9 +7,9 @@ import com.stslex.wizard.feature.profile.di.ProfileScope
 import com.stslex.wizard.feature.profile.domain.interactor.ProfileInteractor
 import com.stslex.wizard.feature.profile.ui.model.ProfileAvatarModel
 import com.stslex.wizard.feature.profile.ui.model.toUi
-import com.stslex.wizard.feature.profile.ui.store.ProfileHandlerStore
-import com.stslex.wizard.feature.profile.ui.store.ProfileScreenState
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Action
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileHandlerStore
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileScreenState
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Action
 import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Scope
 import org.koin.core.annotation.Scoped

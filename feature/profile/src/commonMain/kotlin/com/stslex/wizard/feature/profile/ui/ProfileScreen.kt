@@ -6,7 +6,7 @@ import androidx.compose.runtime.remember
 import com.stslex.wizard.core.ui.mvi.v2.NavComponentScreen
 import com.stslex.wizard.feature.profile.di.ProfileFeature
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent
-import com.stslex.wizard.feature.profile.ui.store.ProfileStore.Event
+import com.stslex.wizard.feature.profile.ui.mvi.store.ProfileStore.Event
 
 @Composable
 fun ProfileScreen(component: ProfileComponent) {
