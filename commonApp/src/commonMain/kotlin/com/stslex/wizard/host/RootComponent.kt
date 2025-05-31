@@ -11,7 +11,7 @@ import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent
 import com.stslex.wizard.feature.follower.mvi.handlers.FollowerComponent
 import com.stslex.wizard.feature.match.ui.mvi.handlers.MatchComponent
-import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent
+import com.stslex.wizard.feature.match_feed.ui.mvi.handlers.MatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent
 import com.stslex.wizard.feature.settings.navigation.SettingsComponent
 
@@ -37,10 +37,7 @@ interface RootComponent {
 
         data class Match(val component: MatchComponent) : Child
 
-        data class MatchDetails(
-            val component: MatchDetailsComponent,
-            val uuid: String
-        ) : Child
+        data class MatchDetails(val component: MatchDetailsComponent) : Child
 
         data class Settings(val component: SettingsComponent) : Child
 

@@ -1,48 +1,37 @@
-package com.stslex.wizard.feature.match_feed.ui.store
+package com.stslex.wizard.feature.match_feed.ui.mvi.handlers
 
 import com.stslex.wizard.core.core.Logger
-import com.stslex.wizard.core.ui.mvi.BaseStore
+import com.stslex.wizard.core.ui.mvi.v2.Handler
+import com.stslex.wizard.feature.match_feed.di.MatchDetailsScope
 import com.stslex.wizard.feature.match_feed.domain.MatchFeedInteractor
-import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent
+import com.stslex.wizard.feature.match_feed.ui.mvi.MatchFeedHandlerStore
+import com.stslex.wizard.feature.match_feed.ui.mvi.MatchFeedStore.Action
+import com.stslex.wizard.feature.match_feed.ui.mvi.MatchFeedStore.Event
+import com.stslex.wizard.feature.match_feed.ui.mvi.ScreenState
 import com.stslex.wizard.feature.match_feed.ui.model.toUI
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Action
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.Event
-import com.stslex.wizard.feature.match_feed.ui.store.MatchFeedStore.State
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.Job
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class MatchFeedStoreImpl(
-    private val interactor: MatchFeedInteractor,
-    private val component: MatchDetailsComponent,
-) : MatchFeedStore, BaseStore<State, Action, Event>(State.INITIAL) {
+@Factory
+@Scope(MatchDetailsScope::class)
+@Scoped
+class CommonHandler(
+    private val interactor: MatchFeedInteractor
+) : Handler<Action.Common, MatchFeedHandlerStore> {
 
     private var loadingJob: Job? = null
 
-    override fun process(action: Action) {
+    override fun MatchFeedHandlerStore.invoke(action: Action.Common) {
         when (action) {
-            Action.Init -> actionInit()
-            Action.LoadFilms -> actionLoadFilms()
-            is Action.FilmClick -> actionFilmClick(action)
-            is Action.FilmSwiped -> actionFilmSwiped(action)
-            is Action.Navigation -> processNavigation(action)
+            Action.Common.Init -> actionInit()
+            Action.Common.LoadFilms -> actionLoadFilms()
         }
     }
 
-    private fun processNavigation(action: Action.Navigation) {
-        when (action) {
-            is Action.Navigation.Film -> component.openFilm(action.uuid)
-        }
-    }
-
-    private fun actionFilmSwiped(action: Action.FilmSwiped) {
-        // todo send action to backend
-    }
-
-    private fun actionFilmClick(action: Action.FilmClick) {
-        consume(Action.Navigation.Film(action.uuid))
-    }
-
-    private fun actionInit() {
+    private fun MatchFeedHandlerStore.actionInit() {
         interactor
             .getLatestMatch()
             .launch { match ->
@@ -52,20 +41,17 @@ class MatchFeedStoreImpl(
                         match = match.toUI()
                     )
                 }
-                loadFilms(match.uuid)
+                consume(Action.Common.LoadFilms)
             }
     }
 
-    private fun actionLoadFilms() {
-        val matchUuid = state.value.match?.uuid
-        if (matchUuid == null) {
+    private fun MatchFeedHandlerStore.actionLoadFilms() {
+        val uuid = state.value.match?.uuid
+        if (uuid == null) {
             Logger.d("Match uuid is null")
             return
         }
-        loadFilms(matchUuid)
-    }
 
-    private fun loadFilms(uuid: String) {
         if (loadingJob?.isActive == true) {
             Logger.d("Loading job is active")
             return
@@ -122,7 +108,6 @@ class MatchFeedStoreImpl(
             },
         )
     }
-
 
     companion object {
 

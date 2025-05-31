@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.stslex.wizard.core.core.Logger
 import com.stslex.wizard.feature.match_feed.ui.model.FilmUi
-import com.stslex.wizard.feature.match_feed.ui.store.ScreenState
+import com.stslex.wizard.feature.match_feed.ui.mvi.ScreenState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged

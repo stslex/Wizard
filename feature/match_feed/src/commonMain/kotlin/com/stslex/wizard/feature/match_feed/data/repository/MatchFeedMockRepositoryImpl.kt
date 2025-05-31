@@ -6,11 +6,18 @@ import com.stslex.wizard.feature.match_feed.data.model.MatchData
 import com.stslex.wizard.feature.match_feed.data.model.MatchFilmsPagingData
 import com.stslex.wizard.feature.match_feed.data.model.MatchPagingData
 import com.stslex.wizard.feature.match_feed.data.model.MatchParticipantData
+import com.stslex.wizard.feature.match_feed.di.MatchDetailsScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.koin.core.annotation.Factory
+import org.koin.core.annotation.Scope
+import org.koin.core.annotation.Scoped
 
-class MatchFeedMockRepositoryImpl(
+@Factory
+@Scope(MatchDetailsScope::class)
+@Scoped
+internal class MatchFeedMockRepositoryImpl(
     private val client: FilmClient
 ) : MatchFeedRepository {
 

@@ -15,7 +15,7 @@ import com.stslex.wizard.feature.film.mvi.handlers.FilmComponent.Companion.creat
 import com.stslex.wizard.feature.film_feed.navigation.FilmFeedComponent.Companion.createFilmFeedComponent
 import com.stslex.wizard.feature.follower.mvi.handlers.FollowerComponent.Companion.createFollowerComponent
 import com.stslex.wizard.feature.match.ui.mvi.handlers.MatchComponent.Companion.createMatchComponent
-import com.stslex.wizard.feature.match_feed.navigation.MatchDetailsComponent.Companion.createMatchDetailsComponent
+import com.stslex.wizard.feature.match_feed.ui.mvi.handlers.MatchDetailsComponent.Companion.createMatchDetailsComponent
 import com.stslex.wizard.feature.profile.navigation.ProfileComponent.Companion.createProfileComponent
 import com.stslex.wizard.feature.settings.navigation.SettingsComponent.Companion.createSettingsComponent
 import com.stslex.wizard.host.RootComponent.Child
@@ -90,8 +90,10 @@ class DefaultRootComponent(
         )
 
         is Config.MatchDetails -> Child.MatchDetails(
-            component = context.createMatchDetailsComponent(::navigateTo),
-            uuid = config.uuid
+            component = context.createMatchDetailsComponent(
+                navTo = ::navigateTo,
+                uuid = config.uuid
+            ),
         )
 
         is Config.Settings -> Child.Settings(
